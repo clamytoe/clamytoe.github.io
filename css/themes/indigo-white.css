@@ -9,6 +9,14 @@ main {
 	color: #FAFAFA;
 }
 
+.icons-social a:hover {
+	color: #49111C;
+}
+
 .icons-social a svg path{
 	fill: #FAFAFA;
+}
+
+.icons-social a:hover svg path{
+	fill: #49111C;
 }
