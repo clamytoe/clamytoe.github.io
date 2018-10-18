@@ -49,6 +49,18 @@ main > .intro {
 	font-weight: 600;
 }
 
+main > .intro > .nick {
+	font-family: 'Reem Kufi', sans-serif;
+	font-size: 0.6em;
+	font-weight: 600;
+	text-decoration: underline;
+	text-decoration-style: wavy;
+	@supports not (-webkit-text-decoration-skip: objects) {
+		filter: url('#svg-underline');
+		text-decoration: : none;
+	}
+}
+
 main > .tagline {
 	font-size: 1.5rem;
 	margin: 1.5rem 0;
