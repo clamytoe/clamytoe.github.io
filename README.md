@@ -1,17 +1,14 @@
 # Martin Uribe
-This repo holds my **Developer Landing Page**.
+Personal blog: **Ramblings of an autodiadact...**
 
 ## Credits
 
 This repo uses work from the following:
 
-* *flexdinesh*: [Minimal landing page for developers](https://github.com/flexdinesh/dev-landing-page)
-* *fonts & icons*: [fontawesome.com](https://fontawesome.com/icons?d=gallery&s=brand)
-* *js code inspired by*: [Dynamic Drive](http://www.dynamicdrive.com)
-* *color themes*: [Colors.co](https://coolors.co/)
+* *opensource.com*: [Run your blog on GitHub Pages with Python](https://opensource.com/article/19/5/run-your-blog-github-pages-python)
 
-Many thanks for their hard work and generosity!
+Many thanks for a great tutorial [Erik O'Shaughnessy](https://opensource.com/users/jnyjny)!
 
 ## License
 
-MIT © Martin Uribe
+MIT © Martin Uribe (clamytoe)
