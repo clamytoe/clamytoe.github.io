@@ -20,14 +20,13 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Blogroll
-LINKS = (('Pelican', 'http://getpelican.com/'),
-         ('Python.org', 'http://python.org/'),
-         ('Jinja2', 'http://jinja.pocoo.org/'),
-         ('You can modify those links in your config file', '#'),)
+LINKS = (('github', 'https://github.com/clamytoe'),
+         ('pybit.es', 'https://codechalleng.es/profiles/clamytoe'),
+         ('articles', 'https://pybit.es/author/martin-uribe.html'),)
 
 # Social widget
-SOCIAL = (('You can add links in your config file', '#'),
-          ('Another social link', '#'),)
+SOCIAL = (('linkedin', 'https://www.linkedin.com/in/martin-uribe/'),
+          ('twitter', 'https://twitter.com/clamytoe'),)
 
 DEFAULT_PAGINATION = 10
 
