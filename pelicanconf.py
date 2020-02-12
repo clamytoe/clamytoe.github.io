@@ -28,6 +28,8 @@ LINKS = (('github', 'https://github.com/clamytoe'),
 SOCIAL = (('linkedin', 'https://www.linkedin.com/in/martin-uribe/'),
           ('twitter', 'https://twitter.com/clamytoe'),)
 
+# Static files
+STATIC_PATHS = 'content/static'
 DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
