@@ -99,4 +99,4 @@ USER: admin
 PASS: admin
 ```
 
-> **NOTE**: This are not real username and passwords!
+> **NOTE**: These are not real username and passwords!
