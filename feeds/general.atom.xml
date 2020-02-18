@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings of an autodidact... - general</title><link href="/" rel="alternate"></link><link href="/feeds/general.atom.xml" rel="self"></link><id>/</id><updated>2020-02-12T12:00:00-06:00</updated><entry><title>Initial Post for my Ramblings of an autodiadact Blog</title><link href="/initial-post.html" rel="alternate"></link><published>2020-02-12T12:00:00-06:00</published><updated>2020-02-12T12:00:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:None,2020-02-12:/initial-post.html</id><summary type="html">&lt;p&gt;initial post&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Getting my feet wet with this blogging stuff!&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings of an autodidact... - General</title><link href="/" rel="alternate"></link><link href="/feeds/general.atom.xml" rel="self"></link><id>/</id><updated>2020-02-12T12:00:00-06:00</updated><entry><title>Initial Post for my Ramblings of an autodiadact Blog</title><link href="/initial-post.html" rel="alternate"></link><published>2020-02-12T12:00:00-06:00</published><updated>2020-02-12T12:00:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:None,2020-02-12:/initial-post.html</id><summary type="html">&lt;p&gt;initial post&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Getting my feet wet with this blogging stuff!&lt;/h1&gt;
 &lt;p&gt;This is my first post here. &lt;/p&gt;
 &lt;p&gt;It's not much to look at, but my goal
 is to show what I'm learning as I go. There's no real "topic" but
 it will mostly be about what I'm working on and what I have to 
-learn to get it done. Hope that it's of interest to someone...&lt;/p&gt;</content><category term="general"></category></entry></feed>
+learn to get it done. Hope that it's of interest to someone...&lt;/p&gt;</content><category term="General"></category></entry></feed>

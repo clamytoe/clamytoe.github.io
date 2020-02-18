@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Rescaling Values</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Ramblings of an autodidact... Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Ramblings of an autodidact...</a></h1>
+                <nav><ul>
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/category/cryptography.html">Cryptography</a></li>
+                    <li class="active"><a href="/category/datascience.html">DataScience</a></li>
+                    <li><a href="/category/general.html">General</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/rescaling-values.html" rel="bookmark"
+           title="Permalink to Rescaling Values">Rescaling Values</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2020-02-12T12:00:00-06:00">
+                Published: Wed 12 February 2020
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/martin-uribe.html">Martin Uribe</a>
+        </address>
+<p>In <a href="/category/datascience.html">DataScience</a>.</p>
+
+</footer><!-- /.post-info -->      <h1>Scaling Values</h1>
+<p>Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relavant. The dataset consisted of "House Ownership":</p>
+<table>
+<thead>
+<tr>
+<th align="left">Age</th>
+<th align="left">Annual income in USD</th>
+<th align="left">House ownership status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">23</td>
+<td align="left">50,000</td>
+<td align="left">Non-owner</td>
+</tr>
+<tr>
+<td align="left">37</td>
+<td align="left">34,000</td>
+<td align="left">Non-owner</td>
+</tr>
+<tr>
+<td align="left">20</td>
+<td align="left">100,000</td>
+<td align="left">Owner</td>
+</tr>
+<tr>
+<td align="left">35</td>
+<td align="left">130,000</td>
+<td align="left">Owner</td>
+</tr>
+<tr>
+<td align="left">etc</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>The aim being to predict whether a person that is 50 years old with an income of $80,000, would own a home so that he could be targeted for home insurance.</p>
+<p>kNN's are currently being covered and for this exercise a <code>k = 1</code> is to be used. Using either a Euclidean or Manhattan distance wouldn't matter because the distances between these values are too great. In comes rescalling!</p>
+<p>The formula use is:</p>
+<blockquote>
+<p><strong>ScaledQuantity = (ActualQnatity-MinQuantity)/(MaxQuantity-MinQuantity)</strong></p>
+</blockquote>
+<p>So for this dataset, both the <strong>Age</strong> and the <strong>Annual income</strong> wound have to be adjusted.</p>
+<blockquote>
+<p><strong>ScaledAge = (ActualAge-MinAge)/(MaxAge-MinAge)</strong></p>
+<p><strong>ScaledIncome = (ActualIncome-MinIncome)/(MaxIncome-MinIncome)</strong></p>
+</blockquote>
+<p>After scaling, the adjusted dataset would look something like this:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Age</th>
+<th align="left">Scaled age</th>
+<th align="left">Annual income in USD</th>
+<th align="left">Scaled annual income</th>
+<th align="left">House ownership status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">23</td>
+<td align="left">09375</td>
+<td align="left">50,000</td>
+<td align="left">2</td>
+<td align="left">Non-owner</td>
+</tr>
+<tr>
+<td align="left">37</td>
+<td align="left">53125</td>
+<td align="left">34,000</td>
+<td align="left">04</td>
+<td align="left">Non-owner</td>
+</tr>
+<tr>
+<td align="left">20</td>
+<td align="left">0</td>
+<td align="left">100,000</td>
+<td align="left">7</td>
+<td align="left">Owner</td>
+</tr>
+<tr>
+<td align="left">35</td>
+<td align="left">46875</td>
+<td align="left">130,000</td>
+<td align="left">1</td>
+<td align="left">Owner</td>
+</tr>
+<tr>
+<td align="left">50</td>
+<td align="left">9375</td>
+<td align="left">80,000</td>
+<td align="left">5</td>
+<td align="left">?</td>
+</tr>
+</tbody>
+</table>
+<p>Now an 1-NN algorithm with a Euclidean metric could easily be used to find out if the last person is more than likely to own a home. Without the rescaling, the algorithm would have yielded different results.</p>
+<p>Keeping it short today, but hopefully it was a helpful tip!</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="https://github.com/clamytoe">github</a></li>
+                            <li><a href="https://codechalleng.es/profiles/clamytoe">pybit.es</a></li>
+                            <li><a href="https://pybit.es/author/martin-uribe.html">articles</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                            <li><a href="https://www.linkedin.com/in/martin-uribe/">linkedin</a></li>
+                            <li><a href="https://twitter.com/clamytoe">twitter</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
