@@ -1,6 +1,6 @@
 title: Initial Post for my Ramblings of an autodiadact Blog
 date: 2020-02-12 12:00
-category: general
+category: General
 slug: initial-post
 author: Martin Uribe
 summary: initial post
