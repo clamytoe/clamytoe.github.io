@@ -15,6 +15,7 @@
                     <li><a href="/category/cryptography.html">Cryptography</a></li>
                     <li class="active"><a href="/category/datascience.html">DataScience</a></li>
                     <li><a href="/category/general.html">General</a></li>
+                    <li><a href="/category/pytest.html">Pytest</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 <section id="content" class="body">
@@ -37,7 +38,7 @@
 <p>In <a href="/category/datascience.html">DataScience</a>.</p>
 
 </footer><!-- /.post-info -->      <h1>Scaling Values</h1>
-<p>Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relavant. The dataset consisted of "House Ownership":</p>
+<p>Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relevant. The dataset consisted of "House Ownership":</p>
 <table>
 <thead>
 <tr>
@@ -75,7 +76,7 @@
 </tbody>
 </table>
 <p>The aim being to predict whether a person that is 50 years old with an income of $80,000, would own a home so that he could be targeted for home insurance.</p>
-<p>kNN's are currently being covered and for this exercise a <code>k = 1</code> is to be used. Using either a Euclidean or Manhattan distance wouldn't matter because the distances between these values are too great. In comes rescalling!</p>
+<p><a href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm">k-Nearest Neighbor</a>'s are currently being covered and for this exercise a <code>k = 1</code> is to be used. Using either a <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean</a> or <a href="https://en.wiktionary.org/wiki/Manhattan_distance">Manhattan</a> distance wouldn't matter because the distances between these values are too great. In comes rescalling!</p>
 <p>The formula use is:</p>
 <blockquote>
 <p><strong>ScaledQuantity = (ActualQnatity-MinQuantity)/(MaxQuantity-MinQuantity)</strong></p>

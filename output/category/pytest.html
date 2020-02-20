@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Ramblings of an autodidact...</title>
+        <title>Ramblings of an autodidact... - Pytest</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
         <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Ramblings of an autodidact... Atom Feed" />
 </head>
@@ -15,7 +15,7 @@
                     <li><a href="/category/cryptography.html">Cryptography</a></li>
                     <li><a href="/category/datascience.html">DataScience</a></li>
                     <li><a href="/category/general.html">General</a></li>
-                    <li><a href="/category/pytest.html">Pytest</a></li>
+                    <li class="active"><a href="/category/pytest.html">Pytest</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 
@@ -110,78 +110,6 @@
 <p>Setting the <code>scope</code> of the fixture to <em>module</em> makes it so that it doesn't actually do the tearing down until after all of the tests are completed. Perfect!</p>
 <p>The variables in the <code>Vault</code> instance are Path objects, so it was simple enough to just <code>unlink()</code> the files and then <code>rmdir()</code> the directory after it's been emptied. Of course, I tried removing the directory first, but it wasn't having any of that until it was empty...</p>                </article>
             </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/pycryptodome.html" rel="bookmark"
-                           title="Permalink to Venture Into Cryptography with PyCryptodome!">Venture Into Cryptography with PyCryptodome!</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2020-02-14T07:00:00-06:00">
-                Published: Fri 14 February 2020
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/martin-uribe.html">Martin Uribe</a>
-        </address>
-<p>In <a href="/category/cryptography.html">Cryptography</a>.</p>
-
-</footer><!-- /.post-info -->                <p>learning about how to encrypt files</p>
-                <a class="readmore" href="/pycryptodome.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/initial-post.html" rel="bookmark"
-                           title="Permalink to Initial Post for my Ramblings of an autodiadact Blog">Initial Post for my Ramblings of an autodiadact Blog</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2020-02-12T12:00:00-06:00">
-                Published: Wed 12 February 2020
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/martin-uribe.html">Martin Uribe</a>
-        </address>
-<p>In <a href="/category/general.html">General</a>.</p>
-
-</footer><!-- /.post-info -->                <p>initial post</p>
-                <a class="readmore" href="/initial-post.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/rescaling-values.html" rel="bookmark"
-                           title="Permalink to Rescaling Values">Rescaling Values</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2020-02-12T12:00:00-06:00">
-                Published: Wed 12 February 2020
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/martin-uribe.html">Martin Uribe</a>
-        </address>
-<p>In <a href="/category/datascience.html">DataScience</a>.</p>
-
-</footer><!-- /.post-info -->                <p>Quick discussion about rescaling values for data science</p>
-                <a class="readmore" href="/rescaling-values.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-                </ol><!-- /#posts-list -->
-                </section><!-- /#content -->
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>links</h2>

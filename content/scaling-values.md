@@ -7,7 +7,7 @@ summary: Quick discussion about rescaling values for data science
 
 # Scaling Values
 
-Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relavant. The dataset consisted of "House Ownership":
+Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relevant. The dataset consisted of "House Ownership":
 
 |Age|Annual income in USD|House ownership status|
 |:--|:-------------------|:---------------------|
@@ -19,7 +19,7 @@ etc
 
 The aim being to predict whether a person that is 50 years old with an income of $80,000, would own a home so that he could be targeted for home insurance.
 
-kNN's are currently being covered and for this exercise a `k = 1` is to be used. Using either a Euclidean or Manhattan distance wouldn't matter because the distances between these values are too great. In comes rescalling!
+[k-Nearest Neighbor](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm)'s are currently being covered and for this exercise a `k = 1` is to be used. Using either a [Euclidean](https://en.wikipedia.org/wiki/Euclidean_distance) or [Manhattan](https://en.wiktionary.org/wiki/Manhattan_distance) distance wouldn't matter because the distances between these values are too great. In comes rescalling!
 
 The formula use is:
 
