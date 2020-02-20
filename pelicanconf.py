@@ -2,35 +2,54 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
-AUTHOR = 'clamytoe'
-SITENAME = 'Ramblings of an autodidact...'
-SITEURL = ''
+AUTHOR = 'Martin Uribe'
+SITENAME = "Ramblings of an autodidact..."
+ALT_NAME = "#! " + SITENAME
+SITESUBTITLE = "Random programming stuff"
+DESCRIPTION = "A blog about programming, *nix, and software development."
+SITEURL = 'https://clamytoe.github.io'
+FAVICON = 'favicon.ico'
+FAVICON_TYPE = 'image/vnd.microsoft.icon'
+
+# META_IMAGE = SITEURL + "/static/img/og_logo.jpg"
+# META_IMAGE_TYPE = "image/jpeg"
 
 PATH = 'content'
 
 TIMEZONE = 'US/Central'
 
 DEFAULT_LANG = 'en'
+LOCALE = 'en_US.UTF-8'
 
-# Feed generation is usually not desired when developing
-FEED_ALL_ATOM = None
-CATEGORY_FEED_ATOM = None
-TRANSLATION_FEED_ATOM = None
-AUTHOR_FEED_ATOM = None
-AUTHOR_FEED_RSS = None
-
-# Blogroll
-LINKS = (('github', 'https://github.com/clamytoe'),
-         ('pybit.es', 'https://codechalleng.es/profiles/clamytoe'),
-         ('articles', 'https://pybit.es/author/martin-uribe.html'),)
+THEME = "/home/mohh/anaconda3/envs/ghpages/lib/python3.8/site-packages/pelican/themes/mg"
 
 # Social widget
-SOCIAL = (('linkedin', 'https://www.linkedin.com/in/martin-uribe/'),
-          ('twitter', 'https://twitter.com/clamytoe'),)
+SOCIAL = (('twitter', 'https://twitter.com/clamytoe'),
+          ('github', 'https://github.com/clamytoe'),
+          ('linkedin', 'https://www.linkedin.com/in/martin-uribe/'),)
 
-# Static files
-STATIC_PATHS = 'content/static'
+SHARE = True
+
+FOOTER = ("&copy; 2020 Martin Uribe. All rights reserved.<br>" +
+            "Code snippets in the pages are released under " +
+            "<a href=\"http://opensource.org/licenses/MIT\" target=\"_blank\">" +
+            "The MIT License</a>, unless otherwise specified.")
+
+
 DEFAULT_PAGINATION = 10
 
-# Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
+TAG_SAVE_AS = ''
+AUTHOR_SAVE_AS = ''
+DIRECT_TEMPLATES = ('index', 'categories', 'archives', 'search', 'tipue_search')
+TIPUE_SEARCH_SAVE_AS = 'tipue_search.json'
+
+RELATIVE_URLS = False
+
+FEED_ALL_ATOM = 'feeds/all.atom.xml'
+
+DELETE_OUTPUT_DIRECTORY = True
+
+TWITTER_USERNAME = 'clamytoe'
+# DISQUS_SITENAME = "devsbytes"
+# SC_PROJECT = '10224955'
+# SC_SECURITY = '1f2cc438'
