@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/WebPage"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Pelican markdown test page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<link rel="shortcut icon" href="https://clamytoe.github.io/favicon.ico" type="image/vnd.microsoft.icon">
+<meta name="author" content="clamytoe">
+<meta name="copyright" content="clamytoe">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@clamytoe" />
+<meta property="og:site_name" content="Ramblings of an autodidact..." />
+<meta property="og:title" content="Pelican markdown test page" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://clamytoe.github.io/pages/md-guide.html" />
+<meta name="twitter:url" content="https://clamytoe.github.io/pages/md-guide.html" />
+<meta itemprop="url" content="https://clamytoe.github.io/pages/md-guide.html"/>
+<meta property="og:description" content="Examine how Markdown is rendered with Pelican This page was donated to me by David Colton so that I can see how my Pelican theme is being rendered. He's just starting with blogging as well, but keep your eye on him. I'm expect great things! For a complete markdown reference …" />
+<meta name="twitter:description" content="Examine how Markdown is rendered with Pelican This page was donated to me by David Colton so that I can see how my Pelican theme is being rendered. He's just starting with blogging as well, but keep your eye on him. I'm expect great things! For a complete markdown reference …" />
+<meta itemprop="description" content="Examine how Markdown is rendered with Pelican This page was donated to me by David Colton so that I can see how my Pelican theme is being rendered. He's just starting with blogging as well, but keep your eye on him. I'm expect great things! For a complete markdown reference …"/>
+<link href="https://clamytoe.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Ramblings of an autodidact... ATOM Feed"/>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:800italic' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/uikit/2.23.0/css/uikit.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/uikit/2.23.0/css/components/search.min.css">
+<link rel="stylesheet" href="https://clamytoe.github.io/theme/css/tipuesearch.css">
+<link rel="stylesheet" href="https://clamytoe.github.io/theme/css/solarized.css">
+<link rel="stylesheet" href="https://clamytoe.github.io/theme/css/main.css">
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+</head>
+<body>
+<!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+<header class=" mg-header uk-navbar uk-navbar-attached">
+
+    <div class="uk-container uk-container-center">
+
+        <a class="mg-brand uk-navbar-brand uk-hidden-small" href="https://clamytoe.github.io">#! Ramblings of an autodidact...</a>
+        <div class="mg-tagline uk-navbar-content uk-hidden-small">Random programming stuff</div>
+        <a class="uk-navbar-toggle uk-visible-small" href="#mg-offcanvas" data-uk-offcanvas></a>
+        <a class="mg-brand uk-navbar-brand uk-navbar-center uk-visible-small" href="https://clamytoe.github.io">#! Ramblings of an autodidact...</a>
+
+    </div>
+</header>
+
+<main class="mg-main">
+
+<div class="uk-container uk-container-center">
+
+    <div class="uk-grid" data-uk-grid-margin>
+
+        
+<div class="uk-width-medium-4-5">
+    <h1 class="uk-heading-large" itemprop="name">Pelican Markdown Test Page</h1>
+    
+
+    <h1>Examine how Markdown is rendered with Pelican</h1>
+<p>This page was donated to me by <a href="https://davidcolton.github.io/">David Colton</a> so that I can see how my Pelican theme is being rendered. He's just starting with blogging as well, but keep your eye on him. I'm expect great things!</p>
+<p>For a complete markdown reference refer to <a href="https://www.markdownguide.org/">The Markdown Guide</a>.</p>
+<h2>Markdown Examples Part 1</h2>
+<p>Before you learn anything else you should know be aware of the following:</p>
+<h3>Heading Best Practices</h3>
+<p>Markdown applications don’t agree on how to handle missing blank lines between a heading and the surrounding paragraphs. For compatibility, separate paragraphs and headings with one or more blank lines.</p>
+<h3>Paragraphs</h3>
+<p>To create paragraphs, use a blank line to separate one or more lines of text.</p>
+<h3>Line Breaks</h3>
+<p>To create a line break (&lt;br&gt;), end a line with two or more spaces, and then type return.</p>
+<h3>Some more examples</h3>
+<p>Basic markdown examples are shown below:</p>
+<div class="highlight"><pre><span></span><code>This text is **bold** and this text is also __bold__  
+This text is *italic* and this text is also _italic_  
+This text is **_italic and bold_**
+</code></pre></div>
+
+
+<p>This text is <strong>bold</strong> and this text is also <strong>bold</strong>
+This text is <em>italic</em> and this text is also <em>italic</em><br>
+This text is <strong><em>italic and bold</em></strong></p>
+<p>You can add headers to your markdown to divide your posts into related sections:</p>
+<div class="highlight"><pre><span></span><code># A H1 heading  
+## A H2 heading  
+### A H3 heading  
+#### A H4 heading  
+##### A H5 heading  
+###### A H6 heading
+</code></pre></div>
+
+
+<h1>A H1 heading</h1>
+<h2>A H2 heading</h2>
+<h3>A H3 heading</h3>
+<h4>A H4 heading</h4>
+<h5>A H5 heading</h5>
+<h6>A H6 heading</h6>
+<p>A nice additional way to separate different sections of you post is to insert a horizontal line is to add three or more hyphens:</p>
+<div class="highlight"><pre><span></span><code>---
+</code></pre></div>
+
+
+<hr>
+<p>In Mathew's original post he defines a list with numbers as:</p>
+<div class="highlight"><pre><span></span><code>A list with numbers:
+1. One
+2. Two
+3. Three
+</code></pre></div>
+
+
+<p>When rendered this looks like:</p>
+<p>A list with numbers:
+1. One
+2. Two
+3. Three</p>
+<p>There are two issues with this:</p>
+<ol>
+<li>There should be an empty line between the text preceding the list and the list itself. See notes above about adding empty blank lines between headings and paragraphs. This rule applied to everything.</li>
+<li>Typically you don't provide the numbers. All items in the list are preceded with a <code>1.</code> and the list is then automatically numbered.</li>
+</ol>
+<p>The correct way to define a list of numbers is:</p>
+<div class="highlight"><pre><span></span><code>A list with numbers:
+
+1. One
+1. Two
+1. Three
+</code></pre></div>
+
+
+<p>And this is how it then correctly displays:</p>
+<p>A list with numbers:</p>
+<ol>
+<li>One</li>
+<li>Two</li>
+<li>Three</li>
+</ol>
+<p>You can also have a list of number with a sublist of numbers:</p>
+<ol>
+<li>Top Level<ol>
+<li>Sub level 1</li>
+<li>Sub level 2</li>
+</ol>
+</li>
+<li>Top Level Again<ol>
+<li>Sub level again</li>
+</ol>
+</li>
+</ol>
+<p>And the markdown for sublists like this is:</p>
+<div class="highlight"><pre><span></span><code>1. Top Level  
+    1. Sub level 1
+    1. Sub level 2
+1. Top Level Again  
+    1. Sub level again
+</code></pre></div>
+
+
+<p>The list with bullets example suffers from the same issue as the numbered list in that the example markdown given does not have a blank line between the text and the bulleted list. In markdown you always have to place a blank line:</p>
+<div class="highlight"><pre><span></span><code>A list with bullets:
+
+* One
+* Two
+* Three
+</code></pre></div>
+
+
+<p>A list with bullets:</p>
+<ul>
+<li>Bullet</li>
+<li>Bullet</li>
+<li>Bullet</li>
+</ul>
+<p>Here's a blockquote:</p>
+<div class="highlight"><pre><span></span><code>&gt; Simple is better than complex
+</code></pre></div>
+
+
+<blockquote>
+<p>Simple is better than complex</p>
+</blockquote>
+<p>For some reason the example given my Mathew used <code>&amp;gt;</code>. Not sure why.</p>
+<p>Here's the table example in Mathew's post:</p>
+<div class="highlight"><pre><span></span><code>| Column1 | Column 2 | Column 3 |  
+|---|---|---|  
+| Value 1 | Value 2 | Value 3 |  
+| Value 4 | Value 5 | Value 6 |  
+| Value 7 | Value 8 | Value 9 |
+</code></pre></div>
+
+
+<p>And here is the table rendered:</p>
+<table>
+<thead>
+<tr>
+<th>Column1</th>
+<th>Column 2</th>
+<th>Column 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Value 1</td>
+<td>Value 2</td>
+<td>Value 3</td>
+</tr>
+<tr>
+<td>Value 4</td>
+<td>Value 5</td>
+<td>Value 6</td>
+</tr>
+<tr>
+<td>Value 7</td>
+<td>Value 8</td>
+<td>Value 9</td>
+</tr>
+<tr>
+<td><br/></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>I'm not sure it it's a Pelican thing or the template used but when rendered this looks really poor in my opinion. One way around this it to use HTML directly with CSS styling. I need to investigate this further.</p>
+<p>Here's a HTML table with CSS Styling:</p>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;border-color:#aabcfe;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#aabcfe;color:#669;background-color:#e8edff;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#aabcfe;color:#039;background-color:#b9c9fe;}
+.tg .tg-hmp3{background-color:#D2E4FC;text-align:left;vertical-align:top}
+.tg .tg-baqh{text-align:center;vertical-align:top}
+.tg .tg-mb3i{background-color:#D2E4FC;text-align:right;vertical-align:top}
+.tg .tg-lqy6{text-align:right;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+
+<table class="tg">
+  <tr>
+    <th class="tg-baqh" colspan="6">Results</th>
+  </tr>
+  <tr>
+    <td class="tg-hmp3">No</td>
+    <td class="tg-hmp3">Competition</td>
+    <td class="tg-hmp3">John</td>
+    <td class="tg-hmp3">Adam</td>
+    <td class="tg-hmp3">Robert</td>
+    <td class="tg-hmp3">Paul</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">1</td>
+    <td class="tg-0lax">Swimming</td>
+    <td class="tg-lqy6">1:30</td>
+    <td class="tg-lqy6">2:05</td>
+    <td class="tg-lqy6">1:15</td>
+    <td class="tg-lqy6">1:41</td>
+  </tr>
+  <tr>
+    <td class="tg-hmp3">2</td>
+    <td class="tg-hmp3">Running</td>
+    <td class="tg-mb3i">15:30</td>
+    <td class="tg-mb3i">14:10</td>
+    <td class="tg-mb3i">15:45</td>
+    <td class="tg-mb3i">16:00</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">3</td>
+    <td class="tg-0lax">Shooting</td>
+    <td class="tg-lqy6">70%</td>
+    <td class="tg-lqy6">55%</td>
+    <td class="tg-lqy6">90%</td>
+    <td class="tg-lqy6">88%</td>
+  </tr>
+</table>
+
+<p><br/></p>
+<p><a href="https://www.tablesgenerator.com/html_tables">Table Generator</a> is one simple way to generate HTML code for tables but there are many out there to choose from.</p>
+<hr>
+<h2>Markdown Examples Part 2</h2>
+<p>Images can be displayed in Markdown.  </p>
+<p>Text within the square brackets is the image name. The path to the image goes between the round brackets.<br>
+The {static} tag indicates the image is stored in the content folder. This setting can be changed in <code>pelicanconf.py</code>.</p>
+<p><img alt="python logo" src="https://clamytoe.github.io/img/python_icon.png"></p>
+<p>Links to downloadable content such as PDF files are written similarly to image files but with no ! symbol at the beginning.</p>
+<p><a href="https://clamytoe.github.io/pdf/pelican.pdf">Pelican Documentation</a></p>
+<p>A link to a different blog post on our website is written exactly the same.</p>
+<p>Text within the square brackets can be clicked on to travel to the website between the curly brackets.
+The <code>{filename}</code> tag indicates we want to follow the link to a webpage rather than the static file it was generated from.</p>
+<p><a href="https://clamytoe.github.io/initial-post.html">First Post</a></p>
+<p>Or we can link to another external website by supplying the web address.</p>
+<p><a href="https://pypi.org">Python Package Index</a></p>
+<p>Refer to Mathew's page directly for the setting that need to be added to the <code>peliconconf.py</code> file. One small disadvantage of having to define links using <code>{static}</code> or <code>{filename}</code> is that it makes editing the markdown files in a editor slightly more difficult as you are not actually going to see a preview or inline rendering of the link content. A small annoyance.</p>
+<hr>
+<h2>Markdown Examples Part 3</h2>
+<p>Code blocks are preceded by an indent (4 spaces), three <code>:</code> symbols and the name of the language.  </p>
+<p>All of the following code will be highlighted while the text is indented.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">do_twice</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper_do_twice</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">wrapper_do_twice</span>
+
+<span class="nd">@do_twice</span>
+<span class="k">def</span> <span class="nf">say_whee</span><span class="p">(</span><span class="n">some_text</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">some_text</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;Whee!&#39;</span>
+<span class="n">say_whee</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>And the raw markdown to produce this code block looks like:</p>
+<div class="highlight"><pre><span></span><code>:::python
+def do_twice(func):
+    def wrapper_do_twice(*args, **kwargs):
+        return func(*args, **kwargs).lower()
+    return wrapper_do_twice
+...
+</code></pre></div>
+</div>
+
+        <div class="uk-width-medium-1-5 uk-hidden-small">
+
+            <div class="uk-panel uk-panel-box">
+                <form class="uk-search" action="search.html" data-uk-search>
+                    <input class="uk-search-field tipue_search" type="search" name="q" id="tipue_search_input" autocomplete="off" placeholder="Search...">
+                </form>
+            </div>
+
+            <div class="uk-panel uk-panel-box">
+                <ul class="uk-nav uk-nav-side">
+                    <li class="uk-nav-header">Categories</li>
+                    <li ><a href="https://clamytoe.github.io/category/cryptography.html">Cryptography</a></li>
+                    <li ><a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></li>
+                    <li ><a href="https://clamytoe.github.io/category/general.html">General</a></li>
+                    <li ><a href="https://clamytoe.github.io/category/pytest.html">Pytest</a></li>
+                    <li class="uk-nav-header">Pages</li>
+
+                    <li >
+                        <a href="https://clamytoe.github.io/pages/about.html">About</a>
+                    </li>
+
+
+                    <li class="uk-nav-divider"></li>
+                    <li ><a href="https://clamytoe.github.io/archives.html">Archives</a></li>
+                </ul>
+            </div>
+
+            <div class="uk-panel uk-panel-box">
+                <h3 class="uk-panel-title">Receive Updates</h3>
+                <a rel="alternate" type="application/atom+xml" href="https://clamytoe.github.io/feeds/all.atom.xml" class="mg-feed"><i class="uk-icon-rss uk-icon-medium"></i> ATOM</a>
+            </div>
+
+            <div class="uk-panel uk-panel-box">
+                <h3 class="uk-panel-title">Contacts</h3>
+                <a class="mg-icon-link" href="https://twitter.com/clamytoe">
+                    <i class="uk-icon-twitter uk-icon-medium"></i>
+                </a>
+                <a class="mg-icon-link" href="https://github.com/clamytoe">
+                    <i class="uk-icon-github uk-icon-medium"></i>
+                </a>
+                <a class="mg-icon-link" href="https://www.linkedin.com/in/martin-uribe/">
+                    <i class="uk-icon-linkedin uk-icon-medium"></i>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</main>
+
+<footer class="mg-footer">
+    <div class="uk-container uk-container-center uk-text-center">
+
+        <div class="mg-icons-small uk-subnav uk-visible-small">
+            <li><a rel="alternate" type="application/atom+xml" href="https://clamytoe.github.io/feeds/all.atom.xml" class="uk-icon-button uk-icon-rss"></a></li>
+            <li>
+                <a href="https://twitter.com/clamytoe" class="uk-icon-button uk-icon-twitter"></a>
+            </li>
+            <li>
+                <a href="https://github.com/clamytoe" class="uk-icon-button uk-icon-github"></a>
+            </li>
+            <li>
+                <a href="https://www.linkedin.com/in/martin-uribe/" class="uk-icon-button uk-icon-linkedin"></a>
+            </li>
+        </div>
+
+        <div class="mg-author uk-panel">
+            <p>&copy; 2020 Martin Uribe. All rights reserved.<br>Code snippets in the pages are released under <a href="http://opensource.org/licenses/MIT" target="_blank">The MIT License</a>, unless otherwise specified.</p>
+
+            <p>Powered by <a href="http://blog.getpelican.com">Pelican</a>.<br class="uk-visible-small"> Theme <a href="https://github.com/lucachr/pelican-mg">mg</a> by <a href="https://github.com/lucachr">Luca Chiricozzi</a>.</p>
+        </div>
+    </div>
+</footer>
+
+<div id="mg-offcanvas" class="uk-offcanvas">
+    <div class="uk-offcanvas-bar">
+
+        <form class="uk-search" action="search.html" data-uk-search>
+            <input class="uk-search-field" type="search" name="q" id="tipue_search_input" autocomplete="off" placeholder="Search...">
+        </form>
+
+        <ul class="uk-nav uk-nav-offcanvas" data-uk-nav>
+            <li class="uk-nav-header">Categories</li>
+            <li ><a href="https://clamytoe.github.io/category/cryptography.html">Cryptography</a></li>
+            <li ><a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></li>
+            <li ><a href="https://clamytoe.github.io/category/general.html">General</a></li>
+            <li ><a href="https://clamytoe.github.io/category/pytest.html">Pytest</a></li>
+            <li class="uk-nav-header">Pages</li>
+            <li >
+                <a href="https://clamytoe.github.io/pages/about.html">About</a>
+            </li>
+
+
+            <li class="uk-nav-divider"></li>
+            <li><a href="https://clamytoe.github.io/">Archives</a></li>
+        </ul>
+    </div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/uikit/2.23.0/js/uikit.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/uikit/2.23.0/js/components/search.min.js"></script>
+<script src="https://clamytoe.github.io/theme/js/tipuesearch_set.js"></script>
+<script src="https://clamytoe.github.io/theme/js/tipuesearch.js"></script>
+<script src="https://clamytoe.github.io/theme/js/jquery.sticky-kit.js"></script>
+<script src="https://clamytoe.github.io/theme/js/plugins.js"></script>
+<script src="https://clamytoe.github.io/theme/js/main-search.js"></script>
+
+
+
+</body>
+</html>
