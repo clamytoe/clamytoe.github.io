@@ -15,7 +15,7 @@ FAVICON_TYPE = "image/vnd.microsoft.icon"
 # META_IMAGE_TYPE = "image/jpeg"
 
 PATH = "content"
-STATIC_PATHS = 'content/static'
+STATIC_PATHS = ["content/static"]
 
 TIMEZONE = "US/Central"
 
