@@ -14,8 +14,8 @@ SITEURL = ""
 FAVICON = "favicon.ico"
 FAVICON_TYPE = "image/vnd.microsoft.icon"
 
-# META_IMAGE = SITEURL + "/static/img/og_logo.jpg"
-# META_IMAGE_TYPE = "image/jpeg"
+META_IMAGE = SITEURL + "/img/clamytoe.png"
+META_IMAGE_TYPE = "image/png"
 
 PATH = "content"
 STATIC_PATHS = ["content/static"]
