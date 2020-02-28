@@ -136,6 +136,19 @@ Nice!&lt;/p&gt;
 &lt;p&gt;This was a great learning experience for me.
 Not only did I update the color scheme of my site, I also fixed some annoying issues that I was having.
 Now I don't have to look up any &lt;code&gt;ghp-import ...&lt;/code&gt; command and things just got a heck of a lot more pleasant.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;In summary&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;touch content/posts/new-blog-post.md
+vi &lt;span class="nv"&gt;$_&lt;/span&gt;
+&lt;span class="c1"&gt;# write the blog content&lt;/span&gt;
+git status
+git add .
+git commit -m &lt;span class="s2"&gt;&amp;quot;New blog post.&amp;quot;&lt;/span&gt;
+git push origin content
+make github
+make clean
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;h3&gt;On a side note...&lt;/h3&gt;
 &lt;p&gt;I was also having a weird problem with my search feature.
 I had to remove the machine code from my &lt;a href="https://clamytoe.github.io/category/cryptography.html"&gt;cryptography&lt;/a&gt; blog post because it was completely screwing up the JavaScript.

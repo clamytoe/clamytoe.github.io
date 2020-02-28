@@ -229,6 +229,19 @@ Nice!</p>
 <p>This was a great learning experience for me.
 Not only did I update the color scheme of my site, I also fixed some annoying issues that I was having.
 Now I don't have to look up any <code>ghp-import ...</code> command and things just got a heck of a lot more pleasant.</p>
+<p><strong>In summary</strong>:</p>
+<div class="highlight"><pre><span></span><code>touch content/posts/new-blog-post.md
+vi <span class="nv">$_</span>
+<span class="c1"># write the blog content</span>
+git status
+git add .
+git commit -m <span class="s2">&quot;New blog post.&quot;</span>
+git push origin content
+make github
+make clean
+</code></pre></div>
+
+
 <h3>On a side note...</h3>
 <p>I was also having a weird problem with my search feature.
 I had to remove the machine code from my <a href="https://clamytoe.github.io/category/cryptography.html">cryptography</a> blog post because it was completely screwing up the JavaScript.
