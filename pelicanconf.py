@@ -15,6 +15,7 @@ FAVICON_TYPE = "image/vnd.microsoft.icon"
 # META_IMAGE_TYPE = "image/jpeg"
 
 PATH = "content"
+STATIC_PATHS = 'content/static'
 
 TIMEZONE = "US/Central"
 
@@ -51,7 +52,12 @@ TIPUE_SEARCH_SAVE_AS = "tipue_search.json"
 
 RELATIVE_URLS = False
 
-FEED_ALL_ATOM = "feeds/all.atom.xml"
+# Feed generation is usually not desired when developing
+FEED_ALL_ATOM = None
+CATEGORY_FEED_ATOM = None
+# TRANSLATION_FEED_ATOM = None
+# AUTHOR_FEED_ATOM = None
+# AUTHOR_FEED_RSS = None
 
 DELETE_OUTPUT_DIRECTORY = True
 
