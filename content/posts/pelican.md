@@ -173,6 +173,20 @@ This was a great learning experience for me.
 Not only did I update the color scheme of my site, I also fixed some annoying issues that I was having.
 Now I don't have to look up any `ghp-import ...` command and things just got a heck of a lot more pleasant.
 
+**In summary**:
+
+```zsh
+touch content/posts/new-blog-post.md
+vi $_
+# write the blog content
+git status
+git add .
+git commit -m "New blog post."
+git push origin content
+make github
+make clean
+```
+
 ### On a side note...
 
 I was also having a weird problem with my search feature.
