@@ -1,5 +1,6 @@
 title: Rescaling Values
 date: 2020-02-12 12:00
+modified: 2020-02-12 12:00
 category: DataScience
 slug: rescaling-values
 author: Martin Uribe

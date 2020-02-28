@@ -1,5 +1,6 @@
 title: Venture Into Cryptography with PyCryptodome!
 date: 2020-02-14 07:00
+modified: 2020-02-28 07:50
 category: Cryptography
 slug: pycryptodome
 author: Martin Uribe
@@ -43,21 +44,6 @@ if __name__ == "__main__":
 ```
 
 Seperating the code like this will come in handy when it comes to either creating a [Click](https://palletsprojects.com/p/click/) CLI interface or a GUI one.
-
-The results of encrypting that `Entity` object looks like this:
-
-```
-3�#4����!�0/
-N9"L�,رT�o8a�����cH�.
-O���}�wV&�*um��S�MO�7�`Ӂ�xZ� �BD�n�z@f�ue�x�ڒ����c՞������2��{MW�5����{��j������36	���r	~
-                         |��Bzu�5��!a7܄o7h1���qkE�N�
-�&�T�*puM:��U x">��ت4%��                           �H�����Y6><Q
-����99���献W���'��uZ%$������%$�x��ef`�˲D��i�3���0������:
-�W<���[�����^�ΐ�DGACqI�ސ���7��ŵ�|D��P�_%�9�lI�֐���u�����_ �"��!���P���5�Pw�M4�
-�L��P�[��՜t9��|r� ������D��Uh��w��ۆ�kH]L�~��D���ˤ�󗣰Ӧ��
-~xh�lA�d��٧�e܎�                                           �S
-                  �͚��m�Q��>����{�	+�{'?A-��s��)�^ݞR%  
-```
 
 The log file for that run looks like this:
 

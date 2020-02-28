@@ -6,6 +6,21 @@
     $ pelican content -o output -s publishconf.py
     ```
 
+* To view the site you start the built in pelican server:
+
+    ```zsh
+    $ pelican --listen
+    ```
+
+    Or use the one that comes with Python:
+
+    ```zsh
+    $ cd output
+    $ python -m http.server
+    ```
+    
+    You can preview the site by bringing up `http://localhost:8000` in your browser.
+
 * Use **ghp-import** to add the contents of the **output** directory to the **master** branch:
 
     ```zsh

@@ -1,5 +1,6 @@
 title: Pytest fixtures with tear down
 date: 2020-02-19 17:40
+modified: 2020-02-28 06:41
 category: Pytest
 slug: pytest-fixtures
 author: Martin Uribe
@@ -44,7 +45,7 @@ This is when I got to the part where I had to test the creation of my private an
 
 I was already using fixtures so that I didn't have to recreate the instances of my classes for each test; generating the keys take a bit of time! I went crazy an opted to make them future proof with **4096-bits**...
 
-The challenge was figuring out how to tear them down. I did some initial searches and was coming up blank. I found [Brian's blog](https://pythontesting.net/framework/pytest/pytest-fixtures-easy-example/) about the topic, but his examples just didn't cut it. All they demonstrated was how to print a message, it didn't actually show how to return and instance, and then have it torn down afterwards.
+The challenge was figuring out how to tear them down. I did some initial searches and was coming up blank. I then looked up the pytest guru, [Brian's](https://pythontesting.net/framework/pytest/pytest-fixtures-easy-example/) blog about the topic, but his examples were too simplistic for what I was trying to do. All they demonstrated was how to print a message, it didn't actually show how to return anythin, and then have it torn down afterwards.
 
 Brian's example:
 ```python
