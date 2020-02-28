@@ -3,10 +3,13 @@
 from __future__ import unicode_literals
 
 AUTHOR = "Martin Uribe"
-SITENAME = "Ramblings of an autodidact..."
+SITENAME = "Ramblings"
 ALT_NAME = "#! " + SITENAME
-SITESUBTITLE = "Random programming stuff"
-DESCRIPTION = "A blog about programming, *nix, and software development."
+SITESUBTITLE = "of an autodidact..."
+DESCRIPTION = (
+    "A blog about my struggles and learning about programming,"
+    " software development and life."
+)
 SITEURL = ""
 FAVICON = "favicon.ico"
 FAVICON_TYPE = "image/vnd.microsoft.icon"
