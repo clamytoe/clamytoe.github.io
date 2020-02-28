@@ -1,29 +1,34 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/Blog"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/Blog"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/Blog"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" class="no-js" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/Blog"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/BlogPosting"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/BlogPosting"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/BlogPosting"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/BlogPosting"> <!--<![endif]-->
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Ramblings of an autodidact...</title>
+<title>Finally getting the hang of working with Pelican!</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="A blog about programming, *nix, and software development.">
+<meta name="description" content="Nothing beats learning something new than just jumping in and playing around with it!">
 <link rel="shortcut icon" href="https://clamytoe.github.io/favicon.ico" type="image/vnd.microsoft.icon">
 <meta name="author" content="Martin Uribe">
 <meta name="copyright" content="Martin Uribe">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@clamytoe" />
 <meta property="og:site_name" content="Ramblings of an autodidact..." />
-<meta property="og:title" content="Ramblings of an autodidact..." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://clamytoe.github.io" />
-<meta name="twitter:url" content="https://clamytoe.github.io" />
-<meta itemprop="name" content="Ramblings of an autodidact..." />
-<meta itemprop="url" content="https://clamytoe.github.io"/>
-<meta property="og:description" content="A blog about programming, *nix, and software development." />
-<meta name="twitter:description" content="A blog about programming, *nix, and software development." />
-<meta itemprop="description" content="A blog about programming, *nix, and software development." />
+
+<meta property="og:title" content="Finally getting the hang of working with pelican!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://clamytoe.github.io/pelican.html" />
+<meta name="twitter:title" content="Finally getting the hang of working with pelican!" />
+<meta name="twitter:url" content="https://clamytoe.github.io/pelican.html" />
+<meta itemprop="url" content="https://clamytoe.github.io/pelican.html" />
+<meta property="og:description" content="Nothing beats learning something new than just jumping in and playing around with it!" />
+<meta name="twitter:description" content="Nothing beats learning something new than just jumping in and playing around with it!" />
+<meta property="og:article:published_time" content="2020-02-28" />
+<meta property="og:article:modified_time" content="2020-02-28">
+<meta itemprop="dateModified" content="2020-02-28" />
+<meta property="og:article:author" content="Martin Uribe" >
+
 <link href="https://clamytoe.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Ramblings of an autodidact... ATOM Feed"/>
 <link href='//fonts.googleapis.com/css?family=Open+Sans:800italic' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
@@ -58,15 +63,36 @@
 
     <div class="uk-grid" data-uk-grid-margin>
 
-<div class="uk-width-medium-4-5">
+<div class="mg-container-social uk-width-medium-1-10 uk-hidden-small">
 
+    <div class="uk-panel" id="mg-panel-social">
+        <ul class="uk-nav uk-nav-side">
+            <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://clamytoe.github.io/pelican.html" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" taget="_blank" class="uk-button"><i class="uk-icon-facebook-square"></i> Share</a>
+            </li>
+            <li>
+            <a href="https://twitter.com/intent/tweet?text=Finally%20getting%20the%20hang%20of%20working%20with%20Pelican%21&url=https://clamytoe.github.io/pelican.html&via=clamytoe" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="uk-button" target="_blank"><i class="uk-icon-twitter"></i> Tweet</a>
+            </li>
+            <li>
+            <a href="https://plus.google.com/share?url=https://clamytoe.github.io/pelican.html" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank" class="uk-button"><i class="uk-icon-google-plus-square"></i> Share</a>
+            </li>
+        </ul>
+    </div>
 
-            <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-                <a href="https://clamytoe.github.io/pelican.html" class="uk-article-title uk-link-muted" itemprop="name">Finally getting the hang of working with Pelican!</a>
-                <p class="uk-article-meta"><time datetime="2020-02-28" itemprop="datePublished">Fri 28 February 2020</time> • <a href="https://clamytoe.github.io/category/pelican.html">Pelican</a></p>
-</p>
-                <p class="uk-article-lead" itemprop="description">Nothing beats learning something new than just jumping in and playing around with it!</p>
-                <section itemprop="articleBody"><h1>Finally getting the hang of working with Pelican!</h1>
+</div>
+
+<div class="uk-width-medium-7-10">
+
+    <article class="uk-article">
+        <h1 class="uk-heading-large uk-article-title" itemprop="name">Finally getting the hang of working with Pelican!</h1>
+        <p class="uk-article-meta"><time datetime="2020-02-28" itemprop="datePublished">Fri 28 February 2020</time> in <a href="https://clamytoe.github.io/category/pelican.html">Pelican</a></p>
+
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://clamytoe.github.io/pelican.html" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" taget="_blank" class="uk-button uk-visible-small"><i class="uk-icon-facebook-square"></i> Share</a>
+        <a href="https://twitter.com/intent/tweet?text=Finally%20getting%20the%20hang%20of%20working%20with%20Pelican%21&url=https://clamytoe.github.io/pelican.html&via=clamytoe" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="uk-button uk-visible-small" target="_blank"><i class="uk-icon-twitter"></i> Tweet</a>
+        <a href="https://plus.google.com/share?url=https://clamytoe.github.io/pelican.html" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank" class="uk-button uk-visible-small"><i class="uk-icon-google-plus-square"></i> Share</a>
+
+        <p class="uk-article-lead" itemprop="description">Nothing beats learning something new than just jumping in and playing around with it!</p>
+        <section itemprop="articleBody"><h1>Finally getting the hang of working with Pelican!</h1>
 <p>If you've seen my <a href="https://github.com/clamytoe/clamytoe.github.io">source repo</a> for this site, you know that I followed <a href="https://opensource.com/users/jnyjny">Erik O'Shaughnessy's</a> <em>Run your blog on GitHub Pages with Python</em> <a href="(https://opensource.com/article/19/5/run-your-blog-github-pages-python)">tutorial</a>.
 It's a great tutorial, I specifically love his <strong>one weird trick</strong>, but it leaves so many unanswered questions.
 Go read it now if you haven't and we'll pick up where he leaves off.</p>
@@ -216,53 +242,8 @@ I simply had to add <code>{{ SITEURL }}</code> in the <code>action</code> part o
 
 <p>Now it works beautifully!</p>
 <p>Of course, with me being an upstanding netcitizen, I submitted a <a href="https://github.com/lucachr/pelican-mg/pull/11">pull request</a> to fix the issue :).</p></section>
-                <a href="https://clamytoe.github.io/pelican.html#disqus_thread"></a>
-                <hr class="uk-article-divider">
-            </article>
-
-
-        <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-                <a href="https://clamytoe.github.io/pytest-fixtures.html" class="uk-article-title uk-link-muted" itemprop="name">Pytest fixtures with tear down</a>
-                <p class="uk-article-meta"><time datetime="2020-02-19" itemprop="datePublished">Wed 19 February 2020</time> • <a href="https://clamytoe.github.io/category/pytest.html">Pytest</a></p>
-</p>
-                <p class="uk-article-lead" itemprop="description">Figured out how to tear down a pytest fixture</p>
-                <p>Pytest fixtures with tear down code Today after listening to Brian Okken's Test & Code podcast with Anthony Shaw, I was reminded that I wanted to install Anthon's Python Security Plugin for JetBrain's PyCharm IDE. That was a breeze to install and it just worked out of the box. I fired it up and it automatically checked my code and called it good. I then started to write some tests and while...</p>
-                <a href="https://clamytoe.github.io/pytest-fixtures.html">Read More</a>
-                <hr class="uk-article-divider">
-        </article>
-
-
-        <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-                <a href="https://clamytoe.github.io/pycryptodome.html" class="uk-article-title uk-link-muted" itemprop="name">Venture Into Cryptography with PyCryptodome!</a>
-                <p class="uk-article-meta"><time datetime="2020-02-14" itemprop="datePublished">Fri 14 February 2020</time> • <a href="https://clamytoe.github.io/category/cryptography.html">Cryptography</a></p>
-</p>
-                <p class="uk-article-lead" itemprop="description">learning about how to encrypt files</p>
-                <p>Into the cryptography rabbit hole! As dumb as it is, I have an unsecure text file that I use to keep track of all my username and passwords for all of the sites that I frequent. In order to not be so "hackable", I've decided to encrypt the file. I had recently written a couple of coding challenges for Pybites Code Challenges site, using the cryptography module. One was a coding challenge and the other...</p>
-                <a href="https://clamytoe.github.io/pycryptodome.html">Read More</a>
-                <hr class="uk-article-divider">
-        </article>
-
-
-        <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-                <a href="https://clamytoe.github.io/initial-post.html" class="uk-article-title uk-link-muted" itemprop="name">Initial Post for my Ramblings of an autodiadact Blog</a>
-                <p class="uk-article-meta"><time datetime="2020-02-12" itemprop="datePublished">Wed 12 February 2020</time> • <a href="https://clamytoe.github.io/category/general.html">General</a></p>
-</p>
-                <p class="uk-article-lead" itemprop="description">initial post</p>
-                <p>Getting my feet wet with this blogging stuff! This is my first post here. It's not much to look at, but my goal is to show what I'm learning as I go. There's no real "topic" but it will mostly be about what I'm working on and what I have to learn to get it done. Hope that it's of interest to someone......</p>
-                <a href="https://clamytoe.github.io/initial-post.html">Read More</a>
-                <hr class="uk-article-divider">
-        </article>
-
-
-        <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-                <a href="https://clamytoe.github.io/rescaling-values.html" class="uk-article-title uk-link-muted" itemprop="name">Rescaling Values</a>
-                <p class="uk-article-meta"><time datetime="2020-02-12" itemprop="datePublished">Wed 12 February 2020</time> • <a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></p>
-</p>
-                <p class="uk-article-lead" itemprop="description">Quick discussion about rescaling values for data science</p>
-                <p>Scaling Values Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relevant. The dataset consisted of "House Ownership": Age Annual income in USD House ownership status 23 50,000 Non-owner 37 34,000 Non-owner 20 100,000 Owner 35 130,000 Owner etc The aim being to predict whether a person that is 50 years old with an income...</p>
-                <a href="https://clamytoe.github.io/rescaling-values.html">Read More</a>
-                <hr class="uk-article-divider">
-        </article>
+        <hr class="uk-article-divider">
+    </article>
 
 
 </div>
@@ -281,7 +262,7 @@ I simply had to add <code>{{ SITEURL }}</code> in the <code>action</code> part o
                     <li ><a href="https://clamytoe.github.io/category/cryptography.html">Cryptography</a></li>
                     <li ><a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></li>
                     <li ><a href="https://clamytoe.github.io/category/general.html">General</a></li>
-                    <li ><a href="https://clamytoe.github.io/category/pelican.html">Pelican</a></li>
+                    <li class="uk-active"><a href="https://clamytoe.github.io/category/pelican.html">Pelican</a></li>
                     <li ><a href="https://clamytoe.github.io/category/pytest.html">Pytest</a></li>
                     <li class="uk-nav-header">Pages</li>
 
@@ -357,7 +338,7 @@ I simply had to add <code>{{ SITEURL }}</code> in the <code>action</code> part o
             <li ><a href="https://clamytoe.github.io/category/cryptography.html">Cryptography</a></li>
             <li ><a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></li>
             <li ><a href="https://clamytoe.github.io/category/general.html">General</a></li>
-            <li ><a href="https://clamytoe.github.io/category/pelican.html">Pelican</a></li>
+            <li class="uk-active"><a href="https://clamytoe.github.io/category/pelican.html">Pelican</a></li>
             <li ><a href="https://clamytoe.github.io/category/pytest.html">Pytest</a></li>
             <li class="uk-nav-header">Pages</li>
             <li >
