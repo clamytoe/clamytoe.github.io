@@ -76,12 +76,14 @@
 <div class="uk-width-medium-4-5">
 
 
-            <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-                <a href="https://clamytoe.github.io/rescaling-values.html" class="uk-article-title uk-link-muted" itemprop="name">Rescaling Values</a>
-                <p class="uk-article-meta"><time datetime="2020-02-12" itemprop="datePublished">Wed 12 February 2020</time> • <a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></p>
-</p>
-                <p class="uk-article-lead" itemprop="description">Quick discussion about rescaling values for data science</p>
-                <section itemprop="articleBody"><h1>Scaling Values</h1>
+    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
+        <a href="https://clamytoe.github.io/rescaling-values.html" class="uk-article-title uk-link-muted" itemprop="name">Rescaling Values</a>
+        <p class="uk-article-meta"><time datetime="2020-02-12" itemprop="datePublished">Wed 12 February 2020</time> • <a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></p>
+        </p>
+        <p class="uk-article-lead" itemprop="description">Quick discussion about rescaling values for data science</p>
+            <p>Scaling Values Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relevant. The dataset consisted of "House Ownership": Age Annual income in USD House ownership status 23 50,000 Non-owner 37 34,000 Non-owner 20 100,000 Owner 35 130,000 Owner etc The aim being to predict whether a person that is 50 years old with an income of $80,000, would own a home so that he could be targeted for home insurance. k-Nearest Neighbor's are currently being covered and for this exercise a k = 1 is to be used. Using either a Euclidean or Manhattan distance wouldn't matter because the distances between these values are too great. In comes rescalling! The formula use is: ScaledQuantity = (ActualQnatity-MinQuantity)/(MaxQuantity-MinQuantity) So for this dataset, both the Age and the Annual income wound have to be...</p><br /><br />
+            <a href="https://clamytoe.github.io/rescaling-values.html">Read More</a>
+            <!-- <section itemprop="articleBody"><h1>Scaling Values</h1>
 <p>Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relevant. The dataset consisted of "House Ownership":</p>
 <table>
 <thead>
@@ -181,9 +183,9 @@
 </table>
 <p>Now an 1-NN algorithm with a Euclidean metric could easily be used to find out if the last person is more than likely to own a home. Without the rescaling, the algorithm would have yielded different results.</p>
 <p>Keeping it short today, but hopefully it was a helpful tip!</p></section>
-                <a href="https://clamytoe.github.io/rescaling-values.html#disqus_thread"></a>
-                <hr class="uk-article-divider">
-            </article>
+            <a href="https://clamytoe.github.io/rescaling-values.html#disqus_thread"></a> -->
+        <hr class="uk-article-divider">
+    </article>
 
 
 </div>
