@@ -4,7 +4,7 @@ modified: 2020-03-01 01:13
 category: Markdown
 tags: markdown, pelican
 title: Pelican Markdown Test Page
-slug: md-guide
+slug: markdown
 status: hidden
 
 # Examine how Markdown is rendered with Pelican
