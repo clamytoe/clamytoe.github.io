@@ -9,7 +9,7 @@ summary: Nothing beats learning something new than just jumping in and playing a
 
 # Finally getting the hang of working with Pelican
 
-If you've seen my [source repo](https://github.com/clamytoe/clamytoe.github.io) for this site, you know that I followed [Erik O'Shaughnessy's](https://opensource.com/users/jnyjny) *Run your blog on GitHub Pages with Python* [tutorial]((https://opensource.com/article/19/5/run-your-blog-github-pages-python)).
+If you've seen my [source repo](https://github.com/clamytoe/clamytoe.github.io) for this site, you know that I followed [Erik O'Shaughnessy's](https://opensource.com/users/jnyjny) *Run your blog on GitHub Pages with Python* [tutorial](https://opensource.com/article/19/5/run-your-blog-github-pages-python).
 It's a great tutorial, I specifically love his **one weird trick**, but it leaves so many unanswered questions.
 Go read it now if you haven't and we'll pick up where he leaves off.
 
