@@ -1,14 +1,17 @@
 author: Martin Uribe
 date: 2020-02-24 07:30
-category: markdown
-tags: markdown
+modified: 2020-03-01 01:13
+category: Markdown
+tags: markdown, pelican
 title: Pelican Markdown Test Page
 slug: md-guide
 status: hidden
 
 # Examine how Markdown is rendered with Pelican
 
-This page was donated to me by [David Colton](https://davidcolton.github.io/) so that I can see how my Pelican theme is being rendered. He's just starting with blogging as well, but keep your eye on him. I'm expect great things!
+This page was donated to me by [David Colton](https://davidcolton.github.io/) so that I can see how my Pelican theme is being rendered.
+He's just starting with blogging as well, but keep your eye on him.
+I'm expect great things!
 
 For a complete markdown reference refer to [The Markdown Guide](https://www.markdownguide.org/).
 
@@ -18,7 +21,8 @@ Before you learn anything else you should know be aware of the following:
 
 ### Heading Best Practices
 
-Markdown applications don’t agree on how to handle missing blank lines between a heading and the surrounding paragraphs. For compatibility, separate paragraphs and headings with one or more blank lines.
+Markdown applications don’t agree on how to handle missing blank lines between a heading and the surrounding paragraphs.
+For compatibility, separate paragraphs and headings with one or more blank lines.
 
 ### Paragraphs
 
@@ -51,12 +55,17 @@ You can add headers to your markdown to divide your posts into related sections:
     ##### A H5 heading  
     ###### A H6 heading  
 
-# A H1 heading  
-## A H2 heading  
-### A H3 heading  
-#### A H4 heading  
-##### A H5 heading  
-###### A H6 heading  
+# A H1 heading
+
+## A H2 heading
+
+### A H3 heading
+
+#### A H4 heading
+
+##### A H5 heading
+
+###### A H6 heading
 
 A nice additional way to separate different sections of you post is to insert a horizontal line is to add three or more hyphens:
 
@@ -76,14 +85,18 @@ In Mathew's original post he defines a list with numbers as:
 When rendered this looks like:
 
 A list with numbers:
+
 1. One
 2. Two
 3. Three
 
 There are two issues with this:
 
-1. There should be an empty line between the text preceding the list and the list itself. See notes above about adding empty blank lines between headings and paragraphs. This rule applied to everything.
-1. Typically you don't provide the numbers. All items in the list are preceded with a `1. ` and the list is then automatically numbered.
+1. There should be an empty line between the text preceding the list and the list itself.
+See notes above about adding empty blank lines between headings and paragraphs.
+This rule applied to everything.
+1. Typically you don't provide the numbers.
+All items in the list are preceded with a `1.` and the list is then automatically numbered.
 
 The correct way to define a list of numbers is:
 
@@ -119,7 +132,8 @@ And the markdown for sublists like this is:
     1. Top Level Again  
         1. Sub level again
 
-The list with bullets example suffers from the same issue as the numbered list in that the example markdown given does not have a blank line between the text and the bulleted list. In markdown you always have to place a blank line:
+The list with bullets example suffers from the same issue as the numbered list in that the example markdown given does not have a blank line between the text and the bulleted list.
+In markdown you always have to place a blank line:
 
     :::text
     A list with bullets:
@@ -161,7 +175,9 @@ And here is the table rendered:
 | Value 7 | Value 8 | Value 9 |
 <br/>
 
-I'm not sure it it's a Pelican thing or the template used but when rendered this looks really poor in my opinion. One way around this it to use HTML directly with CSS styling. I need to investigate this further.
+I'm not sure it it's a Pelican thing or the template used but when rendered this looks really poor in my opinion.
+One way around this it to use HTML directly with CSS styling.
+I need to investigate this further.
 
 Here's a HTML table with CSS Styling:
 
@@ -223,7 +239,8 @@ Here's a HTML table with CSS Styling:
 Images can be displayed in Markdown.  
 
 Text within the square brackets is the image name. The path to the image goes between the round brackets.  
-The {static} tag indicates the image is stored in the content folder. This setting can be changed in `pelicanconf.py`.
+The {static} tag indicates the image is stored in the content folder.
+This setting can be changed in `pelicanconf.py`.
 
 ![python logo]({static}/img/python_icon.png)
 
@@ -242,7 +259,8 @@ Or we can link to another external website by supplying the web address.
 
 [Python Package Index](https://pypi.org)
 
-Refer to Mathew's page directly for the setting that need to be added to the `peliconconf.py` file. One small disadvantage of having to define links using `{static}` or `{filename}` is that it makes editing the markdown files in a editor slightly more difficult as you are not actually going to see a preview or inline rendering of the link content. A small annoyance.
+Refer to Mathew's page directly for the setting that need to be added to the `peliconconf.py` file.
+One small disadvantage of having to define links using `{static}` or `{filename}` is that it makes editing the markdown files in a editor slightly more difficult as you are not actually going to see a preview or inline rendering of the link content. A small annoyance.
 
 ---
 

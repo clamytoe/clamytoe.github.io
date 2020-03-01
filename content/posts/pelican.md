@@ -1,12 +1,13 @@
 title: Finally getting the hang of working with Pelican!
 date: 2020-02-28 09:50
-modified: 2020-02-28 09:50
-category: Pelican
+modified: 2020-03-01 00:42
+category: Blog
+tags: pelican, Makefile, make
 slug: pelican
 author: Martin Uribe
 summary: Nothing beats learning something new than just jumping in and playing around with it!
 
-# Finally getting the hang of working with Pelican!
+# Finally getting the hang of working with Pelican
 
 If you've seen my [source repo](https://github.com/clamytoe/clamytoe.github.io) for this site, you know that I followed [Erik O'Shaughnessy's](https://opensource.com/users/jnyjny) *Run your blog on GitHub Pages with Python* [tutorial]((https://opensource.com/article/19/5/run-your-blog-github-pages-python)).
 It's a great tutorial, I specifically love his **one weird trick**, but it leaves so many unanswered questions.
@@ -21,23 +22,23 @@ What caught my eye was how simple it all was to automate things with `make`!
 
 I took a quick look at mine and saw what commands were defined.
 
-```
+```zsh
 make
-Makefile for a pelican Web site                                           
-                                                                          
-Usage:                                                                    
-   make html                           (re)generate the web site          
-   make clean                          remove the generated files         
-   make regenerate                     regenerate files upon modification 
-   make publish                        generate using production settings 
+Makefile for a pelican Web site
+
+Usage:
+   make html                           (re)generate the web site
+   make clean                          remove the generated files
+   make regenerate                     regenerate files upon modification
+   make publish                        generate using production settings
    make serve [PORT=8000]              serve site at http://localhost:8000
-   make serve-global [SERVER=0.0.0.0]  serve (as root) to :80    
-   make devserver [PORT=8000]          serve and regenerate together      
-   make ssh_upload                     upload the web site via SSH        
+   make serve-global [SERVER=0.0.0.0]  serve (as root) to :80
+   make devserver [PORT=8000]          serve and regenerate together
+   make ssh_upload                     upload the web site via SSH
    make rsync_upload                   upload the web site via rsync+ssh  
-   make github                         upload the web site via gh-pages   
-                                                                          
-Set the DEBUG variable to 1 to enable debugging, e.g. make DEBUG=1 html   
+   make github                         upload the web site via gh-pages
+
+Set the DEBUG variable to 1 to enable debugging, e.g. make DEBUG=1 html
 Set the RELATIVE variable to 1 to enable relative urls
 ```
 
@@ -53,13 +54,13 @@ Unfortunately, that broke testing the blog locally because all the links would p
 
 What I'm trying to say here is that in I was able to resolve both of these issues by making the following changes.
 
-`pelicanconf.py`:
+*pelicanconf.py*:
 
 ```python
 SITEURL = ""
 ```
 
-`publishconf.py`:
+*publishconf.py*:
 
 ```python
 SITEURL = "https://clamytoe.github.io"
@@ -82,6 +83,7 @@ cp $(FAVICON) $(OUTPUTDIR)
 ```
 
 > NOTE: I had initially added that to all of the commands, but the ones that run the server, don't actually get to that step.
+
 When I *Ctrl+C* out of it, it just exists...
 
 ## New workflow
@@ -99,6 +101,7 @@ git push origin content
 ```
 
 > NOTE: Of course, only push your files when you're ready to, but you get the idea.
+
 Now you're ready to generate the actual site, here's how that's now done.
 
 ### Generate the site
@@ -187,7 +190,7 @@ make github
 make clean
 ```
 
-### On a side note...
+### On a side note
 
 I was also having a weird problem with my search feature.
 I had to remove the machine code from my [cryptography](https://clamytoe.github.io/category/cryptography.html) blog post because it was completely screwing up the JavaScript.
