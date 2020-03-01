@@ -108,3 +108,12 @@ ENV/
 
 # VSCode
 .vscode/
+
+# plugins
+pelican-plugins/
+plugins/
+
+# pelican
+output/
+pelican_how_to.md
+pelicanconf-og.py
