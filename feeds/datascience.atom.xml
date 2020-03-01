@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings - DataScience</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/datascience.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-02-12T12:00:00-06:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Rescaling Values</title><link href="https://clamytoe.github.io/rescaling-values.html" rel="alternate"></link><published>2020-02-12T12:00:00-06:00</published><updated>2020-02-12T12:00:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-02-12:/rescaling-values.html</id><summary type="html">&lt;p&gt;Quick discussion about rescaling values for data science&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Scaling Values&lt;/h1&gt;
-&lt;p&gt;Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relevant. The dataset consisted of "House Ownership":&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings - DataScience</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/datascience.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-03-01T01:02:00-06:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Rescaling Values</title><link href="https://clamytoe.github.io/rescaling-values.html" rel="alternate"></link><published>2020-02-13T08:00:00-06:00</published><updated>2020-03-01T01:02:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-02-13:/rescaling-values.html</id><summary type="html">&lt;p&gt;Quick discussion about rescaling values for data science&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Scaling Values&lt;/h1&gt;
+&lt;p&gt;Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relevant.
+The dataset consisted of "House Ownership":&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -38,15 +39,16 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;The aim being to predict whether a person that is 50 years old with an income of $80,000, would own a home so that he could be targeted for home insurance.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm"&gt;k-Nearest Neighbor&lt;/a&gt;'s are currently being covered and for this exercise a &lt;code&gt;k = 1&lt;/code&gt; is to be used. Using either a &lt;a href="https://en.wikipedia.org/wiki/Euclidean_distance"&gt;Euclidean&lt;/a&gt; or &lt;a href="https://en.wiktionary.org/wiki/Manhattan_distance"&gt;Manhattan&lt;/a&gt; distance wouldn't matter because the distances between these values are too great. In comes rescalling!&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm"&gt;k-Nearest Neighbor&lt;/a&gt;'s are currently being covered and for this exercise a &lt;code&gt;k = 1&lt;/code&gt; is to be used.
+Using either a &lt;a href="https://en.wikipedia.org/wiki/Euclidean_distance"&gt;Euclidean&lt;/a&gt; or &lt;a href="https://en.wiktionary.org/wiki/Manhattan_distance"&gt;Manhattan&lt;/a&gt; distance wouldn't matter because the distances between these values are too great. In comes rescaling!&lt;/p&gt;
 &lt;p&gt;The formula use is:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;ScaledQuantity = (ActualQnatity-MinQuantity)/(MaxQuantity-MinQuantity)&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;So for this dataset, both the &lt;strong&gt;Age&lt;/strong&gt; and the &lt;strong&gt;Annual income&lt;/strong&gt; wound have to be adjusted.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;ScaledAge = (ActualAge-MinAge)/(MaxAge-MinAge)&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;ScaledIncome = (ActualIncome-MinIncome)/(MaxIncome-MinIncome)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ScaledAge = (ActualAge-MinAge)/(MaxAge-MinAge)&lt;/strong&gt;
+&lt;strong&gt;ScaledIncome = (ActualIncome-MinIncome)/(MaxIncome-MinIncome)&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;After scaling, the adjusted dataset would look something like this:&lt;/p&gt;
 &lt;table&gt;
@@ -97,5 +99,6 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;Now an 1-NN algorithm with a Euclidean metric could easily be used to find out if the last person is more than likely to own a home. Without the rescaling, the algorithm would have yielded different results.&lt;/p&gt;
-&lt;p&gt;Keeping it short today, but hopefully it was a helpful tip!&lt;/p&gt;</content><category term="DataScience"></category></entry></feed>
+&lt;p&gt;Now a 1-NN algorithm with a Euclidean metric could easily be used to find out if the last person is more than likely to own a home.
+Without the rescaling, the algorithm would have yielded different results.&lt;/p&gt;
+&lt;p&gt;Keeping it short today, but hopefully it was a helpful tip!&lt;/p&gt;</content><category term="DataScience"></category><category term="datascience"></category><category term="rescaling"></category><category term="knn"></category><category term="euclidean"></category><category term="manhattan"></category></entry></feed>

@@ -25,9 +25,12 @@
 <meta property="og:description" content="Nothing beats learning something new than just jumping in and playing around with it!" />
 <meta name="twitter:description" content="Nothing beats learning something new than just jumping in and playing around with it!" />
 <meta property="og:article:published_time" content="2020-02-28" />
-<meta property="og:article:modified_time" content="2020-02-28">
+<meta property="og:article:modified_time" content="2020-03-01">
 <meta itemprop="dateModified" content="2020-02-28" />
 <meta property="og:article:author" content="Martin Uribe" >
+<meta property="og:article:tag" content="pelican">
+<meta property="og:article:tag" content="Makefile">
+<meta property="og:article:tag" content="make">
 <meta property="og:image" content="/img/clamytoe.png" />
 <meta property="og:image:type" content="image/png" />
 <meta name="twitter:image" content="/img/clamytoe.png" />
@@ -89,14 +92,14 @@
 
     <article class="uk-article">
         <h1 class="uk-heading-large uk-article-title" itemprop="name">Finally getting the hang of working with Pelican!</h1>
-        <p class="uk-article-meta"><time datetime="2020-02-28" itemprop="datePublished">Fri 28 February 2020</time> in <a href="https://clamytoe.github.io/category/pelican.html">Pelican</a></p>
+        <p class="uk-article-meta"><time datetime="2020-02-28" itemprop="datePublished">Fri 28 February 2020</time> in <a href="https://clamytoe.github.io/category/blog.html">Blog</a></p>
 
         <a href="https://www.facebook.com/sharer/sharer.php?u=https://clamytoe.github.io/pelican.html" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" taget="_blank" class="uk-button uk-visible-small"><i class="uk-icon-facebook-square"></i> Share</a>
         <a href="https://twitter.com/intent/tweet?text=Finally%20getting%20the%20hang%20of%20working%20with%20Pelican%21&url=https://clamytoe.github.io/pelican.html&via=clamytoe" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="uk-button uk-visible-small" target="_blank"><i class="uk-icon-twitter"></i> Tweet</a>
         <a href="https://plus.google.com/share?url=https://clamytoe.github.io/pelican.html" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank" class="uk-button uk-visible-small"><i class="uk-icon-google-plus-square"></i> Share</a>
 
         <p class="uk-article-lead" itemprop="description">Nothing beats learning something new than just jumping in and playing around with it!</p>
-        <section itemprop="articleBody"><h1>Finally getting the hang of working with Pelican!</h1>
+        <section itemprop="articleBody"><h1>Finally getting the hang of working with Pelican</h1>
 <p>If you've seen my <a href="https://github.com/clamytoe/clamytoe.github.io">source repo</a> for this site, you know that I followed <a href="https://opensource.com/users/jnyjny">Erik O'Shaughnessy's</a> <em>Run your blog on GitHub Pages with Python</em> <a href="(https://opensource.com/article/19/5/run-your-blog-github-pages-python)">tutorial</a>.
 It's a great tutorial, I specifically love his <strong>one weird trick</strong>, but it leaves so many unanswered questions.
 Go read it now if you haven't and we'll pick up where he leaves off.</p>
@@ -107,23 +110,23 @@ I'll admit, that I only skimmed over it, it's kind of long.
 I was looking for anything that would jump out at me.
 What caught my eye was how simple it all was to automate things with <code>make</code>!</p>
 <p>I took a quick look at mine and saw what commands were defined.</p>
-<div class="highlight"><pre><span></span><code><span class="n">make</span>
-<span class="n">Makefile</span> <span class="k">for</span> <span class="n">a</span> <span class="n">pelican</span> <span class="n">Web</span> <span class="n">site</span>                                           
+<div class="highlight"><pre><span></span><code>make
+Makefile <span class="k">for</span> a pelican Web site
 
-<span class="k">Usage</span><span class="p">:</span>                                                                    
-   <span class="n">make</span> <span class="n">html</span>                           <span class="p">(</span><span class="n">re</span><span class="p">)</span><span class="n">generate</span> <span class="n">the</span> <span class="n">web</span> <span class="n">site</span>          
-   <span class="n">make</span> <span class="n">clean</span>                          <span class="n">remove</span> <span class="n">the</span> <span class="k">generated</span> <span class="n">files</span>         
-   <span class="n">make</span> <span class="n">regenerate</span>                     <span class="n">regenerate</span> <span class="n">files</span> <span class="n">upon</span> <span class="n">modification</span> 
-   <span class="n">make</span> <span class="n">publish</span>                        <span class="n">generate</span> <span class="k">using</span> <span class="n">production</span> <span class="n">settings</span> 
-   <span class="n">make</span> <span class="n">serve</span> <span class="p">[</span><span class="n">PORT</span><span class="o">=</span><span class="mi">8000</span><span class="p">]</span>              <span class="n">serve</span> <span class="n">site</span> <span class="k">at</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8000</span>
-   <span class="n">make</span> <span class="n">serve</span><span class="o">-</span><span class="k">global</span> <span class="p">[</span><span class="n">SERVER</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">]</span>  <span class="n">serve</span> <span class="p">(</span><span class="k">as</span> <span class="n">root</span><span class="p">)</span> <span class="k">to</span> <span class="p">:</span><span class="mi">80</span>    
-   <span class="n">make</span> <span class="n">devserver</span> <span class="p">[</span><span class="n">PORT</span><span class="o">=</span><span class="mi">8000</span><span class="p">]</span>          <span class="n">serve</span> <span class="k">and</span> <span class="n">regenerate</span> <span class="n">together</span>      
-   <span class="n">make</span> <span class="n">ssh_upload</span>                     <span class="n">upload</span> <span class="n">the</span> <span class="n">web</span> <span class="n">site</span> <span class="n">via</span> <span class="n">SSH</span>        
-   <span class="n">make</span> <span class="n">rsync_upload</span>                   <span class="n">upload</span> <span class="n">the</span> <span class="n">web</span> <span class="n">site</span> <span class="n">via</span> <span class="n">rsync</span><span class="o">+</span><span class="n">ssh</span>  
-   <span class="n">make</span> <span class="n">github</span>                         <span class="n">upload</span> <span class="n">the</span> <span class="n">web</span> <span class="n">site</span> <span class="n">via</span> <span class="n">gh</span><span class="o">-</span><span class="n">pages</span>   
+Usage:
+   make html                           <span class="o">(</span>re<span class="o">)</span>generate the web site
+   make clean                          remove the generated files
+   make regenerate                     regenerate files upon modification
+   make publish                        generate using production settings
+   make serve <span class="o">[</span><span class="nv">PORT</span><span class="o">=</span><span class="m">8000</span><span class="o">]</span>              serve site at http://localhost:8000
+   make serve-global <span class="o">[</span><span class="nv">SERVER</span><span class="o">=</span><span class="m">0</span>.0.0.0<span class="o">]</span>  serve <span class="o">(</span>as root<span class="o">)</span> to :80
+   make devserver <span class="o">[</span><span class="nv">PORT</span><span class="o">=</span><span class="m">8000</span><span class="o">]</span>          serve and regenerate together
+   make ssh_upload                     upload the web site via SSH
+   make rsync_upload                   upload the web site via rsync+ssh  
+   make github                         upload the web site via gh-pages
 
-<span class="k">Set</span> <span class="n">the</span> <span class="n">DEBUG</span> <span class="k">variable</span> <span class="k">to</span> <span class="mi">1</span> <span class="k">to</span> <span class="n">enable</span> <span class="n">debugging</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="k">g</span><span class="p">.</span> <span class="n">make</span> <span class="n">DEBUG</span><span class="o">=</span><span class="mi">1</span> <span class="n">html</span>   
-<span class="k">Set</span> <span class="n">the</span> <span class="k">RELATIVE</span> <span class="k">variable</span> <span class="k">to</span> <span class="mi">1</span> <span class="k">to</span> <span class="n">enable</span> <span class="k">relative</span> <span class="n">urls</span>
+Set the DEBUG variable to <span class="m">1</span> to <span class="nb">enable</span> debugging, e.g. make <span class="nv">DEBUG</span><span class="o">=</span><span class="m">1</span> html
+Set the RELATIVE variable to <span class="m">1</span> to <span class="nb">enable</span> relative urls
 </code></pre></div>
 
 
@@ -137,12 +140,12 @@ Whenever I clicked on the header link, instead of taking me back to the home pag
 I was able to get around that by just specifying the <code>SITE_URL</code> variable in <code>pelicanconf.py</code>.
 Unfortunately, that broke testing the blog locally because all the links would point to the live site on GitHub!</p>
 <p>What I'm trying to say here is that in I was able to resolve both of these issues by making the following changes.</p>
-<p><code>pelicanconf.py</code>:</p>
+<p><em>pelicanconf.py</em>:</p>
 <div class="highlight"><pre><span></span><code><span class="n">SITEURL</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 </code></pre></div>
 
 
-<p><code>publishconf.py</code>:</p>
+<p><em>publishconf.py</em>:</p>
 <div class="highlight"><pre><span></span><code><span class="n">SITEURL</span> <span class="o">=</span> <span class="s2">&quot;https://clamytoe.github.io&quot;</span>
 </code></pre></div>
 
@@ -161,9 +164,9 @@ But now that I was going to use the <code>Makefile</code> I decided to automate 
 
 
 <blockquote>
-<p>NOTE: I had initially added that to all of the commands, but the ones that run the server, don't actually get to that step.
-When I <em>Ctrl+C</em> out of it, it just exists...</p>
+<p>NOTE: I had initially added that to all of the commands, but the ones that run the server, don't actually get to that step.</p>
 </blockquote>
+<p>When I <em>Ctrl+C</em> out of it, it just exists...</p>
 <h2>New workflow</h2>
 <p>With that all set, things are now much easier and make more sense.
 What I would recommend, is to run the <code>make clean</code> command and commit it to your <code>content</code> branch.
@@ -176,9 +179,9 @@ git push origin content
 
 
 <blockquote>
-<p>NOTE: Of course, only push your files when you're ready to, but you get the idea.
-Now you're ready to generate the actual site, here's how that's now done.</p>
+<p>NOTE: Of course, only push your files when you're ready to, but you get the idea.</p>
 </blockquote>
+<p>Now you're ready to generate the actual site, here's how that's now done.</p>
 <h3>Generate the site</h3>
 <p>If you just want to generate the site this is the command that you want:</p>
 <div class="highlight"><pre><span></span><code>make html
@@ -246,7 +249,7 @@ make clean
 </code></pre></div>
 
 
-<h3>On a side note...</h3>
+<h3>On a side note</h3>
 <p>I was also having a weird problem with my search feature.
 I had to remove the machine code from my <a href="https://clamytoe.github.io/category/cryptography.html">cryptography</a> blog post because it was completely screwing up the JavaScript.
 Once I got that working, I then noticed that whenever I tried to do a search from any of the category pages, that it was looking for <code>/category/search.html</code>.
@@ -276,11 +279,9 @@ I simply had to add <code>{{ SITEURL }}</code> in the <code>action</code> part o
             <div class="uk-panel uk-panel-box">
                 <ul class="uk-nav uk-nav-side">
                     <li class="uk-nav-header">Categories</li>
-                    <li ><a href="https://clamytoe.github.io/category/cryptography.html">Cryptography</a></li>
+                    <li class="uk-active"><a href="https://clamytoe.github.io/category/blog.html">Blog</a></li>
                     <li ><a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></li>
-                    <li ><a href="https://clamytoe.github.io/category/general.html">General</a></li>
-                    <li class="uk-active"><a href="https://clamytoe.github.io/category/pelican.html">Pelican</a></li>
-                    <li ><a href="https://clamytoe.github.io/category/pytest.html">Pytest</a></li>
+                    <li ><a href="https://clamytoe.github.io/category/python.html">Python</a></li>
                     <li class="uk-nav-header">Pages</li>
 
                     <li >
@@ -352,11 +353,9 @@ I simply had to add <code>{{ SITEURL }}</code> in the <code>action</code> part o
 
         <ul class="uk-nav uk-nav-offcanvas" data-uk-nav>
             <li class="uk-nav-header">Categories</li>
-            <li ><a href="https://clamytoe.github.io/category/cryptography.html">Cryptography</a></li>
+            <li class="uk-active"><a href="https://clamytoe.github.io/category/blog.html">Blog</a></li>
             <li ><a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></li>
-            <li ><a href="https://clamytoe.github.io/category/general.html">General</a></li>
-            <li class="uk-active"><a href="https://clamytoe.github.io/category/pelican.html">Pelican</a></li>
-            <li ><a href="https://clamytoe.github.io/category/pytest.html">Pytest</a></li>
+            <li ><a href="https://clamytoe.github.io/category/python.html">Python</a></li>
             <li class="uk-nav-header">Pages</li>
             <li >
                 <a href="https://clamytoe.github.io/pages/about.html">About</a>

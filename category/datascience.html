@@ -78,13 +78,14 @@
 
     <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
         <a href="https://clamytoe.github.io/rescaling-values.html" class="uk-article-title uk-link-muted" itemprop="name">Rescaling Values</a>
-        <p class="uk-article-meta"><time datetime="2020-02-12" itemprop="datePublished">Wed 12 February 2020</time> • <a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></p>
+        <p class="uk-article-meta"><time datetime="2020-02-13" itemprop="datePublished">Thu 13 February 2020</time> • <a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></p>
         </p>
         <p class="uk-article-lead" itemprop="description">Quick discussion about rescaling values for data science</p>
-            <p>Scaling Values Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relevant. The dataset consisted of "House Ownership": Age Annual income in USD House ownership status 23 50,000 Non-owner 37 34,000 Non-owner 20 100,000 Owner 35 130,000 Owner etc The aim being to predict whether a person that is 50 years old with an income of $80,000, would own a home so that he could be targeted for home insurance. k-Nearest Neighbor's are currently being covered and for this exercise a k = 1 is to be used. Using either a Euclidean or Manhattan distance wouldn't matter because the distances between these values are too great. In comes rescalling! The formula use is: ScaledQuantity = (ActualQnatity-MinQuantity)/(MaxQuantity-MinQuantity) So for this dataset, both the Age and the Annual income wound have to be...</p><br /><br />
+            <p>Scaling Values Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relevant. The dataset consisted of "House Ownership": Age Annual income in USD House ownership status 23 50,000 Non-owner 37 34,000 Non-owner 20 100,000 Owner 35 130,000 Owner etc The aim being to predict whether a person that is 50 years old with an income of $80,000, would own a home so that he could be targeted for home insurance. k-Nearest Neighbor's are currently being covered and for this exercise a k = 1 is to be used. Using either a Euclidean or Manhattan distance wouldn't matter because the distances between these values are too great. In comes rescaling! The formula use is: ScaledQuantity = (ActualQnatity-MinQuantity)/(MaxQuantity-MinQuantity) So for this dataset, both the Age and the Annual income wound have to be adjusted. ScaledAge =...</p><br /><br />
             <a href="https://clamytoe.github.io/rescaling-values.html">Read More</a>
             <!-- <section itemprop="articleBody"><h1>Scaling Values</h1>
-<p>Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relevant. The dataset consisted of "House Ownership":</p>
+<p>Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relevant.
+The dataset consisted of "House Ownership":</p>
 <table>
 <thead>
 <tr>
@@ -122,15 +123,16 @@
 </tbody>
 </table>
 <p>The aim being to predict whether a person that is 50 years old with an income of $80,000, would own a home so that he could be targeted for home insurance.</p>
-<p><a href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm">k-Nearest Neighbor</a>'s are currently being covered and for this exercise a <code>k = 1</code> is to be used. Using either a <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean</a> or <a href="https://en.wiktionary.org/wiki/Manhattan_distance">Manhattan</a> distance wouldn't matter because the distances between these values are too great. In comes rescalling!</p>
+<p><a href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm">k-Nearest Neighbor</a>'s are currently being covered and for this exercise a <code>k = 1</code> is to be used.
+Using either a <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean</a> or <a href="https://en.wiktionary.org/wiki/Manhattan_distance">Manhattan</a> distance wouldn't matter because the distances between these values are too great. In comes rescaling!</p>
 <p>The formula use is:</p>
 <blockquote>
 <p><strong>ScaledQuantity = (ActualQnatity-MinQuantity)/(MaxQuantity-MinQuantity)</strong></p>
 </blockquote>
 <p>So for this dataset, both the <strong>Age</strong> and the <strong>Annual income</strong> wound have to be adjusted.</p>
 <blockquote>
-<p><strong>ScaledAge = (ActualAge-MinAge)/(MaxAge-MinAge)</strong></p>
-<p><strong>ScaledIncome = (ActualIncome-MinIncome)/(MaxIncome-MinIncome)</strong></p>
+<p><strong>ScaledAge = (ActualAge-MinAge)/(MaxAge-MinAge)</strong>
+<strong>ScaledIncome = (ActualIncome-MinIncome)/(MaxIncome-MinIncome)</strong></p>
 </blockquote>
 <p>After scaling, the adjusted dataset would look something like this:</p>
 <table>
@@ -181,7 +183,8 @@
 </tr>
 </tbody>
 </table>
-<p>Now an 1-NN algorithm with a Euclidean metric could easily be used to find out if the last person is more than likely to own a home. Without the rescaling, the algorithm would have yielded different results.</p>
+<p>Now a 1-NN algorithm with a Euclidean metric could easily be used to find out if the last person is more than likely to own a home.
+Without the rescaling, the algorithm would have yielded different results.</p>
 <p>Keeping it short today, but hopefully it was a helpful tip!</p></section>
             <a href="https://clamytoe.github.io/rescaling-values.html#disqus_thread"></a> -->
         <hr class="uk-article-divider">
@@ -201,11 +204,9 @@
             <div class="uk-panel uk-panel-box">
                 <ul class="uk-nav uk-nav-side">
                     <li class="uk-nav-header">Categories</li>
-                    <li ><a href="https://clamytoe.github.io/category/cryptography.html">Cryptography</a></li>
+                    <li ><a href="https://clamytoe.github.io/category/blog.html">Blog</a></li>
                     <li class="uk-active"><a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></li>
-                    <li ><a href="https://clamytoe.github.io/category/general.html">General</a></li>
-                    <li ><a href="https://clamytoe.github.io/category/pelican.html">Pelican</a></li>
-                    <li ><a href="https://clamytoe.github.io/category/pytest.html">Pytest</a></li>
+                    <li ><a href="https://clamytoe.github.io/category/python.html">Python</a></li>
                     <li class="uk-nav-header">Pages</li>
 
                     <li >
@@ -277,11 +278,9 @@
 
         <ul class="uk-nav uk-nav-offcanvas" data-uk-nav>
             <li class="uk-nav-header">Categories</li>
-            <li ><a href="https://clamytoe.github.io/category/cryptography.html">Cryptography</a></li>
+            <li ><a href="https://clamytoe.github.io/category/blog.html">Blog</a></li>
             <li class="uk-active"><a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></li>
-            <li ><a href="https://clamytoe.github.io/category/general.html">General</a></li>
-            <li ><a href="https://clamytoe.github.io/category/pelican.html">Pelican</a></li>
-            <li ><a href="https://clamytoe.github.io/category/pytest.html">Pytest</a></li>
+            <li ><a href="https://clamytoe.github.io/category/python.html">Python</a></li>
             <li class="uk-nav-header">Pages</li>
             <li >
                 <a href="https://clamytoe.github.io/pages/about.html">About</a>
