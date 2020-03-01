@@ -5,7 +5,7 @@ category: Python
 tags: cryptography, pycryptodome
 slug: pycryptodome
 author: Martin Uribe
-summary: learning about how to encrypt files
+summary: Learning about how to encrypt files
 
 # Into the cryptography rabbit hole!
 
