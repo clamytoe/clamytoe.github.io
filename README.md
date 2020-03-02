@@ -1,5 +1,6 @@
 # Martin Uribe
-Personal blog: **Ramblings of an autodiadact...**
+
+Personal blog: **Ramblings of an autodidact...**
 
 ## Credits
 
