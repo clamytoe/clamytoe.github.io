@@ -24,7 +24,7 @@ MARKUP = ('md', 'ipynb')
 PLUGIN_PATHS = ['./plugins', './pelican-plugins']
 PLUGINS = ['ipynb.markup', 'render_math', 'better_codeblock_line_numbering']
 MARKDOWN_EXTENSIONS = [
-    'codehilite(css_class=highlight,linenums=False)',
+    'codehilite(css_class=highlight,linenums=True)',
     'extra'
 ]
 
