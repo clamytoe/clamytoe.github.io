@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/all.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-03-01T01:04:00-06:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Finally getting the hang of working with Pelican!</title><link href="https://clamytoe.github.io/articles/2020/Feb/28/pelican" rel="alternate"></link><published>2020-02-28T09:50:00-06:00</published><updated>2020-03-01T00:42:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-02-28:/articles/2020/Feb/28/pelican</id><summary type="html">&lt;p&gt;Nothing beats learning something new than just jumping in and playing around with it!&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Finally getting the hang of working with Pelican&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/all.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-03-01T01:04:00-06:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Finally getting the hang of working with Pelican!</title><link href="https://clamytoe.github.io/articles/2020/Feb/28/pelican" rel="alternate"></link><published>2020-02-28T09:50:00-06:00</published><updated>2020-03-01T00:42:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-02-28:/articles/2020/Feb/28/pelican</id><summary type="html">&lt;p&gt;Nothing beats learning something new than just jumping in and playing around with it!&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Stumbling into a nice Pelican workflow&lt;/h1&gt;
 &lt;p&gt;If you've seen my &lt;a href="https://github.com/clamytoe/clamytoe.github.io"&gt;source repo&lt;/a&gt; for this site, you know that I followed &lt;a href="https://opensource.com/users/jnyjny"&gt;Erik O'Shaughnessy's&lt;/a&gt; &lt;em&gt;Run your blog on GitHub Pages with Python&lt;/em&gt; &lt;a href="https://opensource.com/article/19/5/run-your-blog-github-pages-python"&gt;tutorial&lt;/a&gt;.
 It's a great tutorial, I specifically love his &lt;strong&gt;one weird trick&lt;/strong&gt;, but it leaves so many unanswered questions.
 Go read it now if you haven't and we'll pick up where he leaves off.&lt;/p&gt;
@@ -10,10 +10,9 @@ I'll admit, that I only skimmed over it, it's kind of long.
 I was looking for anything that would jump out at me.
 What caught my eye was how simple it all was to automate things with &lt;code&gt;make&lt;/code&gt;!&lt;/p&gt;
 &lt;p&gt;I took a quick look at mine and saw what commands were defined.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;make&lt;/span&gt;
-&lt;span class="code-line"&gt;Makefile &lt;span class="k"&gt;for&lt;/span&gt; a pelican Web site&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;Makefile&lt;/span&gt; &lt;span class="err"&gt;for&lt;/span&gt; &lt;span class="err"&gt;a&lt;/span&gt; &lt;span class="err"&gt;pelican&lt;/span&gt; &lt;span class="err"&gt;Web&lt;/span&gt; &lt;span class="err"&gt;site&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;Usage:&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="nf"&gt;Usage&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;   make html                           &lt;span class="o"&gt;(&lt;/span&gt;re&lt;span class="o"&gt;)&lt;/span&gt;generate the web site&lt;/span&gt;
 &lt;span class="code-line"&gt;   make clean                          remove the generated files&lt;/span&gt;
 &lt;span class="code-line"&gt;   make regenerate                     regenerate files upon modification&lt;/span&gt;
@@ -25,8 +24,8 @@ What caught my eye was how simple it all was to automate things with &lt;code&gt
 &lt;span class="code-line"&gt;   make rsync_upload                   upload the web site via rsync+ssh  &lt;/span&gt;
 &lt;span class="code-line"&gt;   make github                         upload the web site via gh-pages&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;Set the DEBUG variable to &lt;span class="m"&gt;1&lt;/span&gt; to &lt;span class="nb"&gt;enable&lt;/span&gt; debugging, e.g. make &lt;span class="nv"&gt;DEBUG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; html&lt;/span&gt;
-&lt;span class="code-line"&gt;Set the RELATIVE variable to &lt;span class="m"&gt;1&lt;/span&gt; to &lt;span class="nb"&gt;enable&lt;/span&gt; relative urls&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="err"&gt;Set&lt;/span&gt; &lt;span class="err"&gt;the&lt;/span&gt; &lt;span class="err"&gt;DEBUG&lt;/span&gt; &lt;span class="err"&gt;variable&lt;/span&gt; &lt;span class="err"&gt;to&lt;/span&gt; &lt;span class="err"&gt;1&lt;/span&gt; &lt;span class="err"&gt;to&lt;/span&gt; &lt;span class="err"&gt;enable&lt;/span&gt; &lt;span class="err"&gt;debugging,&lt;/span&gt; &lt;span class="err"&gt;e.g.&lt;/span&gt; &lt;span class="err"&gt;make&lt;/span&gt; &lt;span class="nv"&gt;DEBUG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; html&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="err"&gt;Set&lt;/span&gt; &lt;span class="err"&gt;the&lt;/span&gt; &lt;span class="err"&gt;RELATIVE&lt;/span&gt; &lt;span class="err"&gt;variable&lt;/span&gt; &lt;span class="err"&gt;to&lt;/span&gt; &lt;span class="err"&gt;1&lt;/span&gt; &lt;span class="err"&gt;to&lt;/span&gt; &lt;span class="err"&gt;enable&lt;/span&gt; &lt;span class="err"&gt;relative&lt;/span&gt; &lt;span class="err"&gt;urls&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
@@ -72,9 +71,9 @@ But now that I was going to use the &lt;code&gt;Makefile&lt;/code&gt; I decided 
 What I would recommend, is to run the &lt;code&gt;make clean&lt;/code&gt; command and commit it to your &lt;code&gt;content&lt;/code&gt; branch.
 Now you will have a &lt;em&gt;clean&lt;/em&gt; slate to start with.&lt;/p&gt;
 &lt;p&gt;You can now add any new content and do the following commands:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;git add .&lt;/span&gt;
-&lt;span class="code-line"&gt;git commit -m &lt;span class="s2"&gt;&amp;quot;Your description...&amp;quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;git push origin content&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;git add .&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="err"&gt;git commit -m &amp;quot;Your description...&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="err"&gt;git push origin content&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
@@ -84,13 +83,13 @@ Now you will have a &lt;em&gt;clean&lt;/em&gt; slate to start with.&lt;/p&gt;
 &lt;p&gt;Now you're ready to generate the actual site, here's how that's now done.&lt;/p&gt;
 &lt;h3&gt;Generate the site&lt;/h3&gt;
 &lt;p&gt;If you just want to generate the site this is the command that you want:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;make html&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;make&lt;/span&gt; &lt;span class="err"&gt;html&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Then you can either run the Pelican server or the Python one.&lt;/p&gt;
 &lt;h4&gt;Pelican server&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pelican --listen&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;pelican --listen&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
@@ -103,7 +102,7 @@ Now you will have a &lt;em&gt;clean&lt;/em&gt; slate to start with.&lt;/p&gt;
 &lt;p&gt;Both of those will make the site accessible at &lt;code&gt;http://localhost:8000&lt;/code&gt;&lt;/p&gt;
 &lt;h3&gt;Generate site and preview&lt;/h3&gt;
 &lt;p&gt;Now, if you know that you will be wanting to preview your site, a much better way is to use this command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;make devserver&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;make&lt;/span&gt; &lt;span class="err"&gt;devserver&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
@@ -113,20 +112,20 @@ I wanted to change the colors on mine and doing it like this automatically detec
 &lt;h3&gt;Publish the site&lt;/h3&gt;
 &lt;p&gt;This command generates the site using the &lt;code&gt;publishconf.py&lt;/code&gt; script, so if you specified your site's url in there, it will add it to the generated html pages.
 It's nice for making sure all is working correctly and enabling your Google Analytics; if you're into that sort of thing.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;make publish&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;make&lt;/span&gt; &lt;span class="err"&gt;publish&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Publish and push to github&lt;/h3&gt;
 &lt;p&gt;Now, we're cooking with Crisco!
 This command will generate the final site using &lt;code&gt;publishconf.py&lt;/code&gt;, merge the output into your &lt;code&gt;master&lt;/code&gt; branch, and push it up the hubs; all in one step!&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;make github&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;make&lt;/span&gt; &lt;span class="err"&gt;github&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Cleaning up&lt;/h3&gt;
 &lt;p&gt;Now that you've pushed to the hubs, removed the generated files:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;make clean&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;make&lt;/span&gt; &lt;span class="err"&gt;clean&lt;/span&gt;&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
@@ -162,6 +161,7 @@ I simply had to add &lt;code&gt;{{ SITEURL }}&lt;/code&gt; in the &lt;code&gt;ac
 
 &lt;p&gt;Now it works beautifully!&lt;/p&gt;
 &lt;p&gt;Of course, with me being an upstanding netcitizen, I submitted a &lt;a href="https://github.com/lucachr/pelican-mg/pull/11"&gt;pull request&lt;/a&gt; to fix the issue :).&lt;/p&gt;</content><category term="Blog"></category><category term="pelican"></category><category term="Makefile"></category><category term="make"></category></entry><entry><title>Pytest fixtures with tear down</title><link href="https://clamytoe.github.io/articles/2020/Feb/19/pytest-fixtures" rel="alternate"></link><published>2020-02-19T17:40:00-06:00</published><updated>2020-03-01T00:57:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-02-19:/articles/2020/Feb/19/pytest-fixtures</id><summary type="html">&lt;p&gt;Figured out how to tear down a pytest fixture&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Pytest fixtures with tear down code&lt;/h1&gt;
+&lt;h2&gt;Setting up pytest fixtures with teardown code&lt;/h2&gt;
 &lt;p&gt;Today after listening to &lt;a href="https://twitter.com/brianokken"&gt;Brian Okken's&lt;/a&gt; &lt;a href="https://testandcode.com/"&gt;Test &amp;amp; Code&lt;/a&gt; podcast with &lt;a href="https://twitter.com/anthonypjshaw"&gt;Anthony Shaw&lt;/a&gt;, I was reminded that I wanted to install Anthony's &lt;a href="https://github.com/tonybaloney/pycharm-security"&gt;Python Security Plugin&lt;/a&gt; for &lt;a href="https://www.jetbrains.com/pycharm/"&gt;JetBrain's PyCharm&lt;/a&gt; IDE.
 That was a breeze to install and it just worked out of the box.
 I fired it up and it automatically checked my code and called it good.&lt;/p&gt;
@@ -248,7 +248,8 @@ I'll do you guys a solid and cut out the noise and show you what I did:&lt;/p&gt
 &lt;p&gt;Setting the &lt;code&gt;scope&lt;/code&gt; of the fixture to &lt;em&gt;module&lt;/em&gt; makes it so that it doesn't actually do the tearing down until after all of the tests are completed.
 &lt;em&gt;Perfect!&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;The variables in the &lt;code&gt;Vault&lt;/code&gt; instance are Path objects, so it was simple enough to just &lt;code&gt;unlink()&lt;/code&gt; the files and then &lt;code&gt;rmdir()&lt;/code&gt; the directory after it's been emptied.
-Of course, I tried removing the directory first, but it wasn't having any of that until it was empty...&lt;/p&gt;</content><category term="Python"></category><category term="pytest"></category><category term="fixtures"></category><category term="tear-down"></category></entry><entry><title>Venture Into Cryptography with PyCryptodome!</title><link href="https://clamytoe.github.io/articles/2020/Feb/14/pycryptodome" rel="alternate"></link><published>2020-02-14T07:00:00-06:00</published><updated>2020-03-01T00:44:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-02-14:/articles/2020/Feb/14/pycryptodome</id><summary type="html">&lt;p&gt;Learning about how to encrypt files&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Into the cryptography rabbit hole!&lt;/h1&gt;
+Of course, I tried removing the directory first, but it wasn't having any of that until it was empty...&lt;/p&gt;</content><category term="Python"></category><category term="pytest"></category><category term="fixtures"></category><category term="tear-down"></category></entry><entry><title>Into the cryptography rabbit hole</title><link href="https://clamytoe.github.io/articles/2020/Feb/14/pycryptodome" rel="alternate"></link><published>2020-02-14T07:00:00-06:00</published><updated>2020-03-01T00:44:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-02-14:/articles/2020/Feb/14/pycryptodome</id><summary type="html">&lt;p&gt;Learning about how to encrypt files&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Venture Into Cryptography with PyCryptodome&lt;/h1&gt;
+&lt;h2&gt;Learning about how to encrypt files&lt;/h2&gt;
 &lt;p&gt;As dumb as it is, I have an unsecured text file that I use to keep track of all my username and passwords for all of the sites that I frequent. In order to not be so "hackable", I've decided to encrypt the file.&lt;/p&gt;
 &lt;p&gt;I had recently written a couple of coding challenges for &lt;a href="https://codechalleng.es/"&gt;Pybites Code Challenges&lt;/a&gt; site, using the &lt;a href="https://cryptography.io/en/latest/"&gt;cryptography&lt;/a&gt; module.
 One was a coding challenge and the other a testing one.
@@ -260,7 +261,7 @@ It started as a single challenge, but I really liked how the tests came out and 
 &lt;p&gt;I pushed them to the Pybites Github private repo and it sat there for a bit before &lt;a href="https://codechalleng.es/profiles/pybob"&gt;Bob Belderbos&lt;/a&gt; decided to add them.
 That's when the problems started!
 He discovered that the module was not available so he installed it.
-It worked perfectly for the coding challenge, but for the testing one, when the call to the &lt;a href="https://docs.pytest.org/en/latest/"&gt;Pytest&lt;/a&gt;/&lt;a href="https://github.com/mutpy/mutpy"&gt;Mutpy&lt;/a&gt; instance is made, it loosed the path to the module!&lt;/p&gt;
+It worked perfectly for the coding challenge, but for the testing one, when the call to the &lt;a href="https://docs.pytest.org/en/latest/"&gt;Pytest&lt;/a&gt;/&lt;a href="https://github.com/mutpy/mutpy"&gt;Mutpy&lt;/a&gt; instance is made, it looses the path to the module!&lt;/p&gt;
 &lt;p&gt;We were discussing the issue on the &lt;a href="https://pybit.es/pages/community.html"&gt;Pybites&lt;/a&gt; Slack channel when &lt;a href="https://codechalleng.es/profiles/driscollis"&gt;Mike Driscoll&lt;/a&gt; the creator of &lt;a href="http://www.blog.pythonlibrary.org/"&gt;The Mouse vs Python&lt;/a&gt;, mentioned the &lt;a href="https://www.pycryptodome.org/en/latest/"&gt;PyCryptodome&lt;/a&gt; module.
 He initially thought that the problem was with installing the cryptography module.
 In the end, Bob was not able to figure out how to get it to work, so the challenge had to be removed from the platform.&lt;/p&gt;
@@ -297,28 +298,28 @@ It works out pretty good because the &lt;code&gt;app.py&lt;/code&gt; file now on
 
 &lt;p&gt;Separating the code like this will come in handy when it comes to either creating a &lt;a href="https://palletsprojects.com/p/click/"&gt;Click&lt;/a&gt; CLI interface or a GUI one.&lt;/p&gt;
 &lt;p&gt;The log file for that run looks like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,812 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Creating vault: /home/mohh/Documents/.passlock/ip.bin&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,812 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Importing public key: plock.pub&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,812 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Public key accessed: /home/mohh/.passlock/plock.pub&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,815 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Generating random byte &lt;span class="k"&gt;for&lt;/span&gt; session key&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,815 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Generating encrypted session key&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,819 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Generating AES cipher&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,820 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Encrypting data to create cipher text&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,820 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Writing cipher text to: ip.bin&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,820 - &lt;span class="o"&gt;[&lt;/span&gt;WARNING&lt;span class="o"&gt;]&lt;/span&gt; - root - /home/mohh/Documents/.passlock/ip.bin already exists!&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,820 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Successfully wrote to: /home/mohh/Documents/.passlock/ip.bin&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,821 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Opening file &lt;span class="k"&gt;for&lt;/span&gt; reading: /home/mohh/Documents/.passlock/ip.bin&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,821 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Importing private key: plock&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,821 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Private key accessed: /home/mohh/.passlock/plock&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:18,150 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Extracting encrypted session key&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:18,151 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Generating RSA cipher key from imported private key&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:18,151 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Decrypting extracted session key&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:18,171 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Session key was successfully restored&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:18,171 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Generating AES cipher from session key&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:18,172 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Decrypting and verifying cipher text&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:18,172 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Closing: ip.bin&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:18,172 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Generating new Entry object from decrypted data&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:18,172 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Returning decrypted text &lt;span class="k"&gt;for&lt;/span&gt;: ip&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;2020-02-13 14:05:17,812 - [INFO] - root - Creating vault: /home/mohh/Documents/.passlock/ip.bin&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,812 - [INFO] - root - Importing public key: plock.pub&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,812 - [INFO] - root - Public key accessed: /home/mohh/.passlock/plock.pub&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,815 - [INFO] - root - Generating random byte for session key&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,815 - [INFO] - root - Generating encrypted session key&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,819 - [INFO] - root - Generating AES cipher&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,820 - [INFO] - root - Encrypting data to create cipher text&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,820 - [INFO] - root - Writing cipher text to: ip.bin&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,820 - [WARNING] - root - /home/mohh/Documents/.passlock/ip.bin already exists!&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,820 - [INFO] - root - Successfully wrote to: /home/mohh/Documents/.passlock/ip.bin&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,821 - [INFO] - root - Opening file for reading: /home/mohh/Documents/.passlock/ip.bin&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,821 - [INFO] - root - Importing private key: plock&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,821 - [INFO] - root - Private key accessed: /home/mohh/.passlock/plock&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:18,150 - [INFO] - root - Extracting encrypted session key&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:18,151 - [INFO] - root - Generating RSA cipher key from imported private key&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:18,151 - [INFO] - root - Decrypting extracted session key&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:18,171 - [INFO] - root - Session key was successfully restored&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:18,171 - [INFO] - root - Generating AES cipher from session key&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:18,172 - [INFO] - root - Decrypting and verifying cipher text&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:18,172 - [INFO] - root - Closing: ip.bin&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:18,172 - [INFO] - root - Generating new Entry object from decrypted data&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:18,172 - [INFO] - root - Returning decrypted text for: ip&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
@@ -327,7 +328,7 @@ I've tried to keep all sensitive data out of it unless the logging is switched t
 &lt;p&gt;Retrieving the encrypted data looks like this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Successfully created: /home/mohh/Documents/.passlock/ip.bin&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="o"&gt;[&lt;/span&gt;ip&lt;span class="o"&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;[ip]&lt;/span&gt;
 &lt;span class="code-line"&gt;INFO: http://192.168.2.1&lt;/span&gt;
 &lt;span class="code-line"&gt;USER: admin&lt;/span&gt;
 &lt;span class="code-line"&gt;PASS: admin&lt;/span&gt;
@@ -336,8 +337,8 @@ I've tried to keep all sensitive data out of it unless the logging is switched t
 
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: These are not real username and passwords!&lt;/p&gt;
-&lt;/blockquote&gt;</content><category term="Python"></category><category term="cryptography"></category><category term="pycryptodome"></category></entry><entry><title>Rescaling Values</title><link href="https://clamytoe.github.io/articles/2020/Feb/13/rescaling-values" rel="alternate"></link><published>2020-02-13T08:00:00-06:00</published><updated>2020-03-01T01:02:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-02-13:/articles/2020/Feb/13/rescaling-values</id><summary type="html">&lt;p&gt;Quick discussion about rescaling values for data science&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Scaling Values&lt;/h1&gt;
-&lt;p&gt;Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relevant.
+&lt;/blockquote&gt;</content><category term="Python"></category><category term="cryptography"></category><category term="pycryptodome"></category></entry><entry><title>Rescaling values for DataScience</title><link href="https://clamytoe.github.io/articles/2020/Feb/13/rescaling-values" rel="alternate"></link><published>2020-02-13T08:00:00-06:00</published><updated>2020-03-01T01:02:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-02-13:/articles/2020/Feb/13/rescaling-values</id><summary type="html">&lt;p&gt;Quick discussion about rescaling values for data science&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Scaling values&lt;/h1&gt;
+&lt;p&gt;Today while reading Data Science Algorithms in a Week, from &lt;a href="https://www.packtpub.com"&gt;packt&lt;/a&gt;, I came across the concept of rescaling values so that when measuring their distances they would be more relevant.
 The dataset consisted of "House Ownership":&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -368,25 +369,17 @@ The dataset consisted of "House Ownership":&lt;/p&gt;
 &lt;td align="left"&gt;130,000&lt;/td&gt;
 &lt;td align="left"&gt;Owner&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align="left"&gt;etc&lt;/td&gt;
-&lt;td align="left"&gt;&lt;/td&gt;
-&lt;td align="left"&gt;&lt;/td&gt;
-&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;p&gt;etc..&lt;/p&gt;
 &lt;p&gt;The aim being to predict whether a person that is 50 years old with an income of $80,000, would own a home so that he could be targeted for home insurance.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm"&gt;k-Nearest Neighbor&lt;/a&gt;'s are currently being covered and for this exercise a &lt;code&gt;k = 1&lt;/code&gt; is to be used.
 Using either a &lt;a href="https://en.wikipedia.org/wiki/Euclidean_distance"&gt;Euclidean&lt;/a&gt; or &lt;a href="https://en.wiktionary.org/wiki/Manhattan_distance"&gt;Manhattan&lt;/a&gt; distance wouldn't matter because the distances between these values are too great. In comes rescaling!&lt;/p&gt;
 &lt;p&gt;The formula use is:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;ScaledQuantity = (ActualQnatity-MinQuantity)/(MaxQuantity-MinQuantity)&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;div class="math"&gt;$$ScaledQuantity = \frac{ActualQuantity-MinQuantity}{MaxQuantity-MinQuantity}$$&lt;/div&gt;
 &lt;p&gt;So for this dataset, both the &lt;strong&gt;Age&lt;/strong&gt; and the &lt;strong&gt;Annual income&lt;/strong&gt; wound have to be adjusted.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;ScaledAge = (ActualAge-MinAge)/(MaxAge-MinAge)&lt;/strong&gt;
-&lt;strong&gt;ScaledIncome = (ActualIncome-MinIncome)/(MaxIncome-MinIncome)&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;div class="math"&gt;$$ScaledAge = \frac{ActualAge-MinAge}{MaxAge-MinAge}$$&lt;/div&gt;
+&lt;div class="math"&gt;$$ScaledIncome = \frac{ActualIncome-MinIncome}{MaxIncome-MinIncome}$$&lt;/div&gt;
 &lt;p&gt;After scaling, the adjusted dataset would look something like this:&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -410,7 +403,7 @@ Using either a &lt;a href="https://en.wikipedia.org/wiki/Euclidean_distance"&gt;
 &lt;td align="left"&gt;37&lt;/td&gt;
 &lt;td align="left"&gt;53125&lt;/td&gt;
 &lt;td align="left"&gt;34,000&lt;/td&gt;
-&lt;td align="left"&gt;04&lt;/td&gt;
+&lt;td align="left"&gt;4&lt;/td&gt;
 &lt;td align="left"&gt;Non-owner&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -438,9 +431,69 @@ Using either a &lt;a href="https://en.wikipedia.org/wiki/Euclidean_distance"&gt;
 &lt;/table&gt;
 &lt;p&gt;Now a 1-NN algorithm with a Euclidean metric could easily be used to find out if the last person is more than likely to own a home.
 Without the rescaling, the algorithm would have yielded different results.&lt;/p&gt;
-&lt;p&gt;Keeping it short today, but hopefully it was a helpful tip!&lt;/p&gt;</content><category term="DataScience"></category><category term="datascience"></category><category term="rescaling"></category><category term="knn"></category><category term="euclidean"></category><category term="manhattan"></category></entry><entry><title>Initial Post for my Ramblings of an autodiadact Blog</title><link href="https://clamytoe.github.io/articles/2020/Feb/12/initial-post" rel="alternate"></link><published>2020-02-12T12:00:00-06:00</published><updated>2020-03-01T01:04:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-02-12:/articles/2020/Feb/12/initial-post</id><summary type="html">&lt;p&gt;initial post&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Getting my feet wet with this blogging stuff&lt;/h1&gt;
-&lt;p&gt;This is my first post here.&lt;/p&gt;
-&lt;p&gt;It's not much to look at, but my goal
-is to show what I'm learning as I go.
+&lt;p&gt;Keeping it short today, but hopefully it was a helpful tip!&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="DataScience"></category><category term="datascience"></category><category term="rescaling"></category><category term="knn"></category><category term="euclidean"></category><category term="manhattan"></category></entry><entry><title>This is my first post here</title><link href="https://clamytoe.github.io/articles/2020/Feb/12/initial-post" rel="alternate"></link><published>2020-02-12T12:00:00-06:00</published><updated>2020-03-01T01:04:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-02-12:/articles/2020/Feb/12/initial-post</id><summary type="html">&lt;p&gt;Initial Post for my Ramblings of an autodidact Blog&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Getting my feet wet with this blogging stuff&lt;/h1&gt;
+&lt;p&gt;It's not much to look at, but my goal is to show what I'm learning as I go.
 There's no real "topic" but it will mostly be about what I'm working on and what I have to learn to get it done.
 Hope that it's of interest to someone...&lt;/p&gt;</content><category term="Blog"></category><category term="initial"></category><category term="post"></category><category term="blog"></category></entry></feed>

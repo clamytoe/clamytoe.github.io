@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings - Python</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/python.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-03-01T00:57:00-06:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Pytest fixtures with tear down</title><link href="https://clamytoe.github.io/articles/2020/Feb/19/pytest-fixtures" rel="alternate"></link><published>2020-02-19T17:40:00-06:00</published><updated>2020-03-01T00:57:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-02-19:/articles/2020/Feb/19/pytest-fixtures</id><summary type="html">&lt;p&gt;Figured out how to tear down a pytest fixture&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Pytest fixtures with tear down code&lt;/h1&gt;
+&lt;h2&gt;Setting up pytest fixtures with teardown code&lt;/h2&gt;
 &lt;p&gt;Today after listening to &lt;a href="https://twitter.com/brianokken"&gt;Brian Okken's&lt;/a&gt; &lt;a href="https://testandcode.com/"&gt;Test &amp;amp; Code&lt;/a&gt; podcast with &lt;a href="https://twitter.com/anthonypjshaw"&gt;Anthony Shaw&lt;/a&gt;, I was reminded that I wanted to install Anthony's &lt;a href="https://github.com/tonybaloney/pycharm-security"&gt;Python Security Plugin&lt;/a&gt; for &lt;a href="https://www.jetbrains.com/pycharm/"&gt;JetBrain's PyCharm&lt;/a&gt; IDE.
 That was a breeze to install and it just worked out of the box.
 I fired it up and it automatically checked my code and called it good.&lt;/p&gt;
@@ -86,7 +87,8 @@ I'll do you guys a solid and cut out the noise and show you what I did:&lt;/p&gt
 &lt;p&gt;Setting the &lt;code&gt;scope&lt;/code&gt; of the fixture to &lt;em&gt;module&lt;/em&gt; makes it so that it doesn't actually do the tearing down until after all of the tests are completed.
 &lt;em&gt;Perfect!&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;The variables in the &lt;code&gt;Vault&lt;/code&gt; instance are Path objects, so it was simple enough to just &lt;code&gt;unlink()&lt;/code&gt; the files and then &lt;code&gt;rmdir()&lt;/code&gt; the directory after it's been emptied.
-Of course, I tried removing the directory first, but it wasn't having any of that until it was empty...&lt;/p&gt;</content><category term="Python"></category><category term="pytest"></category><category term="fixtures"></category><category term="tear-down"></category></entry><entry><title>Venture Into Cryptography with PyCryptodome!</title><link href="https://clamytoe.github.io/articles/2020/Feb/14/pycryptodome" rel="alternate"></link><published>2020-02-14T07:00:00-06:00</published><updated>2020-03-01T00:44:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-02-14:/articles/2020/Feb/14/pycryptodome</id><summary type="html">&lt;p&gt;Learning about how to encrypt files&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Into the cryptography rabbit hole!&lt;/h1&gt;
+Of course, I tried removing the directory first, but it wasn't having any of that until it was empty...&lt;/p&gt;</content><category term="Python"></category><category term="pytest"></category><category term="fixtures"></category><category term="tear-down"></category></entry><entry><title>Into the cryptography rabbit hole</title><link href="https://clamytoe.github.io/articles/2020/Feb/14/pycryptodome" rel="alternate"></link><published>2020-02-14T07:00:00-06:00</published><updated>2020-03-01T00:44:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-02-14:/articles/2020/Feb/14/pycryptodome</id><summary type="html">&lt;p&gt;Learning about how to encrypt files&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Venture Into Cryptography with PyCryptodome&lt;/h1&gt;
+&lt;h2&gt;Learning about how to encrypt files&lt;/h2&gt;
 &lt;p&gt;As dumb as it is, I have an unsecured text file that I use to keep track of all my username and passwords for all of the sites that I frequent. In order to not be so "hackable", I've decided to encrypt the file.&lt;/p&gt;
 &lt;p&gt;I had recently written a couple of coding challenges for &lt;a href="https://codechalleng.es/"&gt;Pybites Code Challenges&lt;/a&gt; site, using the &lt;a href="https://cryptography.io/en/latest/"&gt;cryptography&lt;/a&gt; module.
 One was a coding challenge and the other a testing one.
@@ -98,7 +100,7 @@ It started as a single challenge, but I really liked how the tests came out and 
 &lt;p&gt;I pushed them to the Pybites Github private repo and it sat there for a bit before &lt;a href="https://codechalleng.es/profiles/pybob"&gt;Bob Belderbos&lt;/a&gt; decided to add them.
 That's when the problems started!
 He discovered that the module was not available so he installed it.
-It worked perfectly for the coding challenge, but for the testing one, when the call to the &lt;a href="https://docs.pytest.org/en/latest/"&gt;Pytest&lt;/a&gt;/&lt;a href="https://github.com/mutpy/mutpy"&gt;Mutpy&lt;/a&gt; instance is made, it loosed the path to the module!&lt;/p&gt;
+It worked perfectly for the coding challenge, but for the testing one, when the call to the &lt;a href="https://docs.pytest.org/en/latest/"&gt;Pytest&lt;/a&gt;/&lt;a href="https://github.com/mutpy/mutpy"&gt;Mutpy&lt;/a&gt; instance is made, it looses the path to the module!&lt;/p&gt;
 &lt;p&gt;We were discussing the issue on the &lt;a href="https://pybit.es/pages/community.html"&gt;Pybites&lt;/a&gt; Slack channel when &lt;a href="https://codechalleng.es/profiles/driscollis"&gt;Mike Driscoll&lt;/a&gt; the creator of &lt;a href="http://www.blog.pythonlibrary.org/"&gt;The Mouse vs Python&lt;/a&gt;, mentioned the &lt;a href="https://www.pycryptodome.org/en/latest/"&gt;PyCryptodome&lt;/a&gt; module.
 He initially thought that the problem was with installing the cryptography module.
 In the end, Bob was not able to figure out how to get it to work, so the challenge had to be removed from the platform.&lt;/p&gt;
@@ -135,28 +137,28 @@ It works out pretty good because the &lt;code&gt;app.py&lt;/code&gt; file now on
 
 &lt;p&gt;Separating the code like this will come in handy when it comes to either creating a &lt;a href="https://palletsprojects.com/p/click/"&gt;Click&lt;/a&gt; CLI interface or a GUI one.&lt;/p&gt;
 &lt;p&gt;The log file for that run looks like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,812 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Creating vault: /home/mohh/Documents/.passlock/ip.bin&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,812 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Importing public key: plock.pub&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,812 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Public key accessed: /home/mohh/.passlock/plock.pub&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,815 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Generating random byte &lt;span class="k"&gt;for&lt;/span&gt; session key&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,815 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Generating encrypted session key&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,819 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Generating AES cipher&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,820 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Encrypting data to create cipher text&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,820 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Writing cipher text to: ip.bin&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,820 - &lt;span class="o"&gt;[&lt;/span&gt;WARNING&lt;span class="o"&gt;]&lt;/span&gt; - root - /home/mohh/Documents/.passlock/ip.bin already exists!&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,820 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Successfully wrote to: /home/mohh/Documents/.passlock/ip.bin&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,821 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Opening file &lt;span class="k"&gt;for&lt;/span&gt; reading: /home/mohh/Documents/.passlock/ip.bin&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,821 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Importing private key: plock&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:17,821 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Private key accessed: /home/mohh/.passlock/plock&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:18,150 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Extracting encrypted session key&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:18,151 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Generating RSA cipher key from imported private key&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:18,151 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Decrypting extracted session key&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:18,171 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Session key was successfully restored&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:18,171 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Generating AES cipher from session key&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:18,172 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Decrypting and verifying cipher text&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:18,172 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Closing: ip.bin&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:18,172 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Generating new Entry object from decrypted data&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="m"&gt;2020&lt;/span&gt;-02-13 &lt;span class="m"&gt;14&lt;/span&gt;:05:18,172 - &lt;span class="o"&gt;[&lt;/span&gt;INFO&lt;span class="o"&gt;]&lt;/span&gt; - root - Returning decrypted text &lt;span class="k"&gt;for&lt;/span&gt;: ip&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;2020-02-13 14:05:17,812 - [INFO] - root - Creating vault: /home/mohh/Documents/.passlock/ip.bin&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,812 - [INFO] - root - Importing public key: plock.pub&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,812 - [INFO] - root - Public key accessed: /home/mohh/.passlock/plock.pub&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,815 - [INFO] - root - Generating random byte for session key&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,815 - [INFO] - root - Generating encrypted session key&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,819 - [INFO] - root - Generating AES cipher&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,820 - [INFO] - root - Encrypting data to create cipher text&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,820 - [INFO] - root - Writing cipher text to: ip.bin&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,820 - [WARNING] - root - /home/mohh/Documents/.passlock/ip.bin already exists!&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,820 - [INFO] - root - Successfully wrote to: /home/mohh/Documents/.passlock/ip.bin&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,821 - [INFO] - root - Opening file for reading: /home/mohh/Documents/.passlock/ip.bin&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,821 - [INFO] - root - Importing private key: plock&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:17,821 - [INFO] - root - Private key accessed: /home/mohh/.passlock/plock&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:18,150 - [INFO] - root - Extracting encrypted session key&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:18,151 - [INFO] - root - Generating RSA cipher key from imported private key&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:18,151 - [INFO] - root - Decrypting extracted session key&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:18,171 - [INFO] - root - Session key was successfully restored&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:18,171 - [INFO] - root - Generating AES cipher from session key&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:18,172 - [INFO] - root - Decrypting and verifying cipher text&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:18,172 - [INFO] - root - Closing: ip.bin&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:18,172 - [INFO] - root - Generating new Entry object from decrypted data&lt;/span&gt;
+&lt;span class="code-line"&gt;2020-02-13 14:05:18,172 - [INFO] - root - Returning decrypted text for: ip&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
@@ -165,7 +167,7 @@ I've tried to keep all sensitive data out of it unless the logging is switched t
 &lt;p&gt;Retrieving the encrypted data looks like this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Successfully created: /home/mohh/Documents/.passlock/ip.bin&lt;/span&gt;
 &lt;span class="code-line"&gt;&lt;/span&gt;
-&lt;span class="code-line"&gt;&lt;span class="o"&gt;[&lt;/span&gt;ip&lt;span class="o"&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;[ip]&lt;/span&gt;
 &lt;span class="code-line"&gt;INFO: http://192.168.2.1&lt;/span&gt;
 &lt;span class="code-line"&gt;USER: admin&lt;/span&gt;
 &lt;span class="code-line"&gt;PASS: admin&lt;/span&gt;

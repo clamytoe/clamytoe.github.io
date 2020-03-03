@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings - DataScience</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/datascience.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-03-01T01:02:00-06:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Rescaling Values</title><link href="https://clamytoe.github.io/articles/2020/Feb/13/rescaling-values" rel="alternate"></link><published>2020-02-13T08:00:00-06:00</published><updated>2020-03-01T01:02:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-02-13:/articles/2020/Feb/13/rescaling-values</id><summary type="html">&lt;p&gt;Quick discussion about rescaling values for data science&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Scaling Values&lt;/h1&gt;
-&lt;p&gt;Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relevant.
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings - DataScience</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/datascience.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-03-01T01:02:00-06:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Rescaling values for DataScience</title><link href="https://clamytoe.github.io/articles/2020/Feb/13/rescaling-values" rel="alternate"></link><published>2020-02-13T08:00:00-06:00</published><updated>2020-03-01T01:02:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-02-13:/articles/2020/Feb/13/rescaling-values</id><summary type="html">&lt;p&gt;Quick discussion about rescaling values for data science&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Scaling values&lt;/h1&gt;
+&lt;p&gt;Today while reading Data Science Algorithms in a Week, from &lt;a href="https://www.packtpub.com"&gt;packt&lt;/a&gt;, I came across the concept of rescaling values so that when measuring their distances they would be more relevant.
 The dataset consisted of "House Ownership":&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -31,25 +31,17 @@ The dataset consisted of "House Ownership":&lt;/p&gt;
 &lt;td align="left"&gt;130,000&lt;/td&gt;
 &lt;td align="left"&gt;Owner&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align="left"&gt;etc&lt;/td&gt;
-&lt;td align="left"&gt;&lt;/td&gt;
-&lt;td align="left"&gt;&lt;/td&gt;
-&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;p&gt;etc..&lt;/p&gt;
 &lt;p&gt;The aim being to predict whether a person that is 50 years old with an income of $80,000, would own a home so that he could be targeted for home insurance.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm"&gt;k-Nearest Neighbor&lt;/a&gt;'s are currently being covered and for this exercise a &lt;code&gt;k = 1&lt;/code&gt; is to be used.
 Using either a &lt;a href="https://en.wikipedia.org/wiki/Euclidean_distance"&gt;Euclidean&lt;/a&gt; or &lt;a href="https://en.wiktionary.org/wiki/Manhattan_distance"&gt;Manhattan&lt;/a&gt; distance wouldn't matter because the distances between these values are too great. In comes rescaling!&lt;/p&gt;
 &lt;p&gt;The formula use is:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;ScaledQuantity = (ActualQnatity-MinQuantity)/(MaxQuantity-MinQuantity)&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;div class="math"&gt;$$ScaledQuantity = \frac{ActualQuantity-MinQuantity}{MaxQuantity-MinQuantity}$$&lt;/div&gt;
 &lt;p&gt;So for this dataset, both the &lt;strong&gt;Age&lt;/strong&gt; and the &lt;strong&gt;Annual income&lt;/strong&gt; wound have to be adjusted.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;ScaledAge = (ActualAge-MinAge)/(MaxAge-MinAge)&lt;/strong&gt;
-&lt;strong&gt;ScaledIncome = (ActualIncome-MinIncome)/(MaxIncome-MinIncome)&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;div class="math"&gt;$$ScaledAge = \frac{ActualAge-MinAge}{MaxAge-MinAge}$$&lt;/div&gt;
+&lt;div class="math"&gt;$$ScaledIncome = \frac{ActualIncome-MinIncome}{MaxIncome-MinIncome}$$&lt;/div&gt;
 &lt;p&gt;After scaling, the adjusted dataset would look something like this:&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -73,7 +65,7 @@ Using either a &lt;a href="https://en.wikipedia.org/wiki/Euclidean_distance"&gt;
 &lt;td align="left"&gt;37&lt;/td&gt;
 &lt;td align="left"&gt;53125&lt;/td&gt;
 &lt;td align="left"&gt;34,000&lt;/td&gt;
-&lt;td align="left"&gt;04&lt;/td&gt;
+&lt;td align="left"&gt;4&lt;/td&gt;
 &lt;td align="left"&gt;Non-owner&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -101,4 +93,66 @@ Using either a &lt;a href="https://en.wikipedia.org/wiki/Euclidean_distance"&gt;
 &lt;/table&gt;
 &lt;p&gt;Now a 1-NN algorithm with a Euclidean metric could easily be used to find out if the last person is more than likely to own a home.
 Without the rescaling, the algorithm would have yielded different results.&lt;/p&gt;
-&lt;p&gt;Keeping it short today, but hopefully it was a helpful tip!&lt;/p&gt;</content><category term="DataScience"></category><category term="datascience"></category><category term="rescaling"></category><category term="knn"></category><category term="euclidean"></category><category term="manhattan"></category></entry></feed>
+&lt;p&gt;Keeping it short today, but hopefully it was a helpful tip!&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="DataScience"></category><category term="datascience"></category><category term="rescaling"></category><category term="knn"></category><category term="euclidean"></category><category term="manhattan"></category></entry></feed>
