@@ -1,4 +1,4 @@
-title: Venture Into Cryptography with PyCryptodome!
+title: Into the cryptography rabbit hole
 date: 2020-02-14 07:00
 modified: 2020-03-01 00:44
 category: Python
@@ -7,7 +7,9 @@ slug: pycryptodome
 author: Martin Uribe
 summary: Learning about how to encrypt files
 
-# Into the cryptography rabbit hole!
+# Venture Into Cryptography with PyCryptodome
+
+## Learning about how to encrypt files
 
 As dumb as it is, I have an unsecured text file that I use to keep track of all my username and passwords for all of the sites that I frequent. In order to not be so "hackable", I've decided to encrypt the file.
 
@@ -23,7 +25,7 @@ It started as a single challenge, but I really liked how the tests came out and 
 I pushed them to the Pybites Github private repo and it sat there for a bit before [Bob Belderbos](https://codechalleng.es/profiles/pybob) decided to add them.
 That's when the problems started!
 He discovered that the module was not available so he installed it.
-It worked perfectly for the coding challenge, but for the testing one, when the call to the [Pytest](https://docs.pytest.org/en/latest/)/[Mutpy](https://github.com/mutpy/mutpy) instance is made, it loosed the path to the module!
+It worked perfectly for the coding challenge, but for the testing one, when the call to the [Pytest](https://docs.pytest.org/en/latest/)/[Mutpy](https://github.com/mutpy/mutpy) instance is made, it looses the path to the module!
 
 We were discussing the issue on the [Pybites](https://pybit.es/pages/community.html) Slack channel when [Mike Driscoll](https://codechalleng.es/profiles/driscollis) the creator of [The Mouse vs Python](http://www.blog.pythonlibrary.org/), mentioned the [PyCryptodome](https://www.pycryptodome.org/en/latest/) module.
 He initially thought that the problem was with installing the cryptography module.
@@ -67,7 +69,7 @@ Separating the code like this will come in handy when it comes to either creatin
 
 The log file for that run looks like this:
 
-```zsh
+```text
 2020-02-13 14:05:17,812 - [INFO] - root - Creating vault: /home/mohh/Documents/.passlock/ip.bin
 2020-02-13 14:05:17,812 - [INFO] - root - Importing public key: plock.pub
 2020-02-13 14:05:17,812 - [INFO] - root - Public key accessed: /home/mohh/.passlock/plock.pub
@@ -97,7 +99,7 @@ I've tried to keep all sensitive data out of it unless the logging is switched t
 
 Retrieving the encrypted data looks like this:
 
-```zsh
+```text
 Successfully created: /home/mohh/Documents/.passlock/ip.bin
 
 [ip]

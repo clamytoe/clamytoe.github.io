@@ -9,6 +9,8 @@ summary: Figured out how to tear down a pytest fixture
 
 # Pytest fixtures with tear down code
 
+## Setting up pytest fixtures with teardown code
+
 Today after listening to [Brian Okken's](https://twitter.com/brianokken) [Test & Code](https://testandcode.com/) podcast with [Anthony Shaw](https://twitter.com/anthonypjshaw), I was reminded that I wanted to install Anthony's [Python Security Plugin](https://github.com/tonybaloney/pycharm-security) for [JetBrain's PyCharm](https://www.jetbrains.com/pycharm/) IDE.
 That was a breeze to install and it just worked out of the box.
 I fired it up and it automatically checked my code and called it good.
