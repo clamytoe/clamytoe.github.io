@@ -77,175 +77,255 @@
 
 
     <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
+        <a href="https://clamytoe.github.io/articles/2020/Mar/03/pelican-plugins" class="uk-article-title uk-link-muted" itemprop="name">Playing around with adding plugins to Pelican</a>
+        <p class="uk-article-meta"><time datetime="2020-03-03" itemprop="datePublished">Tue 03 March 2020</time> • <a href="https://clamytoe.github.io/category/blog.html">Blog</a></p>
+        </p>
+        <p class="uk-article-lead" itemprop="description">Wanted to add some extra styling to my blog posts</p>
+            <p>Some parts of my blog were looking pretty blah Math syntax I've been tweaking my blog like crazy. Just making minor changes here and there. I wanted to make things look a little better. For instance, for my rescaling article, I had the following mathematical syntax: ScaledQuantity = (ActualQuantity-MinQuantity)/(MaxQuantity-MinQuantity) What the hell is that? That looks horrible! I know that markdown supports Latex, so I looked and found this awesome resource: Writing Mathematic Formulars in Markdown ScaledQuantity = \frac{ActualQuantity-MinQuantity}{MaxQuantity-MinQuantity} Um, not quite there yet. Something was up. I searched to see if Pelican had any plugins for rendering math and sure enough, found that pelican-plugins included render_math. I followed the instructions and cloned the repo into my blog directory. Probably should have dropped it somewhere outside of it, but I added it to my .gitignore and it's fine... I added the following to my pelicanconf.py file: PLUGIN_PATHS = ['./pelican-plugins'] PLUGINS = ['render_math'<span...</p><br /><br />
+            <a href="https://clamytoe.github.io/articles/2020/Mar/03/pelican-plugins">Read More</a>
+            <!-- <section itemprop="articleBody"><h1>Some parts of my blog were looking pretty <em>blah</em></h1>
+<h2>Math syntax</h2>
+<p>I've been tweaking my blog like crazy.
+Just making minor changes here and there.
+I wanted to make things look a little better.</p>
+<p>For instance, for my <a href="https://clamytoe.github.io/articles/2020/Feb/13/rescaling-values">rescaling</a> article, I had the following mathematical syntax:</p>
+<blockquote>
+<p><strong>ScaledQuantity = (ActualQuantity-MinQuantity)/(MaxQuantity-MinQuantity)</strong></p>
+</blockquote>
+<p>What the hell is that?
+That looks horrible!
+I know that markdown supports <a href="https://www.latex-project.org/">Latex</a>, so I looked and found this awesome resource: <a href="http://csrgxtu.github.io/2015/03/20/Writing-Mathematic-Fomulars-in-Markdown/">Writing Mathematic Formulars in Markdown</a></p>
+<p>ScaledQuantity = \frac{ActualQuantity-MinQuantity}{MaxQuantity-MinQuantity}</p>
+<p>Um, not quite there yet.
+Something was up.
+I searched to see if Pelican had any plugins for rendering math and sure enough, found that <a href="https://github.com/getpelican/pelican-plugins">pelican-plugins</a> included <em>render_math</em>.
+I followed the instructions and cloned the repo into my blog directory.
+Probably should have dropped it somewhere outside of it, but I added it to my <code>.gitignore</code> and it's fine...</p>
+<p>I added the following to my <code>pelicanconf.py</code> file:</p>
+<div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">PLUGIN_PATHS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;./pelican-plugins&#39;</span><span class="p">]</span></span>
+<span class="code-line"><span class="n">PLUGINS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;render_math&#39;</span><span class="p">]</span></span>
+<span class="code-line"></code></pre></div>
+
+
+<p>I tried the previous code once again and was still getting the same results.
+After some more reading I found that you have to enclose the mathematical equation within double $.</p>
+<div class="math">$$ScaledQuantity = \frac{ActualQuantity-MinQuantity}{MaxQuantity-MinQuantity}$$</div>
+<blockquote>
+<p><strong>NICE!</strong></p>
+</blockquote>
+<h2>Markdown tables</h2>
+<p>My original tables were so bland that it was almost hard to tell that they were even tables!
+Unfortunately I didn't save a screenshot of it, so I can't show you what they looked like, but I can definitely show you the end result!
+Thanks to <a href="https://www.mockaroo.com/">mockaroo</a> I was able to generate some mock data relatively quickly.</p>
+<table>
+<thead>
+<tr>
+<th align="right">id</th>
+<th align="left">first_name</th>
+<th align="left">last_name</th>
+<th align="left">email</th>
+<th align="center">gender</th>
+<th align="right">ip_address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">1</td>
+<td align="left">Odilia</td>
+<td align="left">O'Meara</td>
+<td align="left">oomeara0@yahoo.co.jp</td>
+<td align="center">Female</td>
+<td align="right">244.53.86.185</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td align="left">Marcelo</td>
+<td align="left">Tunna</td>
+<td align="left">mtunna1@netvibes.com</td>
+<td align="center">Male</td>
+<td align="right">128.140.17.56</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td align="left">Farris</td>
+<td align="left">Roston</td>
+<td align="left">froston2@ucla.edu</td>
+<td align="center">Male</td>
+<td align="right">111.104.78.209</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="left">Gene</td>
+<td align="left">Benzies</td>
+<td align="left">gbenzies3@nymag.com</td>
+<td align="center">Male</td>
+<td align="right">67.169.248.21</td>
+</tr>
+<tr>
+<td align="right">5</td>
+<td align="left">Ellsworth</td>
+<td align="left">Goodered</td>
+<td align="left">egoodered4@hud.gov</td>
+<td align="center">Male</td>
+<td align="right">227.48.46.133</td>
+</tr>
+<tr>
+<td align="right">6</td>
+<td align="left">Jan</td>
+<td align="left">Garnsworth</td>
+<td align="left">jgarnsworth5@amazon.de</td>
+<td align="center">Male</td>
+<td align="right">138.13.211.142</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="left">Robby</td>
+<td align="left">Rosenstengel</td>
+<td align="left">rrosenstengel6@chron.com</td>
+<td align="center">Female</td>
+<td align="right">105.76.137.198</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="left">Granthem</td>
+<td align="left">Rymer</td>
+<td align="left">grymer7@yolasite.com</td>
+<td align="center">Male</td>
+<td align="right">15.60.66.25</td>
+</tr>
+<tr>
+<td align="right">9</td>
+<td align="left">Claire</td>
+<td align="left">Stuther</td>
+<td align="left">cstuther8@salon.com</td>
+<td align="center">Female</td>
+<td align="right">5.36.242.109</td>
+</tr>
+<tr>
+<td align="right">10</td>
+<td align="left">Maggy</td>
+<td align="left">Jearum</td>
+<td align="left">mjearum9@npr.org</td>
+<td align="center">Female</td>
+<td align="right">179.12.188.75</td>
+</tr>
+</tbody>
+</table>
+<h2>CSS changes</h2>
+<p>I hope it doesn't bite me in the butt later on, but I'm forcing the table headers into uppercase. In case anyone is curious, this are the styles that I added to the theme:</p>
+<div class="highlight"><pre><span class="code-line"><span></span><code><span class="nt">table</span> <span class="p">{</span></span>
+<span class="code-line">  <span class="k">border-collapse</span><span class="p">:</span> <span class="kc">collapse</span><span class="p">;</span></span>
+<span class="code-line">  <span class="k">margin-left</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span></span>
+<span class="code-line">  <span class="k">margin-right</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span></span>
+<span class="code-line">  <span class="k">width</span><span class="p">:</span> <span class="mi">90</span><span class="kt">%</span><span class="p">;</span></span>
+<span class="code-line"><span class="p">}</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nt">td</span><span class="o">,</span> <span class="nt">th</span> <span class="p">{</span></span>
+<span class="code-line">  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="mh">#ddd</span><span class="p">;</span></span>
+<span class="code-line">  <span class="k">padding</span><span class="p">:</span> <span class="mi">8</span><span class="kt">px</span><span class="p">;</span></span>
+<span class="code-line"><span class="p">}</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nt">tr</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">even</span><span class="o">)</span><span class="p">{</span><span class="k">background-color</span><span class="p">:</span> <span class="mh">#f2f2f2</span><span class="p">;}</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nt">tr</span><span class="p">:</span><span class="nd">hover</span> <span class="p">{</span><span class="k">background-color</span><span class="p">:</span> <span class="mh">#ddd</span><span class="p">;}</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="nt">th</span> <span class="p">{</span></span>
+<span class="code-line">  <span class="k">padding-top</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span></span>
+<span class="code-line">  <span class="k">padding-bottom</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span></span>
+<span class="code-line">  <span class="k">text-transform</span><span class="p">:</span> <span class="kc">uppercase</span><span class="p">;</span></span>
+<span class="code-line">  <span class="k">font-weight</span><span class="p">:</span> <span class="kc">bold</span><span class="p">;</span></span>
+<span class="code-line">  <span class="k">background-color</span><span class="p">:</span> <span class="mh">#607D8B</span><span class="p">;</span></span>
+<span class="code-line">  <span class="k">color</span><span class="p">:</span> <span class="kc">white</span><span class="p">;</span></span>
+<span class="code-line"><span class="p">}</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="p">.</span><span class="nc">math</span> <span class="p">{</span></span>
+<span class="code-line">  <span class="k">font-size</span><span class="p">:</span> <span class="kc">medium</span><span class="p">;</span></span>
+<span class="code-line"><span class="p">}</span></span>
+<span class="code-line"></code></pre></div>
+
+
+<blockquote>
+<p>The default <em>math</em> syntax rendering was kind of small, so I changed the <code>font-size</code> to <em>medium</em>.</p>
+</blockquote>
+<h2>Conclusion</h2>
+<p>This web development stuff is pretty complex.
+There are lots of moving parts, so I give all of my fellow web developers a high-five for being so awesome!
+I can see how this can be pretty overwhelming if you're new to this, but just keep at it and you'll get there.</p>
+<p>This old dog can still learn some new tricks!</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script></section>
+            <a href="https://clamytoe.github.io/articles/2020/Mar/03/pelican-plugins#disqus_thread"></a> -->
+        <hr class="uk-article-divider">
+    </article>
+
+
+    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
         <a href="https://clamytoe.github.io/articles/2020/Feb/28/pelican" class="uk-article-title uk-link-muted" itemprop="name">Finally getting the hang of working with Pelican!</a>
         <p class="uk-article-meta"><time datetime="2020-02-28" itemprop="datePublished">Fri 28 February 2020</time> • <a href="https://clamytoe.github.io/category/blog.html">Blog</a></p>
         </p>
         <p class="uk-article-lead" itemprop="description">Nothing beats learning something new than just jumping in and playing around with it!</p>
-            <p>Stumbling into a nice Pelican workflow If you've seen my source repo for this site, you know that I followed Erik O'Shaughnessy's Run your blog on GitHub Pages with Python tutorial. It's a great tutorial, I specifically love his one weird trick, but it leaves so many unanswered questions. Go read it now if you haven't and we'll pick up where he leaves off. Luckily he does provide the link to the official documentation. It was through that link that I found Pelican's tutorials repo. Specifically Matt Makai's introductory tutorial. I'll admit, that I only skimmed over it, it's kind of long. I was looking for anything that would jump out at me. What caught my eye was how simple it all was to automate things with make! I took a quick look at mine and saw what commands were defined. Makefile for a pelican Web <span...</p><br /><br />
+            <p>Stumbling into a nice Pelican workflow If you've seen my source repo for this site, you know that I followed Erik O'Shaughnessy's Run your blog on GitHub Pages with Python tutorial. It's a great tutorial, I specifically love his one weird trick, but it leaves so many unanswered questions. Go read it now if you haven't and we'll pick up where he leaves off. Luckily he does provide the link to the official documentation. It was...</p>
             <a href="https://clamytoe.github.io/articles/2020/Feb/28/pelican">Read More</a>
-            <!-- <section itemprop="articleBody"><h1>Stumbling into a nice Pelican workflow</h1>
-<p>If you've seen my <a href="https://github.com/clamytoe/clamytoe.github.io">source repo</a> for this site, you know that I followed <a href="https://opensource.com/users/jnyjny">Erik O'Shaughnessy's</a> <em>Run your blog on GitHub Pages with Python</em> <a href="https://opensource.com/article/19/5/run-your-blog-github-pages-python">tutorial</a>.
-It's a great tutorial, I specifically love his <strong>one weird trick</strong>, but it leaves so many unanswered questions.
-Go read it now if you haven't and we'll pick up where he leaves off.</p>
-<p>Luckily he does provide the link to the official <a href="https://docs.getpelican.com/">documentation</a>.
-It was through that link that I found Pelican's tutorials <a href="https://github.com/getpelican/pelican/wiki/Tutorials">repo</a>.
-Specifically <a href="https://www.fullstackpython.com/about-author.html">Matt Makai's</a> introductory <a href="https://www.fullstackpython.com/blog/generating-static-websites-pelican-jinja2-markdown.html">tutorial</a>.
-I'll admit, that I only skimmed over it, it's kind of long.
-I was looking for anything that would jump out at me.
-What caught my eye was how simple it all was to automate things with <code>make</code>!</p>
-<p>I took a quick look at mine and saw what commands were defined.</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="err">Makefile</span> <span class="err">for</span> <span class="err">a</span> <span class="err">pelican</span> <span class="err">Web</span> <span class="err">site</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="nf">Usage</span><span class="o">:</span></span>
-<span class="code-line">   make html                           <span class="o">(</span>re<span class="o">)</span>generate the web site</span>
-<span class="code-line">   make clean                          remove the generated files</span>
-<span class="code-line">   make regenerate                     regenerate files upon modification</span>
-<span class="code-line">   make publish                        generate using production settings</span>
-<span class="code-line">   make serve <span class="o">[</span><span class="nv">PORT</span><span class="o">=</span><span class="m">8000</span><span class="o">]</span>              serve site at http://localhost:8000</span>
-<span class="code-line">   make serve-global <span class="o">[</span><span class="nv">SERVER</span><span class="o">=</span><span class="m">0</span>.0.0.0<span class="o">]</span>  serve <span class="o">(</span>as root<span class="o">)</span> to :80</span>
-<span class="code-line">   make devserver <span class="o">[</span><span class="nv">PORT</span><span class="o">=</span><span class="m">8000</span><span class="o">]</span>          serve and regenerate together</span>
-<span class="code-line">   make ssh_upload                     upload the web site via SSH</span>
-<span class="code-line">   make rsync_upload                   upload the web site via rsync+ssh  </span>
-<span class="code-line">   make github                         upload the web site via gh-pages</span>
-<span class="code-line"></span>
-<span class="code-line"><span class="err">Set</span> <span class="err">the</span> <span class="err">DEBUG</span> <span class="err">variable</span> <span class="err">to</span> <span class="err">1</span> <span class="err">to</span> <span class="err">enable</span> <span class="err">debugging,</span> <span class="err">e.g.</span> <span class="err">make</span> <span class="nv">DEBUG</span><span class="o">=</span><span class="m">1</span> html</span>
-<span class="code-line"><span class="err">Set</span> <span class="err">the</span> <span class="err">RELATIVE</span> <span class="err">variable</span> <span class="err">to</span> <span class="err">1</span> <span class="err">to</span> <span class="err">enable</span> <span class="err">relative</span> <span class="err">urls</span></span>
-<span class="code-line"></code></pre></div>
-
-
-<p>Looking at the <code>Makefile</code> source is where I noticed that for local development, it just uses the <code>pelicanconf.py</code> script, but for publishing it uses <code>publishconf.py</code>.
-Looking at <code>publishconf.py</code> I saw that it actually imports <code>pelicanconf.py</code> and then overrides some of the variables.</p>
-<blockquote>
-<p><strong>AHA!</strong> This is were I had a eurika moment!</p>
-</blockquote>
-<p>I had noticed a problem with my site.
-Whenever I clicked on the header link, instead of taking me back to the home page it would just reload whatever page I was on.
-I was able to get around that by just specifying the <code>SITE_URL</code> variable in <code>pelicanconf.py</code>.
-Unfortunately, that broke testing the blog locally because all the links would point to the live site on GitHub!</p>
-<p>What I'm trying to say here is that in I was able to resolve both of these issues by making the following changes.</p>
-<p><em>pelicanconf.py</em>:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">SITEURL</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span></span>
-<span class="code-line"></code></pre></div>
-
-
-<p><em>publishconf.py</em>:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">SITEURL</span> <span class="o">=</span> <span class="s2">&quot;https://clamytoe.github.io&quot;</span></span>
-<span class="code-line"></code></pre></div>
-
-
-<p>Another issue that I was having was that I couldn't figure out how to get my <code>favicon.ico</code> to be treated as a static file and automatically dumped into the <code>output</code> directory.
-My solution had been to write a little bash script to copy it over for me, but that was kind of tedious.
-But now that I was going to use the <code>Makefile</code> I decided to automate it in there!</p>
-<p>I added the following lines to it:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="nv">FAVICON</span><span class="o">=</span><span class="k">$(</span>INPUTDIR<span class="k">)</span>/static/favicon.ico</span>
-<span class="code-line"></code></pre></div>
-
-
-<p>Then after the <code>html</code>, <code>regenerate</code>, and <code>publish</code> commands, I added:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="err">cp</span> <span class="k">$(</span><span class="nv">FAVICON</span><span class="k">)</span> <span class="k">$(</span><span class="nv">OUTPUTDIR</span><span class="k">)</span></span>
-<span class="code-line"></code></pre></div>
-
-
-<blockquote>
-<p>NOTE: I had initially added that to all of the commands, but the ones that run the server, don't actually get to that step.</p>
-</blockquote>
-<p>When I <em>Ctrl+C</em> out of it, it just exists...</p>
-<h2>New workflow</h2>
-<p>With that all set, things are now much easier and make more sense.
-What I would recommend, is to run the <code>make clean</code> command and commit it to your <code>content</code> branch.
-Now you will have a <em>clean</em> slate to start with.</p>
-<p>You can now add any new content and do the following commands:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="err">git add .</span></span>
-<span class="code-line"><span class="err">git commit -m &quot;Your description...&quot;</span></span>
-<span class="code-line"><span class="err">git push origin content</span></span>
-<span class="code-line"></code></pre></div>
-
-
-<blockquote>
-<p>NOTE: Of course, only push your files when you're ready to, but you get the idea.</p>
-</blockquote>
-<p>Now you're ready to generate the actual site, here's how that's now done.</p>
-<h3>Generate the site</h3>
-<p>If you just want to generate the site this is the command that you want:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="err">make</span> <span class="err">html</span></span>
-<span class="code-line"></code></pre></div>
-
-
-<p>Then you can either run the Pelican server or the Python one.</p>
-<h4>Pelican server</h4>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="err">pelican --listen</span></span>
-<span class="code-line"></code></pre></div>
-
-
-<h4>Python server</h4>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="nb">cd</span> output</span>
-<span class="code-line">python -m http.server</span>
-<span class="code-line"></code></pre></div>
-
-
-<p>Both of those will make the site accessible at <code>http://localhost:8000</code></p>
-<h3>Generate site and preview</h3>
-<p>Now, if you know that you will be wanting to preview your site, a much better way is to use this command:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="err">make</span> <span class="err">devserver</span></span>
-<span class="code-line"></code></pre></div>
-
-
-<p>Not only will this generate the site, but will also start the Pelican server automagically for you!
-This option comes in handy when you are tweaking your site's theme.
-I wanted to change the colors on mine and doing it like this automatically detected the changes and served them up.</p>
-<h3>Publish the site</h3>
-<p>This command generates the site using the <code>publishconf.py</code> script, so if you specified your site's url in there, it will add it to the generated html pages.
-It's nice for making sure all is working correctly and enabling your Google Analytics; if you're into that sort of thing.</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="err">make</span> <span class="err">publish</span></span>
-<span class="code-line"></code></pre></div>
-
-
-<h3>Publish and push to github</h3>
-<p>Now, we're cooking with Crisco!
-This command will generate the final site using <code>publishconf.py</code>, merge the output into your <code>master</code> branch, and push it up the hubs; all in one step!</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="err">make</span> <span class="err">github</span></span>
-<span class="code-line"></code></pre></div>
-
-
-<h3>Cleaning up</h3>
-<p>Now that you've pushed to the hubs, removed the generated files:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="err">make</span> <span class="err">clean</span></span>
-<span class="code-line"></code></pre></div>
-
-
-<p>If you run <code>git status</code>, you should see that there are no changes and that you are ready to add more content.
-Nice!</p>
-<h2>Conclusion</h2>
-<p>This was a great learning experience for me.
-Not only did I update the color scheme of my site, I also fixed some annoying issues that I was having.
-Now I don't have to look up any <code>ghp-import ...</code> command and things just got a heck of a lot more pleasant.</p>
-<p><strong>In summary</strong>:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code>touch content/posts/new-blog-post.md</span>
-<span class="code-line">vi <span class="nv">$_</span></span>
-<span class="code-line"><span class="c1"># write the blog content</span></span>
-<span class="code-line">git status</span>
-<span class="code-line">git add .</span>
-<span class="code-line">git commit -m <span class="s2">&quot;New blog post.&quot;</span></span>
-<span class="code-line">git push origin content</span>
-<span class="code-line">make github</span>
-<span class="code-line">make clean</span>
-<span class="code-line"></code></pre></div>
-
-
-<h3>On a side note</h3>
-<p>I was also having a weird problem with my search feature.
-I had to remove the machine code from my <a href="https://clamytoe.github.io/category/cryptography.html">cryptography</a> blog post because it was completely screwing up the JavaScript.
-Once I got that working, I then noticed that whenever I tried to do a search from any of the category pages, that it was looking for <code>/category/search.html</code>.
-That page doesn't exists, so I was baffled as to why that was going on.
-I took a look at the <a href="https://github.com/lucachr/pelican-mg">pelican-mg</a> theme's <a href="https://palletsprojects.com/p/jinja/">Jinja</a> templates and found the issue in <code>base.html</code>.
-I simply had to add <code>{{ SITEURL }}</code> in the <code>action</code> part of the form:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="p">&lt;</span><span class="nt">form</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;uk-search&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/search.html&quot;</span> <span class="na">data-uk-search</span><span class="p">&gt;</span></span>
-<span class="code-line"></code></pre></div>
-
-
-<p>Now it works beautifully!</p>
-<p>Of course, with me being an upstanding netcitizen, I submitted a <a href="https://github.com/lucachr/pelican-mg/pull/11">pull request</a> to fix the issue :).</p></section>
-            <a href="https://clamytoe.github.io/articles/2020/Feb/28/pelican#disqus_thread"></a> -->
         <hr class="uk-article-divider">
     </article>
 

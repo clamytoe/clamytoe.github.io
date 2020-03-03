@@ -1,5 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings - Blog</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/blog.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-03-01T01:04:00-06:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Finally getting the hang of working with Pelican!</title><link href="https://clamytoe.github.io/articles/2020/Feb/28/pelican" rel="alternate"></link><published>2020-02-28T09:50:00-06:00</published><updated>2020-03-01T00:42:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-02-28:/articles/2020/Feb/28/pelican</id><summary type="html">&lt;p&gt;Nothing beats learning something new than just jumping in and playing around with it!&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Stumbling into a nice Pelican workflow&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings - Blog</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/blog.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-03-03T13:20:00-06:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Playing around with adding plugins to Pelican</title><link href="https://clamytoe.github.io/articles/2020/Mar/03/pelican-plugins" rel="alternate"></link><published>2020-03-03T13:20:00-06:00</published><updated>2020-03-03T13:20:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-03-03:/articles/2020/Mar/03/pelican-plugins</id><summary type="html">&lt;p&gt;Wanted to add some extra styling to my blog posts&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Some parts of my blog were looking pretty &lt;em&gt;blah&lt;/em&gt;&lt;/h1&gt;
+&lt;h2&gt;Math syntax&lt;/h2&gt;
+&lt;p&gt;I've been tweaking my blog like crazy.
+Just making minor changes here and there.
+I wanted to make things look a little better.&lt;/p&gt;
+&lt;p&gt;For instance, for my &lt;a href="https://clamytoe.github.io/articles/2020/Feb/13/rescaling-values"&gt;rescaling&lt;/a&gt; article, I had the following mathematical syntax:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;ScaledQuantity = (ActualQuantity-MinQuantity)/(MaxQuantity-MinQuantity)&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;What the hell is that?
+That looks horrible!
+I know that markdown supports &lt;a href="https://www.latex-project.org/"&gt;Latex&lt;/a&gt;, so I looked and found this awesome resource: &lt;a href="http://csrgxtu.github.io/2015/03/20/Writing-Mathematic-Fomulars-in-Markdown/"&gt;Writing Mathematic Formulars in Markdown&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;ScaledQuantity = \frac{ActualQuantity-MinQuantity}{MaxQuantity-MinQuantity}&lt;/p&gt;
+&lt;p&gt;Um, not quite there yet.
+Something was up.
+I searched to see if Pelican had any plugins for rendering math and sure enough, found that &lt;a href="https://github.com/getpelican/pelican-plugins"&gt;pelican-plugins&lt;/a&gt; included &lt;em&gt;render_math&lt;/em&gt;.
+I followed the instructions and cloned the repo into my blog directory.
+Probably should have dropped it somewhere outside of it, but I added it to my &lt;code&gt;.gitignore&lt;/code&gt; and it's fine...&lt;/p&gt;
+&lt;p&gt;I added the following to my &lt;code&gt;pelicanconf.py&lt;/code&gt; file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;PLUGIN_PATHS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./pelican-plugins&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="n"&gt;PLUGINS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;render_math&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I tried the previous code once again and was still getting the same results.
+After some more reading I found that you have to enclose the mathematical equation within double $.&lt;/p&gt;
+&lt;div class="math"&gt;$$ScaledQuantity = \frac{ActualQuantity-MinQuantity}{MaxQuantity-MinQuantity}$$&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;NICE!&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Markdown tables&lt;/h2&gt;
+&lt;p&gt;My original tables were so bland that it was almost hard to tell that they were even tables!
+Unfortunately I didn't save a screenshot of it, so I can't show you what they looked like, but I can definitely show you the end result!
+Thanks to &lt;a href="https://www.mockaroo.com/"&gt;mockaroo&lt;/a&gt; I was able to generate some mock data relatively quickly.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align="right"&gt;id&lt;/th&gt;
+&lt;th align="left"&gt;first_name&lt;/th&gt;
+&lt;th align="left"&gt;last_name&lt;/th&gt;
+&lt;th align="left"&gt;email&lt;/th&gt;
+&lt;th align="center"&gt;gender&lt;/th&gt;
+&lt;th align="right"&gt;ip_address&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;1&lt;/td&gt;
+&lt;td align="left"&gt;Odilia&lt;/td&gt;
+&lt;td align="left"&gt;O'Meara&lt;/td&gt;
+&lt;td align="left"&gt;oomeara0@yahoo.co.jp&lt;/td&gt;
+&lt;td align="center"&gt;Female&lt;/td&gt;
+&lt;td align="right"&gt;244.53.86.185&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;2&lt;/td&gt;
+&lt;td align="left"&gt;Marcelo&lt;/td&gt;
+&lt;td align="left"&gt;Tunna&lt;/td&gt;
+&lt;td align="left"&gt;mtunna1@netvibes.com&lt;/td&gt;
+&lt;td align="center"&gt;Male&lt;/td&gt;
+&lt;td align="right"&gt;128.140.17.56&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;3&lt;/td&gt;
+&lt;td align="left"&gt;Farris&lt;/td&gt;
+&lt;td align="left"&gt;Roston&lt;/td&gt;
+&lt;td align="left"&gt;froston2@ucla.edu&lt;/td&gt;
+&lt;td align="center"&gt;Male&lt;/td&gt;
+&lt;td align="right"&gt;111.104.78.209&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;4&lt;/td&gt;
+&lt;td align="left"&gt;Gene&lt;/td&gt;
+&lt;td align="left"&gt;Benzies&lt;/td&gt;
+&lt;td align="left"&gt;gbenzies3@nymag.com&lt;/td&gt;
+&lt;td align="center"&gt;Male&lt;/td&gt;
+&lt;td align="right"&gt;67.169.248.21&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;5&lt;/td&gt;
+&lt;td align="left"&gt;Ellsworth&lt;/td&gt;
+&lt;td align="left"&gt;Goodered&lt;/td&gt;
+&lt;td align="left"&gt;egoodered4@hud.gov&lt;/td&gt;
+&lt;td align="center"&gt;Male&lt;/td&gt;
+&lt;td align="right"&gt;227.48.46.133&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;6&lt;/td&gt;
+&lt;td align="left"&gt;Jan&lt;/td&gt;
+&lt;td align="left"&gt;Garnsworth&lt;/td&gt;
+&lt;td align="left"&gt;jgarnsworth5@amazon.de&lt;/td&gt;
+&lt;td align="center"&gt;Male&lt;/td&gt;
+&lt;td align="right"&gt;138.13.211.142&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;7&lt;/td&gt;
+&lt;td align="left"&gt;Robby&lt;/td&gt;
+&lt;td align="left"&gt;Rosenstengel&lt;/td&gt;
+&lt;td align="left"&gt;rrosenstengel6@chron.com&lt;/td&gt;
+&lt;td align="center"&gt;Female&lt;/td&gt;
+&lt;td align="right"&gt;105.76.137.198&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;8&lt;/td&gt;
+&lt;td align="left"&gt;Granthem&lt;/td&gt;
+&lt;td align="left"&gt;Rymer&lt;/td&gt;
+&lt;td align="left"&gt;grymer7@yolasite.com&lt;/td&gt;
+&lt;td align="center"&gt;Male&lt;/td&gt;
+&lt;td align="right"&gt;15.60.66.25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;9&lt;/td&gt;
+&lt;td align="left"&gt;Claire&lt;/td&gt;
+&lt;td align="left"&gt;Stuther&lt;/td&gt;
+&lt;td align="left"&gt;cstuther8@salon.com&lt;/td&gt;
+&lt;td align="center"&gt;Female&lt;/td&gt;
+&lt;td align="right"&gt;5.36.242.109&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;10&lt;/td&gt;
+&lt;td align="left"&gt;Maggy&lt;/td&gt;
+&lt;td align="left"&gt;Jearum&lt;/td&gt;
+&lt;td align="left"&gt;mjearum9@npr.org&lt;/td&gt;
+&lt;td align="center"&gt;Female&lt;/td&gt;
+&lt;td align="right"&gt;179.12.188.75&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;CSS changes&lt;/h2&gt;
+&lt;p&gt;I hope it doesn't bite me in the butt later on, but I'm forcing the table headers into uppercase. In case anyone is curious, this are the styles that I added to the theme:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;table&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;  &lt;span class="k"&gt;border-collapse&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;collapse&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;  &lt;span class="k"&gt;margin-left&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;auto&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;  &lt;span class="k"&gt;margin-right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;auto&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;  &lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;90&lt;/span&gt;&lt;span class="kt"&gt;%&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="nt"&gt;td&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;th&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;  &lt;span class="k"&gt;border&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt; &lt;span class="kc"&gt;solid&lt;/span&gt; &lt;span class="mh"&gt;#ddd&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;  &lt;span class="k"&gt;padding&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="nt"&gt;tr&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;nth-child&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;even&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="k"&gt;background-color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mh"&gt;#f2f2f2&lt;/span&gt;&lt;span class="p"&gt;;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="nt"&gt;tr&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;hover&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="k"&gt;background-color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mh"&gt;#ddd&lt;/span&gt;&lt;span class="p"&gt;;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="nt"&gt;th&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;  &lt;span class="k"&gt;padding-top&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;  &lt;span class="k"&gt;padding-bottom&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;  &lt;span class="k"&gt;text-transform&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;uppercase&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;  &lt;span class="k"&gt;font-weight&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;bold&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;  &lt;span class="k"&gt;background-color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mh"&gt;#607D8B&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;  &lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;white&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;math&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;  &lt;span class="k"&gt;font-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;medium&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;The default &lt;em&gt;math&lt;/em&gt; syntax rendering was kind of small, so I changed the &lt;code&gt;font-size&lt;/code&gt; to &lt;em&gt;medium&lt;/em&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;This web development stuff is pretty complex.
+There are lots of moving parts, so I give all of my fellow web developers a high-five for being so awesome!
+I can see how this can be pretty overwhelming if you're new to this, but just keep at it and you'll get there.&lt;/p&gt;
+&lt;p&gt;This old dog can still learn some new tricks!&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="Blog"></category><category term="pelican"></category><category term="plugins"></category><category term="latex"></category><category term="css"></category></entry><entry><title>Finally getting the hang of working with Pelican!</title><link href="https://clamytoe.github.io/articles/2020/Feb/28/pelican" rel="alternate"></link><published>2020-02-28T09:50:00-06:00</published><updated>2020-03-01T00:42:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-02-28:/articles/2020/Feb/28/pelican</id><summary type="html">&lt;p&gt;Nothing beats learning something new than just jumping in and playing around with it!&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Stumbling into a nice Pelican workflow&lt;/h1&gt;
 &lt;p&gt;If you've seen my &lt;a href="https://github.com/clamytoe/clamytoe.github.io"&gt;source repo&lt;/a&gt; for this site, you know that I followed &lt;a href="https://opensource.com/users/jnyjny"&gt;Erik O'Shaughnessy's&lt;/a&gt; &lt;em&gt;Run your blog on GitHub Pages with Python&lt;/em&gt; &lt;a href="https://opensource.com/article/19/5/run-your-blog-github-pages-python"&gt;tutorial&lt;/a&gt;.
 It's a great tutorial, I specifically love his &lt;strong&gt;one weird trick&lt;/strong&gt;, but it leaves so many unanswered questions.
 Go read it now if you haven't and we'll pick up where he leaves off.&lt;/p&gt;
