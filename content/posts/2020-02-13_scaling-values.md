@@ -9,7 +9,7 @@ summary: Quick discussion about rescaling values for data science
 
 # Scaling Values
 
-Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relevant.
+Today while reading Data Science Algorithms in a Week, from [packt](https://www.packtpub.com), I came across the concept of rescaling values so that when measuring their distances they would be more relevant.
 The dataset consisted of "House Ownership":
 
 |Age|Annual income in USD|House ownership status|
