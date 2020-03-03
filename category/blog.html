@@ -247,6 +247,15 @@ Thanks to <a href="https://www.mockaroo.com/">mockaroo</a> I was able to generat
 <blockquote>
 <p>The default <em>math</em> syntax rendering was kind of small, so I changed the <code>font-size</code> to <em>medium</em>.</p>
 </blockquote>
+<h2>On a side note</h2>
+<p>I noticed that some of my changes wouldn't take effect until after I removed the <em><strong>pycache</strong></em> and <em>.pytest_cache</em> directories. In order to automate this, I modified my <em>Makefile</em>'s <code>clean</code> code to the following:</p>
+<div class="highlight"><pre><span class="code-line"><span></span><code><span class="nf">clean</span><span class="o">:</span></span>
+<span class="code-line">    <span class="o">[</span> ! -d <span class="k">$(</span>OUTPUTDIR<span class="k">)</span> <span class="o">]</span> <span class="o">||</span> rm -rf <span class="k">$(</span>OUTPUTDIR<span class="k">)</span></span>
+<span class="code-line">    rm -rf __pycache__</span>
+<span class="code-line">    rm -rf .pytest_cache</span>
+<span class="code-line"></code></pre></div>
+
+
 <h2>Conclusion</h2>
 <p>This web development stuff is pretty complex.
 There are lots of moving parts, so I give all of my fellow web developers a high-five for being so awesome!

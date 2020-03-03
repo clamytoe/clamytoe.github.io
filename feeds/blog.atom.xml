@@ -163,6 +163,15 @@ Thanks to &lt;a href="https://www.mockaroo.com/"&gt;mockaroo&lt;/a&gt; I was abl
 &lt;blockquote&gt;
 &lt;p&gt;The default &lt;em&gt;math&lt;/em&gt; syntax rendering was kind of small, so I changed the &lt;code&gt;font-size&lt;/code&gt; to &lt;em&gt;medium&lt;/em&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;h2&gt;On a side note&lt;/h2&gt;
+&lt;p&gt;I noticed that some of my changes wouldn't take effect until after I removed the &lt;em&gt;&lt;strong&gt;pycache&lt;/strong&gt;&lt;/em&gt; and &lt;em&gt;.pytest_cache&lt;/em&gt; directories. In order to automate this, I modified my &lt;em&gt;Makefile&lt;/em&gt;'s &lt;code&gt;clean&lt;/code&gt; code to the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="code-line"&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;    &lt;span class="o"&gt;[&lt;/span&gt; ! -d &lt;span class="k"&gt;$(&lt;/span&gt;OUTPUTDIR&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; rm -rf &lt;span class="k"&gt;$(&lt;/span&gt;OUTPUTDIR&lt;span class="k"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class="code-line"&gt;    rm -rf __pycache__&lt;/span&gt;
+&lt;span class="code-line"&gt;    rm -rf .pytest_cache&lt;/span&gt;
+&lt;span class="code-line"&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;This web development stuff is pretty complex.
 There are lots of moving parts, so I give all of my fellow web developers a high-five for being so awesome!
