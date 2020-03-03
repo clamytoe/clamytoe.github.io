@@ -101,6 +101,17 @@ th {
 
 > The default *math* syntax rendering was kind of small, so I changed the `font-size` to *medium*.
 
+## On a side note
+
+I noticed that some of my changes wouldn't take effect until after I removed the *__pycache__* and *.pytest_cache* directories. In order to automate this, I modified my *Makefile*'s `clean` code to the following:
+
+```make
+clean:
+	[ ! -d $(OUTPUTDIR) ] || rm -rf $(OUTPUTDIR)
+	rm -rf __pycache__
+	rm -rf .pytest_cache
+```
+
 ## Conclusion
 
 This web development stuff is pretty complex.
