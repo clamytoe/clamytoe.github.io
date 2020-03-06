@@ -3,7 +3,8 @@
 from __future__ import unicode_literals
 
 THEME = (
-    "/home/mohh/anaconda3/envs/ghpages/lib/python3.8/site-packages/pelican/themes/mg"
+    # "/home/mohh/anaconda3/envs/ghpages/lib/python3.8/site-packages/pelican/themes/mg"
+    "themes/mg"
 )
 
 # Site and name settings
@@ -27,6 +28,9 @@ MARKDOWN_EXTENSIONS = [
     'codehilite(css_class=highlight,linenums=True)',
     'extra'
 ]
+
+# Render math settings
+MATH_JAX = {"linebreak_automatic": True, "responsive": True}
 
 # Path settings
 PATH = "content"
