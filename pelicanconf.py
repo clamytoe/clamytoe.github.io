@@ -30,7 +30,7 @@ MARKDOWN_EXTENSIONS = [
 ]
 
 # Render math settings
-MATH_JAX = {"linebreak_automatic": True, "responsive": True}
+MATH_JAX = {"linebreak_automatic": True, "responsive": True, "responsive_break": 1125}
 
 # Path settings
 PATH = "content"

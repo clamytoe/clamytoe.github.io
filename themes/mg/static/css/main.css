@@ -11,7 +11,9 @@ table {
   overflow-x: auto;
   white-space: nowrap;
   border-collapse: collapse;
-  margin-left: 5px; }
+  margin-left: 5px;
+  margin-right: auto;
+  width: 90%; }
 
 td, th {
   border: 1px solid #ddd;
