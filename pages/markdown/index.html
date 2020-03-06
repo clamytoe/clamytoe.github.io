@@ -82,23 +82,23 @@ For compatibility, separate paragraphs and headings with one or more blank lines
 <p>To create a line break (&lt;br&gt;), end a line with two or more spaces, and then type return.</p>
 <h3>Some more examples</h3>
 <p>Basic markdown examples are shown below:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code>This text is **bold** and this text is also __bold__  </span>
-<span class="code-line">This text is *italic* and this text is also _italic_  </span>
-<span class="code-line">This text is **_italic and bold_**</span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code>This text is **bold** and this text is also __bold__  
+This text is *italic* and this text is also _italic_  
+This text is **_italic and bold_**
+</code></pre></div>
 
 
 <p>This text is <strong>bold</strong> and this text is also <strong>bold</strong>
 This text is <em>italic</em> and this text is also <em>italic</em><br>
 This text is <strong><em>italic and bold</em></strong></p>
 <p>You can add headers to your markdown to divide your posts into related sections:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code># A H1 heading  </span>
-<span class="code-line">## A H2 heading  </span>
-<span class="code-line">### A H3 heading  </span>
-<span class="code-line">#### A H4 heading  </span>
-<span class="code-line">##### A H5 heading  </span>
-<span class="code-line">###### A H6 heading</span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code># A H1 heading  
+## A H2 heading  
+### A H3 heading  
+#### A H4 heading  
+##### A H5 heading  
+###### A H6 heading
+</code></pre></div>
 
 
 <h1>A H1 heading</h1>
@@ -108,17 +108,17 @@ This text is <strong><em>italic and bold</em></strong></p>
 <h5>A H5 heading</h5>
 <h6>A H6 heading</h6>
 <p>A nice additional way to separate different sections of you post is to insert a horizontal line is to add three or more hyphens:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code>---</span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code>---
+</code></pre></div>
 
 
 <hr>
 <p>In Mathew's original post he defines a list with numbers as:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code>A list with numbers:</span>
-<span class="code-line">1. One</span>
-<span class="code-line">2. Two</span>
-<span class="code-line">3. Three</span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code>A list with numbers:
+1. One
+2. Two
+3. Three
+</code></pre></div>
 
 
 <p>When rendered this looks like:</p>
@@ -137,12 +137,12 @@ This rule applied to everything.</li>
 All items in the list are preceded with a <code>1.</code> and the list is then automatically numbered.</li>
 </ol>
 <p>The correct way to define a list of numbers is:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code>A list with numbers:</span>
-<span class="code-line"></span>
-<span class="code-line">1. One</span>
-<span class="code-line">1. Two</span>
-<span class="code-line">1. Three</span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code>A list with numbers:
+
+1. One
+1. Two
+1. Three
+</code></pre></div>
 
 
 <p>And this is how it then correctly displays:</p>
@@ -165,22 +165,22 @@ All items in the list are preceded with a <code>1.</code> and the list is then a
 </li>
 </ol>
 <p>And the markdown for sublists like this is:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code>1. Top Level  </span>
-<span class="code-line">    1. Sub level 1</span>
-<span class="code-line">    1. Sub level 2</span>
-<span class="code-line">1. Top Level Again  </span>
-<span class="code-line">    1. Sub level again</span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code>1. Top Level  
+    1. Sub level 1
+    1. Sub level 2
+1. Top Level Again  
+    1. Sub level again
+</code></pre></div>
 
 
 <p>The list with bullets example suffers from the same issue as the numbered list in that the example markdown given does not have a blank line between the text and the bulleted list.
 In markdown you always have to place a blank line:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code>A list with bullets:</span>
-<span class="code-line"></span>
-<span class="code-line">* One</span>
-<span class="code-line">* Two</span>
-<span class="code-line">* Three</span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code>A list with bullets:
+
+* One
+* Two
+* Three
+</code></pre></div>
 
 
 <p>A list with bullets:</p>
@@ -190,8 +190,8 @@ In markdown you always have to place a blank line:</p>
 <li>Bullet</li>
 </ul>
 <p>Here's a blockquote:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code>&gt; Simple is better than complex</span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code>&gt; Simple is better than complex
+</code></pre></div>
 
 
 <blockquote>
@@ -199,12 +199,12 @@ In markdown you always have to place a blank line:</p>
 </blockquote>
 <p>For some reason the example given my Mathew used <code>&amp;gt;</code>. Not sure why.</p>
 <p>Here's the table example in Mathew's post:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code>| Column1 | Column 2 | Column 3 |  </span>
-<span class="code-line">|---|---|---|  </span>
-<span class="code-line">| Value 1 | Value 2 | Value 3 |  </span>
-<span class="code-line">| Value 4 | Value 5 | Value 6 |  </span>
-<span class="code-line">| Value 7 | Value 8 | Value 9 |</span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code>| Column1 | Column 2 | Column 3 |  
+|---|---|---|  
+| Value 1 | Value 2 | Value 3 |  
+| Value 4 | Value 5 | Value 6 |  
+| Value 7 | Value 8 | Value 9 |
+</code></pre></div>
 
 
 <p>And here is the table rendered:</p>
@@ -315,28 +315,28 @@ One small disadvantage of having to define links using <code>{static}</code> or 
 <h2>Markdown Examples Part 3</h2>
 <p>Code blocks are preceded by an indent (4 spaces), three <code>:</code> symbols and the name of the language.  </p>
 <p>All of the following code will be highlighted while the text is indented.</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="k">def</span> <span class="nf">do_twice</span><span class="p">(</span><span class="n">func</span><span class="p">):</span></span>
-<span class="code-line">    <span class="k">def</span> <span class="nf">wrapper_do_twice</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span></span>
-<span class="code-line">        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span></span>
-<span class="code-line">    <span class="k">return</span> <span class="n">wrapper_do_twice</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="nd">@do_twice</span></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">say_whee</span><span class="p">(</span><span class="n">some_text</span><span class="p">):</span></span>
-<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="n">some_text</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;Whee!&#39;</span></span>
-<span class="code-line"><span class="n">say_whee</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">do_twice</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper_do_twice</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">wrapper_do_twice</span>
+
+<span class="nd">@do_twice</span>
+<span class="k">def</span> <span class="nf">say_whee</span><span class="p">(</span><span class="n">some_text</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">some_text</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;Whee!&#39;</span>
+<span class="n">say_whee</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>And the raw markdown to produce this code block looks like:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code>:::python</span>
-<span class="code-line">def do_twice(func):</span>
-<span class="code-line">    def wrapper_do_twice(*args, **kwargs):</span>
-<span class="code-line">        return func(*args, **kwargs).lower()</span>
-<span class="code-line">    return wrapper_do_twice</span>
-<span class="code-line">...</span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code>:::python
+def do_twice(func):
+    def wrapper_do_twice(*args, **kwargs):
+        return func(*args, **kwargs).lower()
+    return wrapper_do_twice
+...
+</code></pre></div>
 </div>
 
         <div class="uk-width-medium-1-5 uk-hidden-small">

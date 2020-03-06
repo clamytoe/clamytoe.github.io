@@ -119,9 +119,9 @@ I searched to see if Pelican had any plugins for rendering math and sure enough,
 I followed the instructions and cloned the repo into my blog directory.
 Probably should have dropped it somewhere outside of it, but I added it to my <code>.gitignore</code> and it's fine...</p>
 <p>I added the following to my <code>pelicanconf.py</code> file:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">PLUGIN_PATHS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;./pelican-plugins&#39;</span><span class="p">]</span></span>
-<span class="code-line"><span class="n">PLUGINS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;render_math&#39;</span><span class="p">]</span></span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">PLUGIN_PATHS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;./pelican-plugins&#39;</span><span class="p">]</span>
+<span class="n">PLUGINS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;render_math&#39;</span><span class="p">]</span>
+</code></pre></div>
 
 
 <p>I tried the previous code once again and was still getting the same results.
@@ -230,35 +230,35 @@ Thanks to <a href="https://www.mockaroo.com/">mockaroo</a> I was able to generat
 </table>
 <h2>CSS changes</h2>
 <p>I hope it doesn't bite me in the butt later on, but I'm forcing the table headers into uppercase. In case anyone is curious, this are the styles that I added to the theme:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="nt">table</span> <span class="p">{</span></span>
-<span class="code-line">  <span class="k">border-collapse</span><span class="p">:</span> <span class="kc">collapse</span><span class="p">;</span></span>
-<span class="code-line">  <span class="k">margin-left</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span></span>
-<span class="code-line">  <span class="k">margin-right</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span></span>
-<span class="code-line">  <span class="k">width</span><span class="p">:</span> <span class="mi">90</span><span class="kt">%</span><span class="p">;</span></span>
-<span class="code-line"><span class="p">}</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="nt">td</span><span class="o">,</span> <span class="nt">th</span> <span class="p">{</span></span>
-<span class="code-line">  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="mh">#ddd</span><span class="p">;</span></span>
-<span class="code-line">  <span class="k">padding</span><span class="p">:</span> <span class="mi">8</span><span class="kt">px</span><span class="p">;</span></span>
-<span class="code-line"><span class="p">}</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="nt">tr</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">even</span><span class="o">)</span><span class="p">{</span><span class="k">background-color</span><span class="p">:</span> <span class="mh">#f2f2f2</span><span class="p">;}</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="nt">tr</span><span class="p">:</span><span class="nd">hover</span> <span class="p">{</span><span class="k">background-color</span><span class="p">:</span> <span class="mh">#ddd</span><span class="p">;}</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="nt">th</span> <span class="p">{</span></span>
-<span class="code-line">  <span class="k">padding-top</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span></span>
-<span class="code-line">  <span class="k">padding-bottom</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span></span>
-<span class="code-line">  <span class="k">text-transform</span><span class="p">:</span> <span class="kc">uppercase</span><span class="p">;</span></span>
-<span class="code-line">  <span class="k">font-weight</span><span class="p">:</span> <span class="kc">bold</span><span class="p">;</span></span>
-<span class="code-line">  <span class="k">background-color</span><span class="p">:</span> <span class="mh">#607D8B</span><span class="p">;</span></span>
-<span class="code-line">  <span class="k">color</span><span class="p">:</span> <span class="kc">white</span><span class="p">;</span></span>
-<span class="code-line"><span class="p">}</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="p">.</span><span class="nc">math</span> <span class="p">{</span></span>
-<span class="code-line">  <span class="k">font-size</span><span class="p">:</span> <span class="kc">medium</span><span class="p">;</span></span>
-<span class="code-line"><span class="p">}</span></span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nt">table</span> <span class="p">{</span>
+  <span class="k">border-collapse</span><span class="p">:</span> <span class="kc">collapse</span><span class="p">;</span>
+  <span class="k">margin-left</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+  <span class="k">margin-right</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+  <span class="k">width</span><span class="p">:</span> <span class="mi">90</span><span class="kt">%</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">td</span><span class="o">,</span> <span class="nt">th</span> <span class="p">{</span>
+  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="mh">#ddd</span><span class="p">;</span>
+  <span class="k">padding</span><span class="p">:</span> <span class="mi">8</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">tr</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">even</span><span class="o">)</span><span class="p">{</span><span class="k">background-color</span><span class="p">:</span> <span class="mh">#f2f2f2</span><span class="p">;}</span>
+
+<span class="nt">tr</span><span class="p">:</span><span class="nd">hover</span> <span class="p">{</span><span class="k">background-color</span><span class="p">:</span> <span class="mh">#ddd</span><span class="p">;}</span>
+
+<span class="nt">th</span> <span class="p">{</span>
+  <span class="k">padding-top</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">padding-bottom</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">text-transform</span><span class="p">:</span> <span class="kc">uppercase</span><span class="p">;</span>
+  <span class="k">font-weight</span><span class="p">:</span> <span class="kc">bold</span><span class="p">;</span>
+  <span class="k">background-color</span><span class="p">:</span> <span class="mh">#607D8B</span><span class="p">;</span>
+  <span class="k">color</span><span class="p">:</span> <span class="kc">white</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">math</span> <span class="p">{</span>
+  <span class="k">font-size</span><span class="p">:</span> <span class="kc">medium</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 
 
 <blockquote>
@@ -266,11 +266,11 @@ Thanks to <a href="https://www.mockaroo.com/">mockaroo</a> I was able to generat
 </blockquote>
 <h2>On a side note</h2>
 <p>I noticed that some of my changes wouldn't take effect until after I removed the <em><strong>pycache</strong></em> and <em>.pytest_cache</em> directories. In order to automate this, I modified my <em>Makefile</em>'s <code>clean</code> code to the following:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="nf">clean</span><span class="o">:</span></span>
-<span class="code-line">    <span class="o">[</span> ! -d <span class="k">$(</span>OUTPUTDIR<span class="k">)</span> <span class="o">]</span> <span class="o">||</span> rm -rf <span class="k">$(</span>OUTPUTDIR<span class="k">)</span></span>
-<span class="code-line">    rm -rf __pycache__</span>
-<span class="code-line">    rm -rf .pytest_cache</span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nf">clean</span><span class="o">:</span>
+    <span class="o">[</span> ! -d <span class="k">$(</span>OUTPUTDIR<span class="k">)</span> <span class="o">]</span> <span class="o">||</span> rm -rf <span class="k">$(</span>OUTPUTDIR<span class="k">)</span>
+    rm -rf __pycache__
+    rm -rf .pytest_cache
+</code></pre></div>
 
 
 <h2>Conclusion</h2>
@@ -279,7 +279,7 @@ There are lots of moving parts, so I give all of my fellow web developers a high
 I can see how this can be pretty overwhelming if you're new to this, but just keep at it and you'll get there.</p>
 <p>This old dog can still learn some new tricks!</p>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
+    var align = "left",
         indent = "0em",
         linebreak = "true";
 

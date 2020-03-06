@@ -110,23 +110,23 @@ I'll admit, that I only skimmed over it, it's kind of long.
 I was looking for anything that would jump out at me.
 What caught my eye was how simple it all was to automate things with <code>make</code>!</p>
 <p>I took a quick look at mine and saw what commands were defined.</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="err">Makefile</span> <span class="err">for</span> <span class="err">a</span> <span class="err">pelican</span> <span class="err">Web</span> <span class="err">site</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="nf">Usage</span><span class="o">:</span></span>
-<span class="code-line">   make html                           <span class="o">(</span>re<span class="o">)</span>generate the web site</span>
-<span class="code-line">   make clean                          remove the generated files</span>
-<span class="code-line">   make regenerate                     regenerate files upon modification</span>
-<span class="code-line">   make publish                        generate using production settings</span>
-<span class="code-line">   make serve <span class="o">[</span><span class="nv">PORT</span><span class="o">=</span><span class="m">8000</span><span class="o">]</span>              serve site at http://localhost:8000</span>
-<span class="code-line">   make serve-global <span class="o">[</span><span class="nv">SERVER</span><span class="o">=</span><span class="m">0</span>.0.0.0<span class="o">]</span>  serve <span class="o">(</span>as root<span class="o">)</span> to :80</span>
-<span class="code-line">   make devserver <span class="o">[</span><span class="nv">PORT</span><span class="o">=</span><span class="m">8000</span><span class="o">]</span>          serve and regenerate together</span>
-<span class="code-line">   make ssh_upload                     upload the web site via SSH</span>
-<span class="code-line">   make rsync_upload                   upload the web site via rsync+ssh  </span>
-<span class="code-line">   make github                         upload the web site via gh-pages</span>
-<span class="code-line"></span>
-<span class="code-line"><span class="err">Set</span> <span class="err">the</span> <span class="err">DEBUG</span> <span class="err">variable</span> <span class="err">to</span> <span class="err">1</span> <span class="err">to</span> <span class="err">enable</span> <span class="err">debugging,</span> <span class="err">e.g.</span> <span class="err">make</span> <span class="nv">DEBUG</span><span class="o">=</span><span class="m">1</span> html</span>
-<span class="code-line"><span class="err">Set</span> <span class="err">the</span> <span class="err">RELATIVE</span> <span class="err">variable</span> <span class="err">to</span> <span class="err">1</span> <span class="err">to</span> <span class="err">enable</span> <span class="err">relative</span> <span class="err">urls</span></span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">Makefile</span> <span class="err">for</span> <span class="err">a</span> <span class="err">pelican</span> <span class="err">Web</span> <span class="err">site</span>
+
+<span class="nf">Usage</span><span class="o">:</span>
+   make html                           <span class="o">(</span>re<span class="o">)</span>generate the web site
+   make clean                          remove the generated files
+   make regenerate                     regenerate files upon modification
+   make publish                        generate using production settings
+   make serve <span class="o">[</span><span class="nv">PORT</span><span class="o">=</span><span class="m">8000</span><span class="o">]</span>              serve site at http://localhost:8000
+   make serve-global <span class="o">[</span><span class="nv">SERVER</span><span class="o">=</span><span class="m">0</span>.0.0.0<span class="o">]</span>  serve <span class="o">(</span>as root<span class="o">)</span> to :80
+   make devserver <span class="o">[</span><span class="nv">PORT</span><span class="o">=</span><span class="m">8000</span><span class="o">]</span>          serve and regenerate together
+   make ssh_upload                     upload the web site via SSH
+   make rsync_upload                   upload the web site via rsync+ssh  
+   make github                         upload the web site via gh-pages
+
+<span class="err">Set</span> <span class="err">the</span> <span class="err">DEBUG</span> <span class="err">variable</span> <span class="err">to</span> <span class="err">1</span> <span class="err">to</span> <span class="err">enable</span> <span class="err">debugging,</span> <span class="err">e.g.</span> <span class="err">make</span> <span class="nv">DEBUG</span><span class="o">=</span><span class="m">1</span> html
+<span class="err">Set</span> <span class="err">the</span> <span class="err">RELATIVE</span> <span class="err">variable</span> <span class="err">to</span> <span class="err">1</span> <span class="err">to</span> <span class="err">enable</span> <span class="err">relative</span> <span class="err">urls</span>
+</code></pre></div>
 
 
 <p>Looking at the <code>Makefile</code> source is where I noticed that for local development, it just uses the <code>pelicanconf.py</code> script, but for publishing it uses <code>publishconf.py</code>.
@@ -140,26 +140,26 @@ I was able to get around that by just specifying the <code>SITE_URL</code> varia
 Unfortunately, that broke testing the blog locally because all the links would point to the live site on GitHub!</p>
 <p>What I'm trying to say here is that in I was able to resolve both of these issues by making the following changes.</p>
 <p><em>pelicanconf.py</em>:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">SITEURL</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span></span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">SITEURL</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</code></pre></div>
 
 
 <p><em>publishconf.py</em>:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="n">SITEURL</span> <span class="o">=</span> <span class="s2">&quot;https://clamytoe.github.io&quot;</span></span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">SITEURL</span> <span class="o">=</span> <span class="s2">&quot;https://clamytoe.github.io&quot;</span>
+</code></pre></div>
 
 
 <p>Another issue that I was having was that I couldn't figure out how to get my <code>favicon.ico</code> to be treated as a static file and automatically dumped into the <code>output</code> directory.
 My solution had been to write a little bash script to copy it over for me, but that was kind of tedious.
 But now that I was going to use the <code>Makefile</code> I decided to automate it in there!</p>
 <p>I added the following lines to it:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="nv">FAVICON</span><span class="o">=</span><span class="k">$(</span>INPUTDIR<span class="k">)</span>/static/favicon.ico</span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nv">FAVICON</span><span class="o">=</span><span class="k">$(</span>INPUTDIR<span class="k">)</span>/static/favicon.ico
+</code></pre></div>
 
 
 <p>Then after the <code>html</code>, <code>regenerate</code>, and <code>publish</code> commands, I added:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="err">cp</span> <span class="k">$(</span><span class="nv">FAVICON</span><span class="k">)</span> <span class="k">$(</span><span class="nv">OUTPUTDIR</span><span class="k">)</span></span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">cp</span> <span class="k">$(</span><span class="nv">FAVICON</span><span class="k">)</span> <span class="k">$(</span><span class="nv">OUTPUTDIR</span><span class="k">)</span>
+</code></pre></div>
 
 
 <blockquote>
@@ -171,10 +171,10 @@ But now that I was going to use the <code>Makefile</code> I decided to automate 
 What I would recommend, is to run the <code>make clean</code> command and commit it to your <code>content</code> branch.
 Now you will have a <em>clean</em> slate to start with.</p>
 <p>You can now add any new content and do the following commands:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="err">git add .</span></span>
-<span class="code-line"><span class="err">git commit -m &quot;Your description...&quot;</span></span>
-<span class="code-line"><span class="err">git push origin content</span></span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">git add .</span>
+<span class="err">git commit -m &quot;Your description...&quot;</span>
+<span class="err">git push origin content</span>
+</code></pre></div>
 
 
 <blockquote>
@@ -183,27 +183,27 @@ Now you will have a <em>clean</em> slate to start with.</p>
 <p>Now you're ready to generate the actual site, here's how that's now done.</p>
 <h3>Generate the site</h3>
 <p>If you just want to generate the site this is the command that you want:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="err">make</span> <span class="err">html</span></span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">make</span> <span class="err">html</span>
+</code></pre></div>
 
 
 <p>Then you can either run the Pelican server or the Python one.</p>
 <h4>Pelican server</h4>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="err">pelican --listen</span></span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">pelican --listen</span>
+</code></pre></div>
 
 
 <h4>Python server</h4>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="nb">cd</span> output</span>
-<span class="code-line">python -m http.server</span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> output
+python -m http.server
+</code></pre></div>
 
 
 <p>Both of those will make the site accessible at <code>http://localhost:8000</code></p>
 <h3>Generate site and preview</h3>
 <p>Now, if you know that you will be wanting to preview your site, a much better way is to use this command:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="err">make</span> <span class="err">devserver</span></span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">make</span> <span class="err">devserver</span>
+</code></pre></div>
 
 
 <p>Not only will this generate the site, but will also start the Pelican server automagically for you!
@@ -212,21 +212,21 @@ I wanted to change the colors on mine and doing it like this automatically detec
 <h3>Publish the site</h3>
 <p>This command generates the site using the <code>publishconf.py</code> script, so if you specified your site's url in there, it will add it to the generated html pages.
 It's nice for making sure all is working correctly and enabling your Google Analytics; if you're into that sort of thing.</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="err">make</span> <span class="err">publish</span></span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">make</span> <span class="err">publish</span>
+</code></pre></div>
 
 
 <h3>Publish and push to github</h3>
 <p>Now, we're cooking with Crisco!
 This command will generate the final site using <code>publishconf.py</code>, merge the output into your <code>master</code> branch, and push it up the hubs; all in one step!</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="err">make</span> <span class="err">github</span></span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">make</span> <span class="err">github</span>
+</code></pre></div>
 
 
 <h3>Cleaning up</h3>
 <p>Now that you've pushed to the hubs, removed the generated files:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="err">make</span> <span class="err">clean</span></span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">make</span> <span class="err">clean</span>
+</code></pre></div>
 
 
 <p>If you run <code>git status</code>, you should see that there are no changes and that you are ready to add more content.
@@ -236,16 +236,16 @@ Nice!</p>
 Not only did I update the color scheme of my site, I also fixed some annoying issues that I was having.
 Now I don't have to look up any <code>ghp-import ...</code> command and things just got a heck of a lot more pleasant.</p>
 <p><strong>In summary</strong>:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code>touch content/posts/new-blog-post.md</span>
-<span class="code-line">vi <span class="nv">$_</span></span>
-<span class="code-line"><span class="c1"># write the blog content</span></span>
-<span class="code-line">git status</span>
-<span class="code-line">git add .</span>
-<span class="code-line">git commit -m <span class="s2">&quot;New blog post.&quot;</span></span>
-<span class="code-line">git push origin content</span>
-<span class="code-line">make github</span>
-<span class="code-line">make clean</span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code>touch content/posts/new-blog-post.md
+vi <span class="nv">$_</span>
+<span class="c1"># write the blog content</span>
+git status
+git add .
+git commit -m <span class="s2">&quot;New blog post.&quot;</span>
+git push origin content
+make github
+make clean
+</code></pre></div>
 
 
 <h3>On a side note</h3>
@@ -255,8 +255,8 @@ Once I got that working, I then noticed that whenever I tried to do a search fro
 That page doesn't exists, so I was baffled as to why that was going on.
 I took a look at the <a href="https://github.com/lucachr/pelican-mg">pelican-mg</a> theme's <a href="https://palletsprojects.com/p/jinja/">Jinja</a> templates and found the issue in <code>base.html</code>.
 I simply had to add <code>{{ SITEURL }}</code> in the <code>action</code> part of the form:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="p">&lt;</span><span class="nt">form</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;uk-search&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/search.html&quot;</span> <span class="na">data-uk-search</span><span class="p">&gt;</span></span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">form</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;uk-search&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/search.html&quot;</span> <span class="na">data-uk-search</span><span class="p">&gt;</span>
+</code></pre></div>
 
 
 <p>Now it works beautifully!</p>

@@ -81,7 +81,7 @@
         <p class="uk-article-meta"><time datetime="2020-02-19" itemprop="datePublished">Wed 19 February 2020</time> • <a href="https://clamytoe.github.io/category/python.html">Python</a></p>
         </p>
         <p class="uk-article-lead" itemprop="description">Figured out how to tear down a pytest fixture</p>
-            <p>Pytest fixtures with tear down code Setting up pytest fixtures with teardown code Today after listening to Brian Okken's Test & Code podcast with Anthony Shaw, I was reminded that I wanted to install Anthony's Python Security Plugin for JetBrain's PyCharm IDE. That was a breeze to install and it just worked out of the box. I fired it up and it automatically checked my code and called it good. I then started to write some tests and while checking a password, it alerted me to an issue. It made a suggestion to fix it, so I accepted and it updated my code and even added the proper import statement! FROM: assert dummy.password == "admin" TO: from secrets import compare_digest import pytest from passlock.entry import Entry <span...</p><br /><br />
+            <p>Pytest fixtures with tear down code Setting up pytest fixtures with teardown code Today after listening to Brian Okken's Test & Code podcast with Anthony Shaw, I was reminded that I wanted to install Anthony's Python Security Plugin for JetBrain's PyCharm IDE. That was a breeze to install and it just worked out of the box. I fired it up and it automatically checked my code and called it good. I then started to write some tests and while checking a password, it alerted me to an issue. It made a suggestion to fix it, so I accepted and it updated my code and even added the proper import statement! FROM: assert dummy.password == "admin" TO: from secrets import compare_digest import pytest from passlock.entry import Entry @pytest.fixture(scope="module") def...</p><br /><br />
             <a href="https://clamytoe.github.io/articles/2020/Feb/19/pytest-fixtures">Read More</a>
             <!-- <section itemprop="articleBody"><h1>Pytest fixtures with tear down code</h1>
 <h2>Setting up pytest fixtures with teardown code</h2>
@@ -91,29 +91,29 @@ I fired it up and it automatically checked my code and called it good.</p>
 <p>I then started to write some tests and while checking a password, it alerted me to an issue.
 It made a suggestion to fix it, so I accepted and it updated my code and even added the proper import statement!</p>
 <p><em>FROM</em>:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code>    <span class="k">assert</span> <span class="n">dummy</span><span class="o">.</span><span class="n">password</span> <span class="o">==</span> <span class="s2">&quot;admin&quot;</span></span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code>    <span class="k">assert</span> <span class="n">dummy</span><span class="o">.</span><span class="n">password</span> <span class="o">==</span> <span class="s2">&quot;admin&quot;</span>
+</code></pre></div>
 
 
 <p><em>TO</em>:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="kn">from</span> <span class="nn">secrets</span> <span class="kn">import</span> <span class="n">compare_digest</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="kn">import</span> <span class="nn">pytest</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="kn">from</span> <span class="nn">passlock.entry</span> <span class="kn">import</span> <span class="n">Entry</span></span>
-<span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;module&quot;</span><span class="p">)</span></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">dummy</span><span class="p">():</span></span>
-<span class="code-line">    <span class="k">return</span> <span class="n">Entry</span><span class="p">(</span><span class="s2">&quot;router&quot;</span><span class="p">,</span> <span class="s2">&quot;http://192.168.2.1&quot;</span><span class="p">,</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span> <span class="s2">&quot;admin&quot;</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">test_entry</span><span class="p">(</span><span class="n">dummy</span><span class="p">):</span></span>
-<span class="code-line">    <span class="k">assert</span> <span class="n">dummy</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;router&quot;</span></span>
-<span class="code-line">    <span class="k">assert</span> <span class="n">dummy</span><span class="o">.</span><span class="n">url</span> <span class="o">==</span> <span class="s2">&quot;http://192.168.2.1&quot;</span></span>
-<span class="code-line">    <span class="k">assert</span> <span class="n">dummy</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="s2">&quot;admin&quot;</span></span>
-<span class="code-line">    <span class="k">assert</span> <span class="n">compare_digest</span><span class="p">(</span><span class="n">dummy</span><span class="o">.</span><span class="n">password</span><span class="p">,</span> <span class="s2">&quot;admin&quot;</span><span class="p">)</span></span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">secrets</span> <span class="kn">import</span> <span class="n">compare_digest</span>
+
+<span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="kn">from</span> <span class="nn">passlock.entry</span> <span class="kn">import</span> <span class="n">Entry</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;module&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">dummy</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">Entry</span><span class="p">(</span><span class="s2">&quot;router&quot;</span><span class="p">,</span> <span class="s2">&quot;http://192.168.2.1&quot;</span><span class="p">,</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span> <span class="s2">&quot;admin&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">test_entry</span><span class="p">(</span><span class="n">dummy</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">dummy</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;router&quot;</span>
+    <span class="k">assert</span> <span class="n">dummy</span><span class="o">.</span><span class="n">url</span> <span class="o">==</span> <span class="s2">&quot;http://192.168.2.1&quot;</span>
+    <span class="k">assert</span> <span class="n">dummy</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="s2">&quot;admin&quot;</span>
+    <span class="k">assert</span> <span class="n">compare_digest</span><span class="p">(</span><span class="n">dummy</span><span class="o">.</span><span class="n">password</span><span class="p">,</span> <span class="s2">&quot;admin&quot;</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>Although, this is just a dummy password for testing, it doesn't hurt to build up some good habits!</p>
@@ -127,45 +127,45 @@ I did some initial searches and was coming up blank.
 I then looked up the pytest guru, <a href="https://pythontesting.net/framework/pytest/pytest-fixtures-easy-example/">Brian's</a> blog about the topic, but his examples were too simplistic for what I was trying to do.
 All they demonstrated was how to print a message, it didn't actually show how to return anything, and then have it torn down afterwards.</p>
 <p><em>Brian's example</em>:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span></span>
-<span class="code-line"><span class="kn">import</span> <span class="nn">pytest</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s1">&#39;module&#39;</span><span class="p">)</span></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">resource_a_setup</span><span class="p">(</span><span class="n">request</span><span class="p">):</span></span>
-<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">resources_a_setup()&#39;</span><span class="p">)</span></span>
-<span class="code-line">    <span class="k">def</span> <span class="nf">resource_a_teardown</span><span class="p">():</span></span>
-<span class="code-line">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">resources_a_teardown()&#39;</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">request</span><span class="o">.</span><span class="n">addfinalizer</span><span class="p">(</span><span class="n">resource_a_teardown</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">test_1_that_needs_resource_a</span><span class="p">(</span><span class="n">resource_a_setup</span><span class="p">):</span></span>
-<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;test_1_that_needs_resource_a()&#39;</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">test_2_that_does_not</span><span class="p">():</span></span>
-<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">test_2_that_does_not()&#39;</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">test_3_that_does</span><span class="p">(</span><span class="n">resource_a_setup</span><span class="p">):</span></span>
-<span class="code-line">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">test_3_that_does()&#39;</span><span class="p">)</span></span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s1">&#39;module&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">resource_a_setup</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">resources_a_setup()&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">resource_a_teardown</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">resources_a_teardown()&#39;</span><span class="p">)</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">addfinalizer</span><span class="p">(</span><span class="n">resource_a_teardown</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_1_that_needs_resource_a</span><span class="p">(</span><span class="n">resource_a_setup</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;test_1_that_needs_resource_a()&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_2_that_does_not</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">test_2_that_does_not()&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_3_that_does</span><span class="p">(</span><span class="n">resource_a_setup</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">test_3_that_does()&#39;</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>I ended up reading the actual <a href="https://docs.pytest.org/en/latest/fixture.html">pytest documentation</a>; who would have thunk?!
 I'll do you guys a solid and cut out the noise and show you what I did:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="kn">import</span> <span class="nn">pytest</span></span>
-<span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;module&quot;</span><span class="p">)</span></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">custom_locker</span><span class="p">():</span></span>
-<span class="code-line">    <span class="n">v</span> <span class="o">=</span> <span class="n">Vault</span><span class="p">(</span><span class="s2">&quot;.toe&quot;</span><span class="p">,</span> <span class="s2">&quot;tlock&quot;</span><span class="p">)</span></span>
-<span class="code-line">    <span class="k">yield</span> <span class="n">v</span></span>
-<span class="code-line">    <span class="n">v</span><span class="o">.</span><span class="n">plock</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span></span>
-<span class="code-line">    <span class="n">v</span><span class="o">.</span><span class="n">pub</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span></span>
-<span class="code-line">    <span class="n">v</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">rmdir</span><span class="p">()</span></span>
-<span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">test_vault_custom</span><span class="p">(</span><span class="n">custom_locker</span><span class="p">):</span></span>
-<span class="code-line">    <span class="k">assert</span> <span class="n">custom_locker</span><span class="o">.</span><span class="n">loc</span> <span class="o">==</span> <span class="s2">&quot;.toe&quot;</span></span>
-<span class="code-line">    <span class="k">assert</span> <span class="n">custom_locker</span><span class="o">.</span><span class="n">key_name</span> <span class="o">==</span> <span class="s2">&quot;tlock&quot;</span></span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pytest</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;module&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">custom_locker</span><span class="p">():</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">Vault</span><span class="p">(</span><span class="s2">&quot;.toe&quot;</span><span class="p">,</span> <span class="s2">&quot;tlock&quot;</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="n">v</span>
+    <span class="n">v</span><span class="o">.</span><span class="n">plock</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+    <span class="n">v</span><span class="o">.</span><span class="n">pub</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+    <span class="n">v</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">rmdir</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">test_vault_custom</span><span class="p">(</span><span class="n">custom_locker</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">custom_locker</span><span class="o">.</span><span class="n">loc</span> <span class="o">==</span> <span class="s2">&quot;.toe&quot;</span>
+    <span class="k">assert</span> <span class="n">custom_locker</span><span class="o">.</span><span class="n">key_name</span> <span class="o">==</span> <span class="s2">&quot;tlock&quot;</span>
+</code></pre></div>
 
 
 <p>Setting the <code>scope</code> of the fixture to <em>module</em> makes it so that it doesn't actually do the tearing down until after all of the tests are completed.

@@ -127,62 +127,62 @@ I might even play around with creating a UI for it, to make it easier to use.</p
 <p>Since I used my <a href="https://github.com/clamytoe/toepack">toepack</a> <a href="https://github.com/cookiecutter/cookiecutter">Cookiecutter</a> template, it's a package.
 It's gotten big enough that I've moved the two classes, (<code>Entry</code>, <code>Vault</code>) into their own files.
 It works out pretty good because the <code>app.py</code> file now only contains:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code><span class="kn">from</span> <span class="nn">.entry</span> <span class="kn">import</span> <span class="n">Entry</span></span>
-<span class="code-line"><span class="kn">from</span> <span class="nn">.vault</span> <span class="kn">import</span> <span class="n">Vault</span><span class="p">,</span> <span class="n">logger</span></span>
-<span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span></span>
-<span class="code-line">    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Entering main.&quot;</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">ip</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="s2">&quot;ip&quot;</span><span class="p">,</span> <span class="s2">&quot;http://192.168.2.1&quot;</span><span class="p">,</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span> <span class="s2">&quot;admin&quot;</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line">    <span class="n">v</span> <span class="o">=</span> <span class="n">Vault</span><span class="p">()</span></span>
-<span class="code-line">    <span class="n">v</span><span class="o">.</span><span class="n">encrypt_file</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">v</span><span class="o">.</span><span class="n">decrypt_file</span><span class="p">(</span><span class="n">ip</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></span>
-<span class="code-line"></span>
-<span class="code-line"></span>
-<span class="code-line"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span></span>
-<span class="code-line">    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Running as a module.&quot;</span><span class="p">)</span></span>
-<span class="code-line">    <span class="n">main</span><span class="p">()</span></span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">.entry</span> <span class="kn">import</span> <span class="n">Entry</span>
+<span class="kn">from</span> <span class="nn">.vault</span> <span class="kn">import</span> <span class="n">Vault</span><span class="p">,</span> <span class="n">logger</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Entering main.&quot;</span><span class="p">)</span>
+    <span class="n">ip</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="s2">&quot;ip&quot;</span><span class="p">,</span> <span class="s2">&quot;http://192.168.2.1&quot;</span><span class="p">,</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span> <span class="s2">&quot;admin&quot;</span><span class="p">)</span>
+
+    <span class="n">v</span> <span class="o">=</span> <span class="n">Vault</span><span class="p">()</span>
+    <span class="n">v</span><span class="o">.</span><span class="n">encrypt_file</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+    <span class="n">v</span><span class="o">.</span><span class="n">decrypt_file</span><span class="p">(</span><span class="n">ip</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Running as a module.&quot;</span><span class="p">)</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
 
 
 <p>Separating the code like this will come in handy when it comes to either creating a <a href="https://palletsprojects.com/p/click/">Click</a> CLI interface or a GUI one.</p>
 <p>The log file for that run looks like this:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code>2020-02-13 14:05:17,812 - [INFO] - root - Creating vault: /home/mohh/Documents/.passlock/ip.bin</span>
-<span class="code-line">2020-02-13 14:05:17,812 - [INFO] - root - Importing public key: plock.pub</span>
-<span class="code-line">2020-02-13 14:05:17,812 - [INFO] - root - Public key accessed: /home/mohh/.passlock/plock.pub</span>
-<span class="code-line">2020-02-13 14:05:17,815 - [INFO] - root - Generating random byte for session key</span>
-<span class="code-line">2020-02-13 14:05:17,815 - [INFO] - root - Generating encrypted session key</span>
-<span class="code-line">2020-02-13 14:05:17,819 - [INFO] - root - Generating AES cipher</span>
-<span class="code-line">2020-02-13 14:05:17,820 - [INFO] - root - Encrypting data to create cipher text</span>
-<span class="code-line">2020-02-13 14:05:17,820 - [INFO] - root - Writing cipher text to: ip.bin</span>
-<span class="code-line">2020-02-13 14:05:17,820 - [WARNING] - root - /home/mohh/Documents/.passlock/ip.bin already exists!</span>
-<span class="code-line">2020-02-13 14:05:17,820 - [INFO] - root - Successfully wrote to: /home/mohh/Documents/.passlock/ip.bin</span>
-<span class="code-line">2020-02-13 14:05:17,821 - [INFO] - root - Opening file for reading: /home/mohh/Documents/.passlock/ip.bin</span>
-<span class="code-line">2020-02-13 14:05:17,821 - [INFO] - root - Importing private key: plock</span>
-<span class="code-line">2020-02-13 14:05:17,821 - [INFO] - root - Private key accessed: /home/mohh/.passlock/plock</span>
-<span class="code-line">2020-02-13 14:05:18,150 - [INFO] - root - Extracting encrypted session key</span>
-<span class="code-line">2020-02-13 14:05:18,151 - [INFO] - root - Generating RSA cipher key from imported private key</span>
-<span class="code-line">2020-02-13 14:05:18,151 - [INFO] - root - Decrypting extracted session key</span>
-<span class="code-line">2020-02-13 14:05:18,171 - [INFO] - root - Session key was successfully restored</span>
-<span class="code-line">2020-02-13 14:05:18,171 - [INFO] - root - Generating AES cipher from session key</span>
-<span class="code-line">2020-02-13 14:05:18,172 - [INFO] - root - Decrypting and verifying cipher text</span>
-<span class="code-line">2020-02-13 14:05:18,172 - [INFO] - root - Closing: ip.bin</span>
-<span class="code-line">2020-02-13 14:05:18,172 - [INFO] - root - Generating new Entry object from decrypted data</span>
-<span class="code-line">2020-02-13 14:05:18,172 - [INFO] - root - Returning decrypted text for: ip</span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code>2020-02-13 14:05:17,812 - [INFO] - root - Creating vault: /home/mohh/Documents/.passlock/ip.bin
+2020-02-13 14:05:17,812 - [INFO] - root - Importing public key: plock.pub
+2020-02-13 14:05:17,812 - [INFO] - root - Public key accessed: /home/mohh/.passlock/plock.pub
+2020-02-13 14:05:17,815 - [INFO] - root - Generating random byte for session key
+2020-02-13 14:05:17,815 - [INFO] - root - Generating encrypted session key
+2020-02-13 14:05:17,819 - [INFO] - root - Generating AES cipher
+2020-02-13 14:05:17,820 - [INFO] - root - Encrypting data to create cipher text
+2020-02-13 14:05:17,820 - [INFO] - root - Writing cipher text to: ip.bin
+2020-02-13 14:05:17,820 - [WARNING] - root - /home/mohh/Documents/.passlock/ip.bin already exists!
+2020-02-13 14:05:17,820 - [INFO] - root - Successfully wrote to: /home/mohh/Documents/.passlock/ip.bin
+2020-02-13 14:05:17,821 - [INFO] - root - Opening file for reading: /home/mohh/Documents/.passlock/ip.bin
+2020-02-13 14:05:17,821 - [INFO] - root - Importing private key: plock
+2020-02-13 14:05:17,821 - [INFO] - root - Private key accessed: /home/mohh/.passlock/plock
+2020-02-13 14:05:18,150 - [INFO] - root - Extracting encrypted session key
+2020-02-13 14:05:18,151 - [INFO] - root - Generating RSA cipher key from imported private key
+2020-02-13 14:05:18,151 - [INFO] - root - Decrypting extracted session key
+2020-02-13 14:05:18,171 - [INFO] - root - Session key was successfully restored
+2020-02-13 14:05:18,171 - [INFO] - root - Generating AES cipher from session key
+2020-02-13 14:05:18,172 - [INFO] - root - Decrypting and verifying cipher text
+2020-02-13 14:05:18,172 - [INFO] - root - Closing: ip.bin
+2020-02-13 14:05:18,172 - [INFO] - root - Generating new Entry object from decrypted data
+2020-02-13 14:05:18,172 - [INFO] - root - Returning decrypted text for: ip
+</code></pre></div>
 
 
 <p>Not sure if that's too much information but logging each step in the process really comes in handy when trying to figure out issues at work.
 I've tried to keep all sensitive data out of it unless the logging is switched to <code>debug</code>.</p>
 <p>Retrieving the encrypted data looks like this:</p>
-<div class="highlight"><pre><span class="code-line"><span></span><code>Successfully created: /home/mohh/Documents/.passlock/ip.bin</span>
-<span class="code-line"></span>
-<span class="code-line">[ip]</span>
-<span class="code-line">INFO: http://192.168.2.1</span>
-<span class="code-line">USER: admin</span>
-<span class="code-line">PASS: admin</span>
-<span class="code-line"></code></pre></div>
+<div class="highlight"><pre><span></span><code>Successfully created: /home/mohh/Documents/.passlock/ip.bin
+
+[ip]
+INFO: http://192.168.2.1
+USER: admin
+PASS: admin
+</code></pre></div>
 
 
 <blockquote>
