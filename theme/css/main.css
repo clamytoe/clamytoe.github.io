@@ -7,20 +7,21 @@ a {
     color: #0099cc; }
 
 table {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
   border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  width: 90%;
-}
+  margin-left: 5px; }
 
 td, th {
   border: 1px solid #ddd;
-  padding: 8px;
-}
+  padding: 8px; }
 
-tr:nth-child(even){background-color: #f2f2f2;}
+tr:nth-child(even) {
+  background-color: #f2f2f2; }
 
-tr:hover {background-color: #ddd;}
+tr:hover {
+  background-color: #ddd; }
 
 th {
   padding-top: 12px;
@@ -28,12 +29,7 @@ th {
   text-transform: uppercase;
   font-weight: bold;
   background-color: #607D8B;
-  color: white;
-}
-
-.math {
-  font-size: medium;
-}
+  color: white; }
 
 .uk-navbar-brand {
   text-transform: uppercase; }
