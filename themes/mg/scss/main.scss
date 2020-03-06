@@ -52,13 +52,12 @@ table {
     background-color: #607D8B;
     color: white;
   }
-  
-  // latex math settings override
 
-//   .math {
-//     font-size: medium;
-//   }
-  
+// math style
+.math {
+    margin-left: 5px;
+}
+
 // uikit override
 
 .uk-navbar-brand {

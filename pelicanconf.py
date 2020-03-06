@@ -2,10 +2,7 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
-THEME = (
-    # "/home/mohh/anaconda3/envs/ghpages/lib/python3.8/site-packages/pelican/themes/mg"
-    "themes/mg"
-)
+THEME = "themes/mg"
 
 # Site and name settings
 AUTHOR = "Martin Uribe"
@@ -21,21 +18,21 @@ FAVICON = "favicon.ico"
 FAVICON_TYPE = "image/vnd.microsoft.icon"
 
 # plugins
-MARKUP = ('md', 'ipynb')
-PLUGIN_PATHS = ['./plugins', './pelican-plugins']
-PLUGINS = ['ipynb.markup', 'render_math', 'better_codeblock_line_numbering']
-MARKDOWN_EXTENSIONS = [
-    'codehilite(css_class=highlight,linenums=True)',
-    'extra'
-]
+MARKUP = ("md", "ipynb")
+PLUGIN_PATHS = ["./plugins"]
+PLUGINS = ["ipynb.markup", "render_math"]
 
 # Render math settings
-MATH_JAX = {"linebreak_automatic": True, "responsive": True, "responsive_break": 1125}
+MATH_JAX = {
+    "align": "left",
+    "linebreak_automatic": True,
+    "responsive": True,
+    "responsive_break": 1125,
+}
 
 # Path settings
 PATH = "content"
 STATIC_PATHS = ["static"]
-# STATIC_PATHS = ["content/static"]
 
 # Time and Date settings
 TIMEZONE = "US/Central"
@@ -52,10 +49,10 @@ FOOTER = (
 # URL settings
 TAG_SAVE_AS = ""
 AUTHOR_SAVE_AS = ""
-ARTICLE_URL = 'articles/{date:%Y}/{date:%b}/{date:%d}/{slug}'
-ARTICLE_SAVE_AS = 'articles/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html'
-PAGE_URL = 'pages/{slug}'
-PAGE_SAVE_AS = 'pages/{slug}/index.html'
+ARTICLE_URL = "articles/{date:%Y}/{date:%b}/{date:%d}/{slug}"
+ARTICLE_SAVE_AS = "articles/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html"
+PAGE_URL = "pages/{slug}"
+PAGE_SAVE_AS = "pages/{slug}/index.html"
 DIRECT_TEMPLATES = ("index", "categories", "archives", "search", "tipue_search")
 TIPUE_SEARCH_SAVE_AS = "tipue_search.json"
 
@@ -72,9 +69,6 @@ DELETE_OUTPUT_DIRECTORY = True
 
 # Page settings
 TWITTER_USERNAME = "clamytoe"
-# DISQUS_SITENAME = "devsbytes"
-# SC_PROJECT = '10224955'
-# SC_SECURITY = '1f2cc438'
 
 # Social widget
 SOCIAL = (
