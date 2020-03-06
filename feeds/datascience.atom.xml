@@ -100,9 +100,9 @@ Without the rescaling, the algorithm would have yielded different results.&lt;/p
         linebreak = "true";
 
     if (true) {
-        align = (screen.width &lt; 1334) ? "left" : align;
-        indent = (screen.width &lt; 1334) ? "0em" : indent;
-        linebreak = (screen.width &lt; 1334) ? 'true' : linebreak;
+        align = (screen.width &lt; 1125) ? "left" : align;
+        indent = (screen.width &lt; 1125) ? "0em" : indent;
+        linebreak = (screen.width &lt; 1125) ? 'true' : linebreak;
     }
 
     var mathjaxscript = document.createElement('script');
