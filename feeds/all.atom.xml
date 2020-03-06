@@ -183,9 +183,9 @@ I can see how this can be pretty overwhelming if you're new to this, but just ke
         linebreak = "true";
 
     if (true) {
-        align = (screen.width &lt; 768) ? "left" : align;
-        indent = (screen.width &lt; 768) ? "0em" : indent;
-        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+        align = (screen.width &lt; 1334) ? "left" : align;
+        indent = (screen.width &lt; 1334) ? "0em" : indent;
+        linebreak = (screen.width &lt; 1334) ? 'true' : linebreak;
     }
 
     var mathjaxscript = document.createElement('script');
@@ -677,9 +677,9 @@ Without the rescaling, the algorithm would have yielded different results.&lt;/p
         linebreak = "true";
 
     if (true) {
-        align = (screen.width &lt; 768) ? "left" : align;
-        indent = (screen.width &lt; 768) ? "0em" : indent;
-        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+        align = (screen.width &lt; 1334) ? "left" : align;
+        indent = (screen.width &lt; 1334) ? "0em" : indent;
+        linebreak = (screen.width &lt; 1334) ? 'true' : linebreak;
     }
 
     var mathjaxscript = document.createElement('script');
