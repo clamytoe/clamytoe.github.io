@@ -77,156 +77,143 @@
 
 
     <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
+        <a href="https://clamytoe.github.io/articles/2020/Mar/07/mongodb-cli-intro" class="uk-article-title uk-link-muted" itemprop="name">MongoDB CLI Intro</a>
+        <p class="uk-article-meta"><time datetime="2020-03-07" itemprop="datePublished">Sat 07 March 2020</time> • <a href="https://clamytoe.github.io/category/database.html">Database</a></p>
+        </p>
+        <p class="uk-article-lead" itemprop="description">Quick introduction on how to connect to a mondoDB database through the built in mongo cli application</p>
+            <p>MongoDB CLI Intro After publishing my article on How to install MongoDB on Linux I realized that I should have covered how to access it through the command line! Didn't occur to me that anyone reading it might not want to download and install Robo 3T! Sorry about that! Intro into the mongo cli app It's simple enough. Now I'm no expert but this is what I discovered just playing around with it. (base) ➜ ~ mongo MongoDB shell version v4.2.3 connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb Implicit session: session { "id" : UUID("39eaf67e-7de5-4874-ba3e-a6673080cfbc") } MongoDB server version: 4.2.3 Welcome to the MongoDB shell. For interactive help, type "help". For more comprehensive documentation, see http://docs.mongodb.org/ <span...</p><br /><br />
+            <a href="https://clamytoe.github.io/articles/2020/Mar/07/mongodb-cli-intro">Read More</a>
+            <!-- <section itemprop="articleBody"><h1>MongoDB CLI Intro</h1>
+<p>After publishing my article on <a href="https://clamytoe.github.io/articles/2020/Mar/06/how-to-install-mongodb-on-linux">How to install MongoDB on Linux</a> I realized that I should have covered how to access it through the command line!
+Didn't occur to me that anyone reading it might not want to download and install <a href="https://robomongo.org/">Robo 3T</a>!</p>
+<p>Sorry about that!</p>
+<h3>Intro into the mongo cli app</h3>
+<p>It's simple enough.
+Now I'm no expert but this is what I discovered just playing around with it.</p>
+<div class="highlight"><pre><span></span><code>(<span class="n">base</span>) ➜  ~ <span class="n">mongo</span>
+<span class="n">MongoDB</span> <span class="n">shell</span> <span class="n">version</span> <span class="n">v4</span><span class="mf">.2.3</span>
+<span class="n">connecting</span> <span class="n">to:</span> <span class="n">mongodb:</span>//<span class="mf">127.0.0.1</span>:<span class="mi">27017</span>/?<span class="n">compressors</span>=<span class="n">disabled</span><span class="nv">&amp;gssapiServiceName</span>=<span class="n">mongodb</span>
+<span class="n">Implicit</span> <span class="n">session:</span> <span class="n">session</span> { <span class="s">&quot;id&quot;</span> : <span class="n">UUID</span>(<span class="s">&quot;39eaf67e-7de5-4874-ba3e-a6673080cfbc&quot;</span>) }
+<span class="n">MongoDB</span> <span class="n">server</span> <span class="n">version:</span> <span class="mf">4.2.3</span>
+<span class="n">Welcome</span> <span class="nb">to</span> <span class="n">the</span> <span class="n">MongoDB</span> <span class="n">shell</span>.
+<span class="n">For</span> <span class="n">interactive</span> <span class="n">help</span>, <span class="n">type</span> <span class="s">&quot;help&quot;</span>.
+<span class="n">For</span> <span class="n">more</span> <span class="n">comprehensive</span> <span class="n">documentation</span>, <span class="n">see</span>
+    <span class="n">http:</span>//<span class="n">docs</span>.<span class="n">mongodb</span>.<span class="n">org</span>/
+<span class="n">Questions</span>? <span class="n">Try</span> <span class="n">the</span> <span class="n">support</span> <span class="n">group</span>
+    <span class="n">http:</span>//<span class="n">groups</span>.<span class="n">google</span>.<span class="n">com</span><span class="o">/</span><span class="n">group</span><span class="o">/</span><span class="n">mongodb-user</span>
+<span class="n">Server</span> <span class="k">has</span> <span class="n">startup</span> <span class="n">warnings:</span> 
+<span class="mi">2020</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mo">06</span><span class="n">T20:35:19</span><span class="mf">.314</span><span class="o">-</span><span class="mo">0600</span> <span class="n">I</span>  <span class="n">STORAGE</span>  [<span class="n">initandlisten</span>] 
+<span class="mi">2020</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mo">06</span><span class="n">T20:35:19</span><span class="mf">.314</span><span class="o">-</span><span class="mo">0600</span> <span class="n">I</span>  <span class="n">STORAGE</span>  [<span class="n">initandlisten</span>] ** <span class="n">WARNING:</span> <span class="n">Using</span> <span class="n">the</span> <span class="n">XFS</span> <span class="n">filesystem</span> <span class="k">is</span> <span class="n">strongly</span> <span class="n">recommended</span> <span class="n">with</span> <span class="n">the</span> <span class="n">WiredTiger</span> <span class="n">storage</span> <span class="n">engine</span>
+<span class="mi">2020</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mo">06</span><span class="n">T20:35:19</span><span class="mf">.314</span><span class="o">-</span><span class="mo">0600</span> <span class="n">I</span>  <span class="n">STORAGE</span>  [<span class="n">initandlisten</span>] **          <span class="n">See</span> <span class="n">http:</span>//<span class="n">dochub</span>.<span class="n">mongodb</span>.<span class="n">org</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">prodnotes-filesystem</span>
+<span class="mi">2020</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mo">06</span><span class="n">T20:35:22</span><span class="mf">.538</span><span class="o">-</span><span class="mo">0600</span> <span class="n">I</span>  <span class="k">CONTROL</span>  [<span class="n">initandlisten</span>] 
+<span class="mi">2020</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mo">06</span><span class="n">T20:35:22</span><span class="mf">.539</span><span class="o">-</span><span class="mo">0600</span> <span class="n">I</span>  <span class="k">CONTROL</span>  [<span class="n">initandlisten</span>] ** <span class="n">WARNING:</span> <span class="n">Access</span> <span class="n">control</span> <span class="k">is</span> <span class="nb">not</span> <span class="n">enabled</span> <span class="k">for</span> <span class="n">the</span> <span class="n">database</span>.
+<span class="mi">2020</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mo">06</span><span class="n">T20:35:22</span><span class="mf">.539</span><span class="o">-</span><span class="mo">0600</span> <span class="n">I</span>  <span class="k">CONTROL</span>  [<span class="n">initandlisten</span>] **          <span class="n">Read</span> <span class="o">and</span> <span class="nb">write</span> <span class="n">access</span> <span class="nb">to</span> <span class="n">data</span> <span class="o">and</span> <span class="n">configuration</span> <span class="k">is</span> <span class="n">unrestricted</span>.
+<span class="mi">2020</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mo">06</span><span class="n">T20:35:22</span><span class="mf">.539</span><span class="o">-</span><span class="mo">0600</span> <span class="n">I</span>  <span class="k">CONTROL</span>  [<span class="n">initandlisten</span>] 
+---
+<span class="n">Enable</span> <span class="n">MongoDB&#39;s</span> <span class="n">free</span> <span class="n">cloud-based</span> <span class="n">monitoring</span> <span class="n">service</span>, <span class="n">which</span> <span class="k">will</span> <span class="n">then</span> <span class="n">receive</span> <span class="o">and</span> <span class="n">display</span>
+<span class="n">metrics</span> <span class="n">about</span> <span class="n">your</span> <span class="n">deployment</span> (<span class="n">disk</span> <span class="n">utilization</span>, <span class="n">CPU</span>, <span class="n">operation</span> <span class="n">statistics</span>, <span class="n">etc</span>).
+
+<span class="n">The</span> <span class="n">monitoring</span> <span class="n">data</span> <span class="k">will</span> <span class="n">be</span> <span class="n">available</span> <span class="n">on</span> <span class="n">a</span> <span class="n">MongoDB</span> <span class="n">website</span> <span class="n">with</span> <span class="n">a</span> <span class="n">unique</span> <span class="n">URL</span> <span class="n">accessible</span> <span class="nb">to</span> <span class="n">you</span>
+<span class="o">and</span> <span class="n">anyone</span> <span class="n">you</span> <span class="n">share</span> <span class="n">the</span> <span class="n">URL</span> <span class="n">with</span>. <span class="n">MongoDB</span> <span class="n">may</span> <span class="k">use</span> <span class="n">this</span> <span class="n">information</span> <span class="nb">to</span> <span class="k">make</span> <span class="n">product</span>
+<span class="n">improvements</span> <span class="o">and</span> <span class="nb">to</span> <span class="n">suggest</span> <span class="n">MongoDB</span> <span class="n">products</span> <span class="o">and</span> <span class="n">deployment</span> <span class="n">options</span> <span class="nb">to</span> <span class="n">you</span>.
+
+<span class="n">To</span> <span class="n">enable</span> <span class="n">free</span> <span class="n">monitoring</span>, <span class="nb">run</span> <span class="n">the</span> <span class="n">following</span> <span class="n">command:</span> <span class="n">db</span>.<span class="n">enableFreeMonitoring</span>()
+<span class="n">To</span> <span class="n">permanently</span> <span class="n">disable</span> <span class="n">this</span> <span class="n">reminder</span>, <span class="nb">run</span> <span class="n">the</span> <span class="n">following</span> <span class="n">command:</span> <span class="n">db</span>.<span class="n">disableFreeMonitoring</span>()
+---
+
+&gt;
+</code></pre></div>
+
+
+<p>As you can tell, I haven't secured the database yet.
+Let's continue exploring though and see what the <em>help</em> command will show us.</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="n">help</span><span class="w"></span>
+<span class="w">    </span><span class="n">db</span><span class="p">.</span><span class="n">help</span><span class="p">()</span><span class="w">                    </span><span class="n">help</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="n">methods</span><span class="w"></span>
+<span class="w">    </span><span class="n">db</span><span class="p">.</span><span class="n">mycoll</span><span class="p">.</span><span class="n">help</span><span class="p">()</span><span class="w">             </span><span class="n">help</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">collection</span><span class="w"> </span><span class="n">methods</span><span class="w"></span>
+<span class="w">    </span><span class="n">sh</span><span class="p">.</span><span class="n">help</span><span class="p">()</span><span class="w">                    </span><span class="n">sharding</span><span class="w"> </span><span class="n">helpers</span><span class="w"></span>
+<span class="w">    </span><span class="n">rs</span><span class="p">.</span><span class="n">help</span><span class="p">()</span><span class="w">                    </span><span class="n">replica</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">helpers</span><span class="w"></span>
+<span class="w">    </span><span class="n">help</span><span class="w"> </span><span class="k">admin</span><span class="w">                   </span><span class="n">administrative</span><span class="w"> </span><span class="n">help</span><span class="w"></span>
+<span class="w">    </span><span class="n">help</span><span class="w"> </span><span class="k">connect</span><span class="w">                 </span><span class="n">connecting</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="n">help</span><span class="w"></span>
+<span class="w">    </span><span class="n">help</span><span class="w"> </span><span class="n">keys</span><span class="w">                    </span><span class="k">key</span><span class="w"> </span><span class="n">shortcuts</span><span class="w"></span>
+<span class="w">    </span><span class="n">help</span><span class="w"> </span><span class="n">misc</span><span class="w">                    </span><span class="n">misc</span><span class="w"> </span><span class="n">things</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">know</span><span class="w"></span>
+<span class="w">    </span><span class="n">help</span><span class="w"> </span><span class="n">mr</span><span class="w">                      </span><span class="n">mapreduce</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">show</span><span class="w"> </span><span class="n">dbs</span><span class="w">                     </span><span class="n">show</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="k">names</span><span class="w"></span>
+<span class="w">    </span><span class="n">show</span><span class="w"> </span><span class="n">collections</span><span class="w">             </span><span class="n">show</span><span class="w"> </span><span class="n">collections</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">current</span><span class="w"> </span><span class="k">database</span><span class="w"></span>
+<span class="w">    </span><span class="n">show</span><span class="w"> </span><span class="n">users</span><span class="w">                   </span><span class="n">show</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">current</span><span class="w"> </span><span class="k">database</span><span class="w"></span>
+<span class="w">    </span><span class="n">show</span><span class="w"> </span><span class="n">profile</span><span class="w">                 </span><span class="n">show</span><span class="w"> </span><span class="n">most</span><span class="w"> </span><span class="n">recent</span><span class="w"> </span><span class="k">system</span><span class="p">.</span><span class="n">profile</span><span class="w"> </span><span class="n">entries</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="nc">time</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1</span><span class="n">ms</span><span class="w"></span>
+<span class="w">    </span><span class="n">show</span><span class="w"> </span><span class="n">logs</span><span class="w">                    </span><span class="n">show</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">accessible</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span><span class="k">names</span><span class="w"></span>
+<span class="w">    </span><span class="n">show</span><span class="w"> </span><span class="nf">log</span><span class="w"> </span><span class="o">[</span><span class="n">name</span><span class="o">]</span><span class="w">              </span><span class="n">prints</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">last</span><span class="w"> </span><span class="n">segment</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nf">log</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">memory</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;global&#39;</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">default</span><span class="w"></span>
+<span class="w">    </span><span class="k">use</span><span class="w"> </span><span class="o">&lt;</span><span class="nf">db_name</span><span class="o">&gt;</span><span class="w">                </span><span class="k">set</span><span class="w"> </span><span class="k">current</span><span class="w"> </span><span class="k">database</span><span class="w"></span>
+<span class="w">    </span><span class="n">db</span><span class="p">.</span><span class="n">foo</span><span class="p">.</span><span class="n">find</span><span class="p">()</span><span class="w">                </span><span class="n">list</span><span class="w"> </span><span class="n">objects</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">collection</span><span class="w"> </span><span class="n">foo</span><span class="w"></span>
+<span class="w">    </span><span class="n">db</span><span class="p">.</span><span class="n">foo</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="err">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="err">}</span><span class="w"> </span><span class="p">)</span><span class="w">     </span><span class="n">list</span><span class="w"> </span><span class="n">objects</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<span class="w">    </span><span class="n">it</span><span class="w">                           </span><span class="k">result</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">last</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="n">evaluated</span><span class="p">;</span><span class="w"> </span><span class="k">use</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">further</span><span class="w"> </span><span class="k">iterate</span><span class="w"></span>
+<span class="w">    </span><span class="n">DBQuery</span><span class="p">.</span><span class="n">shellBatchSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w">   </span><span class="k">set</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">display</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">shell</span><span class="w"></span>
+<span class="w">    </span><span class="k">exit</span><span class="w"></span>
+<span class="o">&gt;</span><span class="w"></span>
+</code></pre></div>
+
+
+<p>Ok, looks simple enough. That <em>show dbs</em> sounds interesting.</p>
+<div class="highlight"><pre><span></span><code><span class="err">&gt; show dbs</span>
+<span class="err">admin      0.000GB</span>
+<span class="err">config     0.000GB</span>
+<span class="err">local      0.000GB</span>
+<span class="err">snake_bnb  0.000GB</span>
+<span class="err">&gt;</span>
+</code></pre></div>
+
+
+<p>Ok, I see the <em>snake_bnb</em> database that we created during the <a href="https://freemongodbcourse.com/">MongoDB Quickstart</a> tutorial.
+Let's see what's in it with that <code>use &lt;db_name&gt;</code> command, followed by <code>show collections</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="err">&gt; use snake_bnb</span>
+<span class="err">switched to db snake_bnb</span>
+<span class="err">&gt; show collections</span>
+<span class="err">owners</span>
+<span class="err">&gt;</span>
+</code></pre></div>
+
+
+<p>Now if I reference the <em>help</em> command again, I see that I can use <code>db.foo.find()</code> to do a dump of everything in it.</p>
+<div class="highlight"><pre><span></span><code><span class="err">&gt; db.owners.find()</span>
+<span class="err">{ &quot;_id&quot; : ObjectId(&quot;5e6243ca45ed06e7f09781fc&quot;), &quot;registered_date&quot; : ISODate(&quot;2020-03-06T06:36:26.108Z&quot;), &quot;name&quot; : &quot;clamytoe&quot;, &quot;email&quot; : &quot;clamytoe@gmail.com&quot;, &quot;snake_ids&quot; : [ ], &quot;cage_ids&quot; : [ ] }</span>
+<span class="err">&gt;</span>
+</code></pre></div>
+
+
+<p>If I had more entries, it looks like I could search for specific entries with <code>db.foo.find( { a : 1 } )</code>.
+I only have one record, so I should just get the same result as the previous command.</p>
+<div class="highlight"><pre><span></span><code><span class="err">&gt; db.owners.find( {&quot;name&quot;: &quot;clamytoe&quot;} )</span>
+<span class="err">{ &quot;_id&quot; : ObjectId(&quot;5e6243ca45ed06e7f09781fc&quot;), &quot;registered_date&quot; : ISODate(&quot;2020-03-06T06:36:26.108Z&quot;), &quot;name&quot; : &quot;clamytoe&quot;, &quot;email&quot; : &quot;clamytoe@gmail.com&quot;, &quot;snake_ids&quot; : [ ], &quot;cage_ids&quot; : [ ] }</span>
+<span class="err">&gt;</span>
+</code></pre></div>
+
+
+<p>To exit, we just use the <em>exit</em> command.</p>
+<div class="highlight"><pre><span></span><code><span class="err">&gt; exit</span>
+<span class="err">bye</span>
+<span class="err">(base) ➜  ~</span>
+</code></pre></div>
+
+
+<h2>Conclusion</h2>
+<p>There you have it.
+A quick intro into using the <em>mongo</em> cli app.
+Simple enough for quick exploration of your databases.
+I'll probably be spending more time in <em>Robo 3T</em> though.
+Not only can your explore the databases through a GUI, but you can also easily add, delete, and update and entries with it.</p></section>
+            <a href="https://clamytoe.github.io/articles/2020/Mar/07/mongodb-cli-intro#disqus_thread"></a> -->
+        <hr class="uk-article-divider">
+    </article>
+
+
+    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
         <a href="https://clamytoe.github.io/articles/2020/Mar/06/how-to-install-mongodb-on-linux" class="uk-article-title uk-link-muted" itemprop="name">How to install MongoDB on Linux</a>
         <p class="uk-article-meta"><time datetime="2020-03-06" itemprop="datePublished">Fri 06 March 2020</time> • <a href="https://clamytoe.github.io/category/database.html">Database</a></p>
         </p>
         <p class="uk-article-lead" itemprop="description">How to prepare to start working with MongoDB</p>
-            <p>How to install MongoDB on Linux So the other day I started going through Michael Kennedy's free MongoDB Quickstart course. Although he covered the Python code portions, he left getting everything setup, up to you. If you're on a Linux machine that uses APT, then keep on reading. Getting MongoDB I could have gone over to MongoDB's download page, and selected the correct version for my setup, but I wanted to stick with the package manager on my machine. The latest version as of this writing was 4.2. The first thing I had to do was find their public key and import it to APT. Importing MongoDB's security key To make sure that I had the required gnupg package installed, I ran the following command: sudo apt-get install gnupg. Once that was taken care off, I imported the key: wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add - Creating a new source for APT The next thing I...</p><br /><br />
+            <p>How to install MongoDB on Linux So the other day I started going through Michael Kennedy's free MongoDB Quickstart course. Although he covered the Python code portions, he left getting everything setup, up to you. If you're on a Linux machine that uses APT, then keep on reading. Getting MongoDB I could have gone over to MongoDB's download page, and selected the correct version for my setup, but I wanted to stick with the package manager on my...</p>
             <a href="https://clamytoe.github.io/articles/2020/Mar/06/how-to-install-mongodb-on-linux">Read More</a>
-            <!-- <section itemprop="articleBody"><h1>How to install MongoDB on Linux</h1>
-<p>So the other day I started going through Michael Kennedy's free <a href="https://training.talkpython.fm/courses/details/mongodb-python-quickstart-mongoengine">MongoDB Quickstart</a> course.
-Although he covered the Python code portions, he left getting everything setup, up to you.
-If you're on a Linux machine that uses APT, then keep on reading.</p>
-<h2>Getting MongoDB</h2>
-<p>I could have gone over to MongoDB's <a href="https://www.mongodb.com/download-center/community">download page</a>, and selected the correct version for my setup, but I wanted to stick with the package manager on my machine.
-The latest version as of this writing was <em>4.2</em>.
-The first thing I had to do was find their <a href="https://www.mongodb.org/static/pgp/server-4.2.asc">public key</a> and import it to APT.</p>
-<h3>Importing MongoDB's security key</h3>
-<p>To make sure that I had the required gnupg package installed, I ran the following command: <code>sudo apt-get install gnupg</code>.
-Once that was taken care off, I imported the key:</p>
-<div class="highlight"><pre><span></span><code>wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc <span class="p">|</span> sudo apt-key add -
-</code></pre></div>
-
-
-<h3>Creating a new source for APT</h3>
-<p>The next thing I did was to find the codename for my system's release.
-I did that with the following command: <code>grep -i /etc/os-release</code></p>
-<div class="highlight"><pre><span></span><code><span class="nv">VERSION_CODENAME</span><span class="o">=</span>tricia
-<span class="nv">UBUNTU_CODENAME</span><span class="o">=</span>bionic
-</code></pre></div>
-
-
-<p>There it was.
-My Linux Mint system is based on <em>bionic</em>.
-Now to create an entry for MongoDB in APT's source list directory <code>/etc/apt/sources.list.d/</code>, I created <code>mongodb-org.4.2.list</code> with the following content:</p>
-<div class="highlight"><pre><span></span><code>deb <span class="o">[</span><span class="nv">arch</span><span class="o">=</span>amd64<span class="o">]</span> https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse
-</code></pre></div>
-
-
-<blockquote>
-<p>I had to look at other entries in there until I got the format correct.
-Don't worry, if you get it wrong, it will let you know when you try to do an update!</p>
-</blockquote>
-<h3>Update APT</h3>
-<p>At this point it was time to update APT and install mongoDB:</p>
-<div class="highlight"><pre><span></span><code>sudo apt-get update
-sudo apt-get install -y mongodb-org
-</code></pre></div>
-
-
-<h2>Starting MongoDB</h2>
-<p>Once everything was installed, it was time to fire up the service so that I could connect to it.</p>
-<div class="highlight"><pre><span></span><code>sudo systemctl start mongod
-</code></pre></div>
-
-
-<p>Now, that command will start the server for this session only.
-Which means that the next time that I reboot, I will have to start it again.
-I wanted the service to always be available, so I did the following:</p>
-<div class="highlight"><pre><span></span><code>sudo systemctl <span class="nb">enable</span> mongod.service
-sudo systemctl daemon-reload
-sudo systemctl restart mongod.service
-</code></pre></div>
-
-
-<p>To verify that it was running, I used this command: <code>service mongod status</code></p>
-<div class="highlight"><pre><span></span><code>● mongod.service - MongoDB Database Server
-   Loaded: loaded <span class="o">(</span>/lib/systemd/system/mongod.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: e
-   Active: active <span class="o">(</span>running<span class="o">)</span> since Fri <span class="m">2020</span>-03-06 <span class="m">20</span>:35:16 CST<span class="p">;</span> 12s ago
-     Docs: https://docs.mongodb.org/manual
- Main PID: <span class="m">8569</span> <span class="o">(</span>mongod<span class="o">)</span>
-   CGroup: /system.slice/mongod.service
-           └─8569 /usr/bin/mongod --config /etc/mongod.conf
-
-Mar <span class="m">06</span> <span class="m">20</span>:35:16 SERENiTY systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Started MongoDB Database Server.
-</code></pre></div>
-
-
-<p>If you want the server to restart after a crash, you would need to add <code>Restart=always</code> under the <em>[Service]</em> section of <code>/lib/systemd/system/mongod.service</code>.
-I didn't add that.</p>
-<blockquote>
-<p>At this point, a reboot would be useful to make sure that it starts up at boot.</p>
-</blockquote>
-<h2>Installing Robo 3T</h2>
-<p>Michael recommended <a href="https://robomongo.org">Robo 3t</a> so I decided to give it a try.
-I went to their <a href="https://robomongo.org/download">download page</a> and selected the linux version.
-My connection at home is terrible, so I try not to download anything through the browser.
-I copied the link and used <code>wget</code> instead.</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/Downloads
-wget -c https://download-test.robomongo.org/linux/robo3t-1.3.1-linux-x86_64-7419c406.tar.gz
-</code></pre></div>
-
-
-<p>Once it had finished downloading, I extracted the file to my home directory:</p>
-<div class="highlight"><pre><span></span><code>mkdir ~/robo3t
-tar -xvzf robo3t-1.3.1-linux-x86_64-7419c406.tar.gz -C ~/robo3t
-</code></pre></div>
-
-
-<h3>Adding a custom menu entry</h3>
-<p>I like to add all of my programs to the "start" menu, so I then did the following:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/robo3t
-wget https://robomongo.org/static/robomongo-128x128-129df2f1.png -O robomongo.png
-ln -s robo3t-1.3.1-linux-x86_64-7419c406/bin/robo3t robo3t
-</code></pre></div>
-
-
-<ul>
-<li>
-<p>Right-click the Mint start button </p>
-<p><img alt="mint" src="https://clamytoe.github.io/images/linux-menu.png"></p>
-</li>
-<li>
-<p>Click on <em>Configure...</em></p>
-<p><img alt="configure" src="https://clamytoe.github.io/images/right-click-menu.png"></p>
-</li>
-<li>
-<p>Click on the <em>Menu</em> button from the dialog window and then click on <strong>Open the menu editor</strong></p>
-<p><img alt="menu-widget" src="https://clamytoe.github.io/images/menu-widget.png"></p>
-</li>
-<li>
-<p>From the <em>Main Menu</em> widget, click on the <strong>Programming</strong> section and then click on the <em>New Item</em> button</p>
-<p><img alt="programming" src="https://clamytoe.github.io/images/main-menu-widget.png"></p>
-<p><img alt="launcher" src="https://clamytoe.github.io/images/launcher-properties.png"></p>
-<ul>
-<li>Fill in the <em>Launcher Properties</em>.</li>
-<li>Select the <code>robomongo.png</code> image that we downloaded previously.</li>
-<li>Give it a <em>Name</em>, <strong>Robo 3T</strong>.</li>
-<li>For the <em>Command</em> select the symlink that we created previously.</li>
-<li>Enter whatever you want under <em>Comment</em> and click <strong>OK</strong>.</li>
-</ul>
-</li>
-<li>
-<p>Close all of the open dialogs.</p>
-</li>
-<li>
-<p>Admire you're awesomeness</p>
-<p><img alt="new-entry" src="https://clamytoe.github.io/images/new-entry.png"></p>
-</li>
-</ul>
-<blockquote>
-<p>Before you can start using <em>Robo 3T</em>, you will have to get to the point of the tutorial where you add a user.</p>
-</blockquote>
-<p>Once you've made an entry, go ahead and start it <em>Robo 3T</em>.
-You will be presented with a <em>MongoDB Connections</em> dialog.
-Click on the <em>Create</em> link to open up the <em>Connection Settings</em> dialog.</p>
-<p><img alt="connections" src="https://clamytoe.github.io/images/connection-settings.png"></p>
-<p>For the <em>Name</em> enter <em>snake_bnb</em>, the name of the database that was created in the tutorial and <em>Save</em>.</p>
-<p><img alt="db-connections" src="https://clamytoe.github.io/images/robo3t-db-connections.png"></p>
-<p>Click on the <em>Connect</em> button to access it.</p>
-<h2>Conclusion</h2>
-<p>Quite a few steps to get here, but now I am setup and ready to continue on with the course and hopefully you will be too!</p></section>
-            <a href="https://clamytoe.github.io/articles/2020/Mar/06/how-to-install-mongodb-on-linux#disqus_thread"></a> -->
         <hr class="uk-article-divider">
     </article>
 
