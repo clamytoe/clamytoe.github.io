@@ -1,5 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/all.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-03-03T13:20:00-06:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Playing around with adding plugins to Pelican</title><link href="https://clamytoe.github.io/articles/2020/Mar/03/pelican-plugins" rel="alternate"></link><published>2020-03-03T13:20:00-06:00</published><updated>2020-03-03T13:20:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-03-03:/articles/2020/Mar/03/pelican-plugins</id><summary type="html">&lt;p&gt;Wanted to add some extra styling to my blog posts&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Some parts of my blog were looking pretty &lt;em&gt;blah&lt;/em&gt;&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/all.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-03-06T12:53:00-06:00</updated><subtitle>of an autodidact...</subtitle><entry><title>How to install MongoDB on Linux</title><link href="https://clamytoe.github.io/articles/2020/Mar/06/how-to-install-mongodb-on-linux" rel="alternate"></link><published>2020-03-06T12:53:00-06:00</published><updated>2020-03-06T12:53:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-03-06:/articles/2020/Mar/06/how-to-install-mongodb-on-linux</id><summary type="html">&lt;p&gt;How to prepare to start working with MongoDB&lt;/p&gt;</summary><content type="html">&lt;h1&gt;How to install MongoDB on Linux&lt;/h1&gt;
+&lt;p&gt;So the other day I started going through Michael Kennedy's free &lt;a href="https://training.talkpython.fm/courses/details/mongodb-python-quickstart-mongoengine"&gt;MongoDB Quickstart&lt;/a&gt; course.
+Although he covered the Python code portions, he left getting everything setup, up to you.
+If you're on a Linux machine that uses APT, then keep on reading.&lt;/p&gt;
+&lt;h2&gt;Getting MongoDB&lt;/h2&gt;
+&lt;p&gt;I could have gone over to MongoDB's &lt;a href="https://www.mongodb.com/download-center/community"&gt;download page&lt;/a&gt;, and selected the correct version for my setup, but I wanted to stick with the package manager on my machine.
+The latest version as of this writing was &lt;em&gt;4.2&lt;/em&gt;.
+The first thing I had to do was find their &lt;a href="https://www.mongodb.org/static/pgp/server-4.2.asc"&gt;public key&lt;/a&gt; and import it to APT.&lt;/p&gt;
+&lt;h3&gt;Importing MongoDB's security key&lt;/h3&gt;
+&lt;p&gt;To make sure that I had the required gnupg package installed, I ran the following command: &lt;code&gt;sudo apt-get install gnupg&lt;/code&gt;.
+Once that was taken care off, I imported the key:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc &lt;span class="p"&gt;|&lt;/span&gt; sudo apt-key add -
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Creating a new source for APT&lt;/h3&gt;
+&lt;p&gt;The next thing I did was to find the codename for my system's release.
+I did that with the following command: &lt;code&gt;grep -i /etc/os-release&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;VERSION_CODENAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;tricia
+&lt;span class="nv"&gt;UBUNTU_CODENAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;bionic
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;There it was.
+My Linux Mint system is based on &lt;em&gt;bionic&lt;/em&gt;.
+Now to create an entry for MongoDB in APT's source list directory &lt;code&gt;/etc/apt/sources.list.d/&lt;/code&gt;, I created &lt;code&gt;mongodb-org.4.2.list&lt;/code&gt; with the following content:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;deb &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;arch&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;amd64&lt;span class="o"&gt;]&lt;/span&gt; https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;I had to look at other entries in there until I got the format correct.
+Don't worry, if you get it wrong, it will let you know when you try to do an update!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;Update APT&lt;/h3&gt;
+&lt;p&gt;At this point it was time to update APT and install mongoDB:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo apt-get update
+sudo apt-get install -y mongodb-org
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Starting MongoDB&lt;/h2&gt;
+&lt;p&gt;Once everything was installed, it was time to fire up the service so that I could connect to it.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo systemctl start mongod
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, that command will start the server for this session only.
+Which means that the next time that I reboot, I will have to start it again.
+I wanted the service to always be available, so I did the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo systemctl &lt;span class="nb"&gt;enable&lt;/span&gt; mongod.service
+sudo systemctl daemon-reload
+sudo systemctl restart mongod.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To verify that it was running, I used this command: &lt;code&gt;service mongod status&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;● mongod.service - MongoDB Database Server
+   Loaded: loaded &lt;span class="o"&gt;(&lt;/span&gt;/lib/systemd/system/mongod.service&lt;span class="p"&gt;;&lt;/span&gt; enabled&lt;span class="p"&gt;;&lt;/span&gt; vendor preset: e
+   Active: active &lt;span class="o"&gt;(&lt;/span&gt;running&lt;span class="o"&gt;)&lt;/span&gt; since Fri &lt;span class="m"&gt;2020&lt;/span&gt;-03-06 &lt;span class="m"&gt;20&lt;/span&gt;:35:16 CST&lt;span class="p"&gt;;&lt;/span&gt; 12s ago
+     Docs: https://docs.mongodb.org/manual
+ Main PID: &lt;span class="m"&gt;8569&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;mongod&lt;span class="o"&gt;)&lt;/span&gt;
+   CGroup: /system.slice/mongod.service
+           └─8569 /usr/bin/mongod --config /etc/mongod.conf
+
+Mar &lt;span class="m"&gt;06&lt;/span&gt; &lt;span class="m"&gt;20&lt;/span&gt;:35:16 SERENiTY systemd&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;: Started MongoDB Database Server.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If you want the server to restart after a crash, you would need to add &lt;code&gt;Restart=always&lt;/code&gt; under the &lt;em&gt;[Service]&lt;/em&gt; section of &lt;code&gt;/lib/systemd/system/mongod.service&lt;/code&gt;.
+I didn't add that.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;At this point, a reboot would be useful to make sure that it starts up at boot.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Installing Robo 3T&lt;/h2&gt;
+&lt;p&gt;Michael recommended &lt;a href="https://robomongo.org"&gt;Robo 3t&lt;/a&gt; so I decided to give it a try.
+I went to their &lt;a href="https://robomongo.org/download"&gt;download page&lt;/a&gt; and selected the linux version.
+My connection at home is terrible, so I try not to download anything through the browser.
+I copied the link and used &lt;code&gt;wget&lt;/code&gt; instead.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/Downloads
+wget -c https://download-test.robomongo.org/linux/robo3t-1.3.1-linux-x86_64-7419c406.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Once it had finished downloading, I extracted the file to my home directory:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;mkdir ~/robo3t
+tar -xvzf robo3t-1.3.1-linux-x86_64-7419c406.tar.gz -C ~/robo3t
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Adding a custom menu entry&lt;/h3&gt;
+&lt;p&gt;I like to add all of my programs to the "start" menu, so I then did the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/robo3t
+wget https://robomongo.org/static/robomongo-128x128-129df2f1.png -O robomongo.png
+ln -s robo3t-1.3.1-linux-x86_64-7419c406/bin/robo3t robo3t
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Right-click the Mint start button &lt;/p&gt;
+&lt;p&gt;&lt;img alt="mint" src="https://clamytoe.github.io/images/linux-menu.png"&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Click on &lt;em&gt;Configure...&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="configure" src="https://clamytoe.github.io/images/right-click-menu.png"&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Click on the &lt;em&gt;Menu&lt;/em&gt; button from the dialog window and then click on &lt;strong&gt;Open the menu editor&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="menu-widget" src="https://clamytoe.github.io/images/menu-widget.png"&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;From the &lt;em&gt;Main Menu&lt;/em&gt; widget, click on the &lt;strong&gt;Programming&lt;/strong&gt; section and then click on the &lt;em&gt;New Item&lt;/em&gt; button&lt;/p&gt;
+&lt;p&gt;&lt;img alt="programming" src="https://clamytoe.github.io/images/main-menu-widget.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="launcher" src="https://clamytoe.github.io/images/launcher-properties.png"&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fill in the &lt;em&gt;Launcher Properties&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;Select the &lt;code&gt;robomongo.png&lt;/code&gt; image that we downloaded previously.&lt;/li&gt;
+&lt;li&gt;Give it a &lt;em&gt;Name&lt;/em&gt;, &lt;strong&gt;Robo 3T&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;For the &lt;em&gt;Command&lt;/em&gt; select the symlink that we created previously.&lt;/li&gt;
+&lt;li&gt;Enter whatever you want under &lt;em&gt;Comment&lt;/em&gt; and click &lt;strong&gt;OK&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Close all of the open dialogs.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Admire you're awesomeness&lt;/p&gt;
+&lt;p&gt;&lt;img alt="new-entry" src="https://clamytoe.github.io/images/new-entry.png"&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Before you can start using &lt;em&gt;Robo 3T&lt;/em&gt;, you will have to get to the point of the tutorial where you add a user.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Once you've made an entry, go ahead and start it &lt;em&gt;Robo 3T&lt;/em&gt;.
+You will be presented with a &lt;em&gt;MongoDB Connections&lt;/em&gt; dialog.
+Click on the &lt;em&gt;Create&lt;/em&gt; link to open up the &lt;em&gt;Connection Settings&lt;/em&gt; dialog.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="connections" src="https://clamytoe.github.io/images/connection-settings.png"&gt;&lt;/p&gt;
+&lt;p&gt;For the &lt;em&gt;Name&lt;/em&gt; enter &lt;em&gt;snake_bnb&lt;/em&gt;, the name of the database that was created in the tutorial and &lt;em&gt;Save&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="db-connections" src="https://clamytoe.github.io/images/robo3t-db-connections.png"&gt;&lt;/p&gt;
+&lt;p&gt;Click on the &lt;em&gt;Connect&lt;/em&gt; button to access it.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Quite a few steps to get here, but now I am setup and ready to continue on with the course and hopefully you will be too!&lt;/p&gt;</content><category term="Database"></category><category term="mongo"></category><category term="mongodb"></category><category term="mongoengine"></category><category term="robot3t"></category></entry><entry><title>Playing around with adding plugins to Pelican</title><link href="https://clamytoe.github.io/articles/2020/Mar/03/pelican-plugins" rel="alternate"></link><published>2020-03-03T13:20:00-06:00</published><updated>2020-03-03T13:20:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-03-03:/articles/2020/Mar/03/pelican-plugins</id><summary type="html">&lt;p&gt;Wanted to add some extra styling to my blog posts&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Some parts of my blog were looking pretty &lt;em&gt;blah&lt;/em&gt;&lt;/h1&gt;
 &lt;h2&gt;Math syntax&lt;/h2&gt;
 &lt;p&gt;I've been tweaking my blog like crazy.
 Just making minor changes here and there.
