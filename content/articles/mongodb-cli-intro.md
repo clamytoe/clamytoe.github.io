@@ -1,5 +1,6 @@
 title: MongoDB CLI Intro
 date: 2020-03-07 12:27
+modified: 2020-03-07 13:15
 category: Database
 tags: mongodb, cli
 slug: mongodb-cli-intro
@@ -137,3 +138,5 @@ A quick intro into using the *mongo* cli app.
 Simple enough for quick exploration of your databases.
 I'll probably be spending more time in *Robo 3T* though.
 Not only can your explore the databases through a GUI, but you can also easily add, delete, and update and entries with it.
+
+![robo-edit]({static}/images/robo-edit.png)
