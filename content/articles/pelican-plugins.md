@@ -15,7 +15,7 @@ I've been tweaking my blog like crazy.
 Just making minor changes here and there.
 I wanted to make things look a little better.
 
-For instance, for my [rescaling]({filename}2020-02-13_scaling-values.md) article, I had the following mathematical syntax:
+For instance, for my [rescaling]({filename}scaling-values.md) article, I had the following mathematical syntax:
 
 > **ScaledQuantity = (ActualQuantity-MinQuantity)/(MaxQuantity-MinQuantity)**
 
