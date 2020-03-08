@@ -25,6 +25,8 @@
 <meta property="og:description" content="How to prepare to start working with MongoDB" />
 <meta name="twitter:description" content="How to prepare to start working with MongoDB" />
 <meta property="og:article:published_time" content="2020-03-06" />
+<meta property="og:article:modified_time" content="2020-03-08">
+<meta itemprop="dateModified" content="2020-03-06" />
 <meta property="og:article:author" content="Martin Uribe" >
 <meta property="og:article:tag" content="mongo">
 <meta property="og:article:tag" content="mongodb">
@@ -154,7 +156,7 @@ sudo systemctl restart mongod.service
 </code></pre></div>
 
 
-<p>To verify that it was running, I used this command: <code>service mongod status</code></p>
+<p>To verify that it was running, I used this command: <code>systemctl status mongod</code></p>
 <div class="highlight"><pre><span></span><code>● mongod.service - MongoDB Database Server
    Loaded: loaded <span class="o">(</span>/lib/systemd/system/mongod.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: e
    Active: active <span class="o">(</span>running<span class="o">)</span> since Fri <span class="m">2020</span>-03-06 <span class="m">20</span>:35:16 CST<span class="p">;</span> 12s ago
@@ -172,6 +174,12 @@ I didn't add that.</p>
 <blockquote>
 <p>At this point, a reboot would be useful to make sure that it starts up at boot.</p>
 </blockquote>
+<p>If you decide that you don't want it running all of the time, just disable it.</p>
+<div class="highlight"><pre><span></span><code>sudo systemctl stop mongod
+sudo systemctl disable mongod
+</code></pre></div>
+
+
 <h2>Installing Robo 3T</h2>
 <p>Michael recommended <a href="https://robomongo.org">Robo 3t</a> so I decided to give it a try.
 I went to their <a href="https://robomongo.org/download">download page</a> and selected the linux version.
