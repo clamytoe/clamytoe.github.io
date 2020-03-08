@@ -1,5 +1,6 @@
 title: How to install MongoDB on Linux
 date: 2020-03-06 12:53
+modified: 2020-03-08 13:57
 category: Database
 tags: mongo, mongodb, mongoengine, robot3t
 slug: how-to-install-mongodb-on-linux
@@ -75,7 +76,7 @@ sudo systemctl daemon-reload
 sudo systemctl restart mongod.service
 ```
 
-To verify that it was running, I used this command: `service mongod status`
+To verify that it was running, I used this command: `systemctl status mongod`
 
 ```zsh
 ● mongod.service - MongoDB Database Server
@@ -93,6 +94,13 @@ If you want the server to restart after a crash, you would need to add `Restart=
 I didn't add that.
 
 > At this point, a reboot would be useful to make sure that it starts up at boot.
+
+If you decide that you don't want it running all of the time, just disable it.
+
+```zsh
+sudo systemctl stop mongod
+sudo systemctl disable mongod
+```
 
 ## Installing Robo 3T
 
