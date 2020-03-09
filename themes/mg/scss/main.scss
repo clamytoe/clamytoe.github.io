@@ -58,6 +58,17 @@ table {
     margin-left: 5px;
 }
 
+// readtime
+.readtime-comment {
+    color: #999;
+    position: absolute;
+    right: 0;
+}
+
+.readtime-min {
+    color: #444;
+}
+
 // uikit override
 
 .uk-navbar-brand {
@@ -65,6 +76,9 @@ table {
 }
 
 .uk-article-meta {
+    position: relative;
+    text-align: left;
+    width: 100%;
     & > a {
     color: $textGrey;
 

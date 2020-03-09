@@ -20,7 +20,7 @@ FAVICON_TYPE = "image/vnd.microsoft.icon"
 # plugins
 MARKUP = ("md", "ipynb")
 PLUGIN_PATHS = ["./plugins"]
-PLUGINS = ["ipynb.markup", "render_math"]
+PLUGINS = ["ipynb.markup", "readtime", "render_math"]
 
 # Render math settings
 MATH_JAX = {
