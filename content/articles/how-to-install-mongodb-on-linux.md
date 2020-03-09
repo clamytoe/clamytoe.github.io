@@ -130,7 +130,8 @@ cd ~/robo3t
 wget https://robomongo.org/static/robomongo-128x128-129df2f1.png -O robomongo.png
 ln -s robo3t-1.3.1-linux-x86_64-7419c406/bin/robo3t robo3t
 ```
-* Right-click the Mint start button 
+
+* Right-click the Mint start button
 
     ![mint]({static}/images/linux-menu.png)
 
