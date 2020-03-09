@@ -1,6 +1,6 @@
 title: Finally getting the hang of working with Pelican!
 date: 2020-02-28 09:50
-modified: 2020-03-01 00:42
+modified: 2020-03-09 09:20
 category: Blog
 tags: pelican, Makefile, make
 slug: pelican
@@ -42,7 +42,12 @@ Set the RELATIVE variable to 1 to enable relative urls
 ```
 
 Looking at the `Makefile` source is where I noticed that for local development, it just uses the `pelicanconf.py` script, but for publishing it uses `publishconf.py`.
+
+{% include_code ../code/Makefile lang:make lines:8-9 :hidelink: %}
+
 Looking at `publishconf.py` I saw that it actually imports `pelicanconf.py` and then overrides some of the variables.
+
+{% include_code ../code/publishconf.py lang:python lines:12-19 :hidelink: %}
 
 > **AHA!** This is were I had a eurika moment!
 
@@ -53,17 +58,9 @@ Unfortunately, that broke testing the blog locally because all the links would p
 
 What I'm trying to say here is that in I was able to resolve both of these issues by making the following changes.
 
-*pelicanconf.py*:
+{% include_code ../code/pelicanconf.py lang:python lines:16-16 :hidelink: %}
 
-```python
-SITEURL = ""
-```
-
-*publishconf.py*:
-
-```python
-SITEURL = "https://clamytoe.github.io"
-```
+{% include_code ../code/publishconf.py lang:python lines:12-12 :hidelink: %}
 
 Another issue that I was having was that I couldn't figure out how to get my `favicon.ico` to be treated as a static file and automatically dumped into the `output` directory.
 My solution had been to write a little bash script to copy it over for me, but that was kind of tedious.
@@ -71,15 +68,15 @@ But now that I was going to use the `Makefile` I decided to automate it in there
 
 I added the following lines to it:
 
-```make
-FAVICON=$(INPUTDIR)/static/favicon.ico
-```
+{% include_code ../code/Makefile lang:make lines:10-10 :hidelink: %}
 
 Then after the `html`, `regenerate`, and `publish` commands, I added:
 
-```make
-cp $(FAVICON) $(OUTPUTDIR)
-```
+{% include_code ../code/Makefile lang:make lines:44-46 :hidelink: %}
+
+{% include_code ../code/Makefile lang:make lines:53-55 :hidelink: %}
+
+{% include_code ../code/Makefile lang:make lines:79-81 :hidelink: %}
 
 > NOTE: I had initially added that to all of the commands, but the ones that run the server, don't actually get to that step.
 
@@ -116,7 +113,7 @@ Then you can either run the Pelican server or the Python one.
 #### Pelican server
 
 ```pelican
-pelican --listen
+pelican -r --listen
 ```
 
 #### Python server
