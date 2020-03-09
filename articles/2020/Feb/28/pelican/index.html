@@ -25,7 +25,7 @@
 <meta property="og:description" content="Nothing beats learning something new than just jumping in and playing around with it!" />
 <meta name="twitter:description" content="Nothing beats learning something new than just jumping in and playing around with it!" />
 <meta property="og:article:published_time" content="2020-02-28" />
-<meta property="og:article:modified_time" content="2020-03-01">
+<meta property="og:article:modified_time" content="2020-03-09">
 <meta itemprop="dateModified" content="2020-02-28" />
 <meta property="og:article:author" content="Martin Uribe" >
 <meta property="og:article:tag" content="pelican">
@@ -129,8 +129,34 @@ What caught my eye was how simple it all was to automate things with <code>make<
 </code></pre></div>
 
 
-<p>Looking at the <code>Makefile</code> source is where I noticed that for local development, it just uses the <code>pelicanconf.py</code> script, but for publishing it uses <code>publishconf.py</code>.
-Looking at <code>publishconf.py</code> I saw that it actually imports <code>pelicanconf.py</code> and then overrides some of the variables.</p>
+<p>Looking at the <code>Makefile</code> source is where I noticed that for local development, it just uses the <code>pelicanconf.py</code> script, but for publishing it uses <code>publishconf.py</code>.</p>
+<figure class='code'>
+<figcaption><span class="liquid-tags-code-filename">Makefile</span><span class="liquid-tags-code-lines">[Lines 8-9]</span></figcaption>
+
+<div class="highlight"><pre><span></span><code><span class="nv">CONFFILE</span><span class="o">=</span><span class="k">$(</span>BASEDIR<span class="k">)</span>/pelicanconf.py
+<span class="nv">PUBLISHCONF</span><span class="o">=</span><span class="k">$(</span>BASEDIR<span class="k">)</span>/publishconf.py
+</code></pre></div>
+
+
+</figure>
+
+<p>Looking at <code>publishconf.py</code> I saw that it actually imports <code>pelicanconf.py</code> and then overrides some of the variables.</p>
+<figure class='code'>
+<figcaption><span class="liquid-tags-code-filename">publishconf.py</span><span class="liquid-tags-code-lines">[Lines 12-19]</span></figcaption>
+
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pelicanconf</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># If your site is available via HTTPS, make sure SITEURL begins with https://</span>
+<span class="n">SITEURL</span> <span class="o">=</span> <span class="s2">&quot;https://clamytoe.github.io&quot;</span>
+<span class="n">RELATIVE_URLS</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">FEED_ALL_ATOM</span> <span class="o">=</span> <span class="s2">&quot;feeds/all.atom.xml&quot;</span>
+<span class="n">CATEGORY_FEED_ATOM</span> <span class="o">=</span> <span class="s2">&quot;feeds/</span><span class="si">{slug}</span><span class="s2">.atom.xml&quot;</span>
+</code></pre></div>
+
+
+</figure>
+
 <blockquote>
 <p><strong>AHA!</strong> This is were I had a eurika moment!</p>
 </blockquote>
@@ -139,28 +165,70 @@ Whenever I clicked on the header link, instead of taking me back to the home pag
 I was able to get around that by just specifying the <code>SITE_URL</code> variable in <code>pelicanconf.py</code>.
 Unfortunately, that broke testing the blog locally because all the links would point to the live site on GitHub!</p>
 <p>What I'm trying to say here is that in I was able to resolve both of these issues by making the following changes.</p>
-<p><em>pelicanconf.py</em>:</p>
+<figure class='code'>
+<figcaption><span class="liquid-tags-code-filename">pelicanconf.py</span><span class="liquid-tags-code-lines">[Lines 16-16]</span></figcaption>
+
 <div class="highlight"><pre><span></span><code><span class="n">SITEURL</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 </code></pre></div>
 
 
-<p><em>publishconf.py</em>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">SITEURL</span> <span class="o">=</span> <span class="s2">&quot;https://clamytoe.github.io&quot;</span>
+</figure>
+
+<figure class='code'>
+<figcaption><span class="liquid-tags-code-filename">publishconf.py</span><span class="liquid-tags-code-lines">[Lines 12-12]</span></figcaption>
+
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pelicanconf</span> <span class="kn">import</span> <span class="o">*</span>
 </code></pre></div>
 
+
+</figure>
 
 <p>Another issue that I was having was that I couldn't figure out how to get my <code>favicon.ico</code> to be treated as a static file and automatically dumped into the <code>output</code> directory.
 My solution had been to write a little bash script to copy it over for me, but that was kind of tedious.
 But now that I was going to use the <code>Makefile</code> I decided to automate it in there!</p>
 <p>I added the following lines to it:</p>
+<figure class='code'>
+<figcaption><span class="liquid-tags-code-filename">Makefile</span><span class="liquid-tags-code-lines">[Lines 10-10]</span></figcaption>
+
 <div class="highlight"><pre><span></span><code><span class="nv">FAVICON</span><span class="o">=</span><span class="k">$(</span>INPUTDIR<span class="k">)</span>/static/favicon.ico
 </code></pre></div>
 
 
+</figure>
+
 <p>Then after the <code>html</code>, <code>regenerate</code>, and <code>publish</code> commands, I added:</p>
-<div class="highlight"><pre><span></span><code><span class="err">cp</span> <span class="k">$(</span><span class="nv">FAVICON</span><span class="k">)</span> <span class="k">$(</span><span class="nv">OUTPUTDIR</span><span class="k">)</span>
+<figure class='code'>
+<figcaption><span class="liquid-tags-code-filename">Makefile</span><span class="liquid-tags-code-lines">[Lines 44-46]</span></figcaption>
+
+<div class="highlight"><pre><span></span><code><span class="nf">html</span><span class="o">:</span>
+	<span class="k">$(</span>PELICAN<span class="k">)</span> <span class="k">$(</span>INPUTDIR<span class="k">)</span> -o <span class="k">$(</span>OUTPUTDIR<span class="k">)</span> -s <span class="k">$(</span>CONFFILE<span class="k">)</span> <span class="k">$(</span>PELICANOPTS<span class="k">)</span>
+	cp <span class="k">$(</span>FAVICON<span class="k">)</span> <span class="k">$(</span>OUTPUTDIR<span class="k">)</span>
 </code></pre></div>
 
+
+</figure>
+
+<figure class='code'>
+<figcaption><span class="liquid-tags-code-filename">Makefile</span><span class="liquid-tags-code-lines">[Lines 53-55]</span></figcaption>
+
+<div class="highlight"><pre><span></span><code><span class="nf">regenerate</span><span class="o">:</span>
+	<span class="k">$(</span>PELICAN<span class="k">)</span> -r <span class="k">$(</span>INPUTDIR<span class="k">)</span> -o <span class="k">$(</span>OUTPUTDIR<span class="k">)</span> -s <span class="k">$(</span>CONFFILE<span class="k">)</span> <span class="k">$(</span>PELICANOPTS<span class="k">)</span>
+	cp <span class="k">$(</span>FAVICON<span class="k">)</span> <span class="k">$(</span>OUTPUTDIR<span class="k">)</span>
+</code></pre></div>
+
+
+</figure>
+
+<figure class='code'>
+<figcaption><span class="liquid-tags-code-filename">Makefile</span><span class="liquid-tags-code-lines">[Lines 79-81]</span></figcaption>
+
+<div class="highlight"><pre><span></span><code><span class="nf">publish</span><span class="o">:</span>
+	<span class="k">$(</span>PELICAN<span class="k">)</span> <span class="k">$(</span>INPUTDIR<span class="k">)</span> -o <span class="k">$(</span>OUTPUTDIR<span class="k">)</span> -s <span class="k">$(</span>PUBLISHCONF<span class="k">)</span> <span class="k">$(</span>PELICANOPTS<span class="k">)</span>
+	cp <span class="k">$(</span>FAVICON<span class="k">)</span> <span class="k">$(</span>OUTPUTDIR<span class="k">)</span>
+</code></pre></div>
+
+
+</figure>
 
 <blockquote>
 <p>NOTE: I had initially added that to all of the commands, but the ones that run the server, don't actually get to that step.</p>
@@ -189,7 +257,7 @@ Now you will have a <em>clean</em> slate to start with.</p>
 
 <p>Then you can either run the Pelican server or the Python one.</p>
 <h4>Pelican server</h4>
-<div class="highlight"><pre><span></span><code><span class="err">pelican --listen</span>
+<div class="highlight"><pre><span></span><code><span class="err">pelican -r --listen</span>
 </code></pre></div>
 
 

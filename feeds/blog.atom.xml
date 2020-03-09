@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings - Blog</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/blog.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-03-03T13:20:00-06:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Playing around with adding plugins to Pelican</title><link href="https://clamytoe.github.io/articles/2020/Mar/03/pelican-plugins" rel="alternate"></link><published>2020-03-03T13:20:00-06:00</published><updated>2020-03-03T13:20:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-03-03:/articles/2020/Mar/03/pelican-plugins</id><summary type="html">&lt;p&gt;Wanted to add some extra styling to my blog posts&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Some parts of my blog were looking pretty &lt;em&gt;blah&lt;/em&gt;&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings - Blog</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/blog.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-03-09T09:20:00-05:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Playing around with adding plugins to Pelican</title><link href="https://clamytoe.github.io/articles/2020/Mar/03/pelican-plugins" rel="alternate"></link><published>2020-03-03T13:20:00-06:00</published><updated>2020-03-03T13:20:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-03-03:/articles/2020/Mar/03/pelican-plugins</id><summary type="html">&lt;p&gt;Wanted to add some extra styling to my blog posts&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Some parts of my blog were looking pretty &lt;em&gt;blah&lt;/em&gt;&lt;/h1&gt;
 &lt;h2&gt;Math syntax&lt;/h2&gt;
 &lt;p&gt;I've been tweaking my blog like crazy.
 Just making minor changes here and there.
@@ -238,7 +238,7 @@ I can see how this can be pretty overwhelming if you're new to this, but just ke
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="Blog"></category><category term="pelican"></category><category term="plugins"></category><category term="latex"></category><category term="css"></category></entry><entry><title>Finally getting the hang of working with Pelican!</title><link href="https://clamytoe.github.io/articles/2020/Feb/28/pelican" rel="alternate"></link><published>2020-02-28T09:50:00-06:00</published><updated>2020-03-01T00:42:00-06:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-02-28:/articles/2020/Feb/28/pelican</id><summary type="html">&lt;p&gt;Nothing beats learning something new than just jumping in and playing around with it!&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Stumbling into a nice Pelican workflow&lt;/h1&gt;
+&lt;/script&gt;</content><category term="Blog"></category><category term="pelican"></category><category term="plugins"></category><category term="latex"></category><category term="css"></category></entry><entry><title>Finally getting the hang of working with Pelican!</title><link href="https://clamytoe.github.io/articles/2020/Feb/28/pelican" rel="alternate"></link><published>2020-02-28T09:50:00-06:00</published><updated>2020-03-09T09:20:00-05:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-02-28:/articles/2020/Feb/28/pelican</id><summary type="html">&lt;p&gt;Nothing beats learning something new than just jumping in and playing around with it!&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Stumbling into a nice Pelican workflow&lt;/h1&gt;
 &lt;p&gt;If you've seen my &lt;a href="https://github.com/clamytoe/clamytoe.github.io"&gt;source repo&lt;/a&gt; for this site, you know that I followed &lt;a href="https://opensource.com/users/jnyjny"&gt;Erik O'Shaughnessy's&lt;/a&gt; &lt;em&gt;Run your blog on GitHub Pages with Python&lt;/em&gt; &lt;a href="https://opensource.com/article/19/5/run-your-blog-github-pages-python"&gt;tutorial&lt;/a&gt;.
 It's a great tutorial, I specifically love his &lt;strong&gt;one weird trick&lt;/strong&gt;, but it leaves so many unanswered questions.
 Go read it now if you haven't and we'll pick up where he leaves off.&lt;/p&gt;
@@ -268,8 +268,34 @@ What caught my eye was how simple it all was to automate things with &lt;code&gt
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Looking at the &lt;code&gt;Makefile&lt;/code&gt; source is where I noticed that for local development, it just uses the &lt;code&gt;pelicanconf.py&lt;/code&gt; script, but for publishing it uses &lt;code&gt;publishconf.py&lt;/code&gt;.
-Looking at &lt;code&gt;publishconf.py&lt;/code&gt; I saw that it actually imports &lt;code&gt;pelicanconf.py&lt;/code&gt; and then overrides some of the variables.&lt;/p&gt;
+&lt;p&gt;Looking at the &lt;code&gt;Makefile&lt;/code&gt; source is where I noticed that for local development, it just uses the &lt;code&gt;pelicanconf.py&lt;/code&gt; script, but for publishing it uses &lt;code&gt;publishconf.py&lt;/code&gt;.&lt;/p&gt;
+&lt;figure class='code'&gt;
+&lt;figcaption&gt;&lt;span class="liquid-tags-code-filename"&gt;Makefile&lt;/span&gt;&lt;span class="liquid-tags-code-lines"&gt;[Lines 8-9]&lt;/span&gt;&lt;/figcaption&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;CONFFILE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;BASEDIR&lt;span class="k"&gt;)&lt;/span&gt;/pelicanconf.py
+&lt;span class="nv"&gt;PUBLISHCONF&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;BASEDIR&lt;span class="k"&gt;)&lt;/span&gt;/publishconf.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;Looking at &lt;code&gt;publishconf.py&lt;/code&gt; I saw that it actually imports &lt;code&gt;pelicanconf.py&lt;/code&gt; and then overrides some of the variables.&lt;/p&gt;
+&lt;figure class='code'&gt;
+&lt;figcaption&gt;&lt;span class="liquid-tags-code-filename"&gt;publishconf.py&lt;/span&gt;&lt;span class="liquid-tags-code-lines"&gt;[Lines 12-19]&lt;/span&gt;&lt;/figcaption&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pelicanconf&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+
+&lt;span class="c1"&gt;# If your site is available via HTTPS, make sure SITEURL begins with https://&lt;/span&gt;
+&lt;span class="n"&gt;SITEURL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;https://clamytoe.github.io&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;RELATIVE_URLS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;
+
+&lt;span class="n"&gt;FEED_ALL_ATOM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;feeds/all.atom.xml&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;CATEGORY_FEED_ATOM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;feeds/&lt;/span&gt;&lt;span class="si"&gt;{slug}&lt;/span&gt;&lt;span class="s2"&gt;.atom.xml&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/figure&gt;
+
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;AHA!&lt;/strong&gt; This is were I had a eurika moment!&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -278,28 +304,70 @@ Whenever I clicked on the header link, instead of taking me back to the home pag
 I was able to get around that by just specifying the &lt;code&gt;SITE_URL&lt;/code&gt; variable in &lt;code&gt;pelicanconf.py&lt;/code&gt;.
 Unfortunately, that broke testing the blog locally because all the links would point to the live site on GitHub!&lt;/p&gt;
 &lt;p&gt;What I'm trying to say here is that in I was able to resolve both of these issues by making the following changes.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;pelicanconf.py&lt;/em&gt;:&lt;/p&gt;
+&lt;figure class='code'&gt;
+&lt;figcaption&gt;&lt;span class="liquid-tags-code-filename"&gt;pelicanconf.py&lt;/span&gt;&lt;span class="liquid-tags-code-lines"&gt;[Lines 16-16]&lt;/span&gt;&lt;/figcaption&gt;
+
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;SITEURL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;em&gt;publishconf.py&lt;/em&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;SITEURL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;https://clamytoe.github.io&amp;quot;&lt;/span&gt;
+&lt;/figure&gt;
+
+&lt;figure class='code'&gt;
+&lt;figcaption&gt;&lt;span class="liquid-tags-code-filename"&gt;publishconf.py&lt;/span&gt;&lt;span class="liquid-tags-code-lines"&gt;[Lines 12-12]&lt;/span&gt;&lt;/figcaption&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pelicanconf&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
+
+&lt;/figure&gt;
 
 &lt;p&gt;Another issue that I was having was that I couldn't figure out how to get my &lt;code&gt;favicon.ico&lt;/code&gt; to be treated as a static file and automatically dumped into the &lt;code&gt;output&lt;/code&gt; directory.
 My solution had been to write a little bash script to copy it over for me, but that was kind of tedious.
 But now that I was going to use the &lt;code&gt;Makefile&lt;/code&gt; I decided to automate it in there!&lt;/p&gt;
 &lt;p&gt;I added the following lines to it:&lt;/p&gt;
+&lt;figure class='code'&gt;
+&lt;figcaption&gt;&lt;span class="liquid-tags-code-filename"&gt;Makefile&lt;/span&gt;&lt;span class="liquid-tags-code-lines"&gt;[Lines 10-10]&lt;/span&gt;&lt;/figcaption&gt;
+
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;FAVICON&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;INPUTDIR&lt;span class="k"&gt;)&lt;/span&gt;/static/favicon.ico
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
+&lt;/figure&gt;
+
 &lt;p&gt;Then after the &lt;code&gt;html&lt;/code&gt;, &lt;code&gt;regenerate&lt;/code&gt;, and &lt;code&gt;publish&lt;/code&gt; commands, I added:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;cp&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;FAVICON&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;OUTPUTDIR&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;figure class='code'&gt;
+&lt;figcaption&gt;&lt;span class="liquid-tags-code-filename"&gt;Makefile&lt;/span&gt;&lt;span class="liquid-tags-code-lines"&gt;[Lines 44-46]&lt;/span&gt;&lt;/figcaption&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;html&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+	&lt;span class="k"&gt;$(&lt;/span&gt;PELICAN&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;INPUTDIR&lt;span class="k"&gt;)&lt;/span&gt; -o &lt;span class="k"&gt;$(&lt;/span&gt;OUTPUTDIR&lt;span class="k"&gt;)&lt;/span&gt; -s &lt;span class="k"&gt;$(&lt;/span&gt;CONFFILE&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;PELICANOPTS&lt;span class="k"&gt;)&lt;/span&gt;
+	cp &lt;span class="k"&gt;$(&lt;/span&gt;FAVICON&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;OUTPUTDIR&lt;span class="k"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
+
+&lt;/figure&gt;
+
+&lt;figure class='code'&gt;
+&lt;figcaption&gt;&lt;span class="liquid-tags-code-filename"&gt;Makefile&lt;/span&gt;&lt;span class="liquid-tags-code-lines"&gt;[Lines 53-55]&lt;/span&gt;&lt;/figcaption&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;regenerate&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+	&lt;span class="k"&gt;$(&lt;/span&gt;PELICAN&lt;span class="k"&gt;)&lt;/span&gt; -r &lt;span class="k"&gt;$(&lt;/span&gt;INPUTDIR&lt;span class="k"&gt;)&lt;/span&gt; -o &lt;span class="k"&gt;$(&lt;/span&gt;OUTPUTDIR&lt;span class="k"&gt;)&lt;/span&gt; -s &lt;span class="k"&gt;$(&lt;/span&gt;CONFFILE&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;PELICANOPTS&lt;span class="k"&gt;)&lt;/span&gt;
+	cp &lt;span class="k"&gt;$(&lt;/span&gt;FAVICON&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;OUTPUTDIR&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/figure&gt;
+
+&lt;figure class='code'&gt;
+&lt;figcaption&gt;&lt;span class="liquid-tags-code-filename"&gt;Makefile&lt;/span&gt;&lt;span class="liquid-tags-code-lines"&gt;[Lines 79-81]&lt;/span&gt;&lt;/figcaption&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;publish&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+	&lt;span class="k"&gt;$(&lt;/span&gt;PELICAN&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;INPUTDIR&lt;span class="k"&gt;)&lt;/span&gt; -o &lt;span class="k"&gt;$(&lt;/span&gt;OUTPUTDIR&lt;span class="k"&gt;)&lt;/span&gt; -s &lt;span class="k"&gt;$(&lt;/span&gt;PUBLISHCONF&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;PELICANOPTS&lt;span class="k"&gt;)&lt;/span&gt;
+	cp &lt;span class="k"&gt;$(&lt;/span&gt;FAVICON&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;OUTPUTDIR&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/figure&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;NOTE: I had initially added that to all of the commands, but the ones that run the server, don't actually get to that step.&lt;/p&gt;
@@ -328,7 +396,7 @@ Now you will have a &lt;em&gt;clean&lt;/em&gt; slate to start with.&lt;/p&gt;
 
 &lt;p&gt;Then you can either run the Pelican server or the Python one.&lt;/p&gt;
 &lt;h4&gt;Pelican server&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;pelican --listen&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;pelican -r --listen&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
