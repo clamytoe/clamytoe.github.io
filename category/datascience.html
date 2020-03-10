@@ -77,198 +77,170 @@
 
 
     <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-        <a href="https://clamytoe.github.io/articles/2020/Mar/09/playing-around-with-jupyter-notebooks" class="uk-article-title uk-link-muted" itemprop="name">Playing around with Jupyter notebooks</a>
-        <p class="uk-article-meta"><time datetime="2020-03-09" itemprop="datePublished">Mon 09 March 2020</time> • <a href="https://clamytoe.github.io/category/datascience.html">Datascience</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">3 min</span></span></p>
+        <a href="https://clamytoe.github.io/articles/2020/Feb/13/rescaling-values" class="uk-article-title uk-link-muted" itemprop="name">Rescaling values for DataScience</a>
+        <p class="uk-article-meta"><time datetime="2020-02-13" itemprop="datePublished">Thu 13 February 2020</time> • <a href="https://clamytoe.github.io/category/datascience.html">DataScience</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">3 min</span></span></p>
         </p>
-        <p class="uk-article-lead" itemprop="description">Just giving the notebook plugin a test run to see how things render</p>
-            <p>Seeing how notebooks compare to just plain Markdown¶So far, I can't complain. This interface does seem a little nicer for some reason. Perhaps I need to change the black theme of my VSCode back to normal and see if that makes a difference in the "feels" department. I'm still trying to keep to the rule of one sentence per line, but not sure if that will make a difference here since these are technically grouped together in "cells". Update to my newpost script¶I had orginally created newpost.py to created the basic structure of new blog posts, but in Markdown. Since I'm going to start using Jupyter Notebooks as well, I decided to spruce it up a bit and add support for them. I want to keep my...</p><br /><br />
-            <a href="https://clamytoe.github.io/articles/2020/Mar/09/playing-around-with-jupyter-notebooks">Read More</a>
-            <!-- <section itemprop="articleBody"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Seeing-how-notebooks-compare-to-just-plain-Markdown">Seeing how notebooks compare to just plain Markdown<a class="anchor-link" href="#Seeing-how-notebooks-compare-to-just-plain-Markdown">&#182;</a></h1><p>So far, I can't complain.
-This interface does seem a little nicer for some reason.
-Perhaps I need to change the black theme of my <a href="https://code.visualstudio.com/">VSCode</a> back to normal and see if that makes a difference in the "feels" department.
-I'm still trying to keep to the rule of one sentence per line, but not sure if that will make a difference here since these are technically grouped together in "cells".</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Update-to-my-newpost-script">Update to my newpost script<a class="anchor-link" href="#Update-to-my-newpost-script">&#182;</a></h2><p>I had orginally created <code>newpost.py</code> to created the basic structure of new blog posts, but in <a href="https://daringfireball.net/projects/markdown/">Markdown</a>.
-Since I'm going to start using <a href="https://jupyter.org/install.html">Jupyter Notebooks</a> as well, I decided to spruce it up a bit and add support for them.
-I want to keep my notebooks, vanilla.
-Meaning that I don't want to shove the <em>metadata</em> required by <a href="https://blog.getpelican.com/">Pelican</a> into them.
-Since I didn't know how much code went into a blank notebook, I decided to just dump the <em>metadata</em> into an <code>.nbdata</code> file.
-All that's left for me to do is to fire up Jupyter, create a new book, and name it exactly like the <code>.nbdata</code> file.
-I didn't want to bother with typing it all out, so I used <a href="https://github.com/asweigart/pyperclip">Pyperclip</a> to copy the <em>slug</em> name into my clipboard.
-Now a simple <em>paste</em> gets the job done!</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-
-<span class="kn">import</span> <span class="nn">pyperclip</span>
-
-<span class="n">AUTHOR</span> <span class="o">=</span> <span class="s2">&quot;Martin Uribe&quot;</span>
-<span class="n">ARTICLE_LOCATION</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;articles&quot;</span><span class="p">)</span>
-
-
-<span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">Article</span><span class="p">:</span>
-    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">category</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">tags</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-    <span class="n">summary</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">markdown</span><span class="p">:</span> <span class="nb">bool</span>
-
-    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">slug</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">author</span> <span class="o">=</span> <span class="n">AUTHOR</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">markdown</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="n">ARTICLE_LOCATION</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{self.slug}</span><span class="s2">.md&quot;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="n">ARTICLE_LOCATION</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{self.slug}</span><span class="s2">.nbdata&quot;</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">create_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">header</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;title: </span><span class="si">{self.title}</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;date: </span><span class="si">{self.date}</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;category: </span><span class="si">{self.category}</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;tags: </span><span class="si">{self.tags}</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;slug: </span><span class="si">{self.slug}</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;author: </span><span class="si">{self.author}</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;summary: </span><span class="si">{self.summary}</span><span class="se">\n</span><span class="s2">&quot;</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">markdown</span><span class="p">:</span>
-            <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"># </span><span class="si">{self.title}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">pyperclip</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slug</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated new article: </span><span class="si">{self.location}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">get_bool</span><span class="p">(</span><span class="n">subject</span><span class="p">):</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{subject.capitalize():&gt;10} [y]/n? &quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">True</span>
-    <span class="k">return</span> <span class="kc">False</span>
-
-
-<span class="k">def</span> <span class="nf">get_input</span><span class="p">(</span><span class="n">subject</span><span class="p">):</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{subject:&gt;10}</span><span class="s2">: &quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No subject provided!&quot;</span><span class="p">)</span>
-        <span class="n">exit</span>
-
-    <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-
-
-<span class="k">def</span> <span class="nf">get_tags</span><span class="p">():</span>
-    <span class="n">tags</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="n">tag</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;       tag: &quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">tag</span><span class="p">:</span>
-            <span class="n">tags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">break</span>
-
-    <span class="k">return</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="n">title</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">)</span>
-    <span class="n">category</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
-    <span class="n">tags</span> <span class="o">=</span> <span class="n">get_tags</span><span class="p">()</span>
-    <span class="n">summary</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">(</span><span class="s2">&quot;summary&quot;</span><span class="p">)</span>
-    <span class="n">markdown</span> <span class="o">=</span> <span class="n">get_bool</span><span class="p">(</span><span class="s2">&quot;markdown&quot;</span><span class="p">)</span>
-    <span class="n">post</span> <span class="o">=</span> <span class="n">Article</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">summary</span><span class="p">,</span> <span class="n">markdown</span><span class="p">)</span>
-    <span class="n">post</span><span class="o">.</span><span class="n">create_file</span><span class="p">()</span>
-
-
-<span class="c1"># if __name__ == &quot;__main__&quot;:</span>
-<span class="c1">#     main()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<blockquote><p>I had to comment out the last bit of code, to prevent it from running in the notebook!</p>
-</blockquote>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h2><p>I'll keep it short today. I basically just want to see how the output from this will look on the site and at the same time, show off my script :). I really don't like that marker that's being added to the end of the markdown cells, so I'll see if I can get rid of those...</p>
-
-</div>
-</div>
-</div>
- 
-
-
+        <p class="uk-article-lead" itemprop="description">Quick discussion about rescaling values for data science</p>
+            <p>Scaling values Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relevant. The dataset consisted of "House Ownership": Age Annual income in USD House ownership status 23 50,000 Non-owner 37 34,000 Non-owner 20 100,000 Owner 35 130,000 Owner etc.. The aim being to predict whether a person that is 50 years old with an income of $80,000, would own a home so that he could be targeted for home insurance. k-Nearest Neighbor's are currently being covered and for this exercise a k = 1 is to be used. Using either a Euclidean or Manhattan distance wouldn't matter because the distances between these values are too great. In comes rescaling! The formula use is: $$ScaledQuantity = \frac{ActualQuantity-MinQuantity}{MaxQuantity-MinQuantity}$$ So for this dataset, both the Age and the Annual income wound have to be adjusted. $$ScaledAge =...</p><br /><br />
+            <a href="https://clamytoe.github.io/articles/2020/Feb/13/rescaling-values">Read More</a>
+            <!-- <section itemprop="articleBody"><h1>Scaling values</h1>
+<p>Today while reading Data Science Algorithms in a Week, from <a href="https://www.packtpub.com">packt</a>, I came across the concept of rescaling values so that when measuring their distances they would be more relevant.
+The dataset consisted of "House Ownership":</p>
+<table>
+<thead>
+<tr>
+<th align="left">Age</th>
+<th align="left">Annual income in USD</th>
+<th align="left">House ownership status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">23</td>
+<td align="left">50,000</td>
+<td align="left">Non-owner</td>
+</tr>
+<tr>
+<td align="left">37</td>
+<td align="left">34,000</td>
+<td align="left">Non-owner</td>
+</tr>
+<tr>
+<td align="left">20</td>
+<td align="left">100,000</td>
+<td align="left">Owner</td>
+</tr>
+<tr>
+<td align="left">35</td>
+<td align="left">130,000</td>
+<td align="left">Owner</td>
+</tr>
+</tbody>
+</table>
+<p>etc..</p>
+<p>The aim being to predict whether a person that is 50 years old with an income of $80,000, would own a home so that he could be targeted for home insurance.</p>
+<p><a href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm">k-Nearest Neighbor</a>'s are currently being covered and for this exercise a <code>k = 1</code> is to be used.
+Using either a <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean</a> or <a href="https://en.wiktionary.org/wiki/Manhattan_distance">Manhattan</a> distance wouldn't matter because the distances between these values are too great. In comes rescaling!</p>
+<p>The formula use is:</p>
+<div class="math">$$ScaledQuantity = \frac{ActualQuantity-MinQuantity}{MaxQuantity-MinQuantity}$$</div>
+<p>So for this dataset, both the <strong>Age</strong> and the <strong>Annual income</strong> wound have to be adjusted.</p>
+<div class="math">$$ScaledAge = \frac{ActualAge-MinAge}{MaxAge-MinAge}$$</div>
+<div class="math">$$ScaledIncome = \frac{ActualIncome-MinIncome}{MaxIncome-MinIncome}$$</div>
+<p>After scaling, the adjusted dataset would look something like this:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Age</th>
+<th align="left">Scaled age</th>
+<th align="left">Annual income in USD</th>
+<th align="left">Scaled annual income</th>
+<th align="left">House ownership status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">23</td>
+<td align="left">09375</td>
+<td align="left">50,000</td>
+<td align="left">2</td>
+<td align="left">Non-owner</td>
+</tr>
+<tr>
+<td align="left">37</td>
+<td align="left">53125</td>
+<td align="left">34,000</td>
+<td align="left">4</td>
+<td align="left">Non-owner</td>
+</tr>
+<tr>
+<td align="left">20</td>
+<td align="left">0</td>
+<td align="left">100,000</td>
+<td align="left">7</td>
+<td align="left">Owner</td>
+</tr>
+<tr>
+<td align="left">35</td>
+<td align="left">46875</td>
+<td align="left">130,000</td>
+<td align="left">1</td>
+<td align="left">Owner</td>
+</tr>
+<tr>
+<td align="left">50</td>
+<td align="left">9375</td>
+<td align="left">80,000</td>
+<td align="left">5</td>
+<td align="left">?</td>
+</tr>
+</tbody>
+</table>
+<p>Now a 1-NN algorithm with a Euclidean metric could easily be used to find out if the last person is more than likely to own a home.
+Without the rescaling, the algorithm would have yielded different results.</p>
+<p>Keeping it short today, but hopefully it was a helpful tip!</p>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "left",
+        indent = "0em",
+        linebreak = "true";
+
+    if (true) {
+        align = (screen.width < 1125) ? "left" : align;
+        indent = (screen.width < 1125) ? "0em" : indent;
+        linebreak = (screen.width < 1125) ? 'true' : linebreak;
+    }
+
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
     mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
-    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
         "MathJax.Hub.Config({" +
         "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
         "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
         "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: 'center'," +
-        "    displayIndent: '0em'," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
         "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
         "    tex2jax: { " +
-        "        inlineMath: [ ['$','$'] ], " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
         "        displayMath: [ ['$$','$$'] ]," +
         "        processEscapes: true," +
         "        preview: 'TeX'," +
         "    }, " +
         "    'HTML-CSS': { " +
-        " linebreaks: { automatic: true, width: '95% container' }, " +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
-        "    } " +
-        "}); ";
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-</script>
-</section>
-            <a href="https://clamytoe.github.io/articles/2020/Mar/09/playing-around-with-jupyter-notebooks#disqus_thread"></a> -->
-        <hr class="uk-article-divider">
-    </article>
-
-
-    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-        <a href="https://clamytoe.github.io/articles/2020/Feb/13/rescaling-values" class="uk-article-title uk-link-muted" itemprop="name">Rescaling values for DataScience</a>
-        <p class="uk-article-meta"><time datetime="2020-02-13" itemprop="datePublished">Thu 13 February 2020</time> • <a href="https://clamytoe.github.io/category/datascience.html">DataScience</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">3 min</span></span></p>
-        </p>
-        <p class="uk-article-lead" itemprop="description">Quick discussion about rescaling values for data science</p>
-            <p>Scaling values Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relevant. The dataset consisted of "House Ownership": Age Annual income in USD House ownership status 23 50,000 Non-owner 37 34,000 Non-owner 20 100,000 Owner 35 130,000 Owner etc.. The aim being to predict whether a person that is 50 years old with an income of $80,000, would...</p>
-            <a href="https://clamytoe.github.io/articles/2020/Feb/13/rescaling-values">Read More</a>
+</script></section>
+            <a href="https://clamytoe.github.io/articles/2020/Feb/13/rescaling-values#disqus_thread"></a> -->
         <hr class="uk-article-divider">
     </article>
 
@@ -288,7 +260,7 @@ Now a simple <em>paste</em> gets the job done!</p>
                     <li class="uk-nav-header">Categories</li>
                     <li ><a href="https://clamytoe.github.io/category/blog.html">Blog</a></li>
                     <li ><a href="https://clamytoe.github.io/category/database.html">Database</a></li>
-                    <li class="uk-active"><a href="https://clamytoe.github.io/category/datascience.html">Datascience</a></li>
+                    <li class="uk-active"><a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></li>
                     <li ><a href="https://clamytoe.github.io/category/python.html">Python</a></li>
                     <li class="uk-nav-header">Pages</li>
 
@@ -363,7 +335,7 @@ Now a simple <em>paste</em> gets the job done!</p>
             <li class="uk-nav-header">Categories</li>
             <li ><a href="https://clamytoe.github.io/category/blog.html">Blog</a></li>
             <li ><a href="https://clamytoe.github.io/category/database.html">Database</a></li>
-            <li class="uk-active"><a href="https://clamytoe.github.io/category/datascience.html">Datascience</a></li>
+            <li class="uk-active"><a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></li>
             <li ><a href="https://clamytoe.github.io/category/python.html">Python</a></li>
             <li class="uk-nav-header">Pages</li>
             <li >

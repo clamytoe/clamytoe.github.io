@@ -77,253 +77,198 @@
 
 
     <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-        <a href="https://clamytoe.github.io/articles/2020/Mar/03/pelican-plugins" class="uk-article-title uk-link-muted" itemprop="name">Playing around with adding plugins to Pelican</a>
-        <p class="uk-article-meta"><time datetime="2020-03-03" itemprop="datePublished">Tue 03 March 2020</time> • <a href="https://clamytoe.github.io/category/blog.html">Blog</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">4 min</span></span></p>
+        <a href="https://clamytoe.github.io/articles/2020/Mar/09/playing-around-with-jupyter-notebooks" class="uk-article-title uk-link-muted" itemprop="name">Playing around with Jupyter notebooks</a>
+        <p class="uk-article-meta"><time datetime="2020-03-09" itemprop="datePublished">Mon 09 March 2020</time> • <a href="https://clamytoe.github.io/category/blog.html">Blog</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">3 min</span></span></p>
         </p>
-        <p class="uk-article-lead" itemprop="description">Wanted to add some extra styling to my blog posts</p>
-            <p>Some parts of my blog were looking pretty blah Math syntax I've been tweaking my blog like crazy. Just making minor changes here and there. I wanted to make things look a little better. For instance, for my rescaling article, I had the following mathematical syntax: ScaledQuantity = (ActualQuantity-MinQuantity)/(MaxQuantity-MinQuantity) What the hell is that? That looks horrible! I know that markdown supports Latex, so I looked and found this awesome resource: Writing Mathematic Formulars in Markdown ScaledQuantity = \frac{ActualQuantity-MinQuantity}{MaxQuantity-MinQuantity} Um, not quite there yet. Something was up. I searched to see if Pelican had any plugins for rendering math and sure enough, found that pelican-plugins included render_math. I followed the instructions and cloned the repo into my blog directory. Probably should have dropped it somewhere outside of it, but I added it to my .gitignore and it's fine... I added the following to my pelicanconf.py file: PLUGIN_PATHS = ['./pelican-plugins'] PLUGINS = ['render_math'] I tried...</p><br /><br />
-            <a href="https://clamytoe.github.io/articles/2020/Mar/03/pelican-plugins">Read More</a>
-            <!-- <section itemprop="articleBody"><h1>Some parts of my blog were looking pretty <em>blah</em></h1>
-<h2>Math syntax</h2>
-<p>I've been tweaking my blog like crazy.
-Just making minor changes here and there.
-I wanted to make things look a little better.</p>
-<p>For instance, for my <a href="https://clamytoe.github.io/articles/2020/Feb/13/rescaling-values">rescaling</a> article, I had the following mathematical syntax:</p>
-<blockquote>
-<p><strong>ScaledQuantity = (ActualQuantity-MinQuantity)/(MaxQuantity-MinQuantity)</strong></p>
+        <p class="uk-article-lead" itemprop="description">Just giving the notebook plugin a test run to see how things render</p>
+            <p>Seeing how notebooks compare to just plain Markdown¶So far, I can't complain. This interface does seem a little nicer for some reason. Perhaps I need to change the black theme of my VSCode back to normal and see if that makes a difference in the "feels" department. I'm still trying to keep to the rule of one sentence per line, but not sure if that will make a difference here since these are technically grouped together in "cells". Update to my newpost script¶I had orginally created newpost.py to created the basic structure of new blog posts, but in Markdown. Since I'm going to start using Jupyter Notebooks as well, I decided to spruce it up a bit and add support for them. I want to keep my...</p><br /><br />
+            <a href="https://clamytoe.github.io/articles/2020/Mar/09/playing-around-with-jupyter-notebooks">Read More</a>
+            <!-- <section itemprop="articleBody"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Seeing-how-notebooks-compare-to-just-plain-Markdown">Seeing how notebooks compare to just plain Markdown<a class="anchor-link" href="#Seeing-how-notebooks-compare-to-just-plain-Markdown">&#182;</a></h1><p>So far, I can't complain.
+This interface does seem a little nicer for some reason.
+Perhaps I need to change the black theme of my <a href="https://code.visualstudio.com/">VSCode</a> back to normal and see if that makes a difference in the "feels" department.
+I'm still trying to keep to the rule of one sentence per line, but not sure if that will make a difference here since these are technically grouped together in "cells".</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Update-to-my-newpost-script">Update to my newpost script<a class="anchor-link" href="#Update-to-my-newpost-script">&#182;</a></h2><p>I had orginally created <code>newpost.py</code> to created the basic structure of new blog posts, but in <a href="https://daringfireball.net/projects/markdown/">Markdown</a>.
+Since I'm going to start using <a href="https://jupyter.org/install.html">Jupyter Notebooks</a> as well, I decided to spruce it up a bit and add support for them.
+I want to keep my notebooks, vanilla.
+Meaning that I don't want to shove the <em>metadata</em> required by <a href="https://blog.getpelican.com/">Pelican</a> into them.
+Since I didn't know how much code went into a blank notebook, I decided to just dump the <em>metadata</em> into an <code>.nbdata</code> file.
+All that's left for me to do is to fire up Jupyter, create a new book, and name it exactly like the <code>.nbdata</code> file.
+I didn't want to bother with typing it all out, so I used <a href="https://github.com/asweigart/pyperclip">Pyperclip</a> to copy the <em>slug</em> name into my clipboard.
+Now a simple <em>paste</em> gets the job done!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="kn">import</span> <span class="nn">pyperclip</span>
+
+<span class="n">AUTHOR</span> <span class="o">=</span> <span class="s2">&quot;Martin Uribe&quot;</span>
+<span class="n">ARTICLE_LOCATION</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;articles&quot;</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Article</span><span class="p">:</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">category</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">tags</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">summary</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">markdown</span><span class="p">:</span> <span class="nb">bool</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slug</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">author</span> <span class="o">=</span> <span class="n">AUTHOR</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">markdown</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="n">ARTICLE_LOCATION</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{self.slug}</span><span class="s2">.md&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="n">ARTICLE_LOCATION</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{self.slug}</span><span class="s2">.nbdata&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">create_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;title: </span><span class="si">{self.title}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;date: </span><span class="si">{self.date}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;category: </span><span class="si">{self.category}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;tags: </span><span class="si">{self.tags}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;slug: </span><span class="si">{self.slug}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;author: </span><span class="si">{self.author}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;summary: </span><span class="si">{self.summary}</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">markdown</span><span class="p">:</span>
+            <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"># </span><span class="si">{self.title}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pyperclip</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slug</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated new article: </span><span class="si">{self.location}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">get_bool</span><span class="p">(</span><span class="n">subject</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{subject.capitalize():&gt;10} [y]/n? &quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="k">def</span> <span class="nf">get_input</span><span class="p">(</span><span class="n">subject</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{subject:&gt;10}</span><span class="s2">: &quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No subject provided!&quot;</span><span class="p">)</span>
+        <span class="n">exit</span>
+
+    <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">get_tags</span><span class="p">():</span>
+    <span class="n">tags</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;       tag: &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">tag</span><span class="p">:</span>
+            <span class="n">tags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">)</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
+    <span class="n">tags</span> <span class="o">=</span> <span class="n">get_tags</span><span class="p">()</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">(</span><span class="s2">&quot;summary&quot;</span><span class="p">)</span>
+    <span class="n">markdown</span> <span class="o">=</span> <span class="n">get_bool</span><span class="p">(</span><span class="s2">&quot;markdown&quot;</span><span class="p">)</span>
+    <span class="n">post</span> <span class="o">=</span> <span class="n">Article</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">summary</span><span class="p">,</span> <span class="n">markdown</span><span class="p">)</span>
+    <span class="n">post</span><span class="o">.</span><span class="n">create_file</span><span class="p">()</span>
+
+
+<span class="c1"># if __name__ == &quot;__main__&quot;:</span>
+<span class="c1">#     main()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>I had to comment out the last bit of code, to prevent it from running in the notebook!</p>
 </blockquote>
-<p>What the hell is that?
-That looks horrible!
-I know that markdown supports <a href="https://www.latex-project.org/">Latex</a>, so I looked and found this awesome resource: <a href="http://csrgxtu.github.io/2015/03/20/Writing-Mathematic-Fomulars-in-Markdown/">Writing Mathematic Formulars in Markdown</a></p>
-<p>ScaledQuantity = \frac{ActualQuantity-MinQuantity}{MaxQuantity-MinQuantity}</p>
-<p>Um, not quite there yet.
-Something was up.
-I searched to see if Pelican had any plugins for rendering math and sure enough, found that <a href="https://github.com/getpelican/pelican-plugins">pelican-plugins</a> included <em>render_math</em>.
-I followed the instructions and cloned the repo into my blog directory.
-Probably should have dropped it somewhere outside of it, but I added it to my <code>.gitignore</code> and it's fine...</p>
-<p>I added the following to my <code>pelicanconf.py</code> file:</p>
-<div class="highlight"><pre><span></span><code><span class="n">PLUGIN_PATHS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;./pelican-plugins&#39;</span><span class="p">]</span>
-<span class="n">PLUGINS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;render_math&#39;</span><span class="p">]</span>
-</code></pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h2><p>I'll keep it short today. I basically just want to see how the output from this will look on the site and at the same time, show off my script :). I really don't like that marker that's being added to the end of the markdown cells, so I'll see if I can get rid of those...</p>
+
+</div>
+</div>
+</div>
+ 
 
 
-<p>I tried the previous code once again and was still getting the same results.
-After some more reading I found that you have to enclose the mathematical equation within double $.</p>
-<div class="math">$$ScaledQuantity = \frac{ActualQuantity-MinQuantity}{MaxQuantity-MinQuantity}$$</div>
-<blockquote>
-<p><strong>NICE!</strong></p>
-</blockquote>
-<h2>Markdown tables</h2>
-<p>My original tables were so bland that it was almost hard to tell that they were even tables!
-Unfortunately I didn't save a screenshot of it, so I can't show you what they looked like, but I can definitely show you the end result!
-Thanks to <a href="https://www.mockaroo.com/">mockaroo</a> I was able to generate some mock data relatively quickly.</p>
-<table>
-<thead>
-<tr>
-<th align="right">id</th>
-<th align="left">first_name</th>
-<th align="left">last_name</th>
-<th align="left">email</th>
-<th align="center">gender</th>
-<th align="right">ip_address</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="right">1</td>
-<td align="left">Odilia</td>
-<td align="left">O'Meara</td>
-<td align="left">oomeara0@yahoo.co.jp</td>
-<td align="center">Female</td>
-<td align="right">244.53.86.185</td>
-</tr>
-<tr>
-<td align="right">2</td>
-<td align="left">Marcelo</td>
-<td align="left">Tunna</td>
-<td align="left">mtunna1@netvibes.com</td>
-<td align="center">Male</td>
-<td align="right">128.140.17.56</td>
-</tr>
-<tr>
-<td align="right">3</td>
-<td align="left">Farris</td>
-<td align="left">Roston</td>
-<td align="left">froston2@ucla.edu</td>
-<td align="center">Male</td>
-<td align="right">111.104.78.209</td>
-</tr>
-<tr>
-<td align="right">4</td>
-<td align="left">Gene</td>
-<td align="left">Benzies</td>
-<td align="left">gbenzies3@nymag.com</td>
-<td align="center">Male</td>
-<td align="right">67.169.248.21</td>
-</tr>
-<tr>
-<td align="right">5</td>
-<td align="left">Ellsworth</td>
-<td align="left">Goodered</td>
-<td align="left">egoodered4@hud.gov</td>
-<td align="center">Male</td>
-<td align="right">227.48.46.133</td>
-</tr>
-<tr>
-<td align="right">6</td>
-<td align="left">Jan</td>
-<td align="left">Garnsworth</td>
-<td align="left">jgarnsworth5@amazon.de</td>
-<td align="center">Male</td>
-<td align="right">138.13.211.142</td>
-</tr>
-<tr>
-<td align="right">7</td>
-<td align="left">Robby</td>
-<td align="left">Rosenstengel</td>
-<td align="left">rrosenstengel6@chron.com</td>
-<td align="center">Female</td>
-<td align="right">105.76.137.198</td>
-</tr>
-<tr>
-<td align="right">8</td>
-<td align="left">Granthem</td>
-<td align="left">Rymer</td>
-<td align="left">grymer7@yolasite.com</td>
-<td align="center">Male</td>
-<td align="right">15.60.66.25</td>
-</tr>
-<tr>
-<td align="right">9</td>
-<td align="left">Claire</td>
-<td align="left">Stuther</td>
-<td align="left">cstuther8@salon.com</td>
-<td align="center">Female</td>
-<td align="right">5.36.242.109</td>
-</tr>
-<tr>
-<td align="right">10</td>
-<td align="left">Maggy</td>
-<td align="left">Jearum</td>
-<td align="left">mjearum9@npr.org</td>
-<td align="center">Female</td>
-<td align="right">179.12.188.75</td>
-</tr>
-</tbody>
-</table>
-<h2>CSS changes</h2>
-<p>I hope it doesn't bite me in the butt later on, but I'm forcing the table headers into uppercase. In case anyone is curious, this are the styles that I added to the theme:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">table</span> <span class="p">{</span>
-  <span class="k">border-collapse</span><span class="p">:</span> <span class="kc">collapse</span><span class="p">;</span>
-  <span class="k">margin-left</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
-  <span class="k">margin-right</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
-  <span class="k">width</span><span class="p">:</span> <span class="mi">90</span><span class="kt">%</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="nt">td</span><span class="o">,</span> <span class="nt">th</span> <span class="p">{</span>
-  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="mh">#ddd</span><span class="p">;</span>
-  <span class="k">padding</span><span class="p">:</span> <span class="mi">8</span><span class="kt">px</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="nt">tr</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">even</span><span class="o">)</span><span class="p">{</span><span class="k">background-color</span><span class="p">:</span> <span class="mh">#f2f2f2</span><span class="p">;}</span>
-
-<span class="nt">tr</span><span class="p">:</span><span class="nd">hover</span> <span class="p">{</span><span class="k">background-color</span><span class="p">:</span> <span class="mh">#ddd</span><span class="p">;}</span>
-
-<span class="nt">th</span> <span class="p">{</span>
-  <span class="k">padding-top</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
-  <span class="k">padding-bottom</span><span class="p">:</span> <span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
-  <span class="k">text-transform</span><span class="p">:</span> <span class="kc">uppercase</span><span class="p">;</span>
-  <span class="k">font-weight</span><span class="p">:</span> <span class="kc">bold</span><span class="p">;</span>
-  <span class="k">background-color</span><span class="p">:</span> <span class="mh">#607D8B</span><span class="p">;</span>
-  <span class="k">color</span><span class="p">:</span> <span class="kc">white</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="p">.</span><span class="nc">math</span> <span class="p">{</span>
-  <span class="k">font-size</span><span class="p">:</span> <span class="kc">medium</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
-
-<blockquote>
-<p>The default <em>math</em> syntax rendering was kind of small, so I changed the <code>font-size</code> to <em>medium</em>.</p>
-</blockquote>
-<h2>On a side note</h2>
-<p>I noticed that some of my changes wouldn't take effect until after I removed the <em><strong>pycache</strong></em> and <em>.pytest_cache</em> directories. In order to automate this, I modified my <em>Makefile</em>'s <code>clean</code> code to the following:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">clean</span><span class="o">:</span>
-    <span class="o">[</span> ! -d <span class="k">$(</span>OUTPUTDIR<span class="k">)</span> <span class="o">]</span> <span class="o">||</span> rm -rf <span class="k">$(</span>OUTPUTDIR<span class="k">)</span>
-    rm -rf __pycache__
-    rm -rf .pytest_cache
-</code></pre></div>
-
-
-<h2>Conclusion</h2>
-<p>This web development stuff is pretty complex.
-There are lots of moving parts, so I give all of my fellow web developers a high-five for being so awesome!
-I can see how this can be pretty overwhelming if you're new to this, but just keep at it and you'll get there.</p>
-<p>This old dog can still learn some new tricks!</p>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "left",
-        indent = "0em",
-        linebreak = "true";
-
-    if (true) {
-        align = (screen.width < 1125) ? "left" : align;
-        indent = (screen.width < 1125) ? "0em" : indent;
-        linebreak = (screen.width < 1125) ? 'true' : linebreak;
-    }
-
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
     mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
         "MathJax.Hub.Config({" +
         "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
         "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
         "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
         "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
         "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        inlineMath: [ ['$','$'] ], " +
         "        displayMath: [ ['$$','$$'] ]," +
         "        processEscapes: true," +
         "        preview: 'TeX'," +
         "    }, " +
         "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-</script></section>
-            <a href="https://clamytoe.github.io/articles/2020/Mar/03/pelican-plugins#disqus_thread"></a> -->
+</script>
+</section>
+            <a href="https://clamytoe.github.io/articles/2020/Mar/09/playing-around-with-jupyter-notebooks#disqus_thread"></a> -->
+        <hr class="uk-article-divider">
+    </article>
+
+
+    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
+        <a href="https://clamytoe.github.io/articles/2020/Mar/03/pelican-plugins" class="uk-article-title uk-link-muted" itemprop="name">Playing around with adding plugins to Pelican</a>
+        <p class="uk-article-meta"><time datetime="2020-03-03" itemprop="datePublished">Tue 03 March 2020</time> • <a href="https://clamytoe.github.io/category/blog.html">Blog</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">4 min</span></span></p>
+        </p>
+        <p class="uk-article-lead" itemprop="description">Wanted to add some extra styling to my blog posts</p>
+            <p>Some parts of my blog were looking pretty blah Math syntax I've been tweaking my blog like crazy. Just making minor changes here and there. I wanted to make things look a little better. For instance, for my rescaling article, I had the following mathematical syntax: ScaledQuantity = (ActualQuantity-MinQuantity)/(MaxQuantity-MinQuantity) What the hell is that? That looks horrible! I know that markdown supports Latex, so I looked and found this awesome resource: Writing Mathematic Formulars in Markdown ScaledQuantity = \frac{ActualQuantity-MinQuantity}{MaxQuantity-MinQuantity} Um, not quite there...</p>
+            <a href="https://clamytoe.github.io/articles/2020/Mar/03/pelican-plugins">Read More</a>
         <hr class="uk-article-divider">
     </article>
 
@@ -365,7 +310,7 @@ I can see how this can be pretty overwhelming if you're new to this, but just ke
                     <li class="uk-nav-header">Categories</li>
                     <li class="uk-active"><a href="https://clamytoe.github.io/category/blog.html">Blog</a></li>
                     <li ><a href="https://clamytoe.github.io/category/database.html">Database</a></li>
-                    <li ><a href="https://clamytoe.github.io/category/datascience.html">Datascience</a></li>
+                    <li ><a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></li>
                     <li ><a href="https://clamytoe.github.io/category/python.html">Python</a></li>
                     <li class="uk-nav-header">Pages</li>
 
@@ -440,7 +385,7 @@ I can see how this can be pretty overwhelming if you're new to this, but just ke
             <li class="uk-nav-header">Categories</li>
             <li class="uk-active"><a href="https://clamytoe.github.io/category/blog.html">Blog</a></li>
             <li ><a href="https://clamytoe.github.io/category/database.html">Database</a></li>
-            <li ><a href="https://clamytoe.github.io/category/datascience.html">Datascience</a></li>
+            <li ><a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></li>
             <li ><a href="https://clamytoe.github.io/category/python.html">Python</a></li>
             <li class="uk-nav-header">Pages</li>
             <li >
