@@ -78,7 +78,7 @@
 
     <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
         <a href="https://clamytoe.github.io/articles/2020/Mar/09/playing-around-with-jupyter-notebooks" class="uk-article-title uk-link-muted" itemprop="name">Playing around with Jupyter notebooks</a>
-        <p class="uk-article-meta"><time datetime="2020-03-09" itemprop="datePublished">Mon 09 March 2020</time> • <a href="https://clamytoe.github.io/category/blog.html">Blog</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">7 min</span></span></p>
+        <p class="uk-article-meta"><time datetime="2020-03-09" itemprop="datePublished">Mon 09 March 2020</time> • <a href="https://clamytoe.github.io/category/blog.html">Blog</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">8 min</span></span></p>
         </p>
         <p class="uk-article-lead" itemprop="description">Just giving the notebook plugin a test run to see how things render</p>
             <p>Seeing how notebooks compare to just plain Markdown¶ In [12]: from IPython.display import HTML HTML("""<script> display_code=true; function toggle_code() { if (display_code) { $('div.input').hide(); } else { $('div.input').show(); } display_code = !display_code } $(document).ready(toggle_code); </script>""") Out[12]: display_code=true; function toggle_code() { if (display_code) { $('div.input').hide(); } else { $('div.input').show(); } display_code = !display_code } $(document).ready(toggle_code); To toggle code blocks on/off: click here <div class="text_cell_render border-box-sizing...</p><br /><br />
@@ -521,6 +521,120 @@ Let's see! <a href='javascript:toggle_code()'>[on/off]</a></p>
 Well when I normally run the script, it automatically creates the new file for me.
 In this instance, it created the new <code>post</code> but it was lost in the <code>main</code> function because I didn't save its state!
 I'll leave it up to you to explore what it contains, but it's pretty easy to see that it just filled in everything that I need to boilerplate a new pelican blog post.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="How-can-you-do-the-same">How can you do the same<a class="anchor-link" href="#How-can-you-do-the-same">&#182;</a></h2><p>Make sure that you're working in your virtual environment and go into the directory where you have your blog project.
+Create a plugins directory if you don't already have one and go into it.
+Then clone the plugin's repos directly into it.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="c1"># from inside your project folder</span>
+mkdir plugins, <span class="nb">cd</span> <span class="nv">$_</span>
+git clone https://github.com/danielfrg/pelican-ipynb ipynb
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Open up your <code>pelicanconf.py</code> file and make the following changes/additions:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="n">MARKUP</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;md&quot;</span><span class="p">,</span> <span class="s2">&quot;ipynb&quot;</span><span class="p">)</span>
+<span class="n">PLUGIN_PATHS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;./plugins&quot;</span><span class="p">]</span>
+<span class="n">PLUGINS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ipynb.markup&quot;</span><span class="p">]</span>
+<span class="n">IGNORE_FILES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.ipynb_checkpoints&quot;</span><span class="p">]</span>
+<span class="n">IPYNB_USE_METACELL</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># set to True if you want to embedd metadata into notebook</span>
+<span class="n">IPYNB_SKIP_CSS</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, if you want to do what I'm doing and keep the <em>metadata</em> in its own file and out of the notebook, you'll have to create a file with the exact same name as the notebook but with the <code>.nbdata</code> extension.
+The one for this article looks like this:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+<pre><code>title: Playing around with Jupyter notebooks
+date: 2020-03-09 19:43
+modified: 2020-03-10 08:17
+category: Blog
+tags: jupyter, notebook, python
+slug: playing-around-with-jupyter-notebooks
+author: Martin Uribe
+summary: Just giving the notebook plugin a test run to see how things render</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Make sure there is an empty line at the end of the file.
+To embed directly into the notebook, modify it like this and put it in the first cell:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+<pre><code>- title: Playing around with Jupyter notebooks
+- date: 2020-03-09 19:43
+- modified: 2020-03-10 08:17
+- category: Blog
+- tags: jupyter, notebook, python
+- slug: playing-around-with-jupyter-notebooks
+- author: Martin Uribe
+- summary: Just giving the notebook plugin a test run to see how things render</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Making-it-look-pretty">Making it look pretty<a class="anchor-link" href="#Making-it-look-pretty">&#182;</a></h3><p>Originally when the notebook was being converted into html, it was putting anchor tags at the end of headings that I didn't like it. 
+<img src="https://clamytoe.github.io/images/nb-anchor.png" alt="nb-anchor">
+Also, each code cell was getting a <strong>In[1]</strong> placed in front of it, indicating in which order it was run.
+I don't need or want any of those, any code that I post will be expected to be ran in order.
+To get rid of them, I created these custom CSS entries into the style sheet of my theme:</p>
+<div class="highlight"><pre><span></span><span class="o">//</span> <span class="nt">jupyter</span> <span class="nt">notebook</span>
+<span class="nt">a</span><span class="p">.</span><span class="nc">anchor-link</span> <span class="p">{</span>
+    <span class="k">visibility</span><span class="p">:</span> <span class="kc">hidden</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">prompt</span><span class="o">,</span> <span class="p">.</span><span class="nc">output_prompt</span> <span class="p">{</span>
+    <span class="k">visibility</span><span class="p">:</span> <span class="kc">hidden</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
 
 </div>
 </div>
