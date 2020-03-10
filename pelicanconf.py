@@ -30,6 +30,9 @@ PLUGINS = [
     "liquid_tags.video",
     "liquid_tags.youtube",
 ]
+IGNORE_FILES = [".ipynb_checkpoints"]
+IPYNB_USE_METACELL = False
+IPYNB_SKIP_CSS = True
 
 # Render math settings
 MATH_JAX = {

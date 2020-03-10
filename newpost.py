@@ -5,6 +5,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import List
 
+import pyperclip
+
 AUTHOR = "Martin Uribe"
 ARTICLE_LOCATION = Path("content", "articles")
 
@@ -15,13 +17,17 @@ class Article:
     category: str
     tags: List[str]
     summary: str
+    markdown: bool
 
     def __post_init__(self):
         self.category = self.category.title()
         self.date = datetime.today().strftime("%Y-%m-%d %H:%M")
         self.slug = self.title.lower().replace(" ", "-")
         self.author = AUTHOR
-        self.location = ARTICLE_LOCATION.joinpath(f"{self.slug}.md")
+        if self.markdown:
+            self.location = ARTICLE_LOCATION.joinpath(f"{self.slug}.md")
+        else:
+            self.location = ARTICLE_LOCATION.joinpath(f"{self.slug}.nbdata")
 
     def create_file(self):
         header = f"title: {self.title}\n"
@@ -31,10 +37,21 @@ class Article:
         header += f"slug: {self.slug}\n"
         header += f"author: {self.author}\n"
         header += f"summary: {self.summary}\n"
-        header += f"\n# {self.title}\n\n"
+
+        if self.markdown:
+            header += f"\n# {self.title}\n\n"
+        else:
+            pyperclip.copy(self.slug)
 
         self.location.write_text(header)
         print(f"Generated new article: {self.location}")
+
+
+def get_bool(subject):
+    value = input(f"{subject.capitalize():>10} [y]/n? ")
+    if not value:
+        return True
+    return False
 
 
 def get_input(subject):
@@ -63,7 +80,8 @@ def main():
     category = get_input("category")
     tags = get_tags()
     summary = get_input("summary")
-    post = Article(title, category, tags, summary)
+    markdown = get_bool("markdown")
+    post = Article(title, category, tags, summary, markdown)
     post.create_file()
 
 
