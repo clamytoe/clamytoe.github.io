@@ -44,6 +44,9 @@ th {
 .readtime-min {
   color: #444; }
 
+a.anchor-link {
+  visibility: hidden; }
+
 .uk-navbar-brand {
   text-transform: uppercase; }
 
