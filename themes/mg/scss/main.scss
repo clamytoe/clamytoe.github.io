@@ -69,6 +69,11 @@ table {
     color: #444;
 }
 
+// jupyter notebook
+a.anchor-link {
+    visibility: hidden;
+}
+
 // uikit override
 
 .uk-navbar-brand {
