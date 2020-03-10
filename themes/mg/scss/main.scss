@@ -74,6 +74,10 @@ a.anchor-link {
     visibility: hidden;
 }
 
+.prompt, .output_prompt {
+    visibility: hidden;
+}
+
 // uikit override
 
 .uk-navbar-brand {
