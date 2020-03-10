@@ -13,13 +13,11 @@
         </p>
         <p class="uk-article-lead" itemprop="description">{{ article.summary|striptags }}</p>
         {% if loop.index == 1 %}
-            <p>{{ ' '.join(article.content.split(' ')[0:150])|striptags }}...</p><br /><br />
-            <a href="{{ SITEURL }}/{{ article.url }}">Read More</a>
-            <!-- <section itemprop="articleBody">{{ article.content }}</section>
-            <a href="{{ SITEURL }}/{{ article.url }}#disqus_thread"></a> -->
+            <section itemprop="articleBody">{{ article.content }}</section>
+            <a href="{{ SITEURL }}/{{ article.url }}#disqus_thread"></a>
         {% else %}
             <p>{{ ' '.join(article.content.split(' ')[0:75])|striptags }}...</p>
-            <a href="{{ SITEURL }}/{{ article.url }}">Read More</a>
+            <p><a href="{{ SITEURL }}/{{ article.url }}">Read More</a></p>
         {% endif %}
         <hr class="uk-article-divider">
     </article>
