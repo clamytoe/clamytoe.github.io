@@ -47,6 +47,9 @@ th {
 a.anchor-link {
   visibility: hidden; }
 
+.prompt, .output_prompt {
+  visibility: hidden; }
+
 .uk-navbar-brand {
   text-transform: uppercase; }
 

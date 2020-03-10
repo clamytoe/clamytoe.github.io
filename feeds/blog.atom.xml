@@ -1,11 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings - Blog</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/blog.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-03-09T20:54:00-05:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Playing around with Jupyter notebooks</title><link href="https://clamytoe.github.io/articles/2020/Mar/09/playing-around-with-jupyter-notebooks" rel="alternate"></link><published>2020-03-09T19:43:00-05:00</published><updated>2020-03-09T20:54:00-05:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-03-09:/articles/2020/Mar/09/playing-around-with-jupyter-notebooks</id><summary type="html">&lt;p&gt;Just giving the notebook plugin a test run to see how things render&lt;/p&gt;</summary><content type="html">&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings - Blog</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/blog.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-03-10T08:17:00-05:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Playing around with Jupyter notebooks</title><link href="https://clamytoe.github.io/articles/2020/Mar/09/playing-around-with-jupyter-notebooks" rel="alternate"></link><published>2020-03-09T19:43:00-05:00</published><updated>2020-03-10T08:17:00-05:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-03-09:/articles/2020/Mar/09/playing-around-with-jupyter-notebooks</id><summary type="html">&lt;p&gt;Just giving the notebook plugin a test run to see how things render&lt;/p&gt;</summary><content type="html">&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h1 id="Seeing-how-notebooks-compare-to-just-plain-Markdown"&gt;Seeing how notebooks compare to just plain Markdown&lt;a class="anchor-link" href="#Seeing-how-notebooks-compare-to-just-plain-Markdown"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;So far, I can't complain.
-This interface does seem a little nicer for some reason.
-Perhaps I need to change the black theme of my &lt;a href="https://code.visualstudio.com/"&gt;VSCode&lt;/a&gt; back to normal and see if that makes a difference in the "feels" department.
-I'm still trying to keep to the rule of one sentence per line, but not sure if that will make a difference here since these are technically grouped together in "cells".&lt;/p&gt;
+&lt;h1 id="Seeing-how-notebooks-compare-to-just-plain-Markdown"&gt;Seeing how notebooks compare to just plain Markdown&lt;a class="anchor-link" href="#Seeing-how-notebooks-compare-to-just-plain-Markdown"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[12]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.display&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;HTML&lt;/span&gt;
+
+&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&amp;lt;script&amp;gt;&lt;/span&gt;
+&lt;span class="s2"&gt;display_code=true;&lt;/span&gt;
+&lt;span class="s2"&gt;function toggle_code() {&lt;/span&gt;
+&lt;span class="s2"&gt;  if (display_code) {&lt;/span&gt;
+&lt;span class="s2"&gt;    $(&amp;#39;div.input&amp;#39;).hide();&lt;/span&gt;
+&lt;span class="s2"&gt;  } else {&lt;/span&gt;
+&lt;span class="s2"&gt;    $(&amp;#39;div.input&amp;#39;).show();&lt;/span&gt;
+&lt;span class="s2"&gt;  }&lt;/span&gt;
+&lt;span class="s2"&gt;  display_code = !display_code&lt;/span&gt;
+&lt;span class="s2"&gt;}&lt;/span&gt;
+&lt;span class="s2"&gt;$(document).ready(toggle_code);&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;lt;/script&amp;gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[12]:&lt;/div&gt;
+
+
+
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;script&gt;
+display_code=true;
+function toggle_code() {
+  if (display_code) {
+    $('div.input').hide();
+  } else {
+    $('div.input').show();
+  }
+  display_code = !display_code
+}
+$(document).ready(toggle_code);
+&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;To toggle code blocks on/off: &lt;a href='javascript:toggle_code()'&gt;click here&lt;/a&gt;&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -13,21 +73,49 @@ I'm still trying to keep to the rule of one sentence per line, but not sure if t
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Update-to-my-newpost-script"&gt;Update to my newpost script&lt;a class="anchor-link" href="#Update-to-my-newpost-script"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;I had orginally created &lt;code&gt;newpost.py&lt;/code&gt; to created the basic structure of new blog posts, but in &lt;a href="https://daringfireball.net/projects/markdown/"&gt;Markdown&lt;/a&gt;.
+&lt;h2 id="What-is-a-Jupyter-Notebook"&gt;What is a Jupyter Notebook&lt;a class="anchor-link" href="#What-is-a-Jupyter-Notebook"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Well it's a document that lets you render markdown code, display code blocks, and also allows you to execute those code blocks and display their results interactively!
+Needless to say, they are definitely game changers.
+It's like the Python interpreter on steroids!&lt;/p&gt;
+&lt;p&gt;They are perfect for academia, data scientist, and anyone else that wants to explore data and code and be able to reproduce and/or show how they did it all in the same document.
+There is a large movement in the scientific community to include the code that was used on research papers, and Notebooks are filling that niche perfectly!&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Update-to-my-newpost-script"&gt;Update to my newpost script&lt;a class="anchor-link" href="#Update-to-my-newpost-script"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;To show a little bit about what Notebooks can do, I'll demonstrate by talking about my &lt;code&gt;newpost.py&lt;/code&gt; script.
+I had orginally written it to create the basic structure of new blog posts, but in &lt;a href="https://daringfireball.net/projects/markdown/"&gt;Markdown&lt;/a&gt;.
 Since I'm going to start using &lt;a href="https://jupyter.org/install.html"&gt;Jupyter Notebooks&lt;/a&gt; as well, I decided to spruce it up a bit and add support for them.
 I want to keep my notebooks, vanilla.
 Meaning that I don't want to shove the &lt;em&gt;metadata&lt;/em&gt; required by &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt; into them.
 Since I didn't know how much code went into a blank notebook, I decided to just dump the &lt;em&gt;metadata&lt;/em&gt; into an &lt;code&gt;.nbdata&lt;/code&gt; file.
-All that's left for me to do is to fire up Jupyter, create a new book, and name it exactly like the &lt;code&gt;.nbdata&lt;/code&gt; file.
+All that's left for me to do is to fire up JupyterLab, create a new book, and name it exactly like the &lt;code&gt;.nbdata&lt;/code&gt; file.
 I didn't want to bother with typing it all out, so I used &lt;a href="https://github.com/asweigart/pyperclip"&gt;Pyperclip&lt;/a&gt; to copy the &lt;em&gt;slug&lt;/em&gt; name into my clipboard.
 Now a simple &lt;em&gt;paste&lt;/em&gt; gets the job done!&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Imports-and-constants"&gt;Imports and constants&lt;a class="anchor-link" href="#Imports-and-constants"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The first thing any Python scripts starts with is importing all of the libraries that are going to be used at the beginning of the file, followed by any global variables.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[&amp;nbsp;]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[14]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;dataclasses&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;dataclass&lt;/span&gt;
@@ -39,9 +127,77 @@ Now a simple &lt;em&gt;paste&lt;/em&gt; gets the job done!&lt;/p&gt;
 
 &lt;span class="n"&gt;AUTHOR&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Martin Uribe&amp;quot;&lt;/span&gt;
 &lt;span class="n"&gt;ARTICLE_LOCATION&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;content&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;articles&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;As you can see, that looks like any other code block that you normally see on blog posts, but this one is actually "active".
+Let me demonstrate. The following will be a simple Python &lt;code&gt;print()&lt;/code&gt; command, and the output that follows will be generated and not typed in by me:&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[18]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{AUTHOR.split()[0]} is storing his blog articles in {ARTICLE_LOCATION.absolute()}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
 
 
-&lt;span class="nd"&gt;@dataclass&lt;/span&gt;
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;Martin is storing his blog articles in /home/mohh/Projects/ghpages/content/articles/content/articles
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Pretty nice, right?&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Article-class"&gt;Article class&lt;a class="anchor-link" href="#Article-class"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;I think you're starting to see how powerful working in notebooks really is.
+Let's continue with the rest of the script.
+Here is the &lt;code&gt;Article&lt;/code&gt; class that I created for it:&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[19]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nd"&gt;@dataclass&lt;/span&gt;
 &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Article&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;
     &lt;span class="n"&gt;category&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;
@@ -75,9 +231,27 @@ Now a simple &lt;em&gt;paste&lt;/em&gt; gets the job done!&lt;/p&gt;
 
         &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write_text&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Generated new article: &lt;/span&gt;&lt;span class="si"&gt;{self.location}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_bool&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Once again, this is all code that I can already start to interact with, but let me add the rest of the helper functions.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[20]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_bool&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{subject.capitalize():&amp;gt;10} [y]/n? &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;
@@ -103,20 +277,6 @@ Now a simple &lt;em&gt;paste&lt;/em&gt; gets the job done!&lt;/p&gt;
             &lt;span class="k"&gt;break&lt;/span&gt;
 
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;, &amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tags&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="n"&gt;title&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;category&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;category&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;tags&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_tags&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-    &lt;span class="n"&gt;summary&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;summary&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;markdown&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_bool&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;markdown&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Article&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;category&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tags&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;markdown&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;post&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create_file&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-
-
-&lt;span class="c1"&gt;# if __name__ == &amp;quot;__main__&amp;quot;:&lt;/span&gt;
-&lt;span class="c1"&gt;#     main()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
     &lt;/div&gt;
@@ -127,8 +287,10 @@ Now a simple &lt;em&gt;paste&lt;/em&gt; gets the job done!&lt;/p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;blockquote&gt;&lt;p&gt;I had to comment out the last bit of code, to prevent it from running in the notebook!&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;You can add functions in separate cells or all together like I did here, it really doesn't matter.
+The one thing that you have to keep in mind though is that these cell blocks can all be executed in any order, so it's easy to have "old" code in memory that can still be used when working on other parts.
+In cases like that where I've changed a lot of code, I like to just &lt;em&gt;Restart the Kernel and Rerun All Cells..&lt;/em&gt; from the &lt;strong&gt;Run&lt;/strong&gt; menu command from the JupyterLab interface.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://clamytoe.github.io/images/kernel-reset.png" alt="kernel-reset"&gt;&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -136,8 +298,158 @@ Now a simple &lt;em&gt;paste&lt;/em&gt; gets the job done!&lt;/p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Conclusion"&gt;Conclusion&lt;a class="anchor-link" href="#Conclusion"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;I'll keep it short today. I basically just want to see how the output from this will look on the site and at the same time, show off my script :). ~I really don't like that marker that's being added to the end of the markdown cells, so I'll see if I can get rid of those...~&lt;/p&gt;
-&lt;p&gt;Update, I got rid of the anchor links and now I'm stoked!&lt;/p&gt;
+&lt;h3 id="Playing-around-with-the-code"&gt;Playing around with the code&lt;a class="anchor-link" href="#Playing-around-with-the-code"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;So the core of the script is now loaded.
+Let's see what we can do.
+As you can tell from looking at the class, we have to instantiate an instance by providing the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;title&lt;/strong&gt;: &lt;em&gt;str&lt;/em&gt;, A title for the new blog post&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;category&lt;/strong&gt;: &lt;em&gt;str&lt;/em&gt;, A category to file it under&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;tags&lt;/strong&gt;: &lt;em&gt;List[str]&lt;/em&gt;, A list of strings for the tags&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;summary&lt;/strong&gt;: &lt;em&gt;str&lt;/em&gt;, A summary of of what the blog is going to be about&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;markdown&lt;/strong&gt;: &lt;em&gt;bool&lt;/em&gt;, True or False if this is going to be a markdown file, if it's not it'll set it up for a notebook&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;This is where the helper functions come in handy.
+I have the following execute when the script is ran:&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[23]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;title&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;category&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;category&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;tags&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_tags&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;summary&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;summary&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;markdown&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_bool&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;markdown&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Article&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;category&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tags&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;markdown&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;#     post.create_file()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;I've commented out the last line that actually creates the file because I really don't want to create it at the moment, but let's the see the rest in action:&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[24]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Since the default is to create a markdown file, no answer was needed for the last question.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Exploring-the-Article-object"&gt;Exploring the Article object&lt;a class="anchor-link" href="#Exploring-the-Article-object"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Ok, so what did that actually do?
+Let's see!&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[25]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;post&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_subarea output_text output_error"&gt;
+&lt;pre&gt;
+&lt;span class="ansi-red-fg"&gt;---------------------------------------------------------------------------&lt;/span&gt;
+&lt;span class="ansi-red-fg"&gt;NameError&lt;/span&gt;                                 Traceback (most recent call last)
+&lt;span class="ansi-green-fg"&gt;&amp;lt;ipython-input-25-9414b608df81&amp;gt;&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;&amp;lt;module&amp;gt;&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;----&amp;gt; 1&lt;/span&gt;&lt;span class="ansi-red-fg"&gt; &lt;/span&gt;post
+
+&lt;span class="ansi-red-fg"&gt;NameError&lt;/span&gt;: name &amp;#39;post&amp;#39; is not defined&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Oh no, what happened?
+Well when I normally run the script, it automatically creates the new file for me.
+In this instance, it created the new &lt;code&gt;post&lt;/code&gt; but it was lost in the &lt;code&gt;main&lt;/code&gt; function because I didn't save its state!
+I'll leave it up to you to explore what it contains, but it's pretty easy to see that it just filled in everything that I need to boilerplate a new pelican blog post.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Conclusion"&gt;Conclusion&lt;a class="anchor-link" href="#Conclusion"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;So far, I can't complain.
+This interface does seem a little nicer for some reason.
+Perhaps I need to change the black theme of my &lt;a href="https://code.visualstudio.com/"&gt;VSCode&lt;/a&gt; back to normal and see if that makes a difference in the "feels" department.
+The notebook definitely gives me more options, but also takes some away.
+For instance, I can't use the &lt;a href="https://github.com/getpelican/pelican-plugins/tree/master/liquid_tags"&gt;liquid_tags&lt;/a&gt; Pelican plugin!&lt;/p&gt;
+&lt;p&gt;Like all things, it's going to take some more experimentation to see what works and what doesn't.&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;

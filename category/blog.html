@@ -78,18 +78,78 @@
 
     <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
         <a href="https://clamytoe.github.io/articles/2020/Mar/09/playing-around-with-jupyter-notebooks" class="uk-article-title uk-link-muted" itemprop="name">Playing around with Jupyter notebooks</a>
-        <p class="uk-article-meta"><time datetime="2020-03-09" itemprop="datePublished">Mon 09 March 2020</time> • <a href="https://clamytoe.github.io/category/blog.html">Blog</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">4 min</span></span></p>
+        <p class="uk-article-meta"><time datetime="2020-03-09" itemprop="datePublished">Mon 09 March 2020</time> • <a href="https://clamytoe.github.io/category/blog.html">Blog</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">7 min</span></span></p>
         </p>
         <p class="uk-article-lead" itemprop="description">Just giving the notebook plugin a test run to see how things render</p>
-            <p>Seeing how notebooks compare to just plain Markdown¶So far, I can't complain. This interface does seem a little nicer for some reason. Perhaps I need to change the black theme of my VSCode back to normal and see if that makes a difference in the "feels" department. I'm still trying to keep to the rule of one sentence per line, but not sure if that will make a difference here since these are technically grouped together in "cells". Update to my newpost script¶I had orginally created newpost.py to created the basic structure of new blog posts, but in Markdown. Since I'm going to start using Jupyter Notebooks as well, I decided to spruce it up a bit and add support for them. I want to keep my...</p><br /><br />
+            <p>Seeing how notebooks compare to just plain Markdown¶ In [12]: from IPython.display import HTML HTML("""<script> display_code=true; function toggle_code() { if (display_code) { $('div.input').hide(); } else { $('div.input').show(); } display_code = !display_code } $(document).ready(toggle_code); </script>""") Out[12]: display_code=true; function toggle_code() { if (display_code) { $('div.input').hide(); } else { $('div.input').show(); } display_code = !display_code } $(document).ready(toggle_code); To toggle code blocks on/off: click here <div class="text_cell_render border-box-sizing...</p><br /><br />
             <a href="https://clamytoe.github.io/articles/2020/Mar/09/playing-around-with-jupyter-notebooks">Read More</a>
             <!-- <section itemprop="articleBody"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Seeing-how-notebooks-compare-to-just-plain-Markdown">Seeing how notebooks compare to just plain Markdown<a class="anchor-link" href="#Seeing-how-notebooks-compare-to-just-plain-Markdown">&#182;</a></h1><p>So far, I can't complain.
-This interface does seem a little nicer for some reason.
-Perhaps I need to change the black theme of my <a href="https://code.visualstudio.com/">VSCode</a> back to normal and see if that makes a difference in the "feels" department.
-I'm still trying to keep to the rule of one sentence per line, but not sure if that will make a difference here since these are technically grouped together in "cells".</p>
+<h1 id="Seeing-how-notebooks-compare-to-just-plain-Markdown">Seeing how notebooks compare to just plain Markdown<a class="anchor-link" href="#Seeing-how-notebooks-compare-to-just-plain-Markdown">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+
+<span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;script&gt;</span>
+<span class="s2">display_code=true;</span>
+<span class="s2">function toggle_code() {</span>
+<span class="s2">  if (display_code) {</span>
+<span class="s2">    $(&#39;div.input&#39;).hide();</span>
+<span class="s2">  } else {</span>
+<span class="s2">    $(&#39;div.input&#39;).show();</span>
+<span class="s2">  }</span>
+<span class="s2">  display_code = !display_code</span>
+<span class="s2">}</span>
+<span class="s2">$(document).ready(toggle_code);</span>
+<span class="s2">&lt;/script&gt;&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<script>
+display_code=true;
+function toggle_code() {
+  if (display_code) {
+    $('div.input').hide();
+  } else {
+    $('div.input').show();
+  }
+  display_code = !display_code
+}
+$(document).ready(toggle_code);
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To toggle code blocks on/off: <a href='javascript:toggle_code()'>click here</a></p>
 
 </div>
 </div>
@@ -97,21 +157,49 @@ I'm still trying to keep to the rule of one sentence per line, but not sure if t
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Update-to-my-newpost-script">Update to my newpost script<a class="anchor-link" href="#Update-to-my-newpost-script">&#182;</a></h2><p>I had orginally created <code>newpost.py</code> to created the basic structure of new blog posts, but in <a href="https://daringfireball.net/projects/markdown/">Markdown</a>.
+<h2 id="What-is-a-Jupyter-Notebook">What is a Jupyter Notebook<a class="anchor-link" href="#What-is-a-Jupyter-Notebook">&#182;</a></h2><p>Well it's a document that lets you render markdown code, display code blocks, and also allows you to execute those code blocks and display their results interactively!
+Needless to say, they are definitely game changers.
+It's like the Python interpreter on steroids!</p>
+<p>They are perfect for academia, data scientist, and anyone else that wants to explore data and code and be able to reproduce and/or show how they did it all in the same document.
+There is a large movement in the scientific community to include the code that was used on research papers, and Notebooks are filling that niche perfectly!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Update-to-my-newpost-script">Update to my newpost script<a class="anchor-link" href="#Update-to-my-newpost-script">&#182;</a></h2><p>To show a little bit about what Notebooks can do, I'll demonstrate by talking about my <code>newpost.py</code> script.
+I had orginally written it to create the basic structure of new blog posts, but in <a href="https://daringfireball.net/projects/markdown/">Markdown</a>.
 Since I'm going to start using <a href="https://jupyter.org/install.html">Jupyter Notebooks</a> as well, I decided to spruce it up a bit and add support for them.
 I want to keep my notebooks, vanilla.
 Meaning that I don't want to shove the <em>metadata</em> required by <a href="https://blog.getpelican.com/">Pelican</a> into them.
 Since I didn't know how much code went into a blank notebook, I decided to just dump the <em>metadata</em> into an <code>.nbdata</code> file.
-All that's left for me to do is to fire up Jupyter, create a new book, and name it exactly like the <code>.nbdata</code> file.
+All that's left for me to do is to fire up JupyterLab, create a new book, and name it exactly like the <code>.nbdata</code> file.
 I didn't want to bother with typing it all out, so I used <a href="https://github.com/asweigart/pyperclip">Pyperclip</a> to copy the <em>slug</em> name into my clipboard.
 Now a simple <em>paste</em> gets the job done!</p>
 
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Imports-and-constants">Imports and constants<a class="anchor-link" href="#Imports-and-constants">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The first thing any Python scripts starts with is importing all of the libraries that are going to be used at the beginning of the file, followed by any global variables.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
@@ -123,9 +211,77 @@ Now a simple <em>paste</em> gets the job done!</p>
 
 <span class="n">AUTHOR</span> <span class="o">=</span> <span class="s2">&quot;Martin Uribe&quot;</span>
 <span class="n">ARTICLE_LOCATION</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;articles&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As you can see, that looks like any other code block that you normally see on blog posts, but this one is actually "active".
+Let me demonstrate. The following will be a simple Python <code>print()</code> command, and the output that follows will be generated and not typed in by me:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{AUTHOR.split()[0]} is storing his blog articles in {ARTICLE_LOCATION.absolute()}&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
 
 
-<span class="nd">@dataclass</span>
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Martin is storing his blog articles in /home/mohh/Projects/ghpages/content/articles/content/articles
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pretty nice, right?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Article-class">Article class<a class="anchor-link" href="#Article-class">&#182;</a></h3><p>I think you're starting to see how powerful working in notebooks really is.
+Let's continue with the rest of the script.
+Here is the <code>Article</code> class that I created for it:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">Article</span><span class="p">:</span>
     <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">category</span><span class="p">:</span> <span class="nb">str</span>
@@ -159,9 +315,27 @@ Now a simple <em>paste</em> gets the job done!</p>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated new article: </span><span class="si">{self.location}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
 
+    </div>
+</div>
+</div>
 
-<span class="k">def</span> <span class="nf">get_bool</span><span class="p">(</span><span class="n">subject</span><span class="p">):</span>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Once again, this is all code that I can already start to interact with, but let me add the rest of the helper functions.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_bool</span><span class="p">(</span><span class="n">subject</span><span class="p">):</span>
     <span class="n">value</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{subject.capitalize():&gt;10} [y]/n? &quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">True</span>
@@ -187,20 +361,6 @@ Now a simple <em>paste</em> gets the job done!</p>
             <span class="k">break</span>
 
     <span class="k">return</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="n">title</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">)</span>
-    <span class="n">category</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
-    <span class="n">tags</span> <span class="o">=</span> <span class="n">get_tags</span><span class="p">()</span>
-    <span class="n">summary</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">(</span><span class="s2">&quot;summary&quot;</span><span class="p">)</span>
-    <span class="n">markdown</span> <span class="o">=</span> <span class="n">get_bool</span><span class="p">(</span><span class="s2">&quot;markdown&quot;</span><span class="p">)</span>
-    <span class="n">post</span> <span class="o">=</span> <span class="n">Article</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">summary</span><span class="p">,</span> <span class="n">markdown</span><span class="p">)</span>
-    <span class="n">post</span><span class="o">.</span><span class="n">create_file</span><span class="p">()</span>
-
-
-<span class="c1"># if __name__ == &quot;__main__&quot;:</span>
-<span class="c1">#     main()</span>
 </pre></div>
 
     </div>
@@ -211,8 +371,10 @@ Now a simple <em>paste</em> gets the job done!</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<blockquote><p>I had to comment out the last bit of code, to prevent it from running in the notebook!</p>
-</blockquote>
+<p>You can add functions in separate cells or all together like I did here, it really doesn't matter.
+The one thing that you have to keep in mind though is that these cell blocks can all be executed in any order, so it's easy to have "old" code in memory that can still be used when working on other parts.
+In cases like that where I've changed a lot of code, I like to just <em>Restart the Kernel and Rerun All Cells..</em> from the <strong>Run</strong> menu command from the JupyterLab interface.</p>
+<p><img src="https://clamytoe.github.io/images/kernel-reset.png" alt="kernel-reset"></p>
 
 </div>
 </div>
@@ -220,8 +382,158 @@ Now a simple <em>paste</em> gets the job done!</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h2><p>I'll keep it short today. I basically just want to see how the output from this will look on the site and at the same time, show off my script :). ~I really don't like that marker that's being added to the end of the markdown cells, so I'll see if I can get rid of those...~</p>
-<p>Update, I got rid of the anchor links and now I'm stoked!</p>
+<h3 id="Playing-around-with-the-code">Playing around with the code<a class="anchor-link" href="#Playing-around-with-the-code">&#182;</a></h3><p>So the core of the script is now loaded.
+Let's see what we can do.
+As you can tell from looking at the class, we have to instantiate an instance by providing the following:</p>
+<ul>
+<li><strong>title</strong>: <em>str</em>, A title for the new blog post</li>
+<li><strong>category</strong>: <em>str</em>, A category to file it under</li>
+<li><strong>tags</strong>: <em>List[str]</em>, A list of strings for the tags</li>
+<li><strong>summary</strong>: <em>str</em>, A summary of of what the blog is going to be about</li>
+<li><strong>markdown</strong>: <em>bool</em>, True or False if this is going to be a markdown file, if it's not it'll set it up for a notebook</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is where the helper functions come in handy.
+I have the following execute when the script is ran:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">)</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
+    <span class="n">tags</span> <span class="o">=</span> <span class="n">get_tags</span><span class="p">()</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">(</span><span class="s2">&quot;summary&quot;</span><span class="p">)</span>
+    <span class="n">markdown</span> <span class="o">=</span> <span class="n">get_bool</span><span class="p">(</span><span class="s2">&quot;markdown&quot;</span><span class="p">)</span>
+    <span class="n">post</span> <span class="o">=</span> <span class="n">Article</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">summary</span><span class="p">,</span> <span class="n">markdown</span><span class="p">)</span>
+<span class="c1">#     post.create_file()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I've commented out the last line that actually creates the file because I really don't want to create it at the moment, but let's the see the rest in action:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Since the default is to create a markdown file, no answer was needed for the last question.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exploring-the-Article-object">Exploring the Article object<a class="anchor-link" href="#Exploring-the-Article-object">&#182;</a></h3><p>Ok, so what did that actually do?
+Let's see!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">post</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-25-9414b608df81&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>post
+
+<span class="ansi-red-fg">NameError</span>: name &#39;post&#39; is not defined</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Oh no, what happened?
+Well when I normally run the script, it automatically creates the new file for me.
+In this instance, it created the new <code>post</code> but it was lost in the <code>main</code> function because I didn't save its state!
+I'll leave it up to you to explore what it contains, but it's pretty easy to see that it just filled in everything that I need to boilerplate a new pelican blog post.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h2><p>So far, I can't complain.
+This interface does seem a little nicer for some reason.
+Perhaps I need to change the black theme of my <a href="https://code.visualstudio.com/">VSCode</a> back to normal and see if that makes a difference in the "feels" department.
+The notebook definitely gives me more options, but also takes some away.
+For instance, I can't use the <a href="https://github.com/getpelican/pelican-plugins/tree/master/liquid_tags">liquid_tags</a> Pelican plugin!</p>
+<p>Like all things, it's going to take some more experimentation to see what works and what doesn't.</p>
 
 </div>
 </div>
