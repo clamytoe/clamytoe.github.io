@@ -1,5 +1,7 @@
 html {
-  font: 400 14px / 20px "Oswald", "Helvetica Neue",Helvetica,Arial,sans-serif; }
+  font-family: Source Sans Pro, Roboto, Open Sans, Liberation Sans, DejaVu Sans, Verdana, Helvetica, Arial, sans-serif;
+  font-size: 1.02em;
+  line-height: 1.2em; }
 
 a {
   color: #33b5e5; }
