@@ -49,14 +49,6 @@ Now a simple &lt;em&gt;paste&lt;/em&gt; gets the job done!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;To toggle code blocks on/off: &lt;a href='javascript:toggle_code()'&gt;click here&lt;/a&gt;&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[14]:&lt;/div&gt;
@@ -185,7 +177,7 @@ Here is the &lt;code&gt;Article&lt;/code&gt; class that I created for it: &lt;a 
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Once again, this is all code that I can already start to interact with, but let me add the rest of the helper functions. &lt;a href='javascript:toggle_code()'&gt;[on/off]&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Once again, this is all code that I can already start to interact with, but let me add the rest of the helper functions.&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -288,7 +280,7 @@ I have the following execute when the script is ran: &lt;a href='javascript:togg
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;I've commented out the last line that actually creates the file because I really don't want to create it at the moment, but let's the see the rest in action: &lt;a href='javascript:toggle_code()'&gt;[on/off]&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I've commented out the last line that actually creates the file because I really don't want to create it at the moment, but let's the see the rest in action:&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -333,7 +325,7 @@ I have the following execute when the script is ran: &lt;a href='javascript:togg
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h3 id="Exploring-the-Article-object"&gt;Exploring the Article object&lt;a class="anchor-link" href="#Exploring-the-Article-object"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Ok, so what did that actually do?
-Let's see! &lt;a href='javascript:toggle_code()'&gt;[on/off]&lt;/a&gt;&lt;/p&gt;
+Let's see!&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -514,62 +506,6 @@ For this notebook, it wasn't necessary, but I could see how it could be handy fo
 
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[12]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.display&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;HTML&lt;/span&gt;
-
-&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&amp;lt;script&amp;gt;&lt;/span&gt;
-&lt;span class="s2"&gt;display_code=true;&lt;/span&gt;
-&lt;span class="s2"&gt;function toggle_code() {&lt;/span&gt;
-&lt;span class="s2"&gt;  if (display_code) {&lt;/span&gt;
-&lt;span class="s2"&gt;    $(&amp;#39;div.input&amp;#39;).hide();&lt;/span&gt;
-&lt;span class="s2"&gt;  } else {&lt;/span&gt;
-&lt;span class="s2"&gt;    $(&amp;#39;div.input&amp;#39;).show();&lt;/span&gt;
-&lt;span class="s2"&gt;  }&lt;/span&gt;
-&lt;span class="s2"&gt;  display_code = !display_code&lt;/span&gt;
-&lt;span class="s2"&gt;}&lt;/span&gt;
-&lt;span class="s2"&gt;$(document).ready(toggle_code);&lt;/span&gt;
-&lt;span class="s2"&gt;&amp;lt;/script&amp;gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;
-
-    &lt;div class="prompt output_prompt"&gt;Out[12]:&lt;/div&gt;
-
-
-
-&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
-&lt;script&gt;
-display_code=true;
-function toggle_code() {
-  if (display_code) {
-    $('div.input').hide();
-  } else {
-    $('div.input').show();
-  }
-  display_code = !display_code
-}
-$(document).ready(toggle_code);
-&lt;/script&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
 &lt;/div&gt;
  
 
