@@ -107,9 +107,9 @@ Then when I checked the code coverage on it, I saw that it was complaining about
 <p>Initial searches didn't turn up much, so I posed the question in PyBites slack channel.
 The best suggestion was to use the <em>dis</em> module and test it that way, but since it's not really running the code, coverage still counts it as untested.</p>
 <h2>How to test abstract methods</h2>
-<p>Finally I came across this post on <a href="">reddit</a> that had the solution. Here is what the code looks like, with doctrings removed:</p>
+<p>Finally I came across this post on <a href="https://stackoverflow.com/questions/9757299/python-testing-an-abstract-base-class#17345619">reddit</a> that had the solution.
+Here is what the code looks like, with doctrings removed:</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Site</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-
     <span class="n">web</span><span class="p">:</span> <span class="n">Web</span>
 
     <span class="k">def</span> <span class="nf">find_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loc</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>

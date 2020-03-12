@@ -8,9 +8,9 @@ Then when I checked the code coverage on it, I saw that it was complaining about
 &lt;p&gt;Initial searches didn't turn up much, so I posed the question in PyBites slack channel.
 The best suggestion was to use the &lt;em&gt;dis&lt;/em&gt; module and test it that way, but since it's not really running the code, coverage still counts it as untested.&lt;/p&gt;
 &lt;h2&gt;How to test abstract methods&lt;/h2&gt;
-&lt;p&gt;Finally I came across this post on &lt;a href=""&gt;reddit&lt;/a&gt; that had the solution. Here is what the code looks like, with doctrings removed:&lt;/p&gt;
+&lt;p&gt;Finally I came across this post on &lt;a href="https://stackoverflow.com/questions/9757299/python-testing-an-abstract-base-class#17345619"&gt;reddit&lt;/a&gt; that had the solution.
+Here is what the code looks like, with doctrings removed:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Site&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ABC&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-
     &lt;span class="n"&gt;web&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Web&lt;/span&gt;
 
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;find_table&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;loc&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
