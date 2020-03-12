@@ -88,70 +88,6 @@
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
-
-<span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;script&gt;</span>
-<span class="s2">display_code=true;</span>
-<span class="s2">function toggle_code() {</span>
-<span class="s2">  if (display_code) {</span>
-<span class="s2">    $(&#39;div.input&#39;).hide();</span>
-<span class="s2">  } else {</span>
-<span class="s2">    $(&#39;div.input&#39;).show();</span>
-<span class="s2">  }</span>
-<span class="s2">  display_code = !display_code</span>
-<span class="s2">}</span>
-<span class="s2">$(document).ready(toggle_code);</span>
-<span class="s2">&lt;/script&gt;&quot;&quot;&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[12]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<script>
-display_code=true;
-function toggle_code() {
-  if (display_code) {
-    $('div.input').hide();
-  } else {
-    $('div.input').show();
-  }
-  display_code = !display_code
-}
-$(document).ready(toggle_code);
-</script>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>To toggle code blocks on/off: <a href='javascript:toggle_code()'>click here</a></p>
-
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -190,7 +126,15 @@ Now a simple <em>paste</em> gets the job done!</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The first thing any Python scripts starts with is importing all of the libraries that are going to be used at the beginning of the file, followed by any global variables. <a href='javascript:toggle_code()'>[on/off]</a></p>
+<p>The first thing any Python scripts starts with is importing all of the libraries that are going to be used at the beginning of the file, followed by any global variables.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To toggle code blocks on/off: <a href='javascript:toggle_code()'>click here</a></p>
 
 </div>
 </div>
@@ -652,6 +596,62 @@ For this notebook, it wasn't necessary, but I could see how it could be handy fo
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+
+<span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;script&gt;</span>
+<span class="s2">display_code=true;</span>
+<span class="s2">function toggle_code() {</span>
+<span class="s2">  if (display_code) {</span>
+<span class="s2">    $(&#39;div.input&#39;).hide();</span>
+<span class="s2">  } else {</span>
+<span class="s2">    $(&#39;div.input&#39;).show();</span>
+<span class="s2">  }</span>
+<span class="s2">  display_code = !display_code</span>
+<span class="s2">}</span>
+<span class="s2">$(document).ready(toggle_code);</span>
+<span class="s2">&lt;/script&gt;&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<script>
+display_code=true;
+function toggle_code() {
+  if (display_code) {
+    $('div.input').hide();
+  } else {
+    $('div.input').show();
+  }
+  display_code = !display_code
+}
+$(document).ready(toggle_code);
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
  
 

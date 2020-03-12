@@ -1,72 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/all.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-03-10T08:17:00-05:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Playing around with Jupyter notebooks</title><link href="https://clamytoe.github.io/articles/2020/Mar/09/playing-around-with-jupyter-notebooks" rel="alternate"></link><published>2020-03-09T19:43:00-05:00</published><updated>2020-03-10T08:17:00-05:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-03-09:/articles/2020/Mar/09/playing-around-with-jupyter-notebooks</id><summary type="html">&lt;p&gt;Just giving the notebook plugin a test run to see how things render&lt;/p&gt;</summary><content type="html">&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/all.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-03-12T07:54:00-05:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Playing around with Jupyter notebooks</title><link href="https://clamytoe.github.io/articles/2020/Mar/09/playing-around-with-jupyter-notebooks" rel="alternate"></link><published>2020-03-09T19:43:00-05:00</published><updated>2020-03-12T07:54:00-05:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-03-09:/articles/2020/Mar/09/playing-around-with-jupyter-notebooks</id><summary type="html">&lt;p&gt;Just giving the notebook plugin a test run to see how things render&lt;/p&gt;</summary><content type="html">&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h1 id="Seeing-how-notebooks-compare-to-just-plain-Markdown"&gt;Seeing how notebooks compare to just plain Markdown&lt;a class="anchor-link" href="#Seeing-how-notebooks-compare-to-just-plain-Markdown"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[12]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.display&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;HTML&lt;/span&gt;
-
-&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&amp;lt;script&amp;gt;&lt;/span&gt;
-&lt;span class="s2"&gt;display_code=true;&lt;/span&gt;
-&lt;span class="s2"&gt;function toggle_code() {&lt;/span&gt;
-&lt;span class="s2"&gt;  if (display_code) {&lt;/span&gt;
-&lt;span class="s2"&gt;    $(&amp;#39;div.input&amp;#39;).hide();&lt;/span&gt;
-&lt;span class="s2"&gt;  } else {&lt;/span&gt;
-&lt;span class="s2"&gt;    $(&amp;#39;div.input&amp;#39;).show();&lt;/span&gt;
-&lt;span class="s2"&gt;  }&lt;/span&gt;
-&lt;span class="s2"&gt;  display_code = !display_code&lt;/span&gt;
-&lt;span class="s2"&gt;}&lt;/span&gt;
-&lt;span class="s2"&gt;$(document).ready(toggle_code);&lt;/span&gt;
-&lt;span class="s2"&gt;&amp;lt;/script&amp;gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;
-
-    &lt;div class="prompt output_prompt"&gt;Out[12]:&lt;/div&gt;
-
-
-
-&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
-&lt;script&gt;
-display_code=true;
-function toggle_code() {
-  if (display_code) {
-    $('div.input').hide();
-  } else {
-    $('div.input').show();
-  }
-  display_code = !display_code
-}
-$(document).ready(toggle_code);
-&lt;/script&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;To toggle code blocks on/off: &lt;a href='javascript:toggle_code()'&gt;click here&lt;/a&gt;&lt;/p&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -108,7 +44,15 @@ Now a simple &lt;em&gt;paste&lt;/em&gt; gets the job done!&lt;/p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;The first thing any Python scripts starts with is importing all of the libraries that are going to be used at the beginning of the file, followed by any global variables. &lt;a href='javascript:toggle_code()'&gt;[on/off]&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The first thing any Python scripts starts with is importing all of the libraries that are going to be used at the beginning of the file, followed by any global variables.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;To toggle code blocks on/off: &lt;a href='javascript:toggle_code()'&gt;click here&lt;/a&gt;&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -570,6 +514,62 @@ For this notebook, it wasn't necessary, but I could see how it could be handy fo
 
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[12]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.display&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;HTML&lt;/span&gt;
+
+&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&amp;lt;script&amp;gt;&lt;/span&gt;
+&lt;span class="s2"&gt;display_code=true;&lt;/span&gt;
+&lt;span class="s2"&gt;function toggle_code() {&lt;/span&gt;
+&lt;span class="s2"&gt;  if (display_code) {&lt;/span&gt;
+&lt;span class="s2"&gt;    $(&amp;#39;div.input&amp;#39;).hide();&lt;/span&gt;
+&lt;span class="s2"&gt;  } else {&lt;/span&gt;
+&lt;span class="s2"&gt;    $(&amp;#39;div.input&amp;#39;).show();&lt;/span&gt;
+&lt;span class="s2"&gt;  }&lt;/span&gt;
+&lt;span class="s2"&gt;  display_code = !display_code&lt;/span&gt;
+&lt;span class="s2"&gt;}&lt;/span&gt;
+&lt;span class="s2"&gt;$(document).ready(toggle_code);&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;lt;/script&amp;gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[12]:&lt;/div&gt;
+
+
+
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;script&gt;
+display_code=true;
+function toggle_code() {
+  if (display_code) {
+    $('div.input').hide();
+  } else {
+    $('div.input').show();
+  }
+  display_code = !display_code
+}
+$(document).ready(toggle_code);
+&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
 &lt;/div&gt;
  
 
