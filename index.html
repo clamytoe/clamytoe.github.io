@@ -66,548 +66,110 @@
 
 
     <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
+        <a href="https://clamytoe.github.io/articles/2020/Mar/12/testing-abc's-with-abstractmethods-with-pytest" class="uk-article-title uk-link-muted" itemprop="name">Testing ABC's with abstractmethods with Pytest</a>
+        <p class="uk-article-meta"><time datetime="2020-03-12" itemprop="datePublished">Thu 12 March 2020</time> • <a href="https://clamytoe.github.io/category/python.html">Python</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">3 min</span></span></p>
+        </p>
+        <p class="uk-article-lead" itemprop="description">What I had to do to get 100% coverage on my tests</p>
+            <section itemprop="articleBody"><h1>Testing ABC's with abstractmethods with Pytest</h1>
+<p>I was working on writing a new code challenge for <a href="https://codechalleng.es/">Codechalleng.es</a> the other day.
+It's based on <a href="https://realpython.com/inheritance-composition-python/">inheritance and composition</a> and uses <a href="https://docs.python.org/3/library/abc.html">Abstract Base Classes</a> to define the interfaces that should be implemented in classes derived from it.</p>
+<p>I was just finishing up with the tests and everything was passing.
+Then when I checked the code coverage on it, I saw that it was complaining about my <em>Site</em> class, which is the one derived from ABC has several methods decorated as <em>abstractmethods</em>.
+<a href="https://coverage.readthedocs.io/en/coverage-5.0.3/">Coverage</a> wanted me to test the <code>pass</code> statements on them...</p>
+<p>Initial searches didn't turn up much, so I posed the question in PyBites slack channel.
+The best suggestion was to use the <em>dis</em> module and test it that way, but since it's not really running the code, coverage still counts it as untested.</p>
+<h2>How to test abstract methods</h2>
+<p>Finally I came across this post on <a href="">reddit</a> that had the solution. Here is what the code looks like, with doctrings removed:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Site</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+
+    <span class="n">web</span><span class="p">:</span> <span class="n">Web</span>
+
+    <span class="k">def</span> <span class="nf">find_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loc</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">)[</span><span class="n">loc</span><span class="p">]</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">parse_rows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="n">Soup</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">polls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loc</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">pass</span>
+</code></pre></div>
+
+
+<p>Here is how you go about testing them:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">test_site</span><span class="p">(</span><span class="n">test_file</span><span class="p">):</span>
+    <span class="n">Site</span><span class="o">.</span><span class="n">__abstractmethods__</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="nd">@dataclass</span>
+    <span class="k">class</span> <span class="nc">Dummy</span><span class="p">(</span><span class="n">Site</span><span class="p">):</span>
+        <span class="n">web</span><span class="p">:</span> <span class="n">Web</span>
+
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://projects.fivethirtyeight.com/polls/&quot;</span>
+    <span class="n">test_web</span> <span class="o">=</span> <span class="n">Web</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">test_file</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">Dummy</span><span class="p">(</span><span class="n">test_web</span><span class="p">)</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">find_table</span><span class="p">()</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">parse_rows</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+    <span class="n">polls</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">polls</span><span class="p">()</span>
+    <span class="n">stats</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">stats</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">d</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;test.html&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">Site</span><span class="p">,</span> <span class="n">ABCMeta</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">rows</span> <span class="ow">is</span> <span class="kc">None</span>
+    <span class="k">assert</span> <span class="n">polls</span> <span class="ow">is</span> <span class="kc">None</span>
+    <span class="k">assert</span> <span class="n">stats</span> <span class="ow">is</span> <span class="kc">None</span>
+</code></pre></div>
+
+
+<p>As you can see, the way to accomplish this is to override <code>__abstractmethods__</code>.
+Basically tricking it into thinking that it doesn't have any.
+The last three <em>asserts</em> then verify that <code>None</code> is being returned.</p>
+<div class="highlight"><pre><span></span><code><span class="o">=============================</span> <span class="n">test</span> <span class="k">session</span> <span class="n">starts</span> <span class="o">==============================</span>
+<span class="n">platform</span> <span class="n">linux</span> <span class="c1">-- Python 3.7.3, pytest-4.4.0, py-1.8.0, pluggy-0.9.0 -- /home/mohh/anaconda3/envs/pybites/bin/python</span>
+<span class="n">cachedir</span><span class="p">:</span> <span class="p">.</span><span class="n">pytest_cache</span>
+<span class="n">rootdir</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">mohh</span><span class="o">/</span><span class="n">Projects</span><span class="o">/</span><span class="n">team</span><span class="o">-</span><span class="n">charlie</span><span class="o">/</span><span class="mi">020</span>
+<span class="n">plugins</span><span class="p">:</span> <span class="n">cov</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">8</span><span class="p">.</span><span class="mi">1</span><span class="p">,</span> <span class="n">asyncio</span><span class="o">-</span><span class="mi">0</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">0</span>
+<span class="n">collected</span> <span class="mi">8</span> <span class="n">items</span>                                                              
+
+<span class="n">test_composition</span><span class="p">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_file_class</span> <span class="n">PASSED</span>                              <span class="p">[</span> <span class="mi">12</span><span class="o">%</span><span class="p">]</span>
+<span class="n">test_composition</span><span class="p">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_web</span> <span class="n">PASSED</span>                                     <span class="p">[</span> <span class="mi">25</span><span class="o">%</span><span class="p">]</span>
+<span class="n">test_composition</span><span class="p">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_web_bad_url</span> <span class="n">PASSED</span>                             <span class="p">[</span> <span class="mi">37</span><span class="o">%</span><span class="p">]</span>
+<span class="n">test_composition</span><span class="p">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_poll</span> <span class="n">PASSED</span>                                    <span class="p">[</span> <span class="mi">50</span><span class="o">%</span><span class="p">]</span>
+<span class="n">test_composition</span><span class="p">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_leaderboard</span> <span class="n">PASSED</span>                             <span class="p">[</span> <span class="mi">62</span><span class="o">%</span><span class="p">]</span>
+<span class="n">test_composition</span><span class="p">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_rcp_stats</span> <span class="n">PASSED</span>                               <span class="p">[</span> <span class="mi">75</span><span class="o">%</span><span class="p">]</span>
+<span class="n">test_composition</span><span class="p">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_nyt</span> <span class="n">PASSED</span>                                     <span class="p">[</span> <span class="mi">87</span><span class="o">%</span><span class="p">]</span>
+<span class="n">test_composition</span><span class="p">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_site</span> <span class="n">PASSED</span>                                    <span class="p">[</span><span class="mi">100</span><span class="o">%</span><span class="p">]</span>
+
+<span class="c1">----------- coverage: platform linux, python 3.7.3-final-0 -----------</span>
+<span class="n">Name</span>             <span class="n">Stmts</span>   <span class="n">Miss</span>  <span class="n">Cover</span>   <span class="n">Missing</span>
+<span class="c1">----------------------------------------------</span>
+<span class="n">composition</span><span class="p">.</span><span class="n">py</span>     <span class="mi">107</span>      <span class="mi">0</span>   <span class="mi">100</span><span class="o">%</span>
+
+
+<span class="o">===========================</span> <span class="mi">8</span> <span class="n">passed</span> <span class="k">in</span> <span class="mi">7</span><span class="p">.</span><span class="mi">22</span> <span class="n">seconds</span> <span class="o">===========================</span>
+</code></pre></div>
+
+
+<p>Success!</p>
+<h2>Conclusion</h2>
+<p>If you're ever faced with having to write test for abstract methods, simply override the <code>__abstractmethods__</code> of the ABC class!
+Definitely something to keep in your toolbox.</p>
+<p>Until next time, happy coding!</p></section>
+            <a href="https://clamytoe.github.io/articles/2020/Mar/12/testing-abc's-with-abstractmethods-with-pytest#disqus_thread"></a>
+        <hr class="uk-article-divider">
+    </article>
+
+
+    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
         <a href="https://clamytoe.github.io/articles/2020/Mar/09/playing-around-with-jupyter-notebooks" class="uk-article-title uk-link-muted" itemprop="name">Playing around with Jupyter notebooks</a>
         <p class="uk-article-meta"><time datetime="2020-03-09" itemprop="datePublished">Mon 09 March 2020</time> • <a href="https://clamytoe.github.io/category/blog.html">Blog</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">8 min</span></span></p>
         </p>
         <p class="uk-article-lead" itemprop="description">Just giving the notebook plugin a test run to see how things render</p>
-            <section itemprop="articleBody"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Seeing-how-notebooks-compare-to-just-plain-Markdown">Seeing how notebooks compare to just plain Markdown<a class="anchor-link" href="#Seeing-how-notebooks-compare-to-just-plain-Markdown">&#182;</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="What-is-a-Jupyter-Notebook">What is a Jupyter Notebook<a class="anchor-link" href="#What-is-a-Jupyter-Notebook">&#182;</a></h2><p>Well it's a document that lets you render markdown code, display code blocks, and also allows you to execute those code blocks and display their results interactively!
-Needless to say, they are definitely game changers.
-It's like the Python interpreter on steroids!</p>
-<p>They are perfect for academia, data scientist, and anyone else that wants to explore data and code and be able to reproduce and/or show how they did it all in the same document.
-There is a large movement in the scientific community to include the code that was used on research papers, and Notebooks are filling that niche perfectly!</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Update-to-my-newpost-script">Update to my newpost script<a class="anchor-link" href="#Update-to-my-newpost-script">&#182;</a></h2><p>To show a little bit about what Notebooks can do, I'll demonstrate by talking about my <code>newpost.py</code> script.
-I had orginally written it to create the basic structure of new blog posts, but in <a href="https://daringfireball.net/projects/markdown/">Markdown</a>.
-Since I'm going to start using <a href="https://jupyter.org/install.html">Jupyter Notebooks</a> as well, I decided to spruce it up a bit and add support for them.
-I want to keep my notebooks, vanilla.
-Meaning that I don't want to shove the <em>metadata</em> required by <a href="https://blog.getpelican.com/">Pelican</a> into them.
-Since I didn't know how much code went into a blank notebook, I decided to just dump the <em>metadata</em> into an <code>.nbdata</code> file.
-All that's left for me to do is to fire up JupyterLab, create a new book, and name it exactly like the <code>.nbdata</code> file.
-I didn't want to bother with typing it all out, so I used <a href="https://github.com/asweigart/pyperclip">Pyperclip</a> to copy the <em>slug</em> name into my clipboard.
-Now a simple <em>paste</em> gets the job done!</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Imports-and-constants">Imports and constants<a class="anchor-link" href="#Imports-and-constants">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The first thing any Python scripts starts with is importing all of the libraries that are going to be used at the beginning of the file, followed by any global variables.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-
-<span class="kn">import</span> <span class="nn">pyperclip</span>
-
-<span class="n">AUTHOR</span> <span class="o">=</span> <span class="s2">&quot;Martin Uribe&quot;</span>
-<span class="n">ARTICLE_LOCATION</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;articles&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>As you can see, that looks like any other code block that you normally see on blog posts, but this one is actually "active".
-Let me demonstrate. The following will be a simple Python <code>print()</code> command, and the output that follows will be generated and not typed in by me: <a href='javascript:toggle_code()'>[on/off]</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{AUTHOR.split()[0]} is storing his blog articles in {ARTICLE_LOCATION.absolute()}&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Martin is storing his blog articles in /home/mohh/Projects/ghpages/content/articles/content/articles
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Pretty nice, right?</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Article-class">Article class<a class="anchor-link" href="#Article-class">&#182;</a></h3><p>I think you're starting to see how powerful working in notebooks really is.
-Let's continue with the rest of the script.
-Here is the <code>Article</code> class that I created for it: <a href='javascript:toggle_code()'>[on/off]</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">Article</span><span class="p">:</span>
-    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">category</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">tags</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-    <span class="n">summary</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">markdown</span><span class="p">:</span> <span class="nb">bool</span>
-
-    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">slug</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">author</span> <span class="o">=</span> <span class="n">AUTHOR</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">markdown</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="n">ARTICLE_LOCATION</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{self.slug}</span><span class="s2">.md&quot;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="n">ARTICLE_LOCATION</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{self.slug}</span><span class="s2">.nbdata&quot;</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">create_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">header</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;title: </span><span class="si">{self.title}</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;date: </span><span class="si">{self.date}</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;category: </span><span class="si">{self.category}</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;tags: </span><span class="si">{self.tags}</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;slug: </span><span class="si">{self.slug}</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;author: </span><span class="si">{self.author}</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;summary: </span><span class="si">{self.summary}</span><span class="se">\n</span><span class="s2">&quot;</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">markdown</span><span class="p">:</span>
-            <span class="n">header</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"># </span><span class="si">{self.title}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">pyperclip</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slug</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated new article: </span><span class="si">{self.location}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Once again, this is all code that I can already start to interact with, but let me add the rest of the helper functions.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_bool</span><span class="p">(</span><span class="n">subject</span><span class="p">):</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{subject.capitalize():&gt;10} [y]/n? &quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">True</span>
-    <span class="k">return</span> <span class="kc">False</span>
-
-
-<span class="k">def</span> <span class="nf">get_input</span><span class="p">(</span><span class="n">subject</span><span class="p">):</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{subject:&gt;10}</span><span class="s2">: &quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No subject provided!&quot;</span><span class="p">)</span>
-        <span class="n">exit</span>
-
-    <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-
-
-<span class="k">def</span> <span class="nf">get_tags</span><span class="p">():</span>
-    <span class="n">tags</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="n">tag</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;       tag: &quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">tag</span><span class="p">:</span>
-            <span class="n">tags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">break</span>
-
-    <span class="k">return</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>You can add functions in separate cells or all together like I did here, it really doesn't matter.
-The one thing that you have to keep in mind though is that these cell blocks can all be executed in any order, so it's easy to have "old" code in memory that can still be used when working on other parts.
-In cases like that where I've changed a lot of code, I like to just <em>Restart the Kernel and Rerun All Cells..</em> from the <strong>Run</strong> menu command from the JupyterLab interface.</p>
-<p><img src="https://clamytoe.github.io/images/kernel-reset.png" alt="kernel-reset"></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Playing-around-with-the-code">Playing around with the code<a class="anchor-link" href="#Playing-around-with-the-code">&#182;</a></h3><p>So the core of the script is now loaded.
-Let's see what we can do.
-As you can tell from looking at the class, we have to instantiate an instance by providing the following:</p>
-<ul>
-<li><strong>title</strong>: <em>str</em>, A title for the new blog post</li>
-<li><strong>category</strong>: <em>str</em>, A category to file it under</li>
-<li><strong>tags</strong>: <em>List[str]</em>, A list of strings for the tags</li>
-<li><strong>summary</strong>: <em>str</em>, A summary of of what the blog is going to be about</li>
-<li><strong>markdown</strong>: <em>bool</em>, True or False if this is going to be a markdown file, if it's not it'll set it up for a notebook</li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>This is where the helper functions come in handy.
-I have the following execute when the script is ran: <a href='javascript:toggle_code()'>[on/off]</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="n">title</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">)</span>
-    <span class="n">category</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
-    <span class="n">tags</span> <span class="o">=</span> <span class="n">get_tags</span><span class="p">()</span>
-    <span class="n">summary</span> <span class="o">=</span> <span class="n">get_input</span><span class="p">(</span><span class="s2">&quot;summary&quot;</span><span class="p">)</span>
-    <span class="n">markdown</span> <span class="o">=</span> <span class="n">get_bool</span><span class="p">(</span><span class="s2">&quot;markdown&quot;</span><span class="p">)</span>
-    <span class="n">post</span> <span class="o">=</span> <span class="n">Article</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">summary</span><span class="p">,</span> <span class="n">markdown</span><span class="p">)</span>
-<span class="c1">#     post.create_file()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>I've commented out the last line that actually creates the file because I really don't want to create it at the moment, but let's the see the rest in action:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">main</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Since the default is to create a markdown file, no answer was needed for the last question.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Exploring-the-Article-object">Exploring the Article object<a class="anchor-link" href="#Exploring-the-Article-object">&#182;</a></h3><p>Ok, so what did that actually do?
-Let's see!</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">post</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-25-9414b608df81&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>post
-
-<span class="ansi-red-fg">NameError</span>: name &#39;post&#39; is not defined</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Oh no, what happened?
-Well when I normally run the script, it automatically creates the new file for me.
-In this instance, it created the new <code>post</code> but it was lost in the <code>main</code> function because I didn't save its state!
-I'll leave it up to you to explore what it contains, but it's pretty easy to see that it just filled in everything that I need to boilerplate a new pelican blog post.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="How-can-you-do-the-same">How can you do the same<a class="anchor-link" href="#How-can-you-do-the-same">&#182;</a></h2><p>Make sure that you're working in your virtual environment and go into the directory where you have your blog project.
-Create a plugins directory if you don't already have one and go into it.
-Then clone the plugin's repos directly into it.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="c1"># from inside your project folder</span>
-mkdir plugins, <span class="nb">cd</span> <span class="nv">$_</span>
-git clone https://github.com/danielfrg/pelican-ipynb ipynb
-</pre></div>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Open up your <code>pelicanconf.py</code> file and make the following changes/additions:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="n">MARKUP</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;md&quot;</span><span class="p">,</span> <span class="s2">&quot;ipynb&quot;</span><span class="p">)</span>
-<span class="n">PLUGIN_PATHS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;./plugins&quot;</span><span class="p">]</span>
-<span class="n">PLUGINS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ipynb.markup&quot;</span><span class="p">]</span>
-<span class="n">IGNORE_FILES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.ipynb_checkpoints&quot;</span><span class="p">]</span>
-<span class="n">IPYNB_USE_METACELL</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># set to True if you want to embedd metadata into notebook</span>
-<span class="n">IPYNB_SKIP_CSS</span> <span class="o">=</span> <span class="kc">True</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, if you want to do what I'm doing and keep the <em>metadata</em> in its own file and out of the notebook, you'll have to create a file with the exact same name as the notebook but with the <code>.nbdata</code> extension.
-The one for this article looks like this:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-<pre><code>title: Playing around with Jupyter notebooks
-date: 2020-03-09 19:43
-modified: 2020-03-10 08:17
-category: Blog
-tags: jupyter, notebook, python
-slug: playing-around-with-jupyter-notebooks
-author: Martin Uribe
-summary: Just giving the notebook plugin a test run to see how things render</code></pre>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Make sure there is an empty line at the end of the file.
-To embed directly into the notebook, modify it like this and put it in the first cell:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-<pre><code>- title: Playing around with Jupyter notebooks
-- date: 2020-03-09 19:43
-- modified: 2020-03-10 08:17
-- category: Blog
-- tags: jupyter, notebook, python
-- slug: playing-around-with-jupyter-notebooks
-- author: Martin Uribe
-- summary: Just giving the notebook plugin a test run to see how things render</code></pre>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Making-it-look-pretty">Making it look pretty<a class="anchor-link" href="#Making-it-look-pretty">&#182;</a></h3><p>Originally when the notebook was being converted into html, it was putting anchor tags at the end of headings that I didn't like it. 
-<img src="https://clamytoe.github.io/images/nb-anchor.png" alt="nb-anchor">
-Also, each code cell was getting a <strong>In[1]</strong> placed in front of it, indicating in which order it was run.
-I don't need or want any of those, any code that I post will be expected to be ran in order.
-To get rid of them, I created these custom CSS entries into the style sheet of my theme:</p>
-<div class="highlight"><pre><span></span><span class="o">//</span> <span class="nt">jupyter</span> <span class="nt">notebook</span>
-<span class="nt">a</span><span class="p">.</span><span class="nc">anchor-link</span> <span class="p">{</span>
-    <span class="k">visibility</span><span class="p">:</span> <span class="kc">hidden</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="p">.</span><span class="nc">prompt</span><span class="o">,</span> <span class="p">.</span><span class="nc">output_prompt</span> <span class="p">{</span>
-    <span class="k">visibility</span><span class="p">:</span> <span class="kc">hidden</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h2><p>So far, I can't complain.
-This interface does seem a little nicer for some reason.
-Perhaps I need to change the black theme of my <a href="https://code.visualstudio.com/">VSCode</a> back to normal and see if that makes a difference in the "feels" department.
-The notebook definitely gives me more options, but also takes some away.
-For instance, I can't use the <a href="https://github.com/getpelican/pelican-plugins/tree/master/liquid_tags">liquid_tags</a> Pelican plugin!</p>
-<p>Like all things, it's going to take some more experimentation to see what works and what doesn't.</p>
-
-</div>
-</div>
-</div>
- 
-
-
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
-    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: 'center'," +
-        "    displayIndent: '0em'," +
-        "    showMathMenu: true," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['$','$'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        " linebreaks: { automatic: true, width: '95% container' }, " +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
-        "    } " +
-        "}); ";
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
-</section>
-            <a href="https://clamytoe.github.io/articles/2020/Mar/09/playing-around-with-jupyter-notebooks#disqus_thread"></a>
+            <p>Seeing how notebooks compare to just plain Markdown¶ What is a Jupyter Notebook¶Well it's a document that lets you render markdown code, display code blocks, and also allows you to execute those code blocks and display their results interactively! Needless to say, they are definitely game changers. It's like the Python interpreter...</p>
+            <p><a href="https://clamytoe.github.io/articles/2020/Mar/09/playing-around-with-jupyter-notebooks">Read More</a></p>
         <hr class="uk-article-divider">
     </article>
 

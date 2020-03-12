@@ -1,44 +1,40 @@
-<meta property="og:title" content="Ramblings" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://clamytoe.github.io" />
-<meta name="twitter:url" content="https://clamytoe.github.io" />
-<meta itemprop="name" content="Ramblings">
-<meta itemprop="url" content="https://clamytoe.github.io">
-<meta property="og:image" content="/img/clamytoe.png" />
-<meta property="og:image:type" content="image/png" />
-<meta name="twitter:image" content="/img/clamytoe.png" />
-<meta itemprop="image" content="/img/clamytoe.png"/>
-
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/Blog"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/Blog"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/Blog"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" class="no-js" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/Blog"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/BlogPosting"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/BlogPosting"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/BlogPosting"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/BlogPosting"> <!--<![endif]-->
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Python</title>
+<title>Testing ABC's with abstractmethods with Pytest</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
+<meta name="description" content="What I had to do to get 100% coverage on my tests">
 <link rel="shortcut icon" href="https://clamytoe.github.io/favicon.ico" type="image/vnd.microsoft.icon">
 <meta name="author" content="Martin Uribe">
 <meta name="copyright" content="Martin Uribe">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@clamytoe" />
 <meta property="og:site_name" content="Ramblings" />
-<meta property="og:title" content="Ramblings" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://clamytoe.github.io" />
-<meta name="twitter:url" content="https://clamytoe.github.io" />
-<meta itemprop="name" content="Ramblings" />
-<meta itemprop="url" content="https://clamytoe.github.io"/>
-<meta property="og:description" content="A blog about my struggles and learning about programming, software development and life." />
-<meta name="twitter:description" content="A blog about my struggles and learning about programming, software development and life." />
-<meta itemprop="description" content="A blog about my struggles and learning about programming, software development and life." />
+
+<meta property="og:title" content="Testing abc's with abstractmethods with pytest" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://clamytoe.github.io/articles/2020/Mar/12/testing-abc's-with-abstractmethods-with-pytest" />
+<meta name="twitter:title" content="Testing abc's with abstractmethods with pytest" />
+<meta name="twitter:url" content="https://clamytoe.github.io/articles/2020/Mar/12/testing-abc's-with-abstractmethods-with-pytest" />
+<meta itemprop="url" content="https://clamytoe.github.io/articles/2020/Mar/12/testing-abc's-with-abstractmethods-with-pytest" />
+<meta property="og:description" content="What I had to do to get 100% coverage on my tests" />
+<meta name="twitter:description" content="What I had to do to get 100% coverage on my tests" />
+<meta property="og:article:published_time" content="2020-03-12" />
+<meta property="og:article:author" content="Martin Uribe" >
+<meta property="og:article:tag" content="python">
+<meta property="og:article:tag" content="pytest">
+<meta property="og:article:tag" content="abc">
+<meta property="og:article:tag" content="abstractmethods">
 <meta property="og:image" content="/img/clamytoe.png" />
 <meta property="og:image:type" content="image/png" />
 <meta name="twitter:image" content="/img/clamytoe.png" />
 <meta itemprop="image" content="/img/clamytoe.png" />
+
 <link href="https://clamytoe.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Ramblings ATOM Feed"/>
 <link href='//fonts.googleapis.com/css?family=Open+Sans:800italic' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
@@ -73,15 +69,36 @@
 
     <div class="uk-grid" data-uk-grid-margin>
 
-<div class="uk-width-medium-4-5">
+<div class="mg-container-social uk-width-medium-1-10 uk-hidden-small">
 
+    <div class="uk-panel" id="mg-panel-social">
+        <ul class="uk-nav uk-nav-side">
+            <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://clamytoe.github.io/articles/2020/Mar/12/testing-abc's-with-abstractmethods-with-pytest" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" taget="_blank" class="uk-button"><i class="uk-icon-facebook-square"></i> Share</a>
+            </li>
+            <li>
+            <a href="https://twitter.com/intent/tweet?text=Testing%20ABC%27s%20with%20abstractmethods%20with%20Pytest&url=https://clamytoe.github.io/articles/2020/Mar/12/testing-abc's-with-abstractmethods-with-pytest&via=clamytoe" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="uk-button" target="_blank"><i class="uk-icon-twitter"></i> Tweet</a>
+            </li>
+            <li>
+            <a href="https://plus.google.com/share?url=https://clamytoe.github.io/articles/2020/Mar/12/testing-abc's-with-abstractmethods-with-pytest" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank" class="uk-button"><i class="uk-icon-google-plus-square"></i> Share</a>
+            </li>
+        </ul>
+    </div>
 
-    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-        <a href="https://clamytoe.github.io/articles/2020/Mar/12/testing-abc's-with-abstractmethods-with-pytest" class="uk-article-title uk-link-muted" itemprop="name">Testing ABC's with abstractmethods with Pytest</a>
-        <p class="uk-article-meta"><time datetime="2020-03-12" itemprop="datePublished">Thu 12 March 2020</time> • <a href="https://clamytoe.github.io/category/python.html">Python</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">3 min</span></span></p>
-        </p>
+</div>
+
+<div class="uk-width-medium-7-10">
+
+    <article class="uk-article">
+        <h1 class="uk-heading-large uk-article-title" itemprop="name">Testing ABC's with abstractmethods with Pytest</h1>
+        <p class="uk-article-meta"><time datetime="2020-03-12" itemprop="datePublished">Thu 12 March 2020</time> in <a href="https://clamytoe.github.io/category/python.html">Python</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">3 min</span></span></p>
+
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://clamytoe.github.io/articles/2020/Mar/12/testing-abc's-with-abstractmethods-with-pytest" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" taget="_blank" class="uk-button uk-visible-small"><i class="uk-icon-facebook-square"></i> Share</a>
+        <a href="https://twitter.com/intent/tweet?text=Testing%20ABC%27s%20with%20abstractmethods%20with%20Pytest&url=https://clamytoe.github.io/articles/2020/Mar/12/testing-abc's-with-abstractmethods-with-pytest&via=clamytoe" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="uk-button uk-visible-small" target="_blank"><i class="uk-icon-twitter"></i> Tweet</a>
+        <a href="https://plus.google.com/share?url=https://clamytoe.github.io/articles/2020/Mar/12/testing-abc's-with-abstractmethods-with-pytest" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank" class="uk-button uk-visible-small"><i class="uk-icon-google-plus-square"></i> Share</a>
+
         <p class="uk-article-lead" itemprop="description">What I had to do to get 100% coverage on my tests</p>
-            <section itemprop="articleBody"><h1>Testing ABC's with abstractmethods with Pytest</h1>
+        <section itemprop="articleBody"><h1>Testing ABC's with abstractmethods with Pytest</h1>
 <p>I was working on writing a new code challenge for <a href="https://codechalleng.es/">Codechalleng.es</a> the other day.
 It's based on <a href="https://realpython.com/inheritance-composition-python/">inheritance and composition</a> and uses <a href="https://docs.python.org/3/library/abc.html">Abstract Base Classes</a> to define the interfaces that should be implemented in classes derived from it.</p>
 <p>I was just finishing up with the tests and everything was passing.
@@ -169,29 +186,6 @@ The last three <em>asserts</em> then verify that <code>None</code> is being retu
 <p>If you're ever faced with having to write test for abstract methods, simply override the <code>__abstractmethods__</code> of the ABC class!
 Definitely something to keep in your toolbox.</p>
 <p>Until next time, happy coding!</p></section>
-            <a href="https://clamytoe.github.io/articles/2020/Mar/12/testing-abc's-with-abstractmethods-with-pytest#disqus_thread"></a>
-        <hr class="uk-article-divider">
-    </article>
-
-
-    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-        <a href="https://clamytoe.github.io/articles/2020/Feb/19/pytest-fixtures" class="uk-article-title uk-link-muted" itemprop="name">Pytest fixtures with tear down</a>
-        <p class="uk-article-meta"><time datetime="2020-02-19" itemprop="datePublished">Wed 19 February 2020</time> • <a href="https://clamytoe.github.io/category/python.html">Python</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">3 min</span></span></p>
-        </p>
-        <p class="uk-article-lead" itemprop="description">Figured out how to tear down a pytest fixture</p>
-            <p>Pytest fixtures with tear down code Setting up pytest fixtures with teardown code Today after listening to Brian Okken's Test & Code podcast with Anthony Shaw, I was reminded that I wanted to install Anthony's Python Security Plugin for JetBrain's PyCharm IDE. That was a breeze to install and it just worked out of the box. I fired it up and it automatically checked my code and called it good. I then started to write...</p>
-            <p><a href="https://clamytoe.github.io/articles/2020/Feb/19/pytest-fixtures">Read More</a></p>
-        <hr class="uk-article-divider">
-    </article>
-
-
-    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-        <a href="https://clamytoe.github.io/articles/2020/Feb/14/pycryptodome" class="uk-article-title uk-link-muted" itemprop="name">Into the cryptography rabbit hole</a>
-        <p class="uk-article-meta"><time datetime="2020-02-14" itemprop="datePublished">Fri 14 February 2020</time> • <a href="https://clamytoe.github.io/category/python.html">Python</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">5 min</span></span></p>
-        </p>
-        <p class="uk-article-lead" itemprop="description">Learning about how to encrypt files</p>
-            <p>Venture Into Cryptography with PyCryptodome Learning about how to encrypt files As dumb as it is, I have an unsecured text file that I use to keep track of all my username and passwords for all of the sites that I frequent. In order to not be so "hackable", I've decided to encrypt the file. I had recently written a couple of coding challenges for Pybites Code Challenges site, using the cryptography module. One was a coding...</p>
-            <p><a href="https://clamytoe.github.io/articles/2020/Feb/14/pycryptodome">Read More</a></p>
         <hr class="uk-article-divider">
     </article>
 
