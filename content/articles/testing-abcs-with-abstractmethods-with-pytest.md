@@ -20,11 +20,11 @@ The best suggestion was to use the *dis* module and test it that way, but since 
 
 ## How to test abstract methods
 
-Finally I came across this post on [reddit]() that had the solution. Here is what the code looks like, with doctrings removed:
+Finally I came across this post on [reddit](https://stackoverflow.com/questions/9757299/python-testing-an-abstract-base-class#17345619) that had the solution.
+Here is what the code looks like, with doctrings removed:
 
 ```python
 class Site(ABC):
-
     web: Web
 
     def find_table(self, loc: int = 0) -> str:
