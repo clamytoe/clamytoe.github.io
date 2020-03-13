@@ -1,20 +1,20 @@
 title: MongoDB CLI Intro
 date: 2020-03-07 12:27
-modified: 2020-03-07 13:15
+modified: 2020-03-12 23:08
 category: Database
 tags: mongodb, cli
 slug: mongodb-cli-intro
 author: Martin Uribe
 summary: Quick introduction on how to connect to a mondoDB database through the built in mongo cli application
 
-# MongoDB CLI Intro
+# Why another article on MongoDB
 
 After publishing my article on [How to install MongoDB on Linux]({filename}how-to-install-mongodb-on-linux.md) I realized that I should have covered how to access it through the command line!
 Didn't occur to me that anyone reading it might not want to download and install [Robo 3T](https://robomongo.org/)!
 
 Sorry about that!
 
-### Intro into the mongo cli app
+## Intro into the mongo cli app
 
 It's simple enough.
 Now I'm no expert but this is what I discovered just playing around with it.
