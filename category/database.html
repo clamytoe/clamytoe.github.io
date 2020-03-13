@@ -80,126 +80,8 @@
         <p class="uk-article-meta"><time datetime="2020-03-07" itemprop="datePublished">Sat 07 March 2020</time> • <a href="https://clamytoe.github.io/category/database.html">Database</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">4 min</span></span></p>
         </p>
         <p class="uk-article-lead" itemprop="description">Quick introduction on how to connect to a mondoDB database through the built in mongo cli application</p>
-            <section itemprop="articleBody"><h1>MongoDB CLI Intro</h1>
-<p>After publishing my article on <a href="https://clamytoe.github.io/articles/2020/Mar/06/how-to-install-mongodb-on-linux">How to install MongoDB on Linux</a> I realized that I should have covered how to access it through the command line!
-Didn't occur to me that anyone reading it might not want to download and install <a href="https://robomongo.org/">Robo 3T</a>!</p>
-<p>Sorry about that!</p>
-<h3>Intro into the mongo cli app</h3>
-<p>It's simple enough.
-Now I'm no expert but this is what I discovered just playing around with it.</p>
-<div class="highlight"><pre><span></span><code>(<span class="n">base</span>) ➜  ~ <span class="n">mongo</span>
-<span class="n">MongoDB</span> <span class="n">shell</span> <span class="n">version</span> <span class="n">v4</span><span class="mf">.2.3</span>
-<span class="n">connecting</span> <span class="n">to:</span> <span class="n">mongodb:</span>//<span class="mf">127.0.0.1</span>:<span class="mi">27017</span>/?<span class="n">compressors</span>=<span class="n">disabled</span><span class="nv">&amp;gssapiServiceName</span>=<span class="n">mongodb</span>
-<span class="n">Implicit</span> <span class="n">session:</span> <span class="n">session</span> { <span class="s">&quot;id&quot;</span> : <span class="n">UUID</span>(<span class="s">&quot;39eaf67e-7de5-4874-ba3e-a6673080cfbc&quot;</span>) }
-<span class="n">MongoDB</span> <span class="n">server</span> <span class="n">version:</span> <span class="mf">4.2.3</span>
-<span class="n">Welcome</span> <span class="nb">to</span> <span class="n">the</span> <span class="n">MongoDB</span> <span class="n">shell</span>.
-<span class="n">For</span> <span class="n">interactive</span> <span class="n">help</span>, <span class="n">type</span> <span class="s">&quot;help&quot;</span>.
-<span class="n">For</span> <span class="n">more</span> <span class="n">comprehensive</span> <span class="n">documentation</span>, <span class="n">see</span>
-    <span class="n">http:</span>//<span class="n">docs</span>.<span class="n">mongodb</span>.<span class="n">org</span>/
-<span class="n">Questions</span>? <span class="n">Try</span> <span class="n">the</span> <span class="n">support</span> <span class="n">group</span>
-    <span class="n">http:</span>//<span class="n">groups</span>.<span class="n">google</span>.<span class="n">com</span><span class="o">/</span><span class="n">group</span><span class="o">/</span><span class="n">mongodb-user</span>
-<span class="n">Server</span> <span class="k">has</span> <span class="n">startup</span> <span class="n">warnings:</span> 
-<span class="mi">2020</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mo">06</span><span class="n">T20:35:19</span><span class="mf">.314</span><span class="o">-</span><span class="mo">0600</span> <span class="n">I</span>  <span class="n">STORAGE</span>  [<span class="n">initandlisten</span>] 
-<span class="mi">2020</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mo">06</span><span class="n">T20:35:19</span><span class="mf">.314</span><span class="o">-</span><span class="mo">0600</span> <span class="n">I</span>  <span class="n">STORAGE</span>  [<span class="n">initandlisten</span>] ** <span class="n">WARNING:</span> <span class="n">Using</span> <span class="n">the</span> <span class="n">XFS</span> <span class="n">filesystem</span> <span class="k">is</span> <span class="n">strongly</span> <span class="n">recommended</span> <span class="n">with</span> <span class="n">the</span> <span class="n">WiredTiger</span> <span class="n">storage</span> <span class="n">engine</span>
-<span class="mi">2020</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mo">06</span><span class="n">T20:35:19</span><span class="mf">.314</span><span class="o">-</span><span class="mo">0600</span> <span class="n">I</span>  <span class="n">STORAGE</span>  [<span class="n">initandlisten</span>] **          <span class="n">See</span> <span class="n">http:</span>//<span class="n">dochub</span>.<span class="n">mongodb</span>.<span class="n">org</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">prodnotes-filesystem</span>
-<span class="mi">2020</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mo">06</span><span class="n">T20:35:22</span><span class="mf">.538</span><span class="o">-</span><span class="mo">0600</span> <span class="n">I</span>  <span class="k">CONTROL</span>  [<span class="n">initandlisten</span>] 
-<span class="mi">2020</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mo">06</span><span class="n">T20:35:22</span><span class="mf">.539</span><span class="o">-</span><span class="mo">0600</span> <span class="n">I</span>  <span class="k">CONTROL</span>  [<span class="n">initandlisten</span>] ** <span class="n">WARNING:</span> <span class="n">Access</span> <span class="n">control</span> <span class="k">is</span> <span class="nb">not</span> <span class="n">enabled</span> <span class="k">for</span> <span class="n">the</span> <span class="n">database</span>.
-<span class="mi">2020</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mo">06</span><span class="n">T20:35:22</span><span class="mf">.539</span><span class="o">-</span><span class="mo">0600</span> <span class="n">I</span>  <span class="k">CONTROL</span>  [<span class="n">initandlisten</span>] **          <span class="n">Read</span> <span class="o">and</span> <span class="nb">write</span> <span class="n">access</span> <span class="nb">to</span> <span class="n">data</span> <span class="o">and</span> <span class="n">configuration</span> <span class="k">is</span> <span class="n">unrestricted</span>.
-<span class="mi">2020</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mo">06</span><span class="n">T20:35:22</span><span class="mf">.539</span><span class="o">-</span><span class="mo">0600</span> <span class="n">I</span>  <span class="k">CONTROL</span>  [<span class="n">initandlisten</span>] 
----
-<span class="n">Enable</span> <span class="n">MongoDB&#39;s</span> <span class="n">free</span> <span class="n">cloud-based</span> <span class="n">monitoring</span> <span class="n">service</span>, <span class="n">which</span> <span class="k">will</span> <span class="n">then</span> <span class="n">receive</span> <span class="o">and</span> <span class="n">display</span>
-<span class="n">metrics</span> <span class="n">about</span> <span class="n">your</span> <span class="n">deployment</span> (<span class="n">disk</span> <span class="n">utilization</span>, <span class="n">CPU</span>, <span class="n">operation</span> <span class="n">statistics</span>, <span class="n">etc</span>).
-
-<span class="n">The</span> <span class="n">monitoring</span> <span class="n">data</span> <span class="k">will</span> <span class="n">be</span> <span class="n">available</span> <span class="n">on</span> <span class="n">a</span> <span class="n">MongoDB</span> <span class="n">website</span> <span class="n">with</span> <span class="n">a</span> <span class="n">unique</span> <span class="n">URL</span> <span class="n">accessible</span> <span class="nb">to</span> <span class="n">you</span>
-<span class="o">and</span> <span class="n">anyone</span> <span class="n">you</span> <span class="n">share</span> <span class="n">the</span> <span class="n">URL</span> <span class="n">with</span>. <span class="n">MongoDB</span> <span class="n">may</span> <span class="k">use</span> <span class="n">this</span> <span class="n">information</span> <span class="nb">to</span> <span class="k">make</span> <span class="n">product</span>
-<span class="n">improvements</span> <span class="o">and</span> <span class="nb">to</span> <span class="n">suggest</span> <span class="n">MongoDB</span> <span class="n">products</span> <span class="o">and</span> <span class="n">deployment</span> <span class="n">options</span> <span class="nb">to</span> <span class="n">you</span>.
-
-<span class="n">To</span> <span class="n">enable</span> <span class="n">free</span> <span class="n">monitoring</span>, <span class="nb">run</span> <span class="n">the</span> <span class="n">following</span> <span class="n">command:</span> <span class="n">db</span>.<span class="n">enableFreeMonitoring</span>()
-<span class="n">To</span> <span class="n">permanently</span> <span class="n">disable</span> <span class="n">this</span> <span class="n">reminder</span>, <span class="nb">run</span> <span class="n">the</span> <span class="n">following</span> <span class="n">command:</span> <span class="n">db</span>.<span class="n">disableFreeMonitoring</span>()
----
-
-&gt;
-</code></pre></div>
-
-
-<p>As you can tell, I haven't secured the database yet.
-Let's continue exploring though and see what the <em>help</em> command will show us.</p>
-<div class="highlight"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="n">help</span><span class="w"></span>
-<span class="w">    </span><span class="n">db</span><span class="p">.</span><span class="n">help</span><span class="p">()</span><span class="w">                    </span><span class="n">help</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="n">methods</span><span class="w"></span>
-<span class="w">    </span><span class="n">db</span><span class="p">.</span><span class="n">mycoll</span><span class="p">.</span><span class="n">help</span><span class="p">()</span><span class="w">             </span><span class="n">help</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">collection</span><span class="w"> </span><span class="n">methods</span><span class="w"></span>
-<span class="w">    </span><span class="n">sh</span><span class="p">.</span><span class="n">help</span><span class="p">()</span><span class="w">                    </span><span class="n">sharding</span><span class="w"> </span><span class="n">helpers</span><span class="w"></span>
-<span class="w">    </span><span class="n">rs</span><span class="p">.</span><span class="n">help</span><span class="p">()</span><span class="w">                    </span><span class="n">replica</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">helpers</span><span class="w"></span>
-<span class="w">    </span><span class="n">help</span><span class="w"> </span><span class="k">admin</span><span class="w">                   </span><span class="n">administrative</span><span class="w"> </span><span class="n">help</span><span class="w"></span>
-<span class="w">    </span><span class="n">help</span><span class="w"> </span><span class="k">connect</span><span class="w">                 </span><span class="n">connecting</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="n">help</span><span class="w"></span>
-<span class="w">    </span><span class="n">help</span><span class="w"> </span><span class="n">keys</span><span class="w">                    </span><span class="k">key</span><span class="w"> </span><span class="n">shortcuts</span><span class="w"></span>
-<span class="w">    </span><span class="n">help</span><span class="w"> </span><span class="n">misc</span><span class="w">                    </span><span class="n">misc</span><span class="w"> </span><span class="n">things</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">know</span><span class="w"></span>
-<span class="w">    </span><span class="n">help</span><span class="w"> </span><span class="n">mr</span><span class="w">                      </span><span class="n">mapreduce</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">show</span><span class="w"> </span><span class="n">dbs</span><span class="w">                     </span><span class="n">show</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="k">names</span><span class="w"></span>
-<span class="w">    </span><span class="n">show</span><span class="w"> </span><span class="n">collections</span><span class="w">             </span><span class="n">show</span><span class="w"> </span><span class="n">collections</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">current</span><span class="w"> </span><span class="k">database</span><span class="w"></span>
-<span class="w">    </span><span class="n">show</span><span class="w"> </span><span class="n">users</span><span class="w">                   </span><span class="n">show</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">current</span><span class="w"> </span><span class="k">database</span><span class="w"></span>
-<span class="w">    </span><span class="n">show</span><span class="w"> </span><span class="n">profile</span><span class="w">                 </span><span class="n">show</span><span class="w"> </span><span class="n">most</span><span class="w"> </span><span class="n">recent</span><span class="w"> </span><span class="k">system</span><span class="p">.</span><span class="n">profile</span><span class="w"> </span><span class="n">entries</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="nc">time</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1</span><span class="n">ms</span><span class="w"></span>
-<span class="w">    </span><span class="n">show</span><span class="w"> </span><span class="n">logs</span><span class="w">                    </span><span class="n">show</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">accessible</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span><span class="k">names</span><span class="w"></span>
-<span class="w">    </span><span class="n">show</span><span class="w"> </span><span class="nf">log</span><span class="w"> </span><span class="o">[</span><span class="n">name</span><span class="o">]</span><span class="w">              </span><span class="n">prints</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">last</span><span class="w"> </span><span class="n">segment</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nf">log</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">memory</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;global&#39;</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">default</span><span class="w"></span>
-<span class="w">    </span><span class="k">use</span><span class="w"> </span><span class="o">&lt;</span><span class="nf">db_name</span><span class="o">&gt;</span><span class="w">                </span><span class="k">set</span><span class="w"> </span><span class="k">current</span><span class="w"> </span><span class="k">database</span><span class="w"></span>
-<span class="w">    </span><span class="n">db</span><span class="p">.</span><span class="n">foo</span><span class="p">.</span><span class="n">find</span><span class="p">()</span><span class="w">                </span><span class="n">list</span><span class="w"> </span><span class="n">objects</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">collection</span><span class="w"> </span><span class="n">foo</span><span class="w"></span>
-<span class="w">    </span><span class="n">db</span><span class="p">.</span><span class="n">foo</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="err">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="err">}</span><span class="w"> </span><span class="p">)</span><span class="w">     </span><span class="n">list</span><span class="w"> </span><span class="n">objects</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
-<span class="w">    </span><span class="n">it</span><span class="w">                           </span><span class="k">result</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">last</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="n">evaluated</span><span class="p">;</span><span class="w"> </span><span class="k">use</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">further</span><span class="w"> </span><span class="k">iterate</span><span class="w"></span>
-<span class="w">    </span><span class="n">DBQuery</span><span class="p">.</span><span class="n">shellBatchSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w">   </span><span class="k">set</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">display</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">shell</span><span class="w"></span>
-<span class="w">    </span><span class="k">exit</span><span class="w"></span>
-<span class="o">&gt;</span><span class="w"></span>
-</code></pre></div>
-
-
-<p>Ok, looks simple enough. That <em>show dbs</em> sounds interesting.</p>
-<div class="highlight"><pre><span></span><code><span class="err">&gt; show dbs</span>
-<span class="err">admin      0.000GB</span>
-<span class="err">config     0.000GB</span>
-<span class="err">local      0.000GB</span>
-<span class="err">snake_bnb  0.000GB</span>
-<span class="err">&gt;</span>
-</code></pre></div>
-
-
-<p>Ok, I see the <em>snake_bnb</em> database that we created during the <a href="https://freemongodbcourse.com/">MongoDB Quickstart</a> tutorial.
-Let's see what's in it with that <code>use &lt;db_name&gt;</code> command, followed by <code>show collections</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="err">&gt; use snake_bnb</span>
-<span class="err">switched to db snake_bnb</span>
-<span class="err">&gt; show collections</span>
-<span class="err">owners</span>
-<span class="err">&gt;</span>
-</code></pre></div>
-
-
-<p>Now if I reference the <em>help</em> command again, I see that I can use <code>db.foo.find()</code> to do a dump of everything in it.</p>
-<div class="highlight"><pre><span></span><code><span class="err">&gt; db.owners.find()</span>
-<span class="err">{ &quot;_id&quot; : ObjectId(&quot;5e6243ca45ed06e7f09781fc&quot;), &quot;registered_date&quot; : ISODate(&quot;2020-03-06T06:36:26.108Z&quot;), &quot;name&quot; : &quot;clamytoe&quot;, &quot;email&quot; : &quot;clamytoe@gmail.com&quot;, &quot;snake_ids&quot; : [ ], &quot;cage_ids&quot; : [ ] }</span>
-<span class="err">&gt;</span>
-</code></pre></div>
-
-
-<p>If I had more entries, it looks like I could search for specific entries with <code>db.foo.find( { a : 1 } )</code>.
-I only have one record, so I should just get the same result as the previous command.</p>
-<div class="highlight"><pre><span></span><code><span class="err">&gt; db.owners.find( {&quot;name&quot;: &quot;clamytoe&quot;} )</span>
-<span class="err">{ &quot;_id&quot; : ObjectId(&quot;5e6243ca45ed06e7f09781fc&quot;), &quot;registered_date&quot; : ISODate(&quot;2020-03-06T06:36:26.108Z&quot;), &quot;name&quot; : &quot;clamytoe&quot;, &quot;email&quot; : &quot;clamytoe@gmail.com&quot;, &quot;snake_ids&quot; : [ ], &quot;cage_ids&quot; : [ ] }</span>
-<span class="err">&gt;</span>
-</code></pre></div>
-
-
-<p>To exit, we just use the <em>exit</em> command.</p>
-<div class="highlight"><pre><span></span><code><span class="err">&gt; exit</span>
-<span class="err">bye</span>
-<span class="err">(base) ➜  ~</span>
-</code></pre></div>
-
-
-<h2>Conclusion</h2>
-<p>There you have it.
-A quick intro into using the <em>mongo</em> cli app.
-Simple enough for quick exploration of your databases.
-I'll probably be spending more time in <em>Robo 3T</em> though.
-Not only can your explore the databases through a GUI, but you can also easily add, delete, and update and entries with it.</p>
-<p><img alt="robo-edit" src="https://clamytoe.github.io/images/robo-edit.png"></p></section>
+            <section itemprop="articleBody">MongoDB CLI Intro After publishing my article on How to install MongoDB on Linux I realized that I should have covered how to access it through the command line! Didn't occur to me that anyone reading it might not want to download and install Robo 3T! Sorry about that! Intro into the mongo cli app It's simple enough. Now I'm no expert but this is what I discovered just playing around with it. (base) ➜ ~ mongo MongoDB shell version v4.2.3 connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb Implicit session: session { "id" : UUID("39eaf67e-7de5-4874-ba3e-a6673080cfbc") } MongoDB server version: 4.2.3 Welcome to the MongoDB shell. For interactive help, type "help". For more comprehensive documentation, see http://docs.mongodb.org/ Questions? Try the support group http://groups.google.com/group/mongodb-user Server has startup warnings: 2020-03-06T20:35:19.314-0600 I STORAGE [initandlisten] 2020-03-06T20:35:19.314-0600 I STORAGE [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine 2020-03-06T20:35:19.314-0600 I STORAGE [initandlisten] ** See http://dochub.mongodb.org/core/prodnotes-filesystem 2020-03-06T20:35:22.538-0600 I CONTROL [initandlisten] 2020-03-06T20:35:22.539-0600 I CONTROL [initandlisten] ** WARNING: Access control is not enabled for the database. 2020-03-06T20:35:22.539-0600 I CONTROL [initandlisten] ** Read and write access to data and configuration is unrestricted....</section>
+            <p><a href="https://clamytoe.github.io/articles/2020/Mar/07/mongodb-cli-intro">Read More</a></p>
             <a href="https://clamytoe.github.io/articles/2020/Mar/07/mongodb-cli-intro#disqus_thread"></a>
         <hr class="uk-article-divider">
     </article>
@@ -210,7 +92,7 @@ Not only can your explore the databases through a GUI, but you can also easily a
         <p class="uk-article-meta"><time datetime="2020-03-06" itemprop="datePublished">Fri 06 March 2020</time> • <a href="https://clamytoe.github.io/category/database.html">Database</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">4 min</span></span></p>
         </p>
         <p class="uk-article-lead" itemprop="description">How to prepare to start working with MongoDB</p>
-            <p>How to install MongoDB on Linux So the other day I started going through Michael Kennedy's free MongoDB Quickstart course. Although he covered the Python code portions, he left getting everything setup, up to you. If you're on a Linux machine that uses APT, then keep on reading. Getting MongoDB I could have gone over to MongoDB's download page, and selected the correct version for my setup, but I wanted to stick with the package manager on my...</p>
+            <p>Learning about MongoDB So the other day I started going through Michael Kennedy's free MongoDB Quickstart course. Although he covered the Python code portions, he left getting everything setup, up to you. If you're on a Linux machine that uses APT, then keep on reading. Getting MongoDB I could have gone over to MongoDB's download page, and selected the correct version for my setup, but I wanted to stick with the package manager on my machine. The latest version...</p>
             <p><a href="https://clamytoe.github.io/articles/2020/Mar/06/how-to-install-mongodb-on-linux">Read More</a></p>
         <hr class="uk-article-divider">
     </article>
