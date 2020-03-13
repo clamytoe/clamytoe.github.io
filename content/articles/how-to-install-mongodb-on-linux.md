@@ -1,13 +1,13 @@
 title: How to install MongoDB on Linux
 date: 2020-03-06 12:53
-modified: 2020-03-08 13:57
+modified: 2020-03-12 21:52
 category: Database
 tags: mongo, mongodb, mongoengine, robot3t
 slug: how-to-install-mongodb-on-linux
 author: Martin Uribe
 summary: How to prepare to start working with MongoDB
 
-# How to install MongoDB on Linux
+# Learning about MongoDB
 
 So the other day I started going through Michael Kennedy's free [MongoDB Quickstart](https://training.talkpython.fm/courses/details/mongodb-python-quickstart-mongoengine) course.
 Although he covered the Python code portions, he left getting everything setup, up to you.

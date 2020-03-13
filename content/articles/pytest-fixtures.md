@@ -1,15 +1,13 @@
 title: Pytest fixtures with tear down
 date: 2020-02-19 17:40
-modified: 2020-03-01 00:57
+modified: 2020-03-12 21:55
 category: Python
 tags: pytest, fixtures, tear-down
 slug: pytest-fixtures
 author: Martin Uribe
 summary: Figured out how to tear down a pytest fixture
 
-# Pytest fixtures with tear down code
-
-## Setting up pytest fixtures with teardown code
+# Setting up pytest fixtures with teardown code
 
 Today after listening to [Brian Okken's](https://twitter.com/brianokken) [Test & Code](https://testandcode.com/) podcast with [Anthony Shaw](https://twitter.com/anthonypjshaw), I was reminded that I wanted to install Anthony's [Python Security Plugin](https://github.com/tonybaloney/pycharm-security) for [JetBrain's PyCharm](https://www.jetbrains.com/pycharm/) IDE.
 That was a breeze to install and it just worked out of the box.

@@ -1,12 +1,13 @@
 title: Testing ABC's with abstract methods with Pytest
 date: 2020-03-12 10:31
+modified: 2020-03-12 21:51
 category: Python
 tags: python, pytest, abc, abstractmethods
 slug: testing-abcs-with-abstract-methods-with-pytest
 author: Martin Uribe
 summary: What I had to do to get 100% coverage on my tests
 
-# Testing ABC's with abstract methods with Pytest
+# So you want to test ABC's with pytest
 
 I was working on writing a new code challenge for [Codechalleng.es](https://codechalleng.es/) the other day.
 It's based on [inheritance and composition](https://realpython.com/inheritance-composition-python/) and uses [Abstract Base Classes](https://docs.python.org/3/library/abc.html) to define the interfaces that should be implemented in classes derived from it.
