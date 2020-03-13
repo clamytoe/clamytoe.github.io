@@ -13,8 +13,7 @@
         </p>
         <p class="uk-article-lead" itemprop="description">{{ article.summary|striptags }}</p>
         {% if loop.index == 1 %}
-            <section itemprop="articleBody">{{ ' '.join(article.content.splitlines()[0:25])|striptags }}...</section>
-            <p><a href="{{ SITEURL }}/{{ article.url }}">Read More</a></p>
+            <section itemprop="articleBody">{{ article.content }}</section>
             <a href="{{ SITEURL }}/{{ article.url }}#disqus_thread"></a>
         {% else %}
             <p>{{ ' '.join(article.content.split(' ')[0:75])|striptags }}...</p>
