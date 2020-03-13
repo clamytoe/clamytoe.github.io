@@ -69,8 +69,94 @@
         <p class="uk-article-meta"><time datetime="2020-03-12" itemprop="datePublished">Thu 12 March 2020</time> • <a href="https://clamytoe.github.io/category/python.html">Python</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">3 min</span></span></p>
         </p>
         <p class="uk-article-lead" itemprop="description">What I had to do to get 100% coverage on my tests</p>
-            <section itemprop="articleBody">So you want to test ABC's with pytest I was working on writing a new code challenge for Codechalleng.es the other day. It's based on inheritance and composition and uses Abstract Base Classes to define the interfaces that should be implemented in classes derived from it. I was just finishing up with the tests and everything was passing. Then when I checked the code coverage on it, I saw that it was complaining about my Site class, which is the one derived from ABC has several methods decorated as abstractmethods. Coverage wanted me to test the pass statements on them... Initial searches didn't turn up much, so I posed the question in PyBites slack channel. The best suggestion was to use the dis module and test it that way, but since it's not really running the code, coverage still counts it as untested. How to test abstract methods Finally I came across this post on reddit that had the solution. Here is what the code looks like, with doctrings removed: class Site(ABC): web: Web def find_table(self, loc: int = 0) -> str: return self.web.soup.find_all("table")[loc] @abstractmethod def parse_rows(self, table: Soup) -> List[Any]: pass @abstractmethod def polls(self, table: int = 0) -> List[Any]: pass...</section>
-            <p><a href="https://clamytoe.github.io/articles/2020/Mar/12/testing-abcs-with-abstract-methods-with-pytest">Read More</a></p>
+            <section itemprop="articleBody"><h1>So you want to test ABC's with pytest</h1>
+<p>I was working on writing a new code challenge for <a href="https://codechalleng.es/">Codechalleng.es</a> the other day.
+It's based on <a href="https://realpython.com/inheritance-composition-python/">inheritance and composition</a> and uses <a href="https://docs.python.org/3/library/abc.html">Abstract Base Classes</a> to define the interfaces that should be implemented in classes derived from it.</p>
+<p>I was just finishing up with the tests and everything was passing.
+Then when I checked the code coverage on it, I saw that it was complaining about my <em>Site</em> class, which is the one derived from ABC has several methods decorated as <em>abstractmethods</em>.
+<a href="https://coverage.readthedocs.io/en/coverage-5.0.3/">Coverage</a> wanted me to test the <code>pass</code> statements on them...</p>
+<p>Initial searches didn't turn up much, so I posed the question in PyBites slack channel.
+The best suggestion was to use the <em>dis</em> module and test it that way, but since it's not really running the code, coverage still counts it as untested.</p>
+<h2>How to test abstract methods</h2>
+<p>Finally I came across this post on <a href="https://stackoverflow.com/questions/9757299/python-testing-an-abstract-base-class#17345619">reddit</a> that had the solution.
+Here is what the code looks like, with doctrings removed:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Site</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="n">web</span><span class="p">:</span> <span class="n">Web</span>
+
+    <span class="k">def</span> <span class="nf">find_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loc</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">)[</span><span class="n">loc</span><span class="p">]</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">parse_rows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="n">Soup</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">polls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loc</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">pass</span>
+</code></pre></div>
+
+
+<p>Here is how you go about testing them:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">test_site</span><span class="p">(</span><span class="n">test_file</span><span class="p">):</span>
+    <span class="n">Site</span><span class="o">.</span><span class="n">__abstractmethods__</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="nd">@dataclass</span>
+    <span class="k">class</span> <span class="nc">Dummy</span><span class="p">(</span><span class="n">Site</span><span class="p">):</span>
+        <span class="n">web</span><span class="p">:</span> <span class="n">Web</span>
+
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://projects.fivethirtyeight.com/polls/&quot;</span>
+    <span class="n">test_web</span> <span class="o">=</span> <span class="n">Web</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">test_file</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">Dummy</span><span class="p">(</span><span class="n">test_web</span><span class="p">)</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">find_table</span><span class="p">()</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">parse_rows</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+    <span class="n">polls</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">polls</span><span class="p">()</span>
+    <span class="n">stats</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">stats</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">d</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;test.html&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">Site</span><span class="p">,</span> <span class="n">ABCMeta</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">rows</span> <span class="ow">is</span> <span class="kc">None</span>
+    <span class="k">assert</span> <span class="n">polls</span> <span class="ow">is</span> <span class="kc">None</span>
+    <span class="k">assert</span> <span class="n">stats</span> <span class="ow">is</span> <span class="kc">None</span>
+</code></pre></div>
+
+
+<p>As you can see, the way to accomplish this is to override <code>__abstractmethods__</code>.
+Basically tricking it into thinking that it doesn't have any.
+The last three <em>asserts</em> then verify that <code>None</code> is being returned.</p>
+<div class="highlight"><pre><span></span><code><span class="o">=============================</span> <span class="n">test</span> <span class="k">session</span> <span class="n">starts</span> <span class="o">==============================</span>
+<span class="n">platform</span> <span class="n">linux</span> <span class="c1">-- Python 3.7.3, pytest-4.4.0, py-1.8.0, pluggy-0.9.0 -- /home/mohh/anaconda3/envs/pybites/bin/python</span>
+<span class="n">cachedir</span><span class="p">:</span> <span class="p">.</span><span class="n">pytest_cache</span>
+<span class="n">rootdir</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">mohh</span><span class="o">/</span><span class="n">Projects</span><span class="o">/</span><span class="n">team</span><span class="o">-</span><span class="n">charlie</span><span class="o">/</span><span class="mi">020</span>
+<span class="n">plugins</span><span class="p">:</span> <span class="n">cov</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">8</span><span class="p">.</span><span class="mi">1</span><span class="p">,</span> <span class="n">asyncio</span><span class="o">-</span><span class="mi">0</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">0</span>
+<span class="n">collected</span> <span class="mi">8</span> <span class="n">items</span>                                                              
+
+<span class="n">test_composition</span><span class="p">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_file_class</span> <span class="n">PASSED</span>                              <span class="p">[</span> <span class="mi">12</span><span class="o">%</span><span class="p">]</span>
+<span class="n">test_composition</span><span class="p">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_web</span> <span class="n">PASSED</span>                                     <span class="p">[</span> <span class="mi">25</span><span class="o">%</span><span class="p">]</span>
+<span class="n">test_composition</span><span class="p">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_web_bad_url</span> <span class="n">PASSED</span>                             <span class="p">[</span> <span class="mi">37</span><span class="o">%</span><span class="p">]</span>
+<span class="n">test_composition</span><span class="p">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_poll</span> <span class="n">PASSED</span>                                    <span class="p">[</span> <span class="mi">50</span><span class="o">%</span><span class="p">]</span>
+<span class="n">test_composition</span><span class="p">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_leaderboard</span> <span class="n">PASSED</span>                             <span class="p">[</span> <span class="mi">62</span><span class="o">%</span><span class="p">]</span>
+<span class="n">test_composition</span><span class="p">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_rcp_stats</span> <span class="n">PASSED</span>                               <span class="p">[</span> <span class="mi">75</span><span class="o">%</span><span class="p">]</span>
+<span class="n">test_composition</span><span class="p">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_nyt</span> <span class="n">PASSED</span>                                     <span class="p">[</span> <span class="mi">87</span><span class="o">%</span><span class="p">]</span>
+<span class="n">test_composition</span><span class="p">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_site</span> <span class="n">PASSED</span>                                    <span class="p">[</span><span class="mi">100</span><span class="o">%</span><span class="p">]</span>
+
+<span class="c1">----------- coverage: platform linux, python 3.7.3-final-0 -----------</span>
+<span class="n">Name</span>             <span class="n">Stmts</span>   <span class="n">Miss</span>  <span class="n">Cover</span>   <span class="n">Missing</span>
+<span class="c1">----------------------------------------------</span>
+<span class="n">composition</span><span class="p">.</span><span class="n">py</span>     <span class="mi">107</span>      <span class="mi">0</span>   <span class="mi">100</span><span class="o">%</span>
+
+
+<span class="o">===========================</span> <span class="mi">8</span> <span class="n">passed</span> <span class="k">in</span> <span class="mi">7</span><span class="p">.</span><span class="mi">22</span> <span class="n">seconds</span> <span class="o">===========================</span>
+</code></pre></div>
+
+
+<p>Success!</p>
+<h2>Conclusion</h2>
+<p>If you're ever faced with having to write test for abstract methods, simply override the <code>__abstractmethods__</code> of the ABC class!
+Definitely something to keep in your toolbox.</p>
+<p>Until next time, happy coding!</p></section>
             <a href="https://clamytoe.github.io/articles/2020/Mar/12/testing-abcs-with-abstract-methods-with-pytest#disqus_thread"></a>
         <hr class="uk-article-divider">
     </article>
@@ -92,7 +178,7 @@
         <p class="uk-article-meta"><time datetime="2020-03-07" itemprop="datePublished">Sat 07 March 2020</time> • <a href="https://clamytoe.github.io/category/database.html">Database</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">4 min</span></span></p>
         </p>
         <p class="uk-article-lead" itemprop="description">Quick introduction on how to connect to a mondoDB database through the built in mongo cli application</p>
-            <p>MongoDB CLI Intro After publishing my article on How to install MongoDB on Linux I realized that I should have covered how to access it through the command line! Didn't occur to me that anyone reading it might not want to download and install Robo 3T! Sorry about that! Intro into the mongo cli app It's simple enough. Now I'm no expert but this is what I discovered just playing around with it. (base) ➜ ~ <span...</p>
+            <p>Why another article on MongoDB After publishing my article on How to install MongoDB on Linux I realized that I should have covered how to access it through the command line! Didn't occur to me that anyone reading it might not want to download and install Robo 3T! Sorry about that! Intro into the mongo cli app It's simple enough. Now I'm no expert but this is what I discovered just playing around with it. (base) ➜...</p>
             <p><a href="https://clamytoe.github.io/articles/2020/Mar/07/mongodb-cli-intro">Read More</a></p>
         <hr class="uk-article-divider">
     </article>
