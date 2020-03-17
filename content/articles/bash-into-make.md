@@ -9,7 +9,7 @@ summary: How to convert a bash script into a Makefile
 
 # Using make can literally make your life easier
 
-So the other day on the Pybites slack channel, [Erik O'Shaughnessy's](https://opensource.com/users/jnyjny) and I were chatting about something and I happened to mention that I had written a bash script to generate documents from Asciidoc files but wanted to create a Makefile to do the same instead.
+So the other day on the Pybites slack channel, [Erik O'Shaughnessy](https://opensource.com/users/jnyjny) and I were chatting about something and I happened to mention that I had written a bash script to generate documents from Asciidoc files but wanted to create a Makefile to do the same instead.
 Without hesitation, he asked for my bash script and got to work!
 I don't think that I could have found a better tutorial on the subject if I had looked.
 I've looked things up before and nothing is as succinct as what he wrote up for me.
@@ -124,7 +124,7 @@ ADOC_FLAGS+= --attribute revdate=$(DATE)
 ### Default rule
 
 The default rule that *Make* looks for when invoked as `make` is `all`.
-To build the `all` target, *make* builds the dependencies listed after the *rulename:*.
+To build the `all` target, *make* builds, replace all with "a rule" name.
 
 ```make
 rulename: dep1 dep2 dep3 ... depN
