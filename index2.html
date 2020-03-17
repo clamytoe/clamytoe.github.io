@@ -1,14 +1,3 @@
-<meta property="og:title" content="Ramblings" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://clamytoe.github.io" />
-<meta name="twitter:url" content="https://clamytoe.github.io" />
-<meta itemprop="name" content="Ramblings">
-<meta itemprop="url" content="https://clamytoe.github.io">
-<meta property="og:image" content="/img/clamytoe.png" />
-<meta property="og:image:type" content="image/png" />
-<meta name="twitter:image" content="/img/clamytoe.png" />
-<meta itemprop="image" content="/img/clamytoe.png"/>
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/Blog"> <![endif]-->
 <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/Blog"> <![endif]-->
@@ -17,9 +6,9 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Datascience</title>
+<title>Ramblings</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
+<meta name="description" content="A blog about my struggles and learning about programming, software development and life.">
 <link rel="shortcut icon" href="https://clamytoe.github.io/favicon.ico" type="image/vnd.microsoft.icon">
 <meta name="author" content="Martin Uribe">
 <meta name="copyright" content="Martin Uribe">
@@ -76,171 +65,21 @@
 
 
     <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-        <a href="https://clamytoe.github.io/articles/2020/Feb/13/rescaling-values" class="uk-article-title uk-link-muted" itemprop="name">Rescaling values for DataScience</a>
-        <p class="uk-article-meta"><time datetime="2020-02-13" itemprop="datePublished">Thu 13 February 2020</time> • <a href="https://clamytoe.github.io/category/datascience.html">DataScience</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">3 min</span></span></p>
+        <a href="https://clamytoe.github.io/articles/2020/Feb/12/initial-post" class="uk-article-title uk-link-muted" itemprop="name">This is my first post here</a>
+        <p class="uk-article-meta"><time datetime="2020-02-12" itemprop="datePublished">Wed 12 February 2020</time> • <a href="https://clamytoe.github.io/category/blog.html">Blog</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">1 min</span></span></p>
         </p>
-        <p class="uk-article-lead" itemprop="description">Quick discussion about rescaling values for data science</p>
-            <section itemprop="articleBody"><h1>Scaling values</h1>
-<p>Today while reading Data Science Algorithms in a Week, from <a href="https://www.packtpub.com">packt</a>, I came across the concept of rescaling values so that when measuring their distances they would be more relevant.
-The dataset consisted of "House Ownership":</p>
-<table>
-<thead>
-<tr>
-<th align="left">Age</th>
-<th align="left">Annual income in USD</th>
-<th align="left">House ownership status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">23</td>
-<td align="left">50,000</td>
-<td align="left">Non-owner</td>
-</tr>
-<tr>
-<td align="left">37</td>
-<td align="left">34,000</td>
-<td align="left">Non-owner</td>
-</tr>
-<tr>
-<td align="left">20</td>
-<td align="left">100,000</td>
-<td align="left">Owner</td>
-</tr>
-<tr>
-<td align="left">35</td>
-<td align="left">130,000</td>
-<td align="left">Owner</td>
-</tr>
-</tbody>
-</table>
-<p>etc..</p>
-<p>The aim being to predict whether a person that is 50 years old with an income of $80,000, would own a home so that he could be targeted for home insurance.</p>
-<p><a href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm">k-Nearest Neighbor</a>'s are currently being covered and for this exercise a <code>k = 1</code> is to be used.
-Using either a <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean</a> or <a href="https://en.wiktionary.org/wiki/Manhattan_distance">Manhattan</a> distance wouldn't matter because the distances between these values are too great. In comes rescaling!</p>
-<p>The formula use is:</p>
-<div class="math">$$ScaledQuantity = \frac{ActualQuantity-MinQuantity}{MaxQuantity-MinQuantity}$$</div>
-<p>So for this dataset, both the <strong>Age</strong> and the <strong>Annual income</strong> wound have to be adjusted.</p>
-<div class="math">$$ScaledAge = \frac{ActualAge-MinAge}{MaxAge-MinAge}$$</div>
-<div class="math">$$ScaledIncome = \frac{ActualIncome-MinIncome}{MaxIncome-MinIncome}$$</div>
-<p>After scaling, the adjusted dataset would look something like this:</p>
-<table>
-<thead>
-<tr>
-<th align="left">Age</th>
-<th align="left">Scaled age</th>
-<th align="left">Annual income in USD</th>
-<th align="left">Scaled annual income</th>
-<th align="left">House ownership status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">23</td>
-<td align="left">09375</td>
-<td align="left">50,000</td>
-<td align="left">2</td>
-<td align="left">Non-owner</td>
-</tr>
-<tr>
-<td align="left">37</td>
-<td align="left">53125</td>
-<td align="left">34,000</td>
-<td align="left">4</td>
-<td align="left">Non-owner</td>
-</tr>
-<tr>
-<td align="left">20</td>
-<td align="left">0</td>
-<td align="left">100,000</td>
-<td align="left">7</td>
-<td align="left">Owner</td>
-</tr>
-<tr>
-<td align="left">35</td>
-<td align="left">46875</td>
-<td align="left">130,000</td>
-<td align="left">1</td>
-<td align="left">Owner</td>
-</tr>
-<tr>
-<td align="left">50</td>
-<td align="left">9375</td>
-<td align="left">80,000</td>
-<td align="left">5</td>
-<td align="left">?</td>
-</tr>
-</tbody>
-</table>
-<p>Now a 1-NN algorithm with a Euclidean metric could easily be used to find out if the last person is more than likely to own a home.
-Without the rescaling, the algorithm would have yielded different results.</p>
-<p>Keeping it short today, but hopefully it was a helpful tip!</p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "left",
-        indent = "0em",
-        linebreak = "true";
-
-    if (true) {
-        align = (screen.width < 1125) ? "left" : align;
-        indent = (screen.width < 1125) ? "0em" : indent;
-        linebreak = (screen.width < 1125) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script></section>
-            <a href="https://clamytoe.github.io/articles/2020/Feb/13/rescaling-values#disqus_thread"></a>
+        <p class="uk-article-lead" itemprop="description">Initial Post for my Ramblings of an autodidact Blog</p>
+            <section itemprop="articleBody"><h1>Getting my feet wet with this blogging stuff</h1>
+<p>It's not much to look at, but my goal is to show what I'm learning as I go.
+There's no real "topic" but it will mostly be about what I'm working on and what I have to learn to get it done.
+Hope that it's of interest to someone...</p></section>
+            <a href="https://clamytoe.github.io/articles/2020/Feb/12/initial-post#disqus_thread"></a>
         <hr class="uk-article-divider">
     </article>
 
+    <ul class="uk-pagination">
+<li><a href="https://clamytoe.github.io/index.html"><i class="uk-icon-angle-double-left"></i></a></li><li><a href="https://clamytoe.github.io/index.html">1</a></li>        <li class="uk-active"><span>2</span></li>
+    </ul>
 
 </div>
 
@@ -257,7 +96,7 @@ Without the rescaling, the algorithm would have yielded different results.</p>
                     <li class="uk-nav-header">Categories</li>
                     <li ><a href="https://clamytoe.github.io/category/blog.html">Blog</a></li>
                     <li ><a href="https://clamytoe.github.io/category/database.html">Database</a></li>
-                    <li class="uk-active"><a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></li>
+                    <li ><a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></li>
                     <li ><a href="https://clamytoe.github.io/category/misc.html">Misc</a></li>
                     <li ><a href="https://clamytoe.github.io/category/python.html">Python</a></li>
                     <li class="uk-nav-header">Pages</li>
@@ -333,7 +172,7 @@ Without the rescaling, the algorithm would have yielded different results.</p>
             <li class="uk-nav-header">Categories</li>
             <li ><a href="https://clamytoe.github.io/category/blog.html">Blog</a></li>
             <li ><a href="https://clamytoe.github.io/category/database.html">Database</a></li>
-            <li class="uk-active"><a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></li>
+            <li ><a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></li>
             <li ><a href="https://clamytoe.github.io/category/misc.html">Misc</a></li>
             <li ><a href="https://clamytoe.github.io/category/python.html">Python</a></li>
             <li class="uk-nav-header">Pages</li>

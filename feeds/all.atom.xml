@@ -1,5 +1,351 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/all.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-03-13T06:54:00-05:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Testing ABC's with abstract methods with Pytest</title><link href="https://clamytoe.github.io/articles/2020/Mar/12/testing-abcs-with-abstract-methods-with-pytest" rel="alternate"></link><published>2020-03-12T10:31:00-05:00</published><updated>2020-03-12T21:51:00-05:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-03-12:/articles/2020/Mar/12/testing-abcs-with-abstract-methods-with-pytest</id><summary type="html">&lt;p&gt;What I had to do to get 100% coverage on my tests&lt;/p&gt;</summary><content type="html">&lt;h1&gt;So you want to test ABC's with pytest&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/all.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-03-17T07:56:00-05:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Bash script into a Makefile</title><link href="https://clamytoe.github.io/articles/2020/Mar/17/bash-into-make" rel="alternate"></link><published>2020-03-17T05:08:00-05:00</published><updated>2020-03-17T07:56:00-05:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-03-17:/articles/2020/Mar/17/bash-into-make</id><summary type="html">&lt;p&gt;How to convert a bash script into a Makefile&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Using make can literally make your life easier&lt;/h1&gt;
+&lt;p&gt;So the other day on the Pybites slack channel, &lt;a href="https://opensource.com/users/jnyjny"&gt;Erik O'Shaughnessy's&lt;/a&gt; and I were chatting about something and I happened to mention that I had written a bash script to generate documents from Asciidoc files but wanted to create a Makefile to do the same instead.
+Without hesitation, he asked for my bash script and got to work!
+I don't think that I could have found a better tutorial on the subject if I had looked.
+I've looked things up before and nothing is as succinct as what he wrote up for me.&lt;/p&gt;
+&lt;p&gt;This is all his work and even though I made some changes, the credit for it all goes to him.
+I thought it was so great, that I had to share it with everyone because I believe that it can help others get up to speed with creating Makefiles.&lt;/p&gt;
+&lt;h2&gt;What is a make and what is a Makefile&lt;/h2&gt;
+&lt;p&gt;The &lt;a href="https://www.gnu.org/software/make/"&gt;GNU Make&lt;/a&gt; project's page describes it as such:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;GNU Make is a tool which controls the generation of executables and other non-source files of a program from the program's source files.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It basically means that you can automate some common tasks with it.
+To illustrate what it can do, I am going to show you how Erik converted my bash script.&lt;/p&gt;
+&lt;h2&gt;The bash script&lt;/h2&gt;
+&lt;p&gt;Here is the script in all its glory...
+It's not much.
+It was just thrown together pretty quick and it was getting the job done.&lt;/p&gt;
+&lt;figure class='code'&gt;
+&lt;figcaption&gt;&lt;span class="liquid-tags-code-filename"&gt;gen_book.sh&lt;/span&gt;&lt;/figcaption&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="nv"&gt;DOC&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;sop&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;DATE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;date +%Y-%m-%d&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;span class="nv"&gt;REV&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;grep revnumber sop.asc &lt;span class="p"&gt;|&lt;/span&gt; cut -d &lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt; -f &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;span class="nv"&gt;PARAMS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;--attribute revnumber=&lt;/span&gt;&lt;span class="nv"&gt;$REV&lt;/span&gt;&lt;span class="s2"&gt; --attribute revdate=&lt;/span&gt;&lt;span class="nv"&gt;$DATE&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+
+&lt;span class="err"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Converting to HTML...&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;bundle&lt;/span&gt; &lt;span class="err"&gt;exec&lt;/span&gt; &lt;span class="err"&gt;asciidoctor&lt;/span&gt; &lt;span class="err"&gt;$PARAMS&lt;/span&gt; &lt;span class="err"&gt;$DOC.asc&lt;/span&gt;
+&lt;span class="err"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; -- HTML outpt at $DOC.html&amp;quot;&lt;/span&gt;
+
+&lt;span class="err"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Converting to ePub...&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;bundle&lt;/span&gt; &lt;span class="err"&gt;exec&lt;/span&gt; &lt;span class="err"&gt;asciidoctor-epub3&lt;/span&gt; &lt;span class="err"&gt;$PARAMS&lt;/span&gt; &lt;span class="err"&gt;$DOC.asc&lt;/span&gt;
+&lt;span class="err"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; -- ePub output at $DOC.epub&amp;quot;&lt;/span&gt;
+
+&lt;span class="err"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Converting to Mobi (kf8)...&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;bundle&lt;/span&gt; &lt;span class="err"&gt;exec&lt;/span&gt; &lt;span class="err"&gt;asciidoctor-epub3&lt;/span&gt; &lt;span class="err"&gt;$PARAMS&lt;/span&gt; &lt;span class="err"&gt;-a&lt;/span&gt; &lt;span class="nv"&gt;ebook-format&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;kf8 &lt;span class="nv"&gt;$DOC&lt;/span&gt;.asc
+&lt;span class="err"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; -- Mobi output at $DOC.mobi&amp;quot;&lt;/span&gt;
+
+&lt;span class="err"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Converting to PDF ... (This one takes a while)&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;bundle&lt;/span&gt; &lt;span class="err"&gt;exec&lt;/span&gt; &lt;span class="err"&gt;asciidoctor-pdf&lt;/span&gt; &lt;span class="err"&gt;$PARAMS&lt;/span&gt; &lt;span class="err"&gt;$DOC.asc&lt;/span&gt;
+&lt;span class="err"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; -- PDF output at $DOC.pdf&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/figure&gt;
+
+&lt;h2&gt;Creating the Makefile&lt;/h2&gt;
+&lt;h3&gt;Variables&lt;/h3&gt;
+&lt;p&gt;This is how you assign a string to a variable name in &lt;em&gt;Make&lt;/em&gt;.
+The variable name doesn't have to be all caps and the equal doesn't have
+to be snugged up to the variable name; it's just how I write Makefiles&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;FILENAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; sop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Referencing variables&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;$(IDENTIFIER)&lt;/code&gt; is how you reference a variable in Make, you can use &lt;code&gt;${}&lt;/code&gt; too, but I prefer &lt;code&gt;$()&lt;/code&gt;.
+If you forget the parentheses or the curly braces, eg &lt;code&gt;$INDENTIFER&lt;/code&gt;, Make will interpret that as &lt;code&gt;$I&lt;/code&gt; with &lt;code&gt;NDENTFIER&lt;/code&gt; appended to it.
+Probably not what you are expecting.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;SOURCE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;FILENAME&lt;span class="k"&gt;)&lt;/span&gt;.asc
+
+&lt;span class="nv"&gt;HTML&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;FILENAME&lt;span class="k"&gt;)&lt;/span&gt;.html
+&lt;span class="nv"&gt;PDF&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;FILENAME&lt;span class="k"&gt;)&lt;/span&gt;.pdf
+&lt;span class="nv"&gt;EPUB&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;FILENAME&lt;span class="k"&gt;)&lt;/span&gt;.epub
+&lt;span class="nv"&gt;MOBI&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;FILENAME&lt;span class="k"&gt;)&lt;/span&gt;.mobi
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Shell commands&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;$(shell shell command )&lt;/code&gt; is how you invoke a command and save the results to a variable.
+It gets kinda tricky since every time you reference &lt;code&gt;$(DATE)&lt;/code&gt; it will execute the command.
+The weird assignment operator &lt;code&gt;:=&lt;/code&gt; means just assign it one time.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;DATE&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;shell date +%Y-%m-%d&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Again, calling shell. This time using &lt;code&gt;AWK&lt;/code&gt; to pull out the revision number.&lt;/p&gt;
+&lt;p&gt;The &lt;em&gt;$&lt;/em&gt; needs to be doubled in the command string to keep Make from
+trying to expand &lt;code&gt;$2&lt;/code&gt; into something we didn't intend.&lt;/p&gt;
+&lt;p&gt;I know there was a &lt;code&gt;grep&lt;/code&gt;|&lt;code&gt;cut&lt;/code&gt; in the bash version, I prefer to use &lt;code&gt;awk&lt;/code&gt; for these kinds of &lt;em&gt;snip&lt;/em&gt; operations since it's a single process invocation.
+Those are easier to deal with in this context since you don't have to worry about any pipe weirdness imposed by Make.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;REVISION&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;shell awk &lt;span class="s1"&gt;&amp;#39;/revnumber/ {print $$2}&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Functions / macros&lt;/h3&gt;
+&lt;p&gt;Ok this is a "function" definition that we use to build the various  &lt;code&gt;ASCIIDOCTOR&lt;/code&gt; invocations.
+We could have just written the format specific definitions:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;ADOC_HTML&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; bundle &lt;span class="nb"&gt;exec&lt;/span&gt; asciidoctor
+&lt;span class="nv"&gt;ADOC_PDF&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; bundle &lt;span class="nb"&gt;exec&lt;/span&gt; asiidoctor-pdf
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The advantage of this technique is you only have to change the &lt;code&gt;BUNDLE_EXEC&lt;/code&gt; part if the way you invoke &lt;em&gt;asciidoctor&lt;/em&gt; changes (I don't know why it would change, but the idea is to isolate stuff that's repeated so you don't have to freaking change it everywhere).&lt;/p&gt;
+&lt;p&gt;Macro or &lt;em&gt;function&lt;/em&gt; definition&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;BUNDLE_EXEC&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; bundle &lt;span class="nb"&gt;exec&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Using the macro&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;ASCIIDOCTOR_HTML&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;call BUNDLE_EXEC,asciidoctor&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;ASCIIDOCTOR_PDF&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;  &lt;span class="k"&gt;$(&lt;/span&gt;call BUNDLE_EXEC,asciidoctor-pdf&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;ASCIIDOCTOR_EPUB&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;call BUNDLE_EXEC,asciidoctor-epub3&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;ASCIIDOCTOR_MOBI&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;call BUNDLE_EXEC,asciidoctor-epub3&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Shared flags&lt;/h3&gt;
+&lt;p&gt;Here we build the shared flags used by &lt;em&gt;asciidoctor&lt;/em&gt; by all invocations.
+I use the &lt;code&gt;+=&lt;/code&gt; assignment to show how you can add to a variable after it's initial assignment.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;ADOC_FLAGS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; --attribute &lt;span class="nv"&gt;revnumber&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;REVISION&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;ADOC_FLAGS&lt;/span&gt;&lt;span class="o"&gt;+=&lt;/span&gt; --attribute &lt;span class="nv"&gt;revdate&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;DATE&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Default rule&lt;/h3&gt;
+&lt;p&gt;The default rule that &lt;em&gt;Make&lt;/em&gt; looks for when invoked as &lt;code&gt;make&lt;/code&gt; is &lt;code&gt;all&lt;/code&gt;.
+To build the &lt;code&gt;all&lt;/code&gt; target, &lt;em&gt;make&lt;/em&gt; builds the dependencies listed after the &lt;em&gt;rulename:&lt;/em&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;rulename&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;dep&lt;/span&gt;1 &lt;span class="n"&gt;dep&lt;/span&gt;2 &lt;span class="n"&gt;dep&lt;/span&gt;3 ... &lt;span class="n"&gt;depN&lt;/span&gt;
+&lt;span class="err"&gt;command_0&lt;/span&gt;
+&lt;span class="err"&gt;@command_1&lt;/span&gt;
+&lt;span class="err"&gt;...&lt;/span&gt;
+&lt;span class="err"&gt;comand_n&lt;/span&gt;
+
+&lt;span class="nf"&gt;dep1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;subdep&lt;/span&gt;1 ...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here, the dependencies for &lt;code&gt;all&lt;/code&gt; are &lt;code&gt;$(HTML)&lt;/code&gt;, &lt;code&gt;$(PDF)&lt;/code&gt;, &lt;code&gt;$(EPUB)&lt;/code&gt; and &lt;code&gt;$(MOBI)&lt;/code&gt; which expand in to the names of the files that &lt;em&gt;asciidoctor&lt;/em&gt; will create.
+So &lt;code&gt;make all&lt;/code&gt; will run the &lt;em&gt;HTML&lt;/em&gt;, &lt;em&gt;PDF&lt;/em&gt;, &lt;em&gt;EPUB&lt;/em&gt; and &lt;em&gt;MOBI&lt;/em&gt; rules in that order.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;all&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;HTML&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;PDF&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;EPUB&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;MOBI&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Rules&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;$(HTML)&lt;/code&gt; rule depends on &lt;code&gt;$(SOURCE)&lt;/code&gt;, and only executes if the source file has changed or the destination file does not exist.
+&lt;code&gt;$@&lt;/code&gt; is an alias for the name of the rule to be used in the body of the recipe.&lt;/p&gt;
+&lt;p&gt;By default, &lt;em&gt;make&lt;/em&gt; will print the command that is being executed to stdout followed by it's output.
+To suppress printing the command, preface the command with an &lt;code&gt;@&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Lastly, the indention is a &lt;strong&gt;TAB&lt;/strong&gt; and not &lt;strong&gt;8 spaces&lt;/strong&gt;.
+&lt;em&gt;Make&lt;/em&gt; is an old-school tool and will complain if it doesn't get it's tabs.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;$(HTML)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;SOURCE&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    @echo Converting &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt; to &lt;span class="nv"&gt;$@&lt;/span&gt;
+    @&lt;span class="k"&gt;$(&lt;/span&gt;ASCIIDOCTOR_HTML&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;ADOC_FLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nf"&gt;$(PDF)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;SOURCE&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    @echo Converting &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt; to &lt;span class="nv"&gt;$@&lt;/span&gt;
+    @&lt;span class="k"&gt;$(&lt;/span&gt;ASCIIDOCTOR_PDF&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;ADOC_FLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nf"&gt;$(EPUB)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;SOURCE&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    @echo Converting &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt; to &lt;span class="nv"&gt;$@&lt;/span&gt;
+    @&lt;span class="k"&gt;$(&lt;/span&gt;ASCIIDOCTOR_EPUB&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;ADOC_FLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nf"&gt;$(MOBI)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ADOC_FLAGS&lt;/span&gt; += -&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;ebook&lt;/span&gt;-&lt;span class="n"&gt;format&lt;/span&gt;=&lt;span class="n"&gt;kf&lt;/span&gt;8
+&lt;span class="nf"&gt;$(MOBI)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;SOURCE&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    @echo Converting &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt; to &lt;span class="nv"&gt;$@&lt;/span&gt;
+    @&lt;span class="k"&gt;$(&lt;/span&gt;ASCIIDOCTOR_MOBI&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;ADOC_FLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;The debug rule&lt;/h3&gt;
+&lt;p&gt;The debug rule is how I checked to make sure all of the variables I constructed contained the things I thought they should.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;debug&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    @echo Rule -&amp;gt; &lt;span class="nv"&gt;$@&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;          SOURCE: $(SOURCE)&amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;        REVISION: $(REVISION)&amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;            HTML: $(HTML)&amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;             PDF: $(PDF)&amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;            EPUB: $(EPUB)&amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;            MOBI: $(MOBI)&amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;       DOC_FLAGS: $(ADOC_FLAGS)&amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;ASCIIDOCTOR HTML: $(ASCIIDOCTOR_HTML)&amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39; ASCIIDOCTOR PDF: $(ASCIIDOCTOR_PDF)&amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;ASCIIDOCTOR EPUB: $(ASCIIDOCTOR_EPUB)&amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;ASCIIDOCTOR MOBI: $(ASCIIDOCTOR_MOBI)&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;The clean rule&lt;/h3&gt;
+&lt;p&gt;Often times we want to restart from a known good "clean" state.
+A clean rule is a good place to remove transient files so you ensure that all your dependencies in your project are rebuilt.
+In this case we just remove the translated files.
+We could use wildcards in this rule like &lt;code&gt;rm *.html&lt;/code&gt; but this can have unintended consequences if we have other files in HTML format that we didn't want to smoke.&lt;/p&gt;
+&lt;p&gt;Always be as explicit as possible in clean rules.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    @/bin/rm -f &lt;span class="k"&gt;$(&lt;/span&gt;HTML&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;PDF&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;EPUB&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;MOBI&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Modifications and additions that I made&lt;/h2&gt;
+&lt;p&gt;I'm lazy.
+I didn't want to have to type out &lt;code&gt;make sop.pdf&lt;/code&gt; each time that I wanted to generate my document in the pdf format.
+So I changed a few things around.&lt;/p&gt;
+&lt;h3&gt;Default rule modifications&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;all&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="n"&gt;pdf&lt;/span&gt; &lt;span class="n"&gt;epub&lt;/span&gt; &lt;span class="n"&gt;mobi&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Rules modifications&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;html&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;SOURCE&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    @echo Converting &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt; to &lt;span class="k"&gt;$(&lt;/span&gt;HTML&lt;span class="k"&gt;)&lt;/span&gt;
+    @&lt;span class="k"&gt;$(&lt;/span&gt;ASCIIDOCTOR_HTML&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;ADOC_FLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nf"&gt;pdf&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;SOURCE&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    @echo Converting &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt; to &lt;span class="k"&gt;$(&lt;/span&gt;PDF&lt;span class="k"&gt;)&lt;/span&gt;
+    @&lt;span class="k"&gt;$(&lt;/span&gt;ASCIIDOCTOR_PDF&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;ADOC_FLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nf"&gt;epub&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;SOURCE&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    @echo Converting &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt; to &lt;span class="k"&gt;$(&lt;/span&gt;EPUB&lt;span class="k"&gt;)&lt;/span&gt;
+    @&lt;span class="k"&gt;$(&lt;/span&gt;ASCIIDOCTOR_EPUB&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;ADOC_FLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nf"&gt;mobi&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ADOC_FLAGS&lt;/span&gt; += -&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;ebook&lt;/span&gt;-&lt;span class="n"&gt;format&lt;/span&gt;=&lt;span class="n"&gt;kf&lt;/span&gt;8
+&lt;span class="nf"&gt;mobi&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;SOURCE&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    @echo Converting &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt; to &lt;span class="k"&gt;$(&lt;/span&gt;MOBI&lt;span class="k"&gt;)&lt;/span&gt;
+    @&lt;span class="k"&gt;$(&lt;/span&gt;ASCIIDOCTOR_MOBI&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;ADOC_FLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;With those changes I can now recreate any of those formats by simply specifying them, as so: &lt;code&gt;make pdf&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;The help rule&lt;/h3&gt;
+&lt;p&gt;I also added a help rule.
+I've found it to be very useful for letting users know what commands are available and what they do.
+Mostly it's for me, I forget everything...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;help&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;Makefile for generating documents from Asciidoc source files              &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;                                                                          &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;Usage:                                                                    &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;   make help                           prints this message                &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;   make all                            generates all of the formats       &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;   make clean                          remove the generated file formats  &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;   make debug                          prints all of the variables used   &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;   make html                           (re)generates an html file         &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;   make pdf                            (re)generates a pdf file           &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;   make epub                           (re)generates an epub file         &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;   make mobi                           (re)generates a mobi file          &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;   make -n                             prints the commands without        &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;                                       executing them                     &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;                                                                          &amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Make&lt;/em&gt; is a very versatile program and can be used for many more things.
+For instance Erik uses it to launch his kids Minecraft server!
+Now that I know how a &lt;em&gt;Makefile&lt;/em&gt; is constructed, I will be able to automate other parts of my daily tasks!&lt;/p&gt;
+&lt;p&gt;The &lt;em&gt;MOBI&lt;/em&gt; format kept failing on me.
+It would leave behind a file with the extension &lt;em&gt;-kf8.epub&lt;/em&gt; and never generate the &lt;em&gt;.mobi&lt;/em&gt; one.
+My guess is that I need to install some kind of Amazon Kindle app or something, so I removed it from the &lt;code&gt;all&lt;/code&gt; rule to prevent it from generating by default.&lt;/p&gt;
+&lt;p&gt;This is the final file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;# Makefile&lt;/span&gt;
+
+&lt;span class="c"&gt;# Main project file name&lt;/span&gt;
+&lt;span class="nv"&gt;FILENAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; pnc-sop
+
+&lt;span class="c"&gt;# Variables used&lt;/span&gt;
+&lt;span class="nv"&gt;SOURCE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;FILENAME&lt;span class="k"&gt;)&lt;/span&gt;.asc
+
+&lt;span class="nv"&gt;HTML&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;FILENAME&lt;span class="k"&gt;)&lt;/span&gt;.html
+&lt;span class="nv"&gt;PDF&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;FILENAME&lt;span class="k"&gt;)&lt;/span&gt;.pdf
+&lt;span class="nv"&gt;EPUB&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;FILENAME&lt;span class="k"&gt;)&lt;/span&gt;.epub
+&lt;span class="nv"&gt;MOBI&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;FILENAME&lt;span class="k"&gt;)&lt;/span&gt;.mobi
+
+&lt;span class="c"&gt;# Store the current date&lt;/span&gt;
+&lt;span class="nv"&gt;DATE&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;shell date +%Y-%m-%d&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# Grab revision number from the source document&lt;/span&gt;
+&lt;span class="nv"&gt;REVISION&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;shell awk &lt;span class="s1"&gt;&amp;#39;/revnumber/ {print $$2}&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;))&lt;/span&gt;
+
+&lt;span class="c"&gt;# Macro or &amp;#39;function&amp;#39; definition&lt;/span&gt;
+&lt;span class="nv"&gt;BUNDLE_EXEC&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; bundle &lt;span class="nb"&gt;exec&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# Assigning the macro&lt;/span&gt;
+&lt;span class="nv"&gt;ASCIIDOCTOR_HTML&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;call BUNDLE_EXEC,asciidoctor&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;ASCIIDOCTOR_PDF&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;  &lt;span class="k"&gt;$(&lt;/span&gt;call BUNDLE_EXEC,asciidoctor-pdf&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;ASCIIDOCTOR_EPUB&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;call BUNDLE_EXEC,asciidoctor-epub3&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;ASCIIDOCTOR_MOBI&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;call BUNDLE_EXEC,asciidoctor-epub3&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# Shared flags&lt;/span&gt;
+&lt;span class="nv"&gt;ADOC_FLAGS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; --attribute &lt;span class="nv"&gt;revnumber&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;REVISION&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;ADOC_FLAGS&lt;/span&gt;&lt;span class="o"&gt;+=&lt;/span&gt; --attribute &lt;span class="nv"&gt;revdate&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;DATE&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# Define the make commands&lt;/span&gt;
+&lt;span class="nf"&gt;all&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="n"&gt;pdf&lt;/span&gt; &lt;span class="n"&gt;epub&lt;/span&gt;
+
+&lt;span class="c"&gt;# Define each of the commands and specifying their outputs&lt;/span&gt;
+&lt;span class="nf"&gt;html&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;SOURCE&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    @echo Converting &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt; to &lt;span class="k"&gt;$(&lt;/span&gt;HTML&lt;span class="k"&gt;)&lt;/span&gt;
+    @&lt;span class="k"&gt;$(&lt;/span&gt;ASCIIDOCTOR_HTML&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;ADOC_FLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nf"&gt;pdf&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;SOURCE&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    @echo Converting &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt; to &lt;span class="k"&gt;$(&lt;/span&gt;PDF&lt;span class="k"&gt;)&lt;/span&gt;
+    @&lt;span class="k"&gt;$(&lt;/span&gt;ASCIIDOCTOR_PDF&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;ADOC_FLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nf"&gt;epub&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;SOURCE&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    @echo Converting &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt; to &lt;span class="k"&gt;$(&lt;/span&gt;EPUB&lt;span class="k"&gt;)&lt;/span&gt;
+    @&lt;span class="k"&gt;$(&lt;/span&gt;ASCIIDOCTOR_EPUB&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;ADOC_FLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nf"&gt;mobi&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ADOC_FLAGS&lt;/span&gt; += -&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;ebook&lt;/span&gt;-&lt;span class="n"&gt;format&lt;/span&gt;=&lt;span class="n"&gt;kf&lt;/span&gt;8
+&lt;span class="nf"&gt;mobi&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;SOURCE&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    @echo Converting &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt; to &lt;span class="k"&gt;$(&lt;/span&gt;MOBI&lt;span class="k"&gt;)&lt;/span&gt;
+    @&lt;span class="k"&gt;$(&lt;/span&gt;ASCIIDOCTOR_MOBI&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;ADOC_FLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;SOURCE&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# Use debug rule to check that all of the variables were&lt;/span&gt;
+&lt;span class="c"&gt;# constructed properly.&lt;/span&gt;
+&lt;span class="nf"&gt;debug&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    @echo Rule -&amp;gt; &lt;span class="nv"&gt;$@&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;          SOURCE: $(SOURCE)&amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;        REVISION: $(REVISION)&amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;            HTML: $(HTML)&amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;             PDF: $(PDF)&amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;            EPUB: $(EPUB)&amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;            MOBI: $(MOBI)&amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;       DOC_FLAGS: $(ADOC_FLAGS)&amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;ASCIIDOCTOR HTML: $(ASCIIDOCTOR_HTML)&amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39; ASCIIDOCTOR PDF: $(ASCIIDOCTOR_PDF)&amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;ASCIIDOCTOR MOBI: $(ASCIIDOCTOR_MOBI)&amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;ASCIIDOCTOR EPUB: $(ASCIIDOCTOR_EPUB)&amp;#39;&lt;/span&gt;
+
+&lt;span class="c"&gt;# Simple help menu showing what commands are available&lt;/span&gt;
+&lt;span class="c"&gt;# and what they do.&lt;/span&gt;
+&lt;span class="nf"&gt;help&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;Makefile for generating documents from Asciidoc source files              &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;                                                                          &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;Usage:                                                                    &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;   make help                           prints this message                &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;   make all                            generates all of the file formats  &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;   make clean                          remove the generated files         &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;   make debug                          prints all of the variables used   &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;   make html                           (re)generates an html file         &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;   make pdf                            (re)generates a pdf file           &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;   make epub                           (re)generates an epub file         &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;   make mobi                           (re)generates a mobi file          &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;   make -n                             prints the commands without        &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;                                       executing them                     &amp;#39;&lt;/span&gt;
+    @echo &lt;span class="s1"&gt;&amp;#39;                                                                          &amp;#39;&lt;/span&gt;
+
+&lt;span class="c"&gt;# Specify clean-up rules.&lt;/span&gt;
+&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    @/bin/rm -f &lt;span class="k"&gt;$(&lt;/span&gt;HTML&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;PDF&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;EPUB&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;MOBI&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;FILENAME&lt;span class="k"&gt;)&lt;/span&gt;-kf8.epub
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;Thanks again Erik!&lt;/p&gt;
+&lt;/blockquote&gt;</content><category term="Misc"></category><category term="bash"></category><category term="make"></category><category term="makefile"></category></entry><entry><title>Testing ABC's with abstract methods with Pytest</title><link href="https://clamytoe.github.io/articles/2020/Mar/12/testing-abcs-with-abstract-methods-with-pytest" rel="alternate"></link><published>2020-03-12T10:31:00-05:00</published><updated>2020-03-12T21:51:00-05:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-03-12:/articles/2020/Mar/12/testing-abcs-with-abstract-methods-with-pytest</id><summary type="html">&lt;p&gt;What I had to do to get 100% coverage on my tests&lt;/p&gt;</summary><content type="html">&lt;h1&gt;So you want to test ABC's with pytest&lt;/h1&gt;
 &lt;p&gt;I was working on writing a new code challenge for &lt;a href="https://codechalleng.es/"&gt;Codechalleng.es&lt;/a&gt; the other day.
 It's based on &lt;a href="https://realpython.com/inheritance-composition-python/"&gt;inheritance and composition&lt;/a&gt; and uses &lt;a href="https://docs.python.org/3/library/abc.html"&gt;Abstract Base Classes&lt;/a&gt; to define the interfaces that should be implemented in classes derived from it.&lt;/p&gt;
 &lt;p&gt;I was just finishing up with the tests and everything was passing.
