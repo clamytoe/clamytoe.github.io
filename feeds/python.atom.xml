@@ -4,7 +4,7 @@
 It's based on &lt;a href="https://realpython.com/inheritance-composition-python/"&gt;inheritance and composition&lt;/a&gt; and uses &lt;a href="https://docs.python.org/3/library/abc.html"&gt;Abstract Base Classes&lt;/a&gt; to define the interfaces that should be implemented in classes derived from it.&lt;/p&gt;
 &lt;p&gt;I was just finishing up with the tests and everything was passing.
 Then when I checked the code coverage on it, I saw that it was complaining about my &lt;em&gt;Site&lt;/em&gt; class, which is the one derived from ABC has several methods decorated as &lt;em&gt;abstractmethods&lt;/em&gt;.
-&lt;a href="https://coverage.readthedocs.io/en/coverage-5.0.3/"&gt;Coverage&lt;/a&gt; wanted me to test the &lt;code&gt;pass&lt;/code&gt; statements on them...&lt;/p&gt;
+&lt;a href="https://coverage.readthedocs.io/"&gt;Coverage&lt;/a&gt; wanted me to test the &lt;code&gt;pass&lt;/code&gt; statements on them...&lt;/p&gt;
 &lt;p&gt;Initial searches didn't turn up much, so I posed the question in PyBites slack channel.
 The best suggestion was to use the &lt;em&gt;dis&lt;/em&gt; module and test it that way, but since it's not really running the code, coverage still counts it as untested.&lt;/p&gt;
 &lt;h2&gt;How to test abstract methods&lt;/h2&gt;
