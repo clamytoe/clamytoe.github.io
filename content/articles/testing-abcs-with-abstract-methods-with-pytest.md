@@ -14,7 +14,7 @@ It's based on [inheritance and composition](https://realpython.com/inheritance-c
 
 I was just finishing up with the tests and everything was passing.
 Then when I checked the code coverage on it, I saw that it was complaining about my *Site* class, which is the one derived from ABC has several methods decorated as *abstractmethods*.
-[Coverage](https://coverage.readthedocs.io/en/coverage-5.0.3/) wanted me to test the `pass` statements on them...
+[Coverage](https://coverage.readthedocs.io/) wanted me to test the `pass` statements on them...
 
 Initial searches didn't turn up much, so I posed the question in PyBites slack channel.
 The best suggestion was to use the *dis* module and test it that way, but since it's not really running the code, coverage still counts it as untested.
