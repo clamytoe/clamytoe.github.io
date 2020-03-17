@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/all.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-03-17T07:56:00-05:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Bash script into a Makefile</title><link href="https://clamytoe.github.io/articles/2020/Mar/17/bash-into-make" rel="alternate"></link><published>2020-03-17T05:08:00-05:00</published><updated>2020-03-17T07:56:00-05:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-03-17:/articles/2020/Mar/17/bash-into-make</id><summary type="html">&lt;p&gt;How to convert a bash script into a Makefile&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Using make can literally make your life easier&lt;/h1&gt;
-&lt;p&gt;So the other day on the Pybites slack channel, &lt;a href="https://opensource.com/users/jnyjny"&gt;Erik O'Shaughnessy's&lt;/a&gt; and I were chatting about something and I happened to mention that I had written a bash script to generate documents from Asciidoc files but wanted to create a Makefile to do the same instead.
+&lt;p&gt;So the other day on the Pybites slack channel, &lt;a href="https://opensource.com/users/jnyjny"&gt;Erik O'Shaughnessy&lt;/a&gt; and I were chatting about something and I happened to mention that I had written a bash script to generate documents from Asciidoc files but wanted to create a Makefile to do the same instead.
 Without hesitation, he asked for my bash script and got to work!
 I don't think that I could have found a better tutorial on the subject if I had looked.
 I've looked things up before and nothing is as succinct as what he wrote up for me.&lt;/p&gt;
@@ -118,7 +118,7 @@ I use the &lt;code&gt;+=&lt;/code&gt; assignment to show how you can add to a va
 
 &lt;h3&gt;Default rule&lt;/h3&gt;
 &lt;p&gt;The default rule that &lt;em&gt;Make&lt;/em&gt; looks for when invoked as &lt;code&gt;make&lt;/code&gt; is &lt;code&gt;all&lt;/code&gt;.
-To build the &lt;code&gt;all&lt;/code&gt; target, &lt;em&gt;make&lt;/em&gt; builds the dependencies listed after the &lt;em&gt;rulename:&lt;/em&gt;.&lt;/p&gt;
+To build the &lt;code&gt;all&lt;/code&gt; target, &lt;em&gt;make&lt;/em&gt; builds, replace all with "a rule" name.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;rulename&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;dep&lt;/span&gt;1 &lt;span class="n"&gt;dep&lt;/span&gt;2 &lt;span class="n"&gt;dep&lt;/span&gt;3 ... &lt;span class="n"&gt;depN&lt;/span&gt;
 &lt;span class="err"&gt;command_0&lt;/span&gt;
 &lt;span class="err"&gt;@command_1&lt;/span&gt;
