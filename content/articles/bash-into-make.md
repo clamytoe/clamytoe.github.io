@@ -1,6 +1,6 @@
 title: Bash script into a Makefile
 date: 2020-03-17 05:08
-modified: 2020-03-17 075:56
+modified: 2020-03-17 07:56
 category: Misc
 tags: bash, make, makefile
 slug: bash-into-make
