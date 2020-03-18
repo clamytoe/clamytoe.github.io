@@ -1,6 +1,6 @@
 title: Bash script into a Makefile
 date: 2020-03-17 05:08
-modified: 2020-03-17 07:56
+modified: 2020-03-18 09:13
 category: Misc
 tags: bash, make, makefile
 slug: bash-into-make
@@ -121,6 +121,17 @@ ADOC_FLAGS= --attribute revnumber=$(REVISION)
 ADOC_FLAGS+= --attribute revdate=$(DATE)
 ```
 
+### Phony rule
+
+This next bit is some *make* magic.
+The `.PHONY` rule is how we tell *make* that some of our rules are not associated directly with a file.
+
+> The `all` rule below is by default a dependency of `.PHONY`
+
+```make
+.PHONY: html pdf epub mobi
+```
+
 ### Default rule
 
 The default rule that *Make* looks for when invoked as `make` is `all`.
@@ -173,6 +184,19 @@ $(MOBI): $(SOURCE)
 	@$(ASCIIDOCTOR_MOBI) $(ADOC_FLAGS) $(SOURCE)
 ```
 
+> **NOTE**: The *MOBI* *asciidoctor* command requires additional flags to generate the file.
+This is how you would make the changes to it.
+
+At this point, you can add each of the *PHONY* rules.
+You might want to group these together along with the regular rules for keep related blocks of logic together, but I'll add them here for now.
+
+```make
+html: $(HTML)
+pdf: $(PDF)
+epub: $(EPUB)
+mobi: $(MOBI)
+```
+
 ### The debug rule
 
 The debug rule is how I checked to make sure all of the variables I constructed contained the things I thought they should.
@@ -207,44 +231,8 @@ clean:
 	@/bin/rm -f $(HTML) $(PDF) $(EPUB) $(MOBI)
 ```
 
-## Modifications and additions that I made
-
-I'm lazy.
-I didn't want to have to type out `make sop.pdf` each time that I wanted to generate my document in the pdf format.
-So I changed a few things around.
-
-### Default rule modifications
-
-```make
-all: html pdf epub mobi
-```
-
-### Rules modifications
-
-```make
-html: $(SOURCE)
-	@echo Converting $(SOURCE) to $(HTML)
-	@$(ASCIIDOCTOR_HTML) $(ADOC_FLAGS) $(SOURCE)
-
-pdf: $(SOURCE)
-	@echo Converting $(SOURCE) to $(PDF)
-	@$(ASCIIDOCTOR_PDF) $(ADOC_FLAGS) $(SOURCE)
-
-epub: $(SOURCE)
-	@echo Converting $(SOURCE) to $(EPUB)
-	@$(ASCIIDOCTOR_EPUB) $(ADOC_FLAGS) $(SOURCE)
-
-mobi: ADOC_FLAGS += -a ebook-format=kf8
-mobi: $(SOURCE)
-	@echo Converting $(SOURCE) to $(MOBI)
-	@$(ASCIIDOCTOR_MOBI) $(ADOC_FLAGS) $(SOURCE)
-```
-
-With those changes I can now recreate any of those formats by simply specifying them, as so: `make pdf`
-
 ### The help rule
 
-I also added a help rule.
 I've found it to be very useful for letting users know what commands are available and what they do.
 Mostly it's for me, I forget everything...
 
@@ -253,16 +241,17 @@ help:
 	@echo 'Makefile for generating documents from Asciidoc source files              '
 	@echo '                                                                          '
 	@echo 'Usage:                                                                    '
-	@echo '   make help                           prints this message                '
-	@echo '   make all                            generates all of the formats       '
-	@echo '   make clean                          remove the generated file formats  '
+	@echo '   make                                runs rules specified under all     '
+	@echo '   make all                            generates all of the file formats  '
+	@echo '   make clean                          remove the generated files         '
 	@echo '   make debug                          prints all of the variables used   '
-	@echo '   make html                           (re)generates an html file         '
-	@echo '   make pdf                            (re)generates a pdf file           '
 	@echo '   make epub                           (re)generates an epub file         '
+	@echo '   make help                           prints this message                '
+	@echo '   make html                           (re)generates an html file         '
 	@echo '   make mobi                           (re)generates a mobi file          '
-	@echo '   make -n                             prints the commands without        '
-	@echo '                                       executing them                     '
+	@echo '   make pdf                            (re)generates a pdf file           '
+	@echo '   make -n [epub, html, mobi, pdf]     prints out the commands it would   '
+	@echo '                                       run without executing them         '
 	@echo '                                                                          '
 ```
 
@@ -272,9 +261,9 @@ help:
 For instance Erik uses it to launch his kids Minecraft server!
 Now that I know how a *Makefile* is constructed, I will be able to automate other parts of my daily tasks!
 
-The *MOBI* format kept failing on me.
+> **NOTE**: The *MOBI* format kept failing on me.
 It would leave behind a file with the extension *-kf8.epub* and never generate the *.mobi* one.
-My guess is that I need to install some kind of Amazon Kindle app or something, so I removed it from the `all` rule to prevent it from generating by default.
+My guess is that I need to install some kind of Amazon Kindle app program or something, so I removed it from the `all` rule to prevent it from generating by default.
 
 This is the final file:
 
@@ -311,26 +300,37 @@ ASCIIDOCTOR_MOBI= $(call BUNDLE_EXEC,asciidoctor-epub3)
 ADOC_FLAGS= --attribute revnumber=$(REVISION)
 ADOC_FLAGS+= --attribute revdate=$(DATE)
 
+# Enable phony rules
+.PHONY: html pdf epub mobi
+
 # Define the make commands
-all: html pdf epub
+all: $(HTML) $(PDF) $(EPUB)
 
 # Define each of the commands and specifying their outputs
-html: $(SOURCE)
-	@echo Converting $(SOURCE) to $(HTML)
+$(HTML): $(SOURCE)
+	@echo Converting $(SOURCE) to $@
 	@$(ASCIIDOCTOR_HTML) $(ADOC_FLAGS) $(SOURCE)
 
-pdf: $(SOURCE)
-	@echo Converting $(SOURCE) to $(PDF)
+html: $(HTML)
+
+$(PDF): $(SOURCE)
+	@echo Converting $(SOURCE) to $@
 	@$(ASCIIDOCTOR_PDF) $(ADOC_FLAGS) $(SOURCE)
 
-epub: $(SOURCE)
-	@echo Converting $(SOURCE) to $(EPUB)
+pdf: $(PDF)
+
+$(EPUB): $(SOURCE)
+	@echo Converting $(SOURCE) to $@
 	@$(ASCIIDOCTOR_EPUB) $(ADOC_FLAGS) $(SOURCE)
 
-mobi: ADOC_FLAGS += -a ebook-format=kf8
-mobi: $(SOURCE)
-	@echo Converting $(SOURCE) to $(MOBI)
+epub: $(EPUB)
+
+$(MOBI): ADOC_FLAGS += -a ebook-format=kf8
+$(MOBI): $(SOURCE)
+	@echo Converting $(SOURCE) to $@
 	@$(ASCIIDOCTOR_MOBI) $(ADOC_FLAGS) $(SOURCE)
+
+mobi: $(MOBI)
 
 # Use debug rule to check that all of the variables were
 # constructed properly.
@@ -354,16 +354,17 @@ help:
 	@echo 'Makefile for generating documents from Asciidoc source files              '
 	@echo '                                                                          '
 	@echo 'Usage:                                                                    '
-	@echo '   make help                           prints this message                '
+	@echo '   make                                runs rules specified under all     '
 	@echo '   make all                            generates all of the file formats  '
 	@echo '   make clean                          remove the generated files         '
 	@echo '   make debug                          prints all of the variables used   '
-	@echo '   make html                           (re)generates an html file         '
-	@echo '   make pdf                            (re)generates a pdf file           '
 	@echo '   make epub                           (re)generates an epub file         '
+	@echo '   make help                           prints this message                '
+	@echo '   make html                           (re)generates an html file         '
 	@echo '   make mobi                           (re)generates a mobi file          '
-	@echo '   make -n                             prints the commands without        '
-	@echo '                                       executing them                     '
+	@echo '   make pdf                            (re)generates a pdf file           '
+	@echo '   make -n [epub, html, mobi, pdf]     prints out the commands it would   '
+	@echo '                                       run without executing them         '
 	@echo '                                                                          '
 
 # Specify clean-up rules.
@@ -372,4 +373,4 @@ clean:
 
 ```
 
-> Thanks again Erik!
+> Thanks again Erik! Check out his commented [Makefile](https://gist.github.com/clamytoe/68d13bb8481fc7acb81e373dea921d7d) for further insights!
