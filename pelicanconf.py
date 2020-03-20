@@ -88,7 +88,10 @@ SOCIAL = (
     ("github", "https://github.com/clamytoe"),
     ("github-alt", "https://gist.github.com/clamytoe"),
     ("linkedin", "https://www.linkedin.com/in/martin-uribe/"),
-    ("user", "https://www.blog.pythonlibrary.org/2019/11/18/pydev-of-the-week-martin-uribe/"),
+    (
+        "user",
+        "https://www.blog.pythonlibrary.org/2019/11/18/pydev-of-the-week-martin-uribe/",
+    ),
     ("coffee", "https://pybit.es/author/martin-uribe.html"),
     ("drupal", "https://codechalleng.es/profiles/clamytoe"),
 )
