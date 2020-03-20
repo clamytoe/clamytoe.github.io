@@ -68,6 +68,8 @@ a.anchor-link {
 
 .uk-icon-twitter {
   color: #00B0ED; }
+  .uk-icon-twitter:hover, .uk-icon-twitter:focus {
+    color: #3cf; }
 
 .uk-icon-facebook, .uk-icon-facebook-square {
   color: #3B5999; }
@@ -75,8 +77,10 @@ a.anchor-link {
 .uk-icon-google-plus, .uk-icon-google-plus-square {
   color: #D34836; }
 
-.uk-icon-github {
+.uk-icon-github, .uk-icon-github-alt, .uk-icon-drupal {
   color: #333; }
+  .uk-icon-github:hover, .uk-icon-github:focus, .uk-icon-github-alt:hover, .uk-icon-github-alt:focus, .uk-icon-drupal:hover, .uk-icon-drupal:focus {
+    color: #4d4d4d; }
 
 .uk-icon-envelope {
   color: #444; }
