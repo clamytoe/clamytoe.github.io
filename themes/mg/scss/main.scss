@@ -123,6 +123,14 @@ a.anchor-link {
     color: $textGrey;
 }
 
+.uk-icon-user {
+    color: #ff5c33;
+    
+    &:hover, &:focus {
+        color: #f30;
+    }
+}
+
 .uk-nav-side > li.uk-active > a {
     background: $accentGreen;
 }

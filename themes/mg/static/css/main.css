@@ -81,6 +81,11 @@ a.anchor-link {
 .uk-icon-envelope {
   color: #444; }
 
+.uk-icon-user {
+  color: #ff5c33; }
+  .uk-icon-user:hover, .uk-icon-user:focus {
+    color: #f30; }
+
 .uk-nav-side > li.uk-active > a {
   background: #455A64; }
 
