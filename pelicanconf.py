@@ -87,6 +87,7 @@ SOCIAL = (
     ("twitter", "https://twitter.com/clamytoe"),
     ("github", "https://github.com/clamytoe"),
     ("linkedin", "https://www.linkedin.com/in/martin-uribe/"),
+    ("user", "https://www.blog.pythonlibrary.org/2019/11/18/pydev-of-the-week-martin-uribe/"),
 )
 META_IMAGE = SITEURL + "/img/clamytoe.png"
 META_IMAGE_TYPE = "image/png"
