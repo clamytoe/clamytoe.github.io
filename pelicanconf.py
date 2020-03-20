@@ -86,8 +86,11 @@ TWITTER_USERNAME = "clamytoe"
 SOCIAL = (
     ("twitter", "https://twitter.com/clamytoe"),
     ("github", "https://github.com/clamytoe"),
+    ("github-alt", "https://gist.github.com/clamytoe"),
     ("linkedin", "https://www.linkedin.com/in/martin-uribe/"),
     ("user", "https://www.blog.pythonlibrary.org/2019/11/18/pydev-of-the-week-martin-uribe/"),
+    ("coffee", "https://pybit.es/author/martin-uribe.html"),
+    ("drupal", "https://codechalleng.es/profiles/clamytoe"),
 )
 META_IMAGE = SITEURL + "/img/clamytoe.png"
 META_IMAGE_TYPE = "image/png"

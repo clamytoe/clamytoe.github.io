@@ -105,6 +105,10 @@ a.anchor-link {
 
 .uk-icon-twitter {
     color: $twitterBlue;
+    
+    &:hover, &:focus {
+        color: #3cf;
+    }
 }
 
 .uk-icon-facebook, .uk-icon-facebook-square {
@@ -115,8 +119,12 @@ a.anchor-link {
     color: $googleRed;
 }
 
-.uk-icon-github {
+.uk-icon-github, .uk-icon-github-alt, .uk-icon-drupal {
     color: $githubBlack;
+    
+    &:hover, &:focus {
+        color: #4d4d4d;
+    }
 }
 
 .uk-icon-envelope {
