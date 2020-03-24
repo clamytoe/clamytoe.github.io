@@ -6,14 +6,23 @@ slug: cleaning-up-anaconda-environment_yml-files
 author: Martin Uribe
 summary: Cleaning up Anaconda exported environment files is pretty tedious work
 
-# Cleaning up Anaconda environment.yml files
+# Recreating virtual environments with Anaconda
 
 I love working with Anaconda.
 It makes things so much easier.
 I enjoy using it so much that I even wrote a guest post article on [PyBit.es](https://pybit.es/guest-anaconda-workflow.html) about my workflow.
 It goes into much more detail on the subject, but I'll cover a few basics here.
 
-With that being the case, there is one aspect of it that I really hate and that is creating the `environment.yml` project file.
+With that being the case, there is one aspect of it that I really hate and that is creating the `environment.yml` project file for distribution.
+
+## Table of Contents
+* [What is an enviroment.yml file](#what-is-an-enviroment.yml-file)
+* [How do you use an environment.yml file](#how-do-you-use-an-environment.yml-file)
+* [How do you create and environment.yml file](#how-do-you-create-and-environment.yml-file)
+* [How to prepare an environment.yml file for mass use](#how-to-prepare-an-environment.yml-file-for-mass-use)
+* [How to use the cleanup-yml.py script](#how-to-use-the-cleanup-yml.py-script)
+* [How to create an environment.yml without version lock in](#how-to-create-an-environment.yml-without-version-lock-in)
+* [Conclusion](#conclusion)
 
 ## What is an enviroment.yml file
 
@@ -25,8 +34,8 @@ Services like [binder](https://mybinder.org/) will automatically know that you a
 
 ## How do you use an environment.yml file
 
-Replicating a working virutal environment from the file is relatively simple.
-If you or the author of the project stuck to conventions and named it *environment.yml*, then issuing the folloing command will get you up and running:
+Replicating a working virtual environment from the file is relatively simple.
+If you or the author of the project stuck to conventions and named it *environment.yml*, then issuing the following command will get you up and running:
 
 ```zsh
 conda env create
@@ -157,6 +166,23 @@ if __name__ == "__main__":
     parsed = clean_yaml(file)
     save(file, parsed)
 
+```
+
+## How to use the cleanup-yml.py script
+
+Using the script is simple.
+I like to put my scripts into the `~/bin/` directory that I have in my home folder.
+Since that directory will automatically be in my path, I will be able to run the script from anywhere on my system.
+Make sure to make the script executable: `chmod +x ~/bin/cleanup-yml.py`
+
+To use it, you must run it from your project's home directory so that it can find the *environment.yml* file.
+There is no output; I guess I should have added a message stating that the modification were completed...
+A typical workflow would be as follows once you've setup your virtual environment by hand:
+
+```zsh
+conda env export > environment.yml
+cleanup-yml.py
+pip freeze > requirements.txt
 ```
 
 ## How to create an environment.yml without version lock in
