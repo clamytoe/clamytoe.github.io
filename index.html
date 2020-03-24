@@ -77,7 +77,7 @@ It goes into much more detail on the subject, but I'll cover a few basics here.<
 <p>With that being the case, there is one aspect of it that I really hate and that is creating the <code>environment.yml</code> project file for distribution.</p>
 <h2>Table of Contents</h2>
 <ul>
-<li><a href="#what-is-an-enviroment.yml-file">What is an enviroment.yml file</a></li>
+<li><a href="#what-is-an-environment.yml-file">What is an environment.yml file</a></li>
 <li><a href="#how-do-you-use-an-environment.yml-file">How do you use an environment.yml file</a></li>
 <li><a href="#how-do-you-create-and-environment.yml-file">How do you create and environment.yml file</a></li>
 <li><a href="#how-to-prepare-an-environment.yml-file-for-mass-use">How to prepare an environment.yml file for mass use</a></li>
@@ -85,12 +85,12 @@ It goes into much more detail on the subject, but I'll cover a few basics here.<
 <li><a href="#how-to-create-an-environment.yml-without-version-lock-in">How to create an environment.yml without version lock in</a></li>
 <li><a href="#conclusion">Conclusion</a></li>
 </ul>
-<h2>What is an enviroment.yml file</h2>
+<h2><a name="what-is-an-environment.yml-file"></a>What is an environment.yml file</h2>
 <p>Think of it as the equivalent of python's <code>requirements.txt</code>.
 With it, anyone can pick up your project and have a working environment up in no time and with all package dependencies resolved!</p>
 <p>By convention, just like the <code>requirements.txt</code> file, the file is usually named <em>environment.yml</em> although it can be any name you wish.
 Services like <a href="https://mybinder.org/">binder</a> will automatically know that you are using an Anaconda environment when it detects it and automatically generate the environment from it.</p>
-<h2>How do you use an environment.yml file</h2>
+<h2><a name="how-do-you-use-an-environment.yml-file"></a>How do you use an environment.yml file</h2>
 <p>Replicating a working virtual environment from the file is relatively simple.
 If you or the author of the project stuck to conventions and named it <em>environment.yml</em>, then issuing the following command will get you up and running:</p>
 <div class="highlight"><pre><span></span><code>conda env create
@@ -105,7 +105,7 @@ in that case you will have to specify the name of the file while using the <code
 
 <p>Anaconda will then create the virtual environment.
 It will download and install the packages that are listed in the yml file.</p>
-<h2>How do you create and environment.yml file</h2>
+<h2><a name="how-do-you-create-and-environment.yml-file"></a>How do you create and environment.yml file</h2>
 <p>So let's say that you want to be able to recreate your current working environment and you want an exact copy, with matching package versions and everything.
 It's really easy to do, you simply issue the following command:</p>
 <div class="highlight"><pre><span></span><code>conda env <span class="nb">export</span> &gt; environment.yml
@@ -114,7 +114,7 @@ It's really easy to do, you simply issue the following command:</p>
 
 <p>The generated file can be used to recreate your virtual environment exactly if you ever had the need.
 One draw back is that, in it's current form, it only works for your specific hardware setup!</p>
-<h2>How to prepare an environment.yml file for mass use</h2>
+<h2><a name="how-to-prepare-an-environment.yml-file-for-mass-use"></a>How to prepare an environment.yml file for mass use</h2>
 <p>To make it so that others can use it, whether they are on a Windows or a Mac, you will have to prepare the file.
 In it's current state it looks something like this:</p>
 <div class="highlight"><pre><span></span><code><span class="n">name</span><span class="o">:</span> <span class="n">dataviz</span>
@@ -211,7 +211,7 @@ That's write, hack together a quick little script to do it for you, and that is 
 </code></pre></div>
 
 
-<h2>How to use the cleanup-yml.py script</h2>
+<h2><a name="how-to-use-the-cleanup-yml.py-script"></a>How to use the cleanup-yml.py script</h2>
 <p>Using the script is simple.
 I like to put my scripts into the <code>~/bin/</code> directory that I have in my home folder.
 Since that directory will automatically be in my path, I will be able to run the script from anywhere on my system.
@@ -225,7 +225,7 @@ pip freeze &gt; requirements.txt
 </code></pre></div>
 
 
-<h2>How to create an environment.yml without version lock in</h2>
+<h2><a name="how-to-create-an-environment.yml-without-version-lock-in"></a>How to create an environment.yml without version lock in</h2>
 <p>If you don't really care about having an exact replica of your environment.
 Meaning that you don't care about the package versions, and you just want the environment with the latest version of the packages installed.</p>
 <p>This command is what you want:</p>
@@ -260,7 +260,7 @@ Meaning that you don't care about the package versions, and you just want the en
 
 
 <p>For that one, you would just need to remove the <strong>prefix</strong> line at the end before distributing.</p>
-<h2>Conclusion</h2>
+<h2><a name="conclusion"></a>Conclusion</h2>
 <p>Writing that cleanup script is really going to improve my workflow, and I hope that it will do the same for yours!</p>
 <p>In normal Python, using the <em>requirements.txt</em> file, you would first create your virtual environment, activate it, and then install the packages with the requirements.txt file.
 With Anaconda, it's all done in one step.
