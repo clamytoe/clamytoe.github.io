@@ -65,365 +65,222 @@
 
 
     <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
+        <a href="https://clamytoe.github.io/articles/2020/Mar/24/cleaning-up-anaconda-environment_yml-files" class="uk-article-title uk-link-muted" itemprop="name">Cleaning up Anaconda environment.yml files</a>
+        <p class="uk-article-meta"><time datetime="2020-03-24" itemprop="datePublished">Tue 24 March 2020</time> • <a href="https://clamytoe.github.io/category/python.html">Python</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">6 min</span></span></p>
+        </p>
+        <p class="uk-article-lead" itemprop="description">Cleaning up Anaconda exported environment files is pretty tedious work</p>
+            <section itemprop="articleBody"><h1>Recreating virtual environments with Anaconda</h1>
+<p>I love working with Anaconda.
+It makes things so much easier.
+I enjoy using it so much that I even wrote a guest post article on <a href="https://pybit.es/guest-anaconda-workflow.html">PyBit.es</a> about my workflow.
+It goes into much more detail on the subject, but I'll cover a few basics here.</p>
+<p>With that being the case, there is one aspect of it that I really hate and that is creating the <code>environment.yml</code> project file for distribution.</p>
+<h2>Table of Contents</h2>
+<ul>
+<li><a href="#what-is-an-enviroment.yml-file">What is an enviroment.yml file</a></li>
+<li><a href="#how-do-you-use-an-environment.yml-file">How do you use an environment.yml file</a></li>
+<li><a href="#how-do-you-create-and-environment.yml-file">How do you create and environment.yml file</a></li>
+<li><a href="#how-to-prepare-an-environment.yml-file-for-mass-use">How to prepare an environment.yml file for mass use</a></li>
+<li><a href="#how-to-use-the-cleanup-yml.py-script">How to use the cleanup-yml.py script</a></li>
+<li><a href="#how-to-create-an-environment.yml-without-version-lock-in">How to create an environment.yml without version lock in</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul>
+<h2>What is an enviroment.yml file</h2>
+<p>Think of it as the equivalent of python's <code>requirements.txt</code>.
+With it, anyone can pick up your project and have a working environment up in no time and with all package dependencies resolved!</p>
+<p>By convention, just like the <code>requirements.txt</code> file, the file is usually named <em>environment.yml</em> although it can be any name you wish.
+Services like <a href="https://mybinder.org/">binder</a> will automatically know that you are using an Anaconda environment when it detects it and automatically generate the environment from it.</p>
+<h2>How do you use an environment.yml file</h2>
+<p>Replicating a working virtual environment from the file is relatively simple.
+If you or the author of the project stuck to conventions and named it <em>environment.yml</em>, then issuing the following command will get you up and running:</p>
+<div class="highlight"><pre><span></span><code>conda env create
+</code></pre></div>
+
+
+<p>But what if it's named something else, like for example <em>secret_sauce.yml</em>?
+in that case you will have to specify the name of the file while using the <code>-f</code> flag, like ah so:</p>
+<div class="highlight"><pre><span></span><code>conda env create -f secret_sauce.yml
+</code></pre></div>
+
+
+<p>Anaconda will then create the virtual environment.
+It will download and install the packages that are listed in the yml file.</p>
+<h2>How do you create and environment.yml file</h2>
+<p>So let's say that you want to be able to recreate your current working environment and you want an exact copy, with matching package versions and everything.
+It's really easy to do, you simply issue the following command:</p>
+<div class="highlight"><pre><span></span><code>conda env <span class="nb">export</span> &gt; environment.yml
+</code></pre></div>
+
+
+<p>The generated file can be used to recreate your virtual environment exactly if you ever had the need.
+One draw back is that, in it's current form, it only works for your specific hardware setup!</p>
+<h2>How to prepare an environment.yml file for mass use</h2>
+<p>To make it so that others can use it, whether they are on a Windows or a Mac, you will have to prepare the file.
+In it's current state it looks something like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">name</span><span class="o">:</span> <span class="n">dataviz</span>
+<span class="n">channels</span><span class="o">:</span>
+  <span class="o">-</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+  <span class="o">-</span> <span class="n">defaults</span>
+<span class="n">dependencies</span><span class="o">:</span>
+  <span class="o">-</span> <span class="n">_libgcc_mutex</span><span class="o">=</span><span class="mf">0.1</span><span class="o">=</span><span class="n">conda_forge</span>
+  <span class="o">-</span> <span class="n">_openmp_mutex</span><span class="o">=</span><span class="mf">4.5</span><span class="o">=</span><span class="mi">0</span><span class="n">_gnu</span>
+  <span class="o">-</span> <span class="n">appdirs</span><span class="o">=</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">3</span><span class="o">=</span><span class="n">py_1</span>
+  <span class="o">-</span> <span class="n">attrs</span><span class="o">=</span><span class="mf">19.3</span><span class="o">.</span><span class="mi">0</span><span class="o">=</span><span class="n">py_0</span>
+  <span class="o">-</span> <span class="n">backcall</span><span class="o">=</span><span class="mf">0.1</span><span class="o">.</span><span class="mi">0</span><span class="o">=</span><span class="n">py_0</span>
+  <span class="o">-</span> <span class="n">black</span><span class="o">=</span><span class="mf">19.10</span><span class="n">b0</span><span class="o">=</span><span class="n">py37_0</span>
+  <span class="o">-</span> <span class="n">bleach</span><span class="o">=</span><span class="mf">3.1</span><span class="o">.</span><span class="mi">3</span><span class="o">=</span><span class="n">pyh8c360ce_0</span>
+  <span class="o">-</span> <span class="n">bokeh</span><span class="o">=</span><span class="mf">2.0</span><span class="o">.</span><span class="mi">0</span><span class="o">=</span><span class="n">py37hc8dfbb8_0</span>
+  <span class="o">-</span> <span class="n">bzip2</span><span class="o">=</span><span class="mf">1.0</span><span class="o">.</span><span class="mi">8</span><span class="o">=</span><span class="n">h516909a_2</span>
+  <span class="o">-</span> <span class="n">ca</span><span class="o">-</span><span class="n">certificates</span><span class="o">=</span><span class="mf">2019.11</span><span class="o">.</span><span class="mi">28</span><span class="o">=</span><span class="n">hecc5488_0</span>
+  <span class="o">-</span> <span class="n">certifi</span><span class="o">=</span><span class="mf">2019.11</span><span class="o">.</span><span class="mi">28</span><span class="o">=</span><span class="n">py37hc8dfbb8_1</span>
+  <span class="o">-</span> <span class="n">click</span><span class="o">=</span><span class="mf">7.1</span><span class="o">.</span><span class="mi">1</span><span class="o">=</span><span class="n">pyh8c360ce_0</span>
+  <span class="o">...</span>
+  <span class="o">-</span> <span class="n">yaml</span><span class="o">=</span><span class="mf">0.2</span><span class="o">.</span><span class="mi">2</span><span class="o">=</span><span class="n">h516909a_1</span>
+  <span class="o">-</span> <span class="n">zeromq</span><span class="o">=</span><span class="mf">4.3</span><span class="o">.</span><span class="mi">2</span><span class="o">=</span><span class="n">he1b5a44_2</span>
+  <span class="o">-</span> <span class="n">zipp</span><span class="o">=</span><span class="mf">3.1</span><span class="o">.</span><span class="mi">0</span><span class="o">=</span><span class="n">py_0</span>
+  <span class="o">-</span> <span class="n">zlib</span><span class="o">=</span><span class="mf">1.2</span><span class="o">.</span><span class="mi">11</span><span class="o">=</span><span class="n">h516909a_1006</span>
+  <span class="o">-</span> <span class="n">zstd</span><span class="o">=</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">4</span><span class="o">=</span><span class="n">h3b9ef0a_2</span>
+  <span class="o">-</span> <span class="n">pip</span><span class="o">:</span>
+    <span class="o">-</span> <span class="n">geoplotlib</span><span class="o">==</span><span class="mf">0.3</span><span class="o">.</span><span class="mi">2</span>
+    <span class="o">-</span> <span class="n">pyqt5</span><span class="o">-</span><span class="n">sip</span><span class="o">==</span><span class="mf">4.19</span><span class="o">.</span><span class="mi">18</span>
+    <span class="o">-</span> <span class="n">pyqtwebengine</span><span class="o">==</span><span class="mf">5.12</span><span class="o">.</span><span class="mi">1</span>
+<span class="n">prefix</span><span class="o">:</span> <span class="sr">/home/mohh/anaconda3/envs/</span><span class="n">dataviz</span>
+</code></pre></div>
+
+
+<blockquote>
+<p><strong>NOTE</strong>: I've shortened it because it was pretty long...</p>
+</blockquote>
+<p>As I described in my <a href="https://pybit.es/guest-anaconda-workflow.html#prepare_environment_yaml_for_distribution">workflow</a> article, you have to remove everything after the second <strong>=</strong> sign and the <strong>prefix:</strong> line towards the end.</p>
+<p>This particular one had <strong>165</strong> lines!!
+As you can imagine, that can get pretty tedious.
+What would any other Python Ninja do in this situation?
+That's write, hack together a quick little script to do it for you, and that is what I have done.</p>
+<p>You can find the script on my gist account here: <a href="https://gist.github.com/clamytoe/5019dd7c60688be9be7ccc3132c391ed">cleanup-yml.py</a></p>
+<p><em>cleanup-yml.py</em>:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+
+<span class="k">def</span> <span class="nf">clean_yaml</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">skip</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Cleans up an Anaconda environment file</span>
+
+<span class="sd">    The contents of the file are generated by issuing the following</span>
+<span class="sd">    command from within an activated Anaconda environment:</span>
+
+<span class="sd">        conda env export &gt; environment.yml</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        file {Path} -- Path file object that contains the exported env</span>
+<span class="sd">        skip {int} -- Number of lines to skip/leave alone at the top</span>
+<span class="sd">                      of the file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str -- cleaned up data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cleaned</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">file</span><span class="o">.</span><span class="n">open</span><span class="p">()</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">skip</span> <span class="ow">or</span> <span class="s2">&quot;==&quot;</span> <span class="ow">in</span> <span class="n">line</span> <span class="ow">or</span> <span class="s2">&quot;pip:&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">cleaned</span> <span class="o">+=</span> <span class="n">line</span>
+            <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;prefix:&quot;</span><span class="p">):</span>
+                <span class="n">cleaned</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="k">elif</span> <span class="s2">&quot;=&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">cleaned</span> <span class="o">+=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">keep</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">cleaned</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{keep}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="n">cleaned</span>
+
+
+<span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Saves the data to the file Path object</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        file {Path} -- Path file object to save the data to</span>
+<span class="sd">        data {str} -- The data to save to the file object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;environment.yml&quot;</span><span class="p">)</span>
+    <span class="n">parsed</span> <span class="o">=</span> <span class="n">clean_yaml</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="n">save</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">parsed</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h2>How to use the cleanup-yml.py script</h2>
+<p>Using the script is simple.
+I like to put my scripts into the <code>~/bin/</code> directory that I have in my home folder.
+Since that directory will automatically be in my path, I will be able to run the script from anywhere on my system.
+Make sure to make the script executable: <code>chmod +x ~/bin/cleanup-yml.py</code></p>
+<p>To use it, you must run it from your project's home directory so that it can find the <em>environment.yml</em> file.
+There is no output; I guess I should have added a message stating that the modification were completed...
+A typical workflow would be as follows once you've setup your virtual environment by hand:</p>
+<div class="highlight"><pre><span></span><code>conda env <span class="nb">export</span> &gt; environment.yml
+cleanup-yml.py
+pip freeze &gt; requirements.txt
+</code></pre></div>
+
+
+<h2>How to create an environment.yml without version lock in</h2>
+<p>If you don't really care about having an exact replica of your environment.
+Meaning that you don't care about the package versions, and you just want the environment with the latest version of the packages installed.</p>
+<p>This command is what you want:</p>
+<div class="highlight"><pre><span></span><code>conda env <span class="nb">export</span> --from-history &gt; environment.yml
+</code></pre></div>
+
+
+<p>This will generate an a yml file with just the packages that you specified and non of their dependencies.</p>
+<p>Here's an example one:</p>
+<div class="highlight"><pre><span></span><code><span class="n">name</span><span class="o">:</span> <span class="n">dataviz</span>
+<span class="n">channels</span><span class="o">:</span>
+  <span class="o">-</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+  <span class="o">-</span> <span class="n">defaults</span>
+<span class="n">dependencies</span><span class="o">:</span>
+  <span class="o">-</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.7</span>
+  <span class="o">-</span> <span class="n">pandas</span>
+  <span class="o">-</span> <span class="n">seaborn</span>
+  <span class="o">-</span> <span class="n">jupyterlab</span>
+  <span class="o">-</span> <span class="n">squarify</span>
+  <span class="o">-</span> <span class="n">bokeh</span>
+  <span class="o">-</span> <span class="n">matplotlib</span>
+  <span class="o">-</span> <span class="n">pyglet</span>
+  <span class="o">-</span> <span class="n">numpy</span>
+  <span class="o">-</span> <span class="n">flake8</span>
+  <span class="o">-</span> <span class="n">isort</span>
+  <span class="o">-</span> <span class="n">black</span>
+  <span class="o">-</span> <span class="n">pytest</span>
+  <span class="o">-</span> <span class="n">pytest</span><span class="o">-</span><span class="n">cov</span>
+  <span class="o">-</span> <span class="n">mypy</span>
+<span class="n">prefix</span><span class="o">:</span> <span class="sr">/home/mohh/anaconda3/envs/</span><span class="n">dataviz</span>
+</code></pre></div>
+
+
+<p>For that one, you would just need to remove the <strong>prefix</strong> line at the end before distributing.</p>
+<h2>Conclusion</h2>
+<p>Writing that cleanup script is really going to improve my workflow, and I hope that it will do the same for yours!</p>
+<p>In normal Python, using the <em>requirements.txt</em> file, you would first create your virtual environment, activate it, and then install the packages with the requirements.txt file.
+With Anaconda, it's all done in one step.
+You also have the option of choosing different versions of Python, plus you get the guarantee that there will be no package conflicts.</p>
+<blockquote>
+<p>On a side note, it feels great to write a script, with type hinting to boot, and not have <a href="https://github.com/psf/black">black</a>, <a href="https://gitlab.com/pycqa/flake8">flake8</a>, <a href="https://github.com/timothycrosley/isort">isort</a>, or <a href="https://github.com/python/mypy">mypy</a> complain about any of it!
+Sure helps to shake that importer syndrome a bit...</p>
+</blockquote></section>
+            <a href="https://clamytoe.github.io/articles/2020/Mar/24/cleaning-up-anaconda-environment_yml-files#disqus_thread"></a>
+        <hr class="uk-article-divider">
+    </article>
+
+
+    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
         <a href="https://clamytoe.github.io/articles/2020/Mar/17/bash-into-make" class="uk-article-title uk-link-muted" itemprop="name">Bash script into a Makefile</a>
         <p class="uk-article-meta"><time datetime="2020-03-17" itemprop="datePublished">Tue 17 March 2020</time> • <a href="https://clamytoe.github.io/category/misc.html">Misc</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">9 min</span></span></p>
         </p>
         <p class="uk-article-lead" itemprop="description">How to convert a bash script into a Makefile</p>
-            <section itemprop="articleBody"><h1>Using make can literally make your life easier</h1>
-<p>So the other day on the Pybites slack channel, <a href="https://opensource.com/users/jnyjny">Erik O'Shaughnessy</a> and I were chatting about something and I happened to mention that I had written a bash script to generate documents from Asciidoc files but wanted to create a Makefile to do the same instead.
-Without hesitation, he asked for my bash script and got to work!
-I don't think that I could have found a better tutorial on the subject if I had looked.
-I've looked things up before and nothing is as succinct as what he wrote up for me.</p>
-<p>This is all his work and even though I made some changes, the credit for it all goes to him.
-I thought it was so great, that I had to share it with everyone because I believe that it can help others get up to speed with creating Makefiles.</p>
-<h2>What is a make and what is a Makefile</h2>
-<p>The <a href="https://www.gnu.org/software/make/">GNU Make</a> project's page describes it as such:</p>
-<blockquote>
-<p>GNU Make is a tool which controls the generation of executables and other non-source files of a program from the program's source files.</p>
-</blockquote>
-<p>It basically means that you can automate some common tasks with it.
-To illustrate what it can do, I am going to show you how Erik converted my bash script.</p>
-<h2>The bash script</h2>
-<p>Here is the script in all its glory...
-It's not much.
-It was just thrown together pretty quick and it was getting the job done.</p>
-<figure class='code'>
-<figcaption><span class="liquid-tags-code-filename">gen_book.sh</span></figcaption>
-
-<div class="highlight"><pre><span></span><code><span class="c">#!/bin/bash</span>
-<span class="nv">DOC</span><span class="o">=</span><span class="s1">&#39;sop&#39;</span>
-<span class="nv">DATE</span><span class="o">=</span><span class="sb">`</span>date +%Y-%m-%d<span class="sb">`</span>
-<span class="nv">REV</span><span class="o">=</span><span class="sb">`</span>grep revnumber sop.asc <span class="p">|</span> cut -d <span class="s1">&#39; &#39;</span> -f <span class="m">2</span><span class="sb">`</span>
-<span class="nv">PARAMS</span><span class="o">=</span><span class="s2">&quot;--attribute revnumber=</span><span class="nv">$REV</span><span class="s2"> --attribute revdate=</span><span class="nv">$DATE</span><span class="s2">&quot;</span>
-
-<span class="err">echo</span> <span class="s2">&quot;Converting to HTML...&quot;</span>
-<span class="err">bundle</span> <span class="err">exec</span> <span class="err">asciidoctor</span> <span class="err">$PARAMS</span> <span class="err">$DOC.asc</span>
-<span class="err">echo</span> <span class="s2">&quot; -- HTML outpt at $DOC.html&quot;</span>
-
-<span class="err">echo</span> <span class="s2">&quot;Converting to ePub...&quot;</span>
-<span class="err">bundle</span> <span class="err">exec</span> <span class="err">asciidoctor-epub3</span> <span class="err">$PARAMS</span> <span class="err">$DOC.asc</span>
-<span class="err">echo</span> <span class="s2">&quot; -- ePub output at $DOC.epub&quot;</span>
-
-<span class="err">echo</span> <span class="s2">&quot;Converting to Mobi (kf8)...&quot;</span>
-<span class="err">bundle</span> <span class="err">exec</span> <span class="err">asciidoctor-epub3</span> <span class="err">$PARAMS</span> <span class="err">-a</span> <span class="nv">ebook-format</span><span class="o">=</span>kf8 <span class="nv">$DOC</span>.asc
-<span class="err">echo</span> <span class="s2">&quot; -- Mobi output at $DOC.mobi&quot;</span>
-
-<span class="err">echo</span> <span class="s2">&quot;Converting to PDF ... (This one takes a while)&quot;</span>
-<span class="err">bundle</span> <span class="err">exec</span> <span class="err">asciidoctor-pdf</span> <span class="err">$PARAMS</span> <span class="err">$DOC.asc</span>
-<span class="err">echo</span> <span class="s2">&quot; -- PDF output at $DOC.pdf&quot;</span>
-</code></pre></div>
-
-
-</figure>
-
-<h2>Creating the Makefile</h2>
-<h3>Variables</h3>
-<p>This is how you assign a string to a variable name in <em>Make</em>.
-The variable name doesn't have to be all caps and the equal doesn't have
-to be snugged up to the variable name; it's just how I write Makefiles</p>
-<div class="highlight"><pre><span></span><code><span class="nv">FILENAME</span><span class="o">=</span> sop
-</code></pre></div>
-
-
-<h3>Referencing variables</h3>
-<p><code>$(IDENTIFIER)</code> is how you reference a variable in Make, you can use <code>${}</code> too, but I prefer <code>$()</code>.
-If you forget the parentheses or the curly braces, eg <code>$INDENTIFER</code>, Make will interpret that as <code>$I</code> with <code>NDENTFIER</code> appended to it.
-Probably not what you are expecting.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">SOURCE</span><span class="o">=</span> <span class="k">$(</span>FILENAME<span class="k">)</span>.asc
-
-<span class="nv">HTML</span><span class="o">=</span> <span class="k">$(</span>FILENAME<span class="k">)</span>.html
-<span class="nv">PDF</span><span class="o">=</span> <span class="k">$(</span>FILENAME<span class="k">)</span>.pdf
-<span class="nv">EPUB</span><span class="o">=</span> <span class="k">$(</span>FILENAME<span class="k">)</span>.epub
-<span class="nv">MOBI</span><span class="o">=</span> <span class="k">$(</span>FILENAME<span class="k">)</span>.mobi
-</code></pre></div>
-
-
-<h3>Shell commands</h3>
-<p><code>$(shell shell command )</code> is how you invoke a command and save the results to a variable.
-It gets kinda tricky since every time you reference <code>$(DATE)</code> it will execute the command.
-The weird assignment operator <code>:=</code> means just assign it one time.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">DATE</span> <span class="o">:=</span> <span class="k">$(</span>shell date +%Y-%m-%d<span class="k">)</span>
-</code></pre></div>
-
-
-<p>Again, calling shell. This time using <code>AWK</code> to pull out the revision number.</p>
-<p>The <em>$</em> needs to be doubled in the command string to keep Make from
-trying to expand <code>$2</code> into something we didn't intend.</p>
-<p>I know there was a <code>grep</code>|<code>cut</code> in the bash version, I prefer to use <code>awk</code> for these kinds of <em>snip</em> operations since it's a single process invocation.
-Those are easier to deal with in this context since you don't have to worry about any pipe weirdness imposed by Make.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">REVISION</span> <span class="o">:=</span> <span class="k">$(</span>shell awk <span class="s1">&#39;/revnumber/ {print $$2}&#39;</span> <span class="k">$(</span>SOURCE<span class="k">))</span>
-</code></pre></div>
-
-
-<h3>Functions / macros</h3>
-<p>Ok this is a "function" definition that we use to build the various  <code>ASCIIDOCTOR</code> invocations.
-We could have just written the format specific definitions:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">ADOC_HTML</span><span class="o">=</span> bundle <span class="nb">exec</span> asciidoctor
-<span class="nv">ADOC_PDF</span><span class="o">=</span> bundle <span class="nb">exec</span> asiidoctor-pdf
-...
-</code></pre></div>
-
-
-<p>The advantage of this technique is you only have to change the <code>BUNDLE_EXEC</code> part if the way you invoke <em>asciidoctor</em> changes (I don't know why it would change, but the idea is to isolate stuff that's repeated so you don't have to freaking change it everywhere).</p>
-<p>Macro or <em>function</em> definition</p>
-<div class="highlight"><pre><span></span><code><span class="nv">BUNDLE_EXEC</span><span class="o">=</span> bundle <span class="nb">exec</span> <span class="k">$(</span><span class="m">1</span><span class="k">)</span>
-</code></pre></div>
-
-
-<h3>Using the macro</h3>
-<div class="highlight"><pre><span></span><code><span class="nv">ASCIIDOCTOR_HTML</span><span class="o">=</span> <span class="k">$(</span>call BUNDLE_EXEC,asciidoctor<span class="k">)</span>
-<span class="nv">ASCIIDOCTOR_PDF</span><span class="o">=</span>  <span class="k">$(</span>call BUNDLE_EXEC,asciidoctor-pdf<span class="k">)</span>
-<span class="nv">ASCIIDOCTOR_EPUB</span><span class="o">=</span> <span class="k">$(</span>call BUNDLE_EXEC,asciidoctor-epub3<span class="k">)</span>
-<span class="nv">ASCIIDOCTOR_MOBI</span><span class="o">=</span> <span class="k">$(</span>call BUNDLE_EXEC,asciidoctor-epub3<span class="k">)</span>
-</code></pre></div>
-
-
-<h3>Shared flags</h3>
-<p>Here we build the shared flags used by <em>asciidoctor</em> by all invocations.
-I use the <code>+=</code> assignment to show how you can add to a variable after it's initial assignment.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">ADOC_FLAGS</span><span class="o">=</span> --attribute <span class="nv">revnumber</span><span class="o">=</span><span class="k">$(</span>REVISION<span class="k">)</span>
-<span class="nv">ADOC_FLAGS</span><span class="o">+=</span> --attribute <span class="nv">revdate</span><span class="o">=</span><span class="k">$(</span>DATE<span class="k">)</span>
-</code></pre></div>
-
-
-<h3>Phony rule</h3>
-<p>This next bit is some <em>make</em> magic.
-The <code>.PHONY</code> rule is how we tell <em>make</em> that some of our rules are not associated directly with a file.</p>
-<blockquote>
-<p>The <code>all</code> rule below is by default a dependency of <code>.PHONY</code></p>
-</blockquote>
-<div class="highlight"><pre><span></span><code><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">html</span> <span class="n">pdf</span> <span class="n">epub</span> <span class="n">mobi</span>
-</code></pre></div>
-
-
-<h3>Default rule</h3>
-<p>The default rule that <em>Make</em> looks for when invoked as <code>make</code> is <code>all</code>.
-To build the <code>all</code> target, <em>make</em> builds, replace all with "a rule" name.</p>
-<div class="highlight"><pre><span></span><code><span class="nf">rulename</span><span class="o">:</span> <span class="n">dep</span>1 <span class="n">dep</span>2 <span class="n">dep</span>3 ... <span class="n">depN</span>
-<span class="err">command_0</span>
-<span class="err">@command_1</span>
-<span class="err">...</span>
-<span class="err">comand_n</span>
-
-<span class="nf">dep1</span><span class="o">:</span> <span class="n">subdep</span>1 ...
-</code></pre></div>
-
-
-<p>Here, the dependencies for <code>all</code> are <code>$(HTML)</code>, <code>$(PDF)</code>, <code>$(EPUB)</code> and <code>$(MOBI)</code> which expand in to the names of the files that <em>asciidoctor</em> will create.
-So <code>make all</code> will run the <em>HTML</em>, <em>PDF</em>, <em>EPUB</em> and <em>MOBI</em> rules in that order.</p>
-<div class="highlight"><pre><span></span><code><span class="nf">all</span><span class="o">:</span> <span class="k">$(</span><span class="nv">HTML</span><span class="k">)</span> <span class="k">$(</span><span class="nv">PDF</span><span class="k">)</span> <span class="k">$(</span><span class="nv">EPUB</span><span class="k">)</span> <span class="k">$(</span><span class="nv">MOBI</span><span class="k">)</span>
-</code></pre></div>
-
-
-<h3>Rules</h3>
-<p>The <code>$(HTML)</code> rule depends on <code>$(SOURCE)</code>, and only executes if the source file has changed or the destination file does not exist.
-<code>$@</code> is an alias for the name of the rule to be used in the body of the recipe.</p>
-<p>By default, <em>make</em> will print the command that is being executed to stdout followed by it's output.
-To suppress printing the command, preface the command with an <code>@</code>.</p>
-<p>Lastly, the indention is a <strong>TAB</strong> and not <strong>8 spaces</strong>.
-<em>Make</em> is an old-school tool and will complain if it doesn't get it's tabs.</p>
-<div class="highlight"><pre><span></span><code><span class="nf">$(HTML)</span><span class="o">:</span> <span class="k">$(</span><span class="nv">SOURCE</span><span class="k">)</span>
-    @echo Converting <span class="k">$(</span>SOURCE<span class="k">)</span> to <span class="nv">$@</span>
-    @<span class="k">$(</span>ASCIIDOCTOR_HTML<span class="k">)</span> <span class="k">$(</span>ADOC_FLAGS<span class="k">)</span> <span class="k">$(</span>SOURCE<span class="k">)</span>
-
-<span class="nf">$(PDF)</span><span class="o">:</span> <span class="k">$(</span><span class="nv">SOURCE</span><span class="k">)</span>
-    @echo Converting <span class="k">$(</span>SOURCE<span class="k">)</span> to <span class="nv">$@</span>
-    @<span class="k">$(</span>ASCIIDOCTOR_PDF<span class="k">)</span> <span class="k">$(</span>ADOC_FLAGS<span class="k">)</span> <span class="k">$(</span>SOURCE<span class="k">)</span>
-
-<span class="nf">$(EPUB)</span><span class="o">:</span> <span class="k">$(</span><span class="nv">SOURCE</span><span class="k">)</span>
-    @echo Converting <span class="k">$(</span>SOURCE<span class="k">)</span> to <span class="nv">$@</span>
-    @<span class="k">$(</span>ASCIIDOCTOR_EPUB<span class="k">)</span> <span class="k">$(</span>ADOC_FLAGS<span class="k">)</span> <span class="k">$(</span>SOURCE<span class="k">)</span>
-
-<span class="nf">$(MOBI)</span><span class="o">:</span> <span class="n">ADOC_FLAGS</span> += -<span class="n">a</span> <span class="n">ebook</span>-<span class="n">format</span>=<span class="n">kf</span>8
-<span class="nf">$(MOBI)</span><span class="o">:</span> <span class="k">$(</span><span class="nv">SOURCE</span><span class="k">)</span>
-    @echo Converting <span class="k">$(</span>SOURCE<span class="k">)</span> to <span class="nv">$@</span>
-    @<span class="k">$(</span>ASCIIDOCTOR_MOBI<span class="k">)</span> <span class="k">$(</span>ADOC_FLAGS<span class="k">)</span> <span class="k">$(</span>SOURCE<span class="k">)</span>
-</code></pre></div>
-
-
-<blockquote>
-<p><strong>NOTE</strong>: The <em>MOBI</em> <em>asciidoctor</em> command requires additional flags to generate the file.
-This is how you would make the changes to it.</p>
-</blockquote>
-<p>At this point, you can add each of the <em>PHONY</em> rules.
-You might want to group these together along with the regular rules for keep related blocks of logic together, but I'll add them here for now.</p>
-<div class="highlight"><pre><span></span><code><span class="nf">html</span><span class="o">:</span> <span class="k">$(</span><span class="nv">HTML</span><span class="k">)</span>
-<span class="nf">pdf</span><span class="o">:</span> <span class="k">$(</span><span class="nv">PDF</span><span class="k">)</span>
-<span class="nf">epub</span><span class="o">:</span> <span class="k">$(</span><span class="nv">EPUB</span><span class="k">)</span>
-<span class="nf">mobi</span><span class="o">:</span> <span class="k">$(</span><span class="nv">MOBI</span><span class="k">)</span>
-</code></pre></div>
-
-
-<h3>The debug rule</h3>
-<p>The debug rule is how I checked to make sure all of the variables I constructed contained the things I thought they should.</p>
-<div class="highlight"><pre><span></span><code><span class="nf">debug</span><span class="o">:</span>
-    @echo Rule -&gt; <span class="nv">$@</span>
-    @echo <span class="s1">&#39;          SOURCE: $(SOURCE)&#39;</span>
-    @echo <span class="s1">&#39;        REVISION: $(REVISION)&#39;</span>
-    @echo <span class="s1">&#39;            HTML: $(HTML)&#39;</span>
-    @echo <span class="s1">&#39;             PDF: $(PDF)&#39;</span>
-    @echo <span class="s1">&#39;            EPUB: $(EPUB)&#39;</span>
-    @echo <span class="s1">&#39;            MOBI: $(MOBI)&#39;</span>
-    @echo <span class="s1">&#39;       DOC_FLAGS: $(ADOC_FLAGS)&#39;</span>
-    @echo <span class="s1">&#39;ASCIIDOCTOR HTML: $(ASCIIDOCTOR_HTML)&#39;</span>
-    @echo <span class="s1">&#39; ASCIIDOCTOR PDF: $(ASCIIDOCTOR_PDF)&#39;</span>
-    @echo <span class="s1">&#39;ASCIIDOCTOR EPUB: $(ASCIIDOCTOR_EPUB)&#39;</span>
-    @echo <span class="s1">&#39;ASCIIDOCTOR MOBI: $(ASCIIDOCTOR_MOBI)&#39;</span>
-</code></pre></div>
-
-
-<h3>The clean rule</h3>
-<p>Often times we want to restart from a known good "clean" state.
-A clean rule is a good place to remove transient files so you ensure that all your dependencies in your project are rebuilt.
-In this case we just remove the translated files.
-We could use wildcards in this rule like <code>rm *.html</code> but this can have unintended consequences if we have other files in HTML format that we didn't want to smoke.</p>
-<p>Always be as explicit as possible in clean rules.</p>
-<div class="highlight"><pre><span></span><code><span class="nf">clean</span><span class="o">:</span>
-    @/bin/rm -f <span class="k">$(</span>HTML<span class="k">)</span> <span class="k">$(</span>PDF<span class="k">)</span> <span class="k">$(</span>EPUB<span class="k">)</span> <span class="k">$(</span>MOBI<span class="k">)</span>
-</code></pre></div>
-
-
-<h3>The help rule</h3>
-<p>I've found it to be very useful for letting users know what commands are available and what they do.
-Mostly it's for me, I forget everything...</p>
-<div class="highlight"><pre><span></span><code><span class="nf">help</span><span class="o">:</span>
-    @echo <span class="s1">&#39;Makefile for generating documents from Asciidoc source files              &#39;</span>
-    @echo <span class="s1">&#39;                                                                          &#39;</span>
-    @echo <span class="s1">&#39;Usage:                                                                    &#39;</span>
-    @echo <span class="s1">&#39;   make                                runs rules specified under all     &#39;</span>
-    @echo <span class="s1">&#39;   make all                            generates all of the file formats  &#39;</span>
-    @echo <span class="s1">&#39;   make clean                          remove the generated files         &#39;</span>
-    @echo <span class="s1">&#39;   make debug                          prints all of the variables used   &#39;</span>
-    @echo <span class="s1">&#39;   make epub                           (re)generates an epub file         &#39;</span>
-    @echo <span class="s1">&#39;   make help                           prints this message                &#39;</span>
-    @echo <span class="s1">&#39;   make html                           (re)generates an html file         &#39;</span>
-    @echo <span class="s1">&#39;   make mobi                           (re)generates a mobi file          &#39;</span>
-    @echo <span class="s1">&#39;   make pdf                            (re)generates a pdf file           &#39;</span>
-    @echo <span class="s1">&#39;   make -n [epub, html, mobi, pdf]     prints out the commands it would   &#39;</span>
-    @echo <span class="s1">&#39;                                       run without executing them         &#39;</span>
-    @echo <span class="s1">&#39;                                                                          &#39;</span>
-</code></pre></div>
-
-
-<h2>Conclusion</h2>
-<p><em>Make</em> is a very versatile program and can be used for many more things.
-For instance Erik uses it to launch his kids Minecraft server!
-Now that I know how a <em>Makefile</em> is constructed, I will be able to automate other parts of my daily tasks!</p>
-<blockquote>
-<p><strong>NOTE</strong>: The <em>MOBI</em> format kept failing on me.
-It would leave behind a file with the extension <em>-kf8.epub</em> and never generate the <em>.mobi</em> one.
-My guess is that I need to install some kind of Amazon Kindle app program or something, so I removed it from the <code>all</code> rule to prevent it from generating by default.</p>
-</blockquote>
-<p>This is the final file:</p>
-<div class="highlight"><pre><span></span><code><span class="c"># Makefile</span>
-
-<span class="c"># Main project file name</span>
-<span class="nv">FILENAME</span><span class="o">=</span> pnc-sop
-
-<span class="c"># Variables used</span>
-<span class="nv">SOURCE</span><span class="o">=</span> <span class="k">$(</span>FILENAME<span class="k">)</span>.asc
-
-<span class="nv">HTML</span><span class="o">=</span> <span class="k">$(</span>FILENAME<span class="k">)</span>.html
-<span class="nv">PDF</span><span class="o">=</span> <span class="k">$(</span>FILENAME<span class="k">)</span>.pdf
-<span class="nv">EPUB</span><span class="o">=</span> <span class="k">$(</span>FILENAME<span class="k">)</span>.epub
-<span class="nv">MOBI</span><span class="o">=</span> <span class="k">$(</span>FILENAME<span class="k">)</span>.mobi
-
-<span class="c"># Store the current date</span>
-<span class="nv">DATE</span> <span class="o">:=</span> <span class="k">$(</span>shell date +%Y-%m-%d<span class="k">)</span>
-
-<span class="c"># Grab revision number from the source document</span>
-<span class="nv">REVISION</span> <span class="o">:=</span> <span class="k">$(</span>shell awk <span class="s1">&#39;/revnumber/ {print $$2}&#39;</span> <span class="k">$(</span>SOURCE<span class="k">))</span>
-
-<span class="c"># Macro or &#39;function&#39; definition</span>
-<span class="nv">BUNDLE_EXEC</span><span class="o">=</span> bundle <span class="nb">exec</span> <span class="k">$(</span><span class="m">1</span><span class="k">)</span>
-
-<span class="c"># Assigning the macro</span>
-<span class="nv">ASCIIDOCTOR_HTML</span><span class="o">=</span> <span class="k">$(</span>call BUNDLE_EXEC,asciidoctor<span class="k">)</span>
-<span class="nv">ASCIIDOCTOR_PDF</span><span class="o">=</span>  <span class="k">$(</span>call BUNDLE_EXEC,asciidoctor-pdf<span class="k">)</span>
-<span class="nv">ASCIIDOCTOR_EPUB</span><span class="o">=</span> <span class="k">$(</span>call BUNDLE_EXEC,asciidoctor-epub3<span class="k">)</span>
-<span class="nv">ASCIIDOCTOR_MOBI</span><span class="o">=</span> <span class="k">$(</span>call BUNDLE_EXEC,asciidoctor-epub3<span class="k">)</span>
-
-<span class="c"># Shared flags</span>
-<span class="nv">ADOC_FLAGS</span><span class="o">=</span> --attribute <span class="nv">revnumber</span><span class="o">=</span><span class="k">$(</span>REVISION<span class="k">)</span>
-<span class="nv">ADOC_FLAGS</span><span class="o">+=</span> --attribute <span class="nv">revdate</span><span class="o">=</span><span class="k">$(</span>DATE<span class="k">)</span>
-
-<span class="c"># Enable phony rules</span>
-<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">html</span> <span class="n">pdf</span> <span class="n">epub</span> <span class="n">mobi</span>
-
-<span class="c"># Define the make commands</span>
-<span class="nf">all</span><span class="o">:</span> <span class="k">$(</span><span class="nv">HTML</span><span class="k">)</span> <span class="k">$(</span><span class="nv">PDF</span><span class="k">)</span> <span class="k">$(</span><span class="nv">EPUB</span><span class="k">)</span>
-
-<span class="c"># Define each of the commands and specifying their outputs</span>
-<span class="nf">$(HTML)</span><span class="o">:</span> <span class="k">$(</span><span class="nv">SOURCE</span><span class="k">)</span>
-    @echo Converting <span class="k">$(</span>SOURCE<span class="k">)</span> to <span class="nv">$@</span>
-    @<span class="k">$(</span>ASCIIDOCTOR_HTML<span class="k">)</span> <span class="k">$(</span>ADOC_FLAGS<span class="k">)</span> <span class="k">$(</span>SOURCE<span class="k">)</span>
-
-<span class="nf">html</span><span class="o">:</span> <span class="k">$(</span><span class="nv">HTML</span><span class="k">)</span>
-
-<span class="nf">$(PDF)</span><span class="o">:</span> <span class="k">$(</span><span class="nv">SOURCE</span><span class="k">)</span>
-    @echo Converting <span class="k">$(</span>SOURCE<span class="k">)</span> to <span class="nv">$@</span>
-    @<span class="k">$(</span>ASCIIDOCTOR_PDF<span class="k">)</span> <span class="k">$(</span>ADOC_FLAGS<span class="k">)</span> <span class="k">$(</span>SOURCE<span class="k">)</span>
-
-<span class="nf">pdf</span><span class="o">:</span> <span class="k">$(</span><span class="nv">PDF</span><span class="k">)</span>
-
-<span class="nf">$(EPUB)</span><span class="o">:</span> <span class="k">$(</span><span class="nv">SOURCE</span><span class="k">)</span>
-    @echo Converting <span class="k">$(</span>SOURCE<span class="k">)</span> to <span class="nv">$@</span>
-    @<span class="k">$(</span>ASCIIDOCTOR_EPUB<span class="k">)</span> <span class="k">$(</span>ADOC_FLAGS<span class="k">)</span> <span class="k">$(</span>SOURCE<span class="k">)</span>
-
-<span class="nf">epub</span><span class="o">:</span> <span class="k">$(</span><span class="nv">EPUB</span><span class="k">)</span>
-
-<span class="nf">$(MOBI)</span><span class="o">:</span> <span class="n">ADOC_FLAGS</span> += -<span class="n">a</span> <span class="n">ebook</span>-<span class="n">format</span>=<span class="n">kf</span>8
-<span class="nf">$(MOBI)</span><span class="o">:</span> <span class="k">$(</span><span class="nv">SOURCE</span><span class="k">)</span>
-    @echo Converting <span class="k">$(</span>SOURCE<span class="k">)</span> to <span class="nv">$@</span>
-    @<span class="k">$(</span>ASCIIDOCTOR_MOBI<span class="k">)</span> <span class="k">$(</span>ADOC_FLAGS<span class="k">)</span> <span class="k">$(</span>SOURCE<span class="k">)</span>
-
-<span class="nf">mobi</span><span class="o">:</span> <span class="k">$(</span><span class="nv">MOBI</span><span class="k">)</span>
-
-<span class="c"># Use debug rule to check that all of the variables were</span>
-<span class="c"># constructed properly.</span>
-<span class="nf">debug</span><span class="o">:</span>
-    @echo Rule -&gt; <span class="nv">$@</span>
-    @echo <span class="s1">&#39;          SOURCE: $(SOURCE)&#39;</span>
-    @echo <span class="s1">&#39;        REVISION: $(REVISION)&#39;</span>
-    @echo <span class="s1">&#39;            HTML: $(HTML)&#39;</span>
-    @echo <span class="s1">&#39;             PDF: $(PDF)&#39;</span>
-    @echo <span class="s1">&#39;            EPUB: $(EPUB)&#39;</span>
-    @echo <span class="s1">&#39;            MOBI: $(MOBI)&#39;</span>
-    @echo <span class="s1">&#39;       DOC_FLAGS: $(ADOC_FLAGS)&#39;</span>
-    @echo <span class="s1">&#39;ASCIIDOCTOR HTML: $(ASCIIDOCTOR_HTML)&#39;</span>
-    @echo <span class="s1">&#39; ASCIIDOCTOR PDF: $(ASCIIDOCTOR_PDF)&#39;</span>
-    @echo <span class="s1">&#39;ASCIIDOCTOR MOBI: $(ASCIIDOCTOR_MOBI)&#39;</span>
-    @echo <span class="s1">&#39;ASCIIDOCTOR EPUB: $(ASCIIDOCTOR_EPUB)&#39;</span>
-
-<span class="c"># Simple help menu showing what commands are available</span>
-<span class="c"># and what they do.</span>
-<span class="nf">help</span><span class="o">:</span>
-    @echo <span class="s1">&#39;Makefile for generating documents from Asciidoc source files              &#39;</span>
-    @echo <span class="s1">&#39;                                                                          &#39;</span>
-    @echo <span class="s1">&#39;Usage:                                                                    &#39;</span>
-    @echo <span class="s1">&#39;   make                                runs rules specified under all     &#39;</span>
-    @echo <span class="s1">&#39;   make all                            generates all of the file formats  &#39;</span>
-    @echo <span class="s1">&#39;   make clean                          remove the generated files         &#39;</span>
-    @echo <span class="s1">&#39;   make debug                          prints all of the variables used   &#39;</span>
-    @echo <span class="s1">&#39;   make epub                           (re)generates an epub file         &#39;</span>
-    @echo <span class="s1">&#39;   make help                           prints this message                &#39;</span>
-    @echo <span class="s1">&#39;   make html                           (re)generates an html file         &#39;</span>
-    @echo <span class="s1">&#39;   make mobi                           (re)generates a mobi file          &#39;</span>
-    @echo <span class="s1">&#39;   make pdf                            (re)generates a pdf file           &#39;</span>
-    @echo <span class="s1">&#39;   make -n [epub, html, mobi, pdf]     prints out the commands it would   &#39;</span>
-    @echo <span class="s1">&#39;                                       run without executing them         &#39;</span>
-    @echo <span class="s1">&#39;                                                                          &#39;</span>
-
-<span class="c"># Specify clean-up rules.</span>
-<span class="nf">clean</span><span class="o">:</span>
-    @/bin/rm -f <span class="k">$(</span>HTML<span class="k">)</span> <span class="k">$(</span>PDF<span class="k">)</span> <span class="k">$(</span>EPUB<span class="k">)</span> <span class="k">$(</span>MOBI<span class="k">)</span> <span class="k">$(</span>FILENAME<span class="k">)</span>-kf8.epub
-</code></pre></div>
-
-
-<blockquote>
-<p>Thanks again Erik! Check out his commented <a href="https://gist.github.com/clamytoe/68d13bb8481fc7acb81e373dea921d7d">Makefile</a> for further insights!</p>
-</blockquote></section>
-            <a href="https://clamytoe.github.io/articles/2020/Mar/17/bash-into-make#disqus_thread"></a>
+            <p>Using make can literally make your life easier So the other day on the Pybites slack channel, Erik O'Shaughnessy and I were chatting about something and I happened to mention that I had written a bash script to generate documents from Asciidoc files but wanted to create a Makefile to do the same instead. Without hesitation, he asked for my bash script and got to work! I don't think that I could have found a better tutorial...</p>
+            <p><a href="https://clamytoe.github.io/articles/2020/Mar/17/bash-into-make">Read More</a></p>
         <hr class="uk-article-divider">
     </article>
 
@@ -512,17 +369,6 @@ My guess is that I need to install some kind of Amazon Kindle app program or som
         <p class="uk-article-lead" itemprop="description">Learning about how to encrypt files</p>
             <p>Venture Into Cryptography with PyCryptodome Learning about how to encrypt files As dumb as it is, I have an unsecured text file that I use to keep track of all my username and passwords for all of the sites that I frequent. In order to not be so "hackable", I've decided to encrypt the file. I had recently written a couple of coding challenges for Pybites Code Challenges site, using the cryptography module. One was a coding...</p>
             <p><a href="https://clamytoe.github.io/articles/2020/Feb/14/pycryptodome">Read More</a></p>
-        <hr class="uk-article-divider">
-    </article>
-
-
-    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-        <a href="https://clamytoe.github.io/articles/2020/Feb/13/rescaling-values" class="uk-article-title uk-link-muted" itemprop="name">Rescaling values for DataScience</a>
-        <p class="uk-article-meta"><time datetime="2020-02-13" itemprop="datePublished">Thu 13 February 2020</time> • <a href="https://clamytoe.github.io/category/datascience.html">DataScience</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">3 min</span></span></p>
-        </p>
-        <p class="uk-article-lead" itemprop="description">Quick discussion about rescaling values for data science</p>
-            <p>Scaling values Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relevant. The dataset consisted of "House Ownership": Age Annual income in USD House ownership status 23 50,000 Non-owner 37 34,000 Non-owner 20 100,000 Owner 35 130,000 Owner etc.. The aim being to predict whether a person that is 50 years old with an income of $80,000, would...</p>
-            <p><a href="https://clamytoe.github.io/articles/2020/Feb/13/rescaling-values">Read More</a></p>
         <hr class="uk-article-divider">
     </article>
 
