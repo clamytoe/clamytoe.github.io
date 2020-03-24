@@ -16,7 +16,8 @@ It goes into much more detail on the subject, but I'll cover a few basics here.
 With that being the case, there is one aspect of it that I really hate and that is creating the `environment.yml` project file for distribution.
 
 ## Table of Contents
-* [What is an enviroment.yml file](#what-is-an-enviroment.yml-file)
+
+* [What is an environment.yml file](#what-is-an-environment.yml-file)
 * [How do you use an environment.yml file](#how-do-you-use-an-environment.yml-file)
 * [How do you create and environment.yml file](#how-do-you-create-and-environment.yml-file)
 * [How to prepare an environment.yml file for mass use](#how-to-prepare-an-environment.yml-file-for-mass-use)
@@ -24,7 +25,7 @@ With that being the case, there is one aspect of it that I really hate and that 
 * [How to create an environment.yml without version lock in](#how-to-create-an-environment.yml-without-version-lock-in)
 * [Conclusion](#conclusion)
 
-## What is an enviroment.yml file
+## <a name="what-is-an-environment.yml-file"></a>What is an environment.yml file
 
 Think of it as the equivalent of python's `requirements.txt`.
 With it, anyone can pick up your project and have a working environment up in no time and with all package dependencies resolved!
@@ -32,7 +33,7 @@ With it, anyone can pick up your project and have a working environment up in no
 By convention, just like the `requirements.txt` file, the file is usually named *environment.yml* although it can be any name you wish.
 Services like [binder](https://mybinder.org/) will automatically know that you are using an Anaconda environment when it detects it and automatically generate the environment from it.
 
-## How do you use an environment.yml file
+## <a name="how-do-you-use-an-environment.yml-file"></a>How do you use an environment.yml file
 
 Replicating a working virtual environment from the file is relatively simple.
 If you or the author of the project stuck to conventions and named it *environment.yml*, then issuing the following command will get you up and running:
@@ -51,7 +52,7 @@ conda env create -f secret_sauce.yml
 Anaconda will then create the virtual environment.
 It will download and install the packages that are listed in the yml file.
 
-## How do you create and environment.yml file
+## <a name="how-do-you-create-and-environment.yml-file"></a>How do you create and environment.yml file
 
 So let's say that you want to be able to recreate your current working environment and you want an exact copy, with matching package versions and everything.
 It's really easy to do, you simply issue the following command:
@@ -63,7 +64,7 @@ conda env export > environment.yml
 The generated file can be used to recreate your virtual environment exactly if you ever had the need.
 One draw back is that, in it's current form, it only works for your specific hardware setup!
 
-## How to prepare an environment.yml file for mass use
+## <a name="how-to-prepare-an-environment.yml-file-for-mass-use"></a>How to prepare an environment.yml file for mass use
 
 To make it so that others can use it, whether they are on a Windows or a Mac, you will have to prepare the file.
 In it's current state it looks something like this:
@@ -168,7 +169,7 @@ if __name__ == "__main__":
 
 ```
 
-## How to use the cleanup-yml.py script
+## <a name="how-to-use-the-cleanup-yml.py-script"></a>How to use the cleanup-yml.py script
 
 Using the script is simple.
 I like to put my scripts into the `~/bin/` directory that I have in my home folder.
@@ -185,7 +186,7 @@ cleanup-yml.py
 pip freeze > requirements.txt
 ```
 
-## How to create an environment.yml without version lock in
+## <a name="how-to-create-an-environment.yml-without-version-lock-in"></a>How to create an environment.yml without version lock in
 
 If you don't really care about having an exact replica of your environment.
 Meaning that you don't care about the package versions, and you just want the environment with the latest version of the packages installed.
@@ -227,7 +228,7 @@ prefix: /home/mohh/anaconda3/envs/dataviz
 
 For that one, you would just need to remove the **prefix** line at the end before distributing.
 
-## Conclusion
+## <a name="conclusion"></a>Conclusion
 
 Writing that cleanup script is really going to improve my workflow, and I hope that it will do the same for yours!
 
