@@ -65,168 +65,112 @@
 
 
     <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
+        <a href="https://clamytoe.github.io/articles/2020/Feb/14/pycryptodome" class="uk-article-title uk-link-muted" itemprop="name">Into the cryptography rabbit hole</a>
+        <p class="uk-article-meta"><time datetime="2020-02-14" itemprop="datePublished">Fri 14 February 2020</time> • <a href="https://clamytoe.github.io/category/python.html">Python</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">5 min</span></span></p>
+        </p>
+        <p class="uk-article-lead" itemprop="description">Learning about how to encrypt files</p>
+            <section itemprop="articleBody"><h1>Venture Into Cryptography with PyCryptodome</h1>
+<h2>Learning about how to encrypt files</h2>
+<p>As dumb as it is, I have an unsecured text file that I use to keep track of all my username and passwords for all of the sites that I frequent. In order to not be so "hackable", I've decided to encrypt the file.</p>
+<p>I had recently written a couple of coding challenges for <a href="https://codechalleng.es/">Pybites Code Challenges</a> site, using the <a href="https://cryptography.io/en/latest/">cryptography</a> module.
+One was a coding challenge and the other a testing one.
+Unfortunately, that module is <strong>NOT</strong> part of Python's Standard Library!</p>
+<p>I didn't specifically install it, but it seems to come pre-installed with <a href="https://www.anaconda.com/distribution/">Anaconda</a>, which I use.
+I was looking through all of the modules that I had, when I came across the cryptography one.
+That's when I first got the idea for the challenges.
+It started as a single challenge, but I really liked how the tests came out and decided to split it up into coding and testing bites.</p>
+<p>I pushed them to the Pybites Github private repo and it sat there for a bit before <a href="https://codechalleng.es/profiles/pybob">Bob Belderbos</a> decided to add them.
+That's when the problems started!
+He discovered that the module was not available so he installed it.
+It worked perfectly for the coding challenge, but for the testing one, when the call to the <a href="https://docs.pytest.org/en/latest/">Pytest</a>/<a href="https://github.com/mutpy/mutpy">Mutpy</a> instance is made, it looses the path to the module!</p>
+<p>We were discussing the issue on the <a href="https://pybit.es/pages/community.html">Pybites</a> Slack channel when <a href="https://codechalleng.es/profiles/driscollis">Mike Driscoll</a> the creator of <a href="http://www.blog.pythonlibrary.org/">The Mouse vs Python</a>, mentioned the <a href="https://www.pycryptodome.org/en/latest/">PyCryptodome</a> module.
+He initially thought that the problem was with installing the cryptography module.
+In the end, Bob was not able to figure out how to get it to work, so the challenge had to be removed from the platform.</p>
+<p>Regardless, I was intrigued by pycryptodome, so I started to look into how it worked.
+It seemed pretty cool, so that's when I came up with the idea of encrypting my password file.
+It took a little bit of work, but I was able to encrypt the file into a binary.
+The problem came when I started to try and retrieve the data.
+The module complained about the data being too large!</p>
+<p>I decided to create an encrypted binary for each entry.
+So far that's worked, but now I have to figure out how to scan the directory and list the ones that are available in order to be able to retrieve/update them.
+I've been using the logging module as well, so now I have to figure out how to do some log rotation to keep from taking up too much drive space.
+I might even play around with creating a UI for it, to make it easier to use.</p>
+<p>Since I used my <a href="https://github.com/clamytoe/toepack">toepack</a> <a href="https://github.com/cookiecutter/cookiecutter">Cookiecutter</a> template, it's a package.
+It's gotten big enough that I've moved the two classes, (<code>Entry</code>, <code>Vault</code>) into their own files.
+It works out pretty good because the <code>app.py</code> file now only contains:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">.entry</span> <span class="kn">import</span> <span class="n">Entry</span>
+<span class="kn">from</span> <span class="nn">.vault</span> <span class="kn">import</span> <span class="n">Vault</span><span class="p">,</span> <span class="n">logger</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Entering main.&quot;</span><span class="p">)</span>
+    <span class="n">ip</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="s2">&quot;ip&quot;</span><span class="p">,</span> <span class="s2">&quot;http://192.168.2.1&quot;</span><span class="p">,</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span> <span class="s2">&quot;admin&quot;</span><span class="p">)</span>
+
+    <span class="n">v</span> <span class="o">=</span> <span class="n">Vault</span><span class="p">()</span>
+    <span class="n">v</span><span class="o">.</span><span class="n">encrypt_file</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+    <span class="n">v</span><span class="o">.</span><span class="n">decrypt_file</span><span class="p">(</span><span class="n">ip</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Running as a module.&quot;</span><span class="p">)</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+
+<p>Separating the code like this will come in handy when it comes to either creating a <a href="https://palletsprojects.com/p/click/">Click</a> CLI interface or a GUI one.</p>
+<p>The log file for that run looks like this:</p>
+<div class="highlight"><pre><span></span><code>2020-02-13 14:05:17,812 - [INFO] - root - Creating vault: /home/mohh/Documents/.passlock/ip.bin
+2020-02-13 14:05:17,812 - [INFO] - root - Importing public key: plock.pub
+2020-02-13 14:05:17,812 - [INFO] - root - Public key accessed: /home/mohh/.passlock/plock.pub
+2020-02-13 14:05:17,815 - [INFO] - root - Generating random byte for session key
+2020-02-13 14:05:17,815 - [INFO] - root - Generating encrypted session key
+2020-02-13 14:05:17,819 - [INFO] - root - Generating AES cipher
+2020-02-13 14:05:17,820 - [INFO] - root - Encrypting data to create cipher text
+2020-02-13 14:05:17,820 - [INFO] - root - Writing cipher text to: ip.bin
+2020-02-13 14:05:17,820 - [WARNING] - root - /home/mohh/Documents/.passlock/ip.bin already exists!
+2020-02-13 14:05:17,820 - [INFO] - root - Successfully wrote to: /home/mohh/Documents/.passlock/ip.bin
+2020-02-13 14:05:17,821 - [INFO] - root - Opening file for reading: /home/mohh/Documents/.passlock/ip.bin
+2020-02-13 14:05:17,821 - [INFO] - root - Importing private key: plock
+2020-02-13 14:05:17,821 - [INFO] - root - Private key accessed: /home/mohh/.passlock/plock
+2020-02-13 14:05:18,150 - [INFO] - root - Extracting encrypted session key
+2020-02-13 14:05:18,151 - [INFO] - root - Generating RSA cipher key from imported private key
+2020-02-13 14:05:18,151 - [INFO] - root - Decrypting extracted session key
+2020-02-13 14:05:18,171 - [INFO] - root - Session key was successfully restored
+2020-02-13 14:05:18,171 - [INFO] - root - Generating AES cipher from session key
+2020-02-13 14:05:18,172 - [INFO] - root - Decrypting and verifying cipher text
+2020-02-13 14:05:18,172 - [INFO] - root - Closing: ip.bin
+2020-02-13 14:05:18,172 - [INFO] - root - Generating new Entry object from decrypted data
+2020-02-13 14:05:18,172 - [INFO] - root - Returning decrypted text for: ip
+</code></pre></div>
+
+
+<p>Not sure if that's too much information but logging each step in the process really comes in handy when trying to figure out issues at work.
+I've tried to keep all sensitive data out of it unless the logging is switched to <code>debug</code>.</p>
+<p>Retrieving the encrypted data looks like this:</p>
+<div class="highlight"><pre><span></span><code>Successfully created: /home/mohh/Documents/.passlock/ip.bin
+
+[ip]
+INFO: http://192.168.2.1
+USER: admin
+PASS: admin
+</code></pre></div>
+
+
+<blockquote>
+<p><strong>NOTE</strong>: These are not real username and passwords!</p>
+</blockquote></section>
+            <a href="https://clamytoe.github.io/articles/2020/Feb/14/pycryptodome#disqus_thread"></a>
+        <hr class="uk-article-divider">
+    </article>
+
+
+    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
         <a href="https://clamytoe.github.io/articles/2020/Feb/13/rescaling-values" class="uk-article-title uk-link-muted" itemprop="name">Rescaling values for DataScience</a>
         <p class="uk-article-meta"><time datetime="2020-02-13" itemprop="datePublished">Thu 13 February 2020</time> • <a href="https://clamytoe.github.io/category/datascience.html">DataScience</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">3 min</span></span></p>
         </p>
         <p class="uk-article-lead" itemprop="description">Quick discussion about rescaling values for data science</p>
-            <section itemprop="articleBody"><h1>Scaling values</h1>
-<p>Today while reading Data Science Algorithms in a Week, from <a href="https://www.packtpub.com">packt</a>, I came across the concept of rescaling values so that when measuring their distances they would be more relevant.
-The dataset consisted of "House Ownership":</p>
-<table>
-<thead>
-<tr>
-<th align="left">Age</th>
-<th align="left">Annual income in USD</th>
-<th align="left">House ownership status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">23</td>
-<td align="left">50,000</td>
-<td align="left">Non-owner</td>
-</tr>
-<tr>
-<td align="left">37</td>
-<td align="left">34,000</td>
-<td align="left">Non-owner</td>
-</tr>
-<tr>
-<td align="left">20</td>
-<td align="left">100,000</td>
-<td align="left">Owner</td>
-</tr>
-<tr>
-<td align="left">35</td>
-<td align="left">130,000</td>
-<td align="left">Owner</td>
-</tr>
-</tbody>
-</table>
-<p>etc..</p>
-<p>The aim being to predict whether a person that is 50 years old with an income of $80,000, would own a home so that he could be targeted for home insurance.</p>
-<p><a href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm">k-Nearest Neighbor</a>'s are currently being covered and for this exercise a <code>k = 1</code> is to be used.
-Using either a <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean</a> or <a href="https://en.wiktionary.org/wiki/Manhattan_distance">Manhattan</a> distance wouldn't matter because the distances between these values are too great. In comes rescaling!</p>
-<p>The formula use is:</p>
-<div class="math">$$ScaledQuantity = \frac{ActualQuantity-MinQuantity}{MaxQuantity-MinQuantity}$$</div>
-<p>So for this dataset, both the <strong>Age</strong> and the <strong>Annual income</strong> wound have to be adjusted.</p>
-<div class="math">$$ScaledAge = \frac{ActualAge-MinAge}{MaxAge-MinAge}$$</div>
-<div class="math">$$ScaledIncome = \frac{ActualIncome-MinIncome}{MaxIncome-MinIncome}$$</div>
-<p>After scaling, the adjusted dataset would look something like this:</p>
-<table>
-<thead>
-<tr>
-<th align="left">Age</th>
-<th align="left">Scaled age</th>
-<th align="left">Annual income in USD</th>
-<th align="left">Scaled annual income</th>
-<th align="left">House ownership status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">23</td>
-<td align="left">09375</td>
-<td align="left">50,000</td>
-<td align="left">2</td>
-<td align="left">Non-owner</td>
-</tr>
-<tr>
-<td align="left">37</td>
-<td align="left">53125</td>
-<td align="left">34,000</td>
-<td align="left">4</td>
-<td align="left">Non-owner</td>
-</tr>
-<tr>
-<td align="left">20</td>
-<td align="left">0</td>
-<td align="left">100,000</td>
-<td align="left">7</td>
-<td align="left">Owner</td>
-</tr>
-<tr>
-<td align="left">35</td>
-<td align="left">46875</td>
-<td align="left">130,000</td>
-<td align="left">1</td>
-<td align="left">Owner</td>
-</tr>
-<tr>
-<td align="left">50</td>
-<td align="left">9375</td>
-<td align="left">80,000</td>
-<td align="left">5</td>
-<td align="left">?</td>
-</tr>
-</tbody>
-</table>
-<p>Now a 1-NN algorithm with a Euclidean metric could easily be used to find out if the last person is more than likely to own a home.
-Without the rescaling, the algorithm would have yielded different results.</p>
-<p>Keeping it short today, but hopefully it was a helpful tip!</p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "left",
-        indent = "0em",
-        linebreak = "true";
-
-    if (true) {
-        align = (screen.width < 1125) ? "left" : align;
-        indent = (screen.width < 1125) ? "0em" : indent;
-        linebreak = (screen.width < 1125) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script></section>
-            <a href="https://clamytoe.github.io/articles/2020/Feb/13/rescaling-values#disqus_thread"></a>
+            <p>Scaling values Today while reading Data Science Algorithms in a Week, from packt, I came across the concept of rescaling values so that when measuring their distances they would be more relevant. The dataset consisted of "House Ownership": Age Annual income in USD House ownership status 23 50,000 Non-owner 37 34,000 Non-owner 20 100,000 Owner 35 130,000 Owner etc.. The aim being to predict whether a person that is 50 years old with an income of $80,000, would...</p>
+            <p><a href="https://clamytoe.github.io/articles/2020/Feb/13/rescaling-values">Read More</a></p>
         <hr class="uk-article-divider">
     </article>
 
