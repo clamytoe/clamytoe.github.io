@@ -6,7 +6,7 @@ slug: advanced-type-annotations
 author: Martin Uribe
 summary: Some concrete examples on how to type hint more advanced class objects
 
-# Advanced type annotations
+# How to add type annotations to Python dataclasses
 
 During the COVID19 outbreak, a lof of companies are either giving away free books, tutorials, or access their training material.
 One such company is Pluralsight.
