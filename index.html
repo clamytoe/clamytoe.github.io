@@ -66,7 +66,7 @@
 
     <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
         <a href="https://clamytoe.github.io/articles/2020/May/04/benchmarking-python-code" class="uk-article-title uk-link-muted" itemprop="name">Benchmarking Python Code</a>
-        <p class="uk-article-meta"><time datetime="2020-05-04" itemprop="datePublished">Mon 04 May 2020</time> • <a href="https://clamytoe.github.io/category/python.html">Python</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">6 min</span></span></p>
+        <p class="uk-article-meta"><time datetime="2020-05-04" itemprop="datePublished">Mon 04 May 2020</time> • <a href="https://clamytoe.github.io/category/python.html">Python</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">7 min</span></span></p>
         </p>
         <p class="uk-article-lead" itemprop="description">How much faster is one implementation compared to another?</p>
             <section itemprop="articleBody"><h1>Need to compare which code is faster, read on to find out how</h1>
@@ -277,7 +277,57 @@ The values passed, just need to be strings, so the easiest thing to do is to jus
 The first method, using <code>time</code> is more suited towards larger code, while <code>timeit</code> is good for shorter snippets of code.
 The <em>timeit</em> module can do a few more things.
 I suggest reading up on it if you're curious.</p>
-<p>Until next time, keep on coding!</p></section>
+<p>Until next time, keep on coding!</p>
+<h2>Update</h2>
+<p>I've always thought that having to enclose your code in triple double quotes was kind of clunky.
+Well, my buddy <a href="https://harrisonmorgan.dev/">Harrison Morgan</a> just demonstrated to me that you don't have to!
+The same thing can be done with a decorator and a <code>lambda</code> expression!</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">from</span> <span class="nn">timeit</span> <span class="kn">import</span> <span class="n">timeit</span>
+
+
+<span class="k">def</span> <span class="nf">test_performance</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{func.__name__:&gt;8}</span><span class="s2">: </span><span class="si">{result}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+
+<span class="nd">@test_performance</span>
+<span class="k">def</span> <span class="nf">mridu</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">s1</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">s1</span> <span class="o">+=</span> <span class="n">s</span><span class="p">[</span><span class="n">x</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">s1</span> <span class="o">+=</span> <span class="n">s</span><span class="p">[</span><span class="n">x</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+    <span class="k">return</span> <span class="n">s1</span>
+
+
+<span class="nd">@test_performance</span>
+<span class="k">def</span> <span class="nf">clamytoe</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">word</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">()])</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;Let&#39;s take LeetCode contest&quot;</span>
+    <span class="n">clamytoe</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">mridu</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>And the results:</p>
+<div class="highlight"><pre><span></span><code><span class="go">clamytoe: 1.9616992009999876</span>
+<span class="go">   mridu: 3.411077960000057</span>
+</code></pre></div>
+
+
+<p>How awesome is that?
+This is why the Python community is so great!
+Everyone is willing to freely share in their knowledge and help each other, thanks again Harrison!</p></section>
             <a href="https://clamytoe.github.io/articles/2020/May/04/benchmarking-python-code#disqus_thread"></a>
         <hr class="uk-article-divider">
     </article>
