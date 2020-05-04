@@ -253,3 +253,58 @@ The _timeit_ module can do a few more things.
 I suggest reading up on it if you're curious.
 
 Until next time, keep on coding!
+
+## Update
+
+I've always thought that having to enclose your code in triple double quotes was kind of clunky.
+Well, my buddy [Harrison Morgan](https://harrisonmorgan.dev/) just demonstrated to me that you don't have to!
+The same thing can be done with a decorator and a `lambda` expression!
+
+```python
+from functools import wraps
+from timeit import timeit
+
+
+def test_performance(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        result = timeit(lambda: func(*args, **kwargs))
+        print(f"{func.__name__:>8}: {result}")
+
+    return wrapper
+
+
+@test_performance
+def mridu(s: str) -> str:
+    s = s.split()
+    s1 = ''
+    for x in range(0, len(s)):
+        if x == len(s) - 1:
+            s1 += s[x][::-1]
+        else:
+            s1 += s[x][::-1] + ' '
+    return s1
+
+
+@test_performance
+def clamytoe(s):
+    return " ".join([word[::-1] for word in s.split()])
+
+
+if __name__ == "__main__":
+    s = "Let's take LeetCode contest"
+    clamytoe(s)
+    mridu(s)
+
+```
+
+And the results:
+
+```console
+clamytoe: 1.9616992009999876
+   mridu: 3.411077960000057
+```
+
+How awesome is that?
+This is why the Python community is so great!
+Everyone is willing to freely share in their knowledge and help each other, thanks again Harrison!
