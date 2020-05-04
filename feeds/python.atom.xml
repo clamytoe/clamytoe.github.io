@@ -1,5 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings - Python</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/python.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-04-19T12:20:00-05:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Advanced type annotations</title><link href="https://clamytoe.github.io/articles/2020/Apr/19/advanced-type-annotations" rel="alternate"></link><published>2020-04-19T12:20:00-05:00</published><updated>2020-04-19T12:20:00-05:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-04-19:/articles/2020/Apr/19/advanced-type-annotations</id><summary type="html">&lt;p&gt;Some concrete examples on how to type hint more advanced class objects&lt;/p&gt;</summary><content type="html">&lt;h1&gt;How to add type annotations to Python dataclasses&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings - Python</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/python.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-05-04T08:56:00-05:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Benchmarking Python Code</title><link href="https://clamytoe.github.io/articles/2020/May/04/benchmarking-python-code" rel="alternate"></link><published>2020-05-04T08:56:00-05:00</published><updated>2020-05-04T08:56:00-05:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-05-04:/articles/2020/May/04/benchmarking-python-code</id><summary type="html">&lt;p&gt;How much faster is one implementation compared to another?&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Need to compare which code is faster, read on to find out how&lt;/h1&gt;
+&lt;p&gt;A friend of mine, &lt;a href="https://dev.to/mridubhatnagar"&gt;Mridu Bhatnagar&lt;/a&gt;, has been posting some really cool articles explaining how she's gone about solving some &lt;a href="https://leetcode.com/"&gt;LeetCode&lt;/a&gt; challenges.
+They are all interesting, but due to time constraints, I have only attempted to see if I can do a couple of them.&lt;/p&gt;
+&lt;h2&gt;Move Zeroes&lt;/h2&gt;
+&lt;p&gt;One of the first that I attempted to do was &lt;a href="https://dev.to/mridubhatnagar/day-3-move-zeroes-1lbb"&gt;Move Zeroes&lt;/a&gt;.
+I thought that I was being clever, and sure enough, my initial time test seemed to indicate the same.
+That is, until &lt;a href="https://www.linkedin.com/in/sps22/"&gt;Suraj Sharma&lt;/a&gt; pointed out to me that once the numbers got bigger, that my implementation would be slower.&lt;/p&gt;
+&lt;p&gt;I decided to see if it was true, and sure enough, once I increased the starting size number, mine was way slower!!
+At any rate, Suraj really liked how I benchmarked the codes, so I decided to share it here.&lt;/p&gt;
+&lt;p&gt;I wanted to write a script that would indicate, whose code it was currently running with the results to the right of it.
+In order to keep it &lt;a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself"&gt;DRY&lt;/a&gt;, I decided to use decorators.&lt;/p&gt;
+&lt;p&gt;Here is what the results look like:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="go"&gt;...&lt;/span&gt;
+&lt;span class="go"&gt;Working with 8 zeroes out of 100 numbers&lt;/span&gt;
+&lt;span class="go"&gt;   mridu: 0.0000221729&lt;/span&gt;
+&lt;span class="go"&gt;clamytoe: 0.0000185966&lt;/span&gt;
+&lt;span class="go"&gt; striker: 0.0000629425&lt;/span&gt;
+&lt;span class="go"&gt; ...&lt;/span&gt;
+&lt;span class="go"&gt;Working with 10003 zeroes out of 100,000 numbers&lt;/span&gt;
+&lt;span class="go"&gt;   mridu: 8.4343523979&lt;/span&gt;
+&lt;span class="go"&gt;clamytoe: 8.0974295139&lt;/span&gt;
+&lt;span class="go"&gt; striker: 0.0438303947&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Full code can be found in this &lt;a href="https://gist.github.com/clamytoe/1fcd47d6f1b5db4d2657623947cd5646"&gt;gist&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Decorator: ID Checker&lt;/h3&gt;
+&lt;p&gt;Part of the requirements for the challenge, was that the same object needed to be modified and not just create a new one.
+I'm not really sure if this is the way to do it, but I decided that checking to see if the &lt;code&gt;id&lt;/code&gt; of the before and after objects were the same was the way to go.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;id_checker&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nd"&gt;@wraps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;after&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;DEBUG&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{&amp;#39;before&amp;#39;:&amp;gt;8}: &lt;/span&gt;&lt;span class="si"&gt;{before}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{&amp;#39;after&amp;#39;:&amp;gt;8}: &lt;/span&gt;&lt;span class="si"&gt;{after}&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;after&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;The nums list is not the same!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Since our functions all only passed the &lt;code&gt;nums&lt;/code&gt; variable, I decided to just hard code it in instead of using &lt;code&gt;*args&lt;/code&gt;.
+In hindsight, I should have used &lt;code&gt;*args&lt;/code&gt;.
+Sometimes while developing code, I like to throw in a &lt;code&gt;DEBUG&lt;/code&gt; global variable to turn on/off print statements, so those can be ignored.&lt;/p&gt;
+&lt;h3&gt;Decorator: Timer&lt;/h3&gt;
+&lt;p&gt;I decided that the easiest way to keep track of whose code was being benchmarked, would be to name each of our functions, with our nicknames.
+Then it would be simple enough to extract the function name from within the code.&lt;/p&gt;
+&lt;p&gt;To time the functions, I created this &lt;code&gt;timer&lt;/code&gt; decorator.
+It's a pretty straight forward timer.
+The only unique part is how I extracted the function name.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;timer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nd"&gt;@wraps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;start&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;stop&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;{func.__name__:&amp;gt;8}&lt;/span&gt;&lt;span class="s2"&gt;: {stop - start:.10f}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If you are not familiar with formatting strings within &lt;em&gt;f-strings&lt;/em&gt;, the &lt;code&gt;:&amp;gt;8&lt;/code&gt; simply means to right align it and use 8 spaces.
+The &lt;code&gt;:.10f&lt;/code&gt; just means that it's a float value and that I want it to use 10 digits of accuracy.&lt;/p&gt;
+&lt;h3&gt;Decorating the Functions&lt;/h3&gt;
+&lt;p&gt;Each of the separate functions were decorated in the same manner.
+To try and keep this discussion short, I'll only illustrate mine.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nd"&gt;@id_checker&lt;/span&gt;
+&lt;span class="nd"&gt;@timer&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;clamytoe&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]):&lt;/span&gt;
+    &lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;remove&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+        &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;ValueError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;break&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The decorators are applied from bottom up.
+Meaning that the &lt;code&gt;@timer&lt;/code&gt; decorator is the first to be ran, followed by the &lt;code&gt;@id_checker&lt;/code&gt;.
+If you are not familiar with decorators, &lt;a href="https://dbader.org/blog/python-decorators"&gt;Dan Bader&lt;/a&gt; wrote a nice article on them.&lt;/p&gt;
+&lt;h2&gt;A Better Way to Benchmark Code&lt;/h2&gt;
+&lt;p&gt;Python comes with the &lt;a href="https://docs.python.org/3/library/timeit.html"&gt;&lt;code&gt;timeit&lt;/code&gt;&lt;/a&gt; module in the standard library.
+I don't like that you have to pass the code that you want to benchmark to it as a string, but it works pretty well.&lt;/p&gt;
+&lt;p&gt;I was working through another one of the challenges that Mridu had completed, &lt;a href="https://dev.to/mridubhatnagar/day-16-reverse-words-in-a-string-iii-jn3"&gt;Reverse words in a string III&lt;/a&gt;.
+When it came time to compare my implementation with hers, I decided to use the &lt;code&gt;timeit&lt;/code&gt; module.&lt;/p&gt;
+&lt;p&gt;Here is the script in it's entirety:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;timeit&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;timeit&lt;/span&gt;
+
+&lt;span class="n"&gt;setup_code&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;s = &amp;quot;Let&amp;#39;s take LeetCode contest&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+&lt;span class="n"&gt;mridu&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;def reverseWords(s: str) -&amp;gt; str:&lt;/span&gt;
+&lt;span class="s2"&gt;    s = s.split()&lt;/span&gt;
+&lt;span class="s2"&gt;    s1 = &amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="s2"&gt;    for x in range(0, len(s)):&lt;/span&gt;
+&lt;span class="s2"&gt;        if x == len(s) - 1:&lt;/span&gt;
+&lt;span class="s2"&gt;            s1 += s[x][::-1]&lt;/span&gt;
+&lt;span class="s2"&gt;        else:&lt;/span&gt;
+&lt;span class="s2"&gt;            s1 += s[x][::-1] + &amp;#39; &amp;#39;&lt;/span&gt;
+&lt;span class="s2"&gt;    return s1&lt;/span&gt;
+
+
+&lt;span class="s2"&gt;reverseWords(s)&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+&lt;span class="n"&gt;clamytoe&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;def reverse_words(s):&lt;/span&gt;
+&lt;span class="s2"&gt;    return &amp;quot; &amp;quot;.join([word[::-1] for word in s.split()])&lt;/span&gt;
+
+
+&lt;span class="s2"&gt;reverse_words(s)&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+
+&lt;span class="n"&gt;codes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;clamytoe&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clamytoe&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;mridu&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;mridu&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;code&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;codes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stmt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;codes&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;setup_code&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The results from running it, look like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="go"&gt;clamytoe 1.9202047239996318&lt;/span&gt;
+&lt;span class="go"&gt;mridu 3.630925637000473&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;As you can see, in the &lt;code&gt;timeit&lt;/code&gt; function, I'm passing &lt;code&gt;stmt&lt;/code&gt; and &lt;code&gt;setup&lt;/code&gt; variables.
+The &lt;code&gt;stmt&lt;/code&gt; is the actual code to benchmark, while &lt;code&gt;setup&lt;/code&gt; is used to setup any code that will be required for it to run properly.&lt;/p&gt;
+&lt;p&gt;You can also pass a &lt;code&gt;number&lt;/code&gt; variable that allows you to modify how many times the code is ran, with the default being 1,000,000.&lt;/p&gt;
+&lt;p&gt;I didn't see a way of using decorators here, so I simply used a dictionary to do the identifying for me.&lt;/p&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I hope that you will now know how to benchmark any of your code.
+The first method, using &lt;code&gt;time&lt;/code&gt; is more suited towards larger code, while &lt;code&gt;timeit&lt;/code&gt; is good for shorter snippets of code.
+The &lt;em&gt;timeit&lt;/em&gt; module can do a few more things.
+I suggest reading up on it if you're curious.&lt;/p&gt;
+&lt;p&gt;Until next time, keep on coding!&lt;/p&gt;</content><category term="Python"></category><category term="time"></category><category term="timeit"></category><category term="decorator"></category><category term="functools"></category><category term="wraps"></category></entry><entry><title>Advanced type annotations</title><link href="https://clamytoe.github.io/articles/2020/Apr/19/advanced-type-annotations" rel="alternate"></link><published>2020-04-19T12:20:00-05:00</published><updated>2020-04-19T12:20:00-05:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-04-19:/articles/2020/Apr/19/advanced-type-annotations</id><summary type="html">&lt;p&gt;Some concrete examples on how to type hint more advanced class objects&lt;/p&gt;</summary><content type="html">&lt;h1&gt;How to add type annotations to Python dataclasses&lt;/h1&gt;
 &lt;p&gt;During the COVID19 outbreak, a lof of companies are either giving away free books, tutorials, or access their training material.
 One such company is Pluralsight.
 For the whole month of April 2020, they have given everyone free access to their complete library!
