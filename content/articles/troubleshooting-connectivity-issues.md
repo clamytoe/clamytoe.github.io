@@ -61,31 +61,31 @@ I found this really good [article](https://www.osradar.com/how-to-enable-and-dis
 Although FTPManager could now ping my machine, it still could not connect to the FTP server.
 I went back into the Firewall settings and did the same as above for ICMP, but this time instead of creating a new **Custom** command, I selected **Program**.
 
-![program](../images/fw-program.png)
+![program]({static}/images/fw-program.png)
 
 On the **Program** screen, I selected **This program path** and clicked on the _Browse_:
 
-![path](../images/fw-path.png)
+![path]({static}/images/fw-path.png)
 
 From within the **Open** dialog windows, I navigated to where the _Filezilla Server_ was installed and selected it:
 
-![filezilla](../images/fw-filezilla.png)
+![filezilla]({static}/images/fw-filezilla.png)
 
 From the **Action** dialog window, I left it at the default _Allow the connection_:
 
-![action](../images/fw-action.png)
+![action]({static}/images/fw-action.png)
 
 I left the **Profile** page as default:
 
-![profile](../images/fw-profile.png)
+![profile]({static}images/fw-profile.png)
 
 I then gave it a generic name and clicked on _Finish_:
 
-![name](../images/fw-name.png)
+![name]({static}/images/fw-name.png)
 
 Here you can see that the new rul is running and is active:
 
-![rule](../images/fw-rule.png)
+![rule]({static}./images/fw-rule.png)
 
 With that final addition, FTPManager was able to connect and I was able to proceeded with the backing up the media files.
 
