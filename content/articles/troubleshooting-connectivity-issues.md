@@ -77,7 +77,7 @@ From the **Action** dialog window, I left it at the default _Allow the connectio
 
 I left the **Profile** page as default:
 
-![profile]({static}images/fw-profile.png)
+![profile]({static}/images/fw-profile.png)
 
 I then gave it a generic name and clicked on _Finish_:
 
@@ -85,7 +85,7 @@ I then gave it a generic name and clicked on _Finish_:
 
 Here you can see that the new rul is running and is active:
 
-![rule]({static}./images/fw-rule.png)
+![rule]({static}/images/fw-rule.png)
 
 With that final addition, FTPManager was able to connect and I was able to proceeded with the backing up the media files.
 
