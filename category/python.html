@@ -117,8 +117,8 @@ I'm not really sure if this is the way to do it, but I decided that checking to 
         <span class="n">after</span> <span class="o">=</span> <span class="nb">id</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">DEBUG</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{&#39;before&#39;:&gt;8}: </span><span class="si">{before}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{&#39;after&#39;:&gt;8}: </span><span class="si">{after}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;before&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">before</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;after&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">after</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">before</span> <span class="o">!=</span> <span class="n">after</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The nums list is not the same!&quot;</span><span class="p">)</span>
@@ -142,7 +142,7 @@ The only unique part is how I extracted the function name.</p>
         <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="n">func</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
         <span class="n">stop</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{func.__name__:&gt;8}</span><span class="s2">: {stop - start:.10f}&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">stop</span> <span class="o">-</span> <span class="n">start</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">wrapper</span>
 </code></pre></div>
@@ -200,10 +200,10 @@ I just forgot to rename it...</p>
         <span class="k">assert</span> <span class="n">nums1</span> <span class="o">==</span> <span class="n">nums2</span> <span class="o">==</span> <span class="n">nums3</span>
     <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Outputs do not match!&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;original: </span><span class="se">\n</span><span class="si">{original}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mridu: </span><span class="se">\n</span><span class="si">{nums1}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;clamytoe: </span><span class="se">\n</span><span class="si">{nums2}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;striker: </span><span class="se">\n</span><span class="si">{nums3}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;original: </span><span class="se">\n</span><span class="si">{</span><span class="n">original</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mridu: </span><span class="se">\n</span><span class="si">{</span><span class="n">nums1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;clamytoe: </span><span class="se">\n</span><span class="si">{</span><span class="n">nums2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;striker: </span><span class="se">\n</span><span class="si">{</span><span class="n">nums3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
 
 
@@ -215,7 +215,7 @@ The following bit of code runs the benchmark and generates the report.</p>
     <span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1_000</span><span class="p">,</span> <span class="mi">10_000</span><span class="p">,</span> <span class="mi">100_000</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">sizes</span><span class="p">:</span>
         <span class="n">original</span> <span class="o">=</span> <span class="n">generate_nums</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Working with {original.count(0)} zeroes out of {len(original):,} numbers&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Working with </span><span class="si">{</span><span class="n">original</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2"> zeroes out of </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">original</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> numbers&quot;</span><span class="p">)</span>
         <span class="n">test_one</span><span class="p">(</span><span class="n">original</span><span class="p">)</span>
 </code></pre></div>
 
@@ -301,7 +301,7 @@ The same thing can be done with a decorator and a <code>lambda</code> expression
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{func.__name__:&gt;8}</span><span class="s2">: </span><span class="si">{result}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">wrapper</span>
 

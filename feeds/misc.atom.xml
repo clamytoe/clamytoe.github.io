@@ -1,5 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings - Misc</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/misc.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-03-18T09:13:00-05:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Bash script into a Makefile</title><link href="https://clamytoe.github.io/articles/2020/Mar/17/bash-into-make" rel="alternate"></link><published>2020-03-17T05:08:00-05:00</published><updated>2020-03-18T09:13:00-05:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-03-17:/articles/2020/Mar/17/bash-into-make</id><summary type="html">&lt;p&gt;How to convert a bash script into a Makefile&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Using make can literally make your life easier&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings - Misc</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/misc.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-08-10T11:11:00-05:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Troubleshooting Connectivity Issues</title><link href="https://clamytoe.github.io/articles/2020/Aug/10/troubleshooting-connectivity-issues" rel="alternate"></link><published>2020-08-10T11:11:00-05:00</published><updated>2020-08-10T11:11:00-05:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-08-10:/articles/2020/Aug/10/troubleshooting-connectivity-issues</id><summary type="html">&lt;p&gt;Had issues connecting to FTP server running on Windows 10&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Troubleshooting Connectivity Issues&lt;/h1&gt;
+&lt;p&gt;My son likes to live stream on Youtube and was in the middle of one the other day when his phone ran out of space.
+He asked me to backup his images and videos for him so that he could make some room.&lt;/p&gt;
+&lt;h2&gt;Some Background&lt;/h2&gt;
+&lt;p&gt;I've been an avid Linux user for ages so I've gotten used to not having to use iTunes.
+I recently made the move back to Windows 10, but I detest having to use iTunes to do anything on my phone, so I don't even have it installed.&lt;/p&gt;
+&lt;p&gt;Back when I was on Linux, I had found &lt;a href="https://apps.apple.com/us/app/ftpmanager-pro/id522627917"&gt;FTPManager Pro&lt;/a&gt; in the Apple app store, which would allow me to start an FTP server so that I could just use &lt;a href="https://filezilla-project.org/download.php"&gt;Filezilla&lt;/a&gt; to upload audio files to my phone as well as allow me to copy my images and videos to my network storage device.&lt;/p&gt;
+&lt;h2&gt;Attacking the Problem&lt;/h2&gt;
+&lt;p&gt;I thought, no problem.
+I already had Filezilla installed, so I fired it up and connected.
+Unfortunately, those images and videos did not show up.
+FTPManager has its own directory that you can access, but Apple apparently won't allow it to access the rest of the filesystem.&lt;/p&gt;
+&lt;p&gt;My next thought was to just run an FTP server on my computer, and use FTPManager to transfer the files, because from within the app the media files in question are available; just not to its built-in FTP server.
+So I downloaded &lt;a href="https://filezilla-project.org/download.php?type=server"&gt;Filezilla's FTP server&lt;/a&gt; utility.
+After a quick run through the settings, creating a user and home directory, I fired it up.&lt;/p&gt;
+&lt;p&gt;Back on the phone, I setup the new server and attempted to connect to it.
+No-Go.
+The phone kept reporting that the server was not reachable.
+I double, tripple-checked all of the settings and everything looked good.
+I fired up Filezilla on my computer and connected to localhost on port 21 and I was able to get in!&lt;/p&gt;
+&lt;h2&gt;The Problem&lt;/h2&gt;
+&lt;p&gt;Back on the phone, I found a way to diagnose connection issues.
+Under &lt;em&gt;Network Diagnostics&lt;/em&gt; it listed the following entries:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Resolve Host&lt;/li&gt;
+&lt;li&gt;Ping Host&lt;/li&gt;
+&lt;li&gt;Connect Port&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The &lt;em&gt;Resolve Host&lt;/em&gt; was the IP address that I had entered for my machine.
+I opened up a command prompt on one of my kids computers and attempted to ping my machine.
+Nothing, 100% packet loss...&lt;/p&gt;
+&lt;p&gt;So with no connectivity between my phone and my computer and not being able to ping my computer from another computer, it's easy to conclude that the issue is with my computer blocking the traffic.&lt;/p&gt;
+&lt;h2&gt;Firewall: Custom Rule&lt;/h2&gt;
+&lt;p&gt;I remembered that at work, while setting up some Samba mounts on a Windows machine, I had run into similar problems because the server could not ping the machines.
+I had to go into the &lt;em&gt;Firewall&lt;/em&gt; settings and enable ICMP ping on IPv4, we don't use IPv6 so I didn't see a need to enable it on that protocol.
+I found this really good &lt;a href="https://www.osradar.com/how-to-enable-and-disable-ping-icmp-in-windows-10-firewall/"&gt;article&lt;/a&gt; on how to do it and was now able to ping my machine in no time.&lt;/p&gt;
+&lt;h2&gt;Firewall: Program Rule&lt;/h2&gt;
+&lt;p&gt;Although FTPManager could now ping my machine, it still could not connect to the FTP server.
+I went back into the Firewall settings and did the same as above for ICMP, but this time instead of creating a new &lt;strong&gt;Custom&lt;/strong&gt; command, I selected &lt;strong&gt;Program&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="program" src="../images/fw-program.png"&gt;&lt;/p&gt;
+&lt;p&gt;On the &lt;strong&gt;Program&lt;/strong&gt; screen, I selected &lt;strong&gt;This program path&lt;/strong&gt; and clicked on the &lt;em&gt;Browse&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="path" src="../images/fw-path.png"&gt;&lt;/p&gt;
+&lt;p&gt;From within the &lt;strong&gt;Open&lt;/strong&gt; dialog windows, I navigated to where the &lt;em&gt;Filezilla Server&lt;/em&gt; was installed and selected it:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="filezilla" src="../images/fw-filezilla.png"&gt;&lt;/p&gt;
+&lt;p&gt;From the &lt;strong&gt;Action&lt;/strong&gt; dialog window, I left it at the default &lt;em&gt;Allow the connection&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="action" src="../images/fw-action.png"&gt;&lt;/p&gt;
+&lt;p&gt;I left the &lt;strong&gt;Profile&lt;/strong&gt; page as default:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="profile" src="../images/fw-profile.png"&gt;&lt;/p&gt;
+&lt;p&gt;I then gave it a generic name and clicked on &lt;em&gt;Finish&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="name" src="../images/fw-name.png"&gt;&lt;/p&gt;
+&lt;p&gt;Here you can see that the new rul is running and is active:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="rule" src="../images/fw-rule.png"&gt;&lt;/p&gt;
+&lt;p&gt;With that final addition, FTPManager was able to connect and I was able to proceeded with the backing up the media files.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Don't give up when you run into problems, there's always a way!&lt;/p&gt;</content><category term="Misc"></category><category term="windows10"></category><category term="icmp"></category><category term="ping"></category><category term="firewall"></category><category term="ftp"></category></entry><entry><title>Bash script into a Makefile</title><link href="https://clamytoe.github.io/articles/2020/Mar/17/bash-into-make" rel="alternate"></link><published>2020-03-17T05:08:00-05:00</published><updated>2020-03-18T09:13:00-05:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-03-17:/articles/2020/Mar/17/bash-into-make</id><summary type="html">&lt;p&gt;How to convert a bash script into a Makefile&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Using make can literally make your life easier&lt;/h1&gt;
 &lt;p&gt;So the other day on the Pybites slack channel, &lt;a href="https://opensource.com/users/jnyjny"&gt;Erik O'Shaughnessy&lt;/a&gt; and I were chatting about something and I happened to mention that I had written a bash script to generate documents from Asciidoc files but wanted to create a Makefile to do the same instead.
 Without hesitation, he asked for my bash script and got to work!
 I don't think that I could have found a better tutorial on the subject if I had looked.

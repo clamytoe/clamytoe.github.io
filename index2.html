@@ -65,99 +65,252 @@
 
 
     <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
+        <a href="https://clamytoe.github.io/articles/2020/Feb/28/pelican" class="uk-article-title uk-link-muted" itemprop="name">Finally getting the hang of working with Pelican!</a>
+        <p class="uk-article-meta"><time datetime="2020-02-28" itemprop="datePublished">Fri 28 February 2020</time> • <a href="https://clamytoe.github.io/category/blog.html">Blog</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">6 min</span></span></p>
+        </p>
+        <p class="uk-article-lead" itemprop="description">Nothing beats learning something new than just jumping in and playing around with it!</p>
+            <section itemprop="articleBody"><h1>Stumbling into a nice Pelican workflow</h1>
+<p>If you've seen my <a href="https://github.com/clamytoe/clamytoe.github.io">source repo</a> for this site, you know that I followed <a href="https://opensource.com/users/jnyjny">Erik O'Shaughnessy's</a> <em>Run your blog on GitHub Pages with Python</em> <a href="https://opensource.com/article/19/5/run-your-blog-github-pages-python">tutorial</a>.
+It's a great tutorial, I specifically love his <strong>one weird trick</strong>, but it leaves so many unanswered questions.
+Go read it now if you haven't and we'll pick up where he leaves off.</p>
+<p>Luckily he does provide the link to the official <a href="https://docs.getpelican.com/">documentation</a>.
+It was through that link that I found Pelican's tutorials <a href="https://github.com/getpelican/pelican/wiki/Tutorials">repo</a>.
+Specifically <a href="https://www.fullstackpython.com/about-author.html">Matt Makai's</a> introductory <a href="https://www.fullstackpython.com/blog/generating-static-websites-pelican-jinja2-markdown.html">tutorial</a>.
+I'll admit, that I only skimmed over it, it's kind of long.
+I was looking for anything that would jump out at me.
+What caught my eye was how simple it all was to automate things with <code>make</code>!</p>
+<p>I took a quick look at mine and saw what commands were defined.</p>
+<div class="highlight"><pre><span></span><code><span class="err">Makefile</span> <span class="err">for</span> <span class="err">a</span> <span class="err">pelican</span> <span class="err">Web</span> <span class="err">site</span>
+
+<span class="nf">Usage</span><span class="o">:</span>
+   make html                           <span class="o">(</span>re<span class="o">)</span>generate the web site
+   make clean                          remove the generated files
+   make regenerate                     regenerate files upon modification
+   make publish                        generate using production settings
+   make serve <span class="o">[</span><span class="nv">PORT</span><span class="o">=</span><span class="m">8000</span><span class="o">]</span>              serve site at http://localhost:8000
+   make serve-global <span class="o">[</span><span class="nv">SERVER</span><span class="o">=</span><span class="m">0</span>.0.0.0<span class="o">]</span>  serve <span class="o">(</span>as root<span class="o">)</span> to :80
+   make devserver <span class="o">[</span><span class="nv">PORT</span><span class="o">=</span><span class="m">8000</span><span class="o">]</span>          serve and regenerate together
+   make ssh_upload                     upload the web site via SSH
+   make rsync_upload                   upload the web site via rsync+ssh  
+   make github                         upload the web site via gh-pages
+
+<span class="err">Set</span> <span class="err">the</span> <span class="err">DEBUG</span> <span class="err">variable</span> <span class="err">to</span> <span class="err">1</span> <span class="err">to</span> <span class="err">enable</span> <span class="err">debugging,</span> <span class="err">e.g.</span> <span class="err">make</span> <span class="nv">DEBUG</span><span class="o">=</span><span class="m">1</span> html
+<span class="err">Set</span> <span class="err">the</span> <span class="err">RELATIVE</span> <span class="err">variable</span> <span class="err">to</span> <span class="err">1</span> <span class="err">to</span> <span class="err">enable</span> <span class="err">relative</span> <span class="err">urls</span>
+</code></pre></div>
+
+
+<p>Looking at the <code>Makefile</code> source is where I noticed that for local development, it just uses the <code>pelicanconf.py</code> script, but for publishing it uses <code>publishconf.py</code>.</p>
+<figure class='code'>
+<figcaption><span class="liquid-tags-code-filename">Makefile</span><span class="liquid-tags-code-lines">[Lines 8-9]</span></figcaption>
+
+<div class="highlight"><pre><span></span><code><span class="nv">CONFFILE</span><span class="o">=</span><span class="k">$(</span>BASEDIR<span class="k">)</span>/pelicanconf.py
+<span class="nv">PUBLISHCONF</span><span class="o">=</span><span class="k">$(</span>BASEDIR<span class="k">)</span>/publishconf.py
+</code></pre></div>
+
+
+</figure>
+
+<p>Looking at <code>publishconf.py</code> I saw that it actually imports <code>pelicanconf.py</code> and then overrides some of the variables.</p>
+<figure class='code'>
+<figcaption><span class="liquid-tags-code-filename">publishconf.py</span><span class="liquid-tags-code-lines">[Lines 12-19]</span></figcaption>
+
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pelicanconf</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># If your site is available via HTTPS, make sure SITEURL begins with https://</span>
+<span class="n">SITEURL</span> <span class="o">=</span> <span class="s2">&quot;https://clamytoe.github.io&quot;</span>
+<span class="n">RELATIVE_URLS</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">FEED_ALL_ATOM</span> <span class="o">=</span> <span class="s2">&quot;feeds/all.atom.xml&quot;</span>
+<span class="n">CATEGORY_FEED_ATOM</span> <span class="o">=</span> <span class="s2">&quot;feeds/</span><span class="si">{slug}</span><span class="s2">.atom.xml&quot;</span>
+</code></pre></div>
+
+
+</figure>
+
+<blockquote>
+<p><strong>AHA!</strong> This is were I had a eurika moment!</p>
+</blockquote>
+<p>I had noticed a problem with my site.
+Whenever I clicked on the header link, instead of taking me back to the home page it would just reload whatever page I was on.
+I was able to get around that by just specifying the <code>SITE_URL</code> variable in <code>pelicanconf.py</code>.
+Unfortunately, that broke testing the blog locally because all the links would point to the live site on GitHub!</p>
+<p>What I'm trying to say here is that in I was able to resolve both of these issues by making the following changes.</p>
+<figure class='code'>
+<figcaption><span class="liquid-tags-code-filename">pelicanconf.py</span><span class="liquid-tags-code-lines">[Lines 16-16]</span></figcaption>
+
+<div class="highlight"><pre><span></span><code><span class="n">SITEURL</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</code></pre></div>
+
+
+</figure>
+
+<figure class='code'>
+<figcaption><span class="liquid-tags-code-filename">publishconf.py</span><span class="liquid-tags-code-lines">[Lines 12-12]</span></figcaption>
+
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pelicanconf</span> <span class="kn">import</span> <span class="o">*</span>
+</code></pre></div>
+
+
+</figure>
+
+<p>Another issue that I was having was that I couldn't figure out how to get my <code>favicon.ico</code> to be treated as a static file and automatically dumped into the <code>output</code> directory.
+My solution had been to write a little bash script to copy it over for me, but that was kind of tedious.
+But now that I was going to use the <code>Makefile</code> I decided to automate it in there!</p>
+<p>I added the following lines to it:</p>
+<figure class='code'>
+<figcaption><span class="liquid-tags-code-filename">Makefile</span><span class="liquid-tags-code-lines">[Lines 10-10]</span></figcaption>
+
+<div class="highlight"><pre><span></span><code><span class="nv">FAVICON</span><span class="o">=</span><span class="k">$(</span>INPUTDIR<span class="k">)</span>/static/favicon.ico
+</code></pre></div>
+
+
+</figure>
+
+<p>Then after the <code>html</code>, <code>regenerate</code>, and <code>publish</code> commands, I added:</p>
+<figure class='code'>
+<figcaption><span class="liquid-tags-code-filename">Makefile</span><span class="liquid-tags-code-lines">[Lines 44-46]</span></figcaption>
+
+<div class="highlight"><pre><span></span><code><span class="nf">html</span><span class="o">:</span>
+	<span class="k">$(</span>PELICAN<span class="k">)</span> <span class="k">$(</span>INPUTDIR<span class="k">)</span> -o <span class="k">$(</span>OUTPUTDIR<span class="k">)</span> -s <span class="k">$(</span>CONFFILE<span class="k">)</span> <span class="k">$(</span>PELICANOPTS<span class="k">)</span>
+	cp <span class="k">$(</span>FAVICON<span class="k">)</span> <span class="k">$(</span>OUTPUTDIR<span class="k">)</span>
+</code></pre></div>
+
+
+</figure>
+
+<figure class='code'>
+<figcaption><span class="liquid-tags-code-filename">Makefile</span><span class="liquid-tags-code-lines">[Lines 53-55]</span></figcaption>
+
+<div class="highlight"><pre><span></span><code><span class="nf">regenerate</span><span class="o">:</span>
+	<span class="k">$(</span>PELICAN<span class="k">)</span> -r <span class="k">$(</span>INPUTDIR<span class="k">)</span> -o <span class="k">$(</span>OUTPUTDIR<span class="k">)</span> -s <span class="k">$(</span>CONFFILE<span class="k">)</span> <span class="k">$(</span>PELICANOPTS<span class="k">)</span>
+	cp <span class="k">$(</span>FAVICON<span class="k">)</span> <span class="k">$(</span>OUTPUTDIR<span class="k">)</span>
+</code></pre></div>
+
+
+</figure>
+
+<figure class='code'>
+<figcaption><span class="liquid-tags-code-filename">Makefile</span><span class="liquid-tags-code-lines">[Lines 79-81]</span></figcaption>
+
+<div class="highlight"><pre><span></span><code><span class="nf">publish</span><span class="o">:</span>
+	<span class="k">$(</span>PELICAN<span class="k">)</span> <span class="k">$(</span>INPUTDIR<span class="k">)</span> -o <span class="k">$(</span>OUTPUTDIR<span class="k">)</span> -s <span class="k">$(</span>PUBLISHCONF<span class="k">)</span> <span class="k">$(</span>PELICANOPTS<span class="k">)</span>
+	cp <span class="k">$(</span>FAVICON<span class="k">)</span> <span class="k">$(</span>OUTPUTDIR<span class="k">)</span>
+</code></pre></div>
+
+
+</figure>
+
+<blockquote>
+<p>NOTE: I had initially added that to all of the commands, but the ones that run the server, don't actually get to that step.</p>
+</blockquote>
+<p>When I <em>Ctrl+C</em> out of it, it just exists...</p>
+<h2>New workflow</h2>
+<p>With that all set, things are now much easier and make more sense.
+What I would recommend, is to run the <code>make clean</code> command and commit it to your <code>content</code> branch.
+Now you will have a <em>clean</em> slate to start with.</p>
+<p>You can now add any new content and do the following commands:</p>
+<div class="highlight"><pre><span></span><code><span class="err">git add .</span>
+<span class="err">git commit -m &quot;Your description...&quot;</span>
+<span class="err">git push origin content</span>
+</code></pre></div>
+
+
+<blockquote>
+<p>NOTE: Of course, only push your files when you're ready to, but you get the idea.</p>
+</blockquote>
+<p>Now you're ready to generate the actual site, here's how that's now done.</p>
+<h3>Generate the site</h3>
+<p>If you just want to generate the site this is the command that you want:</p>
+<div class="highlight"><pre><span></span><code><span class="err">make</span> <span class="err">html</span>
+</code></pre></div>
+
+
+<p>Then you can either run the Pelican server or the Python one.</p>
+<h4>Pelican server</h4>
+<div class="highlight"><pre><span></span><code><span class="err">pelican -r --listen</span>
+</code></pre></div>
+
+
+<h4>Python server</h4>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> output
+python -m http.server
+</code></pre></div>
+
+
+<p>Both of those will make the site accessible at <code>http://localhost:8000</code></p>
+<h3>Generate site and preview</h3>
+<p>Now, if you know that you will be wanting to preview your site, a much better way is to use this command:</p>
+<div class="highlight"><pre><span></span><code><span class="err">make</span> <span class="err">devserver</span>
+</code></pre></div>
+
+
+<p>Not only will this generate the site, but will also start the Pelican server automagically for you!
+This option comes in handy when you are tweaking your site's theme.
+I wanted to change the colors on mine and doing it like this automatically detected the changes and served them up.</p>
+<h3>Publish the site</h3>
+<p>This command generates the site using the <code>publishconf.py</code> script, so if you specified your site's url in there, it will add it to the generated html pages.
+It's nice for making sure all is working correctly and enabling your Google Analytics; if you're into that sort of thing.</p>
+<div class="highlight"><pre><span></span><code><span class="err">make</span> <span class="err">publish</span>
+</code></pre></div>
+
+
+<h3>Publish and push to github</h3>
+<p>Now, we're cooking with Crisco!
+This command will generate the final site using <code>publishconf.py</code>, merge the output into your <code>master</code> branch, and push it up the hubs; all in one step!</p>
+<div class="highlight"><pre><span></span><code><span class="err">make</span> <span class="err">github</span>
+</code></pre></div>
+
+
+<h3>Cleaning up</h3>
+<p>Now that you've pushed to the hubs, removed the generated files:</p>
+<div class="highlight"><pre><span></span><code><span class="err">make</span> <span class="err">clean</span>
+</code></pre></div>
+
+
+<p>If you run <code>git status</code>, you should see that there are no changes and that you are ready to add more content.
+Nice!</p>
+<h2>Conclusion</h2>
+<p>This was a great learning experience for me.
+Not only did I update the color scheme of my site, I also fixed some annoying issues that I was having.
+Now I don't have to look up any <code>ghp-import ...</code> command and things just got a heck of a lot more pleasant.</p>
+<p><strong>In summary</strong>:</p>
+<div class="highlight"><pre><span></span><code>touch content/posts/new-blog-post.md
+vi <span class="nv">$_</span>
+<span class="c1"># write the blog content</span>
+git status
+git add .
+git commit -m <span class="s2">&quot;New blog post.&quot;</span>
+git push origin content
+make github
+make clean
+</code></pre></div>
+
+
+<h3>On a side note</h3>
+<p>I was also having a weird problem with my search feature.
+I had to remove the machine code from my <a href="https://clamytoe.github.io/category/cryptography.html">cryptography</a> blog post because it was completely screwing up the JavaScript.
+Once I got that working, I then noticed that whenever I tried to do a search from any of the category pages, that it was looking for <code>/category/search.html</code>.
+That page doesn't exists, so I was baffled as to why that was going on.
+I took a look at the <a href="https://github.com/lucachr/pelican-mg">pelican-mg</a> theme's <a href="https://palletsprojects.com/p/jinja/">Jinja</a> templates and found the issue in <code>base.html</code>.
+I simply had to add <code>{{ SITEURL }}</code> in the <code>action</code> part of the form:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">form</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;uk-search&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/search.html&quot;</span> <span class="na">data-uk-search</span><span class="p">&gt;</span>
+</code></pre></div>
+
+
+<p>Now it works beautifully!</p>
+<p>Of course, with me being an upstanding netcitizen, I submitted a <a href="https://github.com/lucachr/pelican-mg/pull/11">pull request</a> to fix the issue :).</p></section>
+            <a href="https://clamytoe.github.io/articles/2020/Feb/28/pelican#disqus_thread"></a>
+        <hr class="uk-article-divider">
+    </article>
+
+
+    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
         <a href="https://clamytoe.github.io/articles/2020/Feb/19/pytest-fixtures" class="uk-article-title uk-link-muted" itemprop="name">Pytest fixtures with tear down</a>
         <p class="uk-article-meta"><time datetime="2020-02-19" itemprop="datePublished">Wed 19 February 2020</time> • <a href="https://clamytoe.github.io/category/python.html">Python</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">3 min</span></span></p>
         </p>
         <p class="uk-article-lead" itemprop="description">Figured out how to tear down a pytest fixture</p>
-            <section itemprop="articleBody"><h1>Setting up pytest fixtures with teardown code</h1>
-<p>Today after listening to <a href="https://twitter.com/brianokken">Brian Okken's</a> <a href="https://testandcode.com/">Test &amp; Code</a> podcast with <a href="https://twitter.com/anthonypjshaw">Anthony Shaw</a>, I was reminded that I wanted to install Anthony's <a href="https://github.com/tonybaloney/pycharm-security">Python Security Plugin</a> for <a href="https://www.jetbrains.com/pycharm/">JetBrain's PyCharm</a> IDE.
-That was a breeze to install and it just worked out of the box.
-I fired it up and it automatically checked my code and called it good.</p>
-<p>I then started to write some tests and while checking a password, it alerted me to an issue.
-It made a suggestion to fix it, so I accepted and it updated my code and even added the proper import statement!</p>
-<p><em>FROM</em>:</p>
-<div class="highlight"><pre><span></span><code>    <span class="k">assert</span> <span class="n">dummy</span><span class="o">.</span><span class="n">password</span> <span class="o">==</span> <span class="s2">&quot;admin&quot;</span>
-</code></pre></div>
-
-
-<p><em>TO</em>:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">secrets</span> <span class="kn">import</span> <span class="n">compare_digest</span>
-
-<span class="kn">import</span> <span class="nn">pytest</span>
-
-<span class="kn">from</span> <span class="nn">passlock.entry</span> <span class="kn">import</span> <span class="n">Entry</span>
-
-
-<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;module&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">dummy</span><span class="p">():</span>
-    <span class="k">return</span> <span class="n">Entry</span><span class="p">(</span><span class="s2">&quot;router&quot;</span><span class="p">,</span> <span class="s2">&quot;http://192.168.2.1&quot;</span><span class="p">,</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span> <span class="s2">&quot;admin&quot;</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">test_entry</span><span class="p">(</span><span class="n">dummy</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">dummy</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;router&quot;</span>
-    <span class="k">assert</span> <span class="n">dummy</span><span class="o">.</span><span class="n">url</span> <span class="o">==</span> <span class="s2">&quot;http://192.168.2.1&quot;</span>
-    <span class="k">assert</span> <span class="n">dummy</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="s2">&quot;admin&quot;</span>
-    <span class="k">assert</span> <span class="n">compare_digest</span><span class="p">(</span><span class="n">dummy</span><span class="o">.</span><span class="n">password</span><span class="p">,</span> <span class="s2">&quot;admin&quot;</span><span class="p">)</span>
-</code></pre></div>
-
-
-<p>Although, this is just a dummy password for testing, it doesn't hurt to build up some good habits!</p>
-<h2>On to the fixture tear down</h2>
-<p>This is when I got to the part where I had to test the creation of my private and public keys.
-Since I was creating them for testing and didn't want them around afterwards, I decided that I needed to make them go away after the tests were done.</p>
-<p>I was already using fixtures so that I didn't have to recreate the instances of my classes for each test; generating the keys take a bit of time!
-I went crazy an opted to make them future proof with <strong>4096-bits</strong>...</p>
-<p>The challenge was figuring out how to tear them down.
-I did some initial searches and was coming up blank.
-I then looked up the pytest guru, <a href="https://pythontesting.net/framework/pytest/pytest-fixtures-easy-example/">Brian's</a> blog about the topic, but his examples were too simplistic for what I was trying to do.
-All they demonstrated was how to print a message, it didn't actually show how to return anything, and then have it torn down afterwards.</p>
-<p><em>Brian's example</em>:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
-<span class="kn">import</span> <span class="nn">pytest</span>
-
-<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s1">&#39;module&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">resource_a_setup</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">resources_a_setup()&#39;</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">resource_a_teardown</span><span class="p">():</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">resources_a_teardown()&#39;</span><span class="p">)</span>
-    <span class="n">request</span><span class="o">.</span><span class="n">addfinalizer</span><span class="p">(</span><span class="n">resource_a_teardown</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">test_1_that_needs_resource_a</span><span class="p">(</span><span class="n">resource_a_setup</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;test_1_that_needs_resource_a()&#39;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">test_2_that_does_not</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">test_2_that_does_not()&#39;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">test_3_that_does</span><span class="p">(</span><span class="n">resource_a_setup</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">test_3_that_does()&#39;</span><span class="p">)</span>
-</code></pre></div>
-
-
-<p>I ended up reading the actual <a href="https://docs.pytest.org/en/latest/fixture.html">pytest documentation</a>; who would have thunk?!
-I'll do you guys a solid and cut out the noise and show you what I did:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pytest</span>
-
-
-<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;module&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">custom_locker</span><span class="p">():</span>
-    <span class="n">v</span> <span class="o">=</span> <span class="n">Vault</span><span class="p">(</span><span class="s2">&quot;.toe&quot;</span><span class="p">,</span> <span class="s2">&quot;tlock&quot;</span><span class="p">)</span>
-    <span class="k">yield</span> <span class="n">v</span>
-    <span class="n">v</span><span class="o">.</span><span class="n">plock</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
-    <span class="n">v</span><span class="o">.</span><span class="n">pub</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
-    <span class="n">v</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">rmdir</span><span class="p">()</span>
-
-
-<span class="k">def</span> <span class="nf">test_vault_custom</span><span class="p">(</span><span class="n">custom_locker</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">custom_locker</span><span class="o">.</span><span class="n">loc</span> <span class="o">==</span> <span class="s2">&quot;.toe&quot;</span>
-    <span class="k">assert</span> <span class="n">custom_locker</span><span class="o">.</span><span class="n">key_name</span> <span class="o">==</span> <span class="s2">&quot;tlock&quot;</span>
-</code></pre></div>
-
-
-<p>Setting the <code>scope</code> of the fixture to <em>module</em> makes it so that it doesn't actually do the tearing down until after all of the tests are completed.
-<em>Perfect!</em></p>
-<p>The variables in the <code>Vault</code> instance are Path objects, so it was simple enough to just <code>unlink()</code> the files and then <code>rmdir()</code> the directory after it's been emptied.
-Of course, I tried removing the directory first, but it wasn't having any of that until it was empty...</p></section>
-            <a href="https://clamytoe.github.io/articles/2020/Feb/19/pytest-fixtures#disqus_thread"></a>
+            <p>Setting up pytest fixtures with teardown code Today after listening to Brian Okken's Test & Code podcast with Anthony Shaw, I was reminded that I wanted to install Anthony's Python Security Plugin for JetBrain's PyCharm IDE. That was a breeze to install and it just worked out of the box. I fired it up and it automatically checked my code and called it good. I then started to write some tests and while checking...</p>
+            <p><a href="https://clamytoe.github.io/articles/2020/Feb/19/pytest-fixtures">Read More</a></p>
         <hr class="uk-article-divider">
     </article>
 

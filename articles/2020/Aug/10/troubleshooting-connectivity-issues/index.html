@@ -6,9 +6,9 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>This is my first post here</title>
+<title>Troubleshooting Connectivity Issues</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Initial Post for my Ramblings of an autodidact Blog">
+<meta name="description" content="Had issues connecting to FTP server running on Windows 10">
 <link rel="shortcut icon" href="https://clamytoe.github.io/favicon.ico" type="image/vnd.microsoft.icon">
 <meta name="author" content="Martin Uribe">
 <meta name="copyright" content="Martin Uribe">
@@ -16,21 +16,21 @@
 <meta name="twitter:site" content="@clamytoe" />
 <meta property="og:site_name" content="Ramblings" />
 
-<meta property="og:title" content="This is my first post here" />
+<meta property="og:title" content="Troubleshooting connectivity issues" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://clamytoe.github.io/articles/2020/Feb/12/initial-post" />
-<meta name="twitter:title" content="This is my first post here" />
-<meta name="twitter:url" content="https://clamytoe.github.io/articles/2020/Feb/12/initial-post" />
-<meta itemprop="url" content="https://clamytoe.github.io/articles/2020/Feb/12/initial-post" />
-<meta property="og:description" content="Initial Post for my Ramblings of an autodidact Blog" />
-<meta name="twitter:description" content="Initial Post for my Ramblings of an autodidact Blog" />
-<meta property="og:article:published_time" content="2020-02-12" />
-<meta property="og:article:modified_time" content="2020-03-01">
-<meta itemprop="dateModified" content="2020-02-12" />
+<meta property="og:url" content="https://clamytoe.github.io/articles/2020/Aug/10/troubleshooting-connectivity-issues" />
+<meta name="twitter:title" content="Troubleshooting connectivity issues" />
+<meta name="twitter:url" content="https://clamytoe.github.io/articles/2020/Aug/10/troubleshooting-connectivity-issues" />
+<meta itemprop="url" content="https://clamytoe.github.io/articles/2020/Aug/10/troubleshooting-connectivity-issues" />
+<meta property="og:description" content="Had issues connecting to FTP server running on Windows 10" />
+<meta name="twitter:description" content="Had issues connecting to FTP server running on Windows 10" />
+<meta property="og:article:published_time" content="2020-08-10" />
 <meta property="og:article:author" content="Martin Uribe" >
-<meta property="og:article:tag" content="initial">
-<meta property="og:article:tag" content="post">
-<meta property="og:article:tag" content="blog">
+<meta property="og:article:tag" content="windows10">
+<meta property="og:article:tag" content="icmp">
+<meta property="og:article:tag" content="ping">
+<meta property="og:article:tag" content="firewall">
+<meta property="og:article:tag" content="ftp">
 <meta property="og:image" content="/img/clamytoe.png" />
 <meta property="og:image:type" content="image/png" />
 <meta name="twitter:image" content="/img/clamytoe.png" />
@@ -74,13 +74,13 @@
     <div class="uk-panel" id="mg-panel-social">
         <ul class="uk-nav uk-nav-side">
             <li>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://clamytoe.github.io/articles/2020/Feb/12/initial-post" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" taget="_blank" class="uk-button"><i class="uk-icon-facebook-square"></i> Share</a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://clamytoe.github.io/articles/2020/Aug/10/troubleshooting-connectivity-issues" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" taget="_blank" class="uk-button"><i class="uk-icon-facebook-square"></i> Share</a>
             </li>
             <li>
-            <a href="https://twitter.com/intent/tweet?text=This%20is%20my%20first%20post%20here&url=https://clamytoe.github.io/articles/2020/Feb/12/initial-post&via=clamytoe" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="uk-button" target="_blank"><i class="uk-icon-twitter"></i> Tweet</a>
+            <a href="https://twitter.com/intent/tweet?text=Troubleshooting%20Connectivity%20Issues&url=https://clamytoe.github.io/articles/2020/Aug/10/troubleshooting-connectivity-issues&via=clamytoe" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="uk-button" target="_blank"><i class="uk-icon-twitter"></i> Tweet</a>
             </li>
             <li>
-            <a href="https://plus.google.com/share?url=https://clamytoe.github.io/articles/2020/Feb/12/initial-post" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank" class="uk-button"><i class="uk-icon-google-plus-square"></i> Share</a>
+            <a href="https://plus.google.com/share?url=https://clamytoe.github.io/articles/2020/Aug/10/troubleshooting-connectivity-issues" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank" class="uk-button"><i class="uk-icon-google-plus-square"></i> Share</a>
             </li>
         </ul>
     </div>
@@ -90,18 +90,69 @@
 <div class="uk-width-medium-7-10">
 
     <article class="uk-article">
-        <h1 class="uk-heading-large uk-article-title" itemprop="name">This is my first post here</h1>
-        <p class="uk-article-meta"><time datetime="2020-02-12" itemprop="datePublished">Wed 12 February 2020</time> in <a href="https://clamytoe.github.io/category/blog.html">Blog</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">1 min</span></span></p>
+        <h1 class="uk-heading-large uk-article-title" itemprop="name">Troubleshooting Connectivity Issues</h1>
+        <p class="uk-article-meta"><time datetime="2020-08-10" itemprop="datePublished">Mon 10 August 2020</time> in <a href="https://clamytoe.github.io/category/misc.html">Misc</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">3 min</span></span></p>
 
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://clamytoe.github.io/articles/2020/Feb/12/initial-post" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" taget="_blank" class="uk-button uk-visible-small"><i class="uk-icon-facebook-square"></i> Share</a>
-        <a href="https://twitter.com/intent/tweet?text=This%20is%20my%20first%20post%20here&url=https://clamytoe.github.io/articles/2020/Feb/12/initial-post&via=clamytoe" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="uk-button uk-visible-small" target="_blank"><i class="uk-icon-twitter"></i> Tweet</a>
-        <a href="https://plus.google.com/share?url=https://clamytoe.github.io/articles/2020/Feb/12/initial-post" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank" class="uk-button uk-visible-small"><i class="uk-icon-google-plus-square"></i> Share</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://clamytoe.github.io/articles/2020/Aug/10/troubleshooting-connectivity-issues" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" taget="_blank" class="uk-button uk-visible-small"><i class="uk-icon-facebook-square"></i> Share</a>
+        <a href="https://twitter.com/intent/tweet?text=Troubleshooting%20Connectivity%20Issues&url=https://clamytoe.github.io/articles/2020/Aug/10/troubleshooting-connectivity-issues&via=clamytoe" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="uk-button uk-visible-small" target="_blank"><i class="uk-icon-twitter"></i> Tweet</a>
+        <a href="https://plus.google.com/share?url=https://clamytoe.github.io/articles/2020/Aug/10/troubleshooting-connectivity-issues" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank" class="uk-button uk-visible-small"><i class="uk-icon-google-plus-square"></i> Share</a>
 
-        <p class="uk-article-lead" itemprop="description">Initial Post for my Ramblings of an autodidact Blog</p>
-        <section itemprop="articleBody"><h1>Getting my feet wet with this blogging stuff</h1>
-<p>It's not much to look at, but my goal is to show what I'm learning as I go.
-There's no real "topic" but it will mostly be about what I'm working on and what I have to learn to get it done.
-Hope that it's of interest to someone...</p></section>
+        <p class="uk-article-lead" itemprop="description">Had issues connecting to FTP server running on Windows 10</p>
+        <section itemprop="articleBody"><h1>Troubleshooting Connectivity Issues</h1>
+<p>My son likes to live stream on Youtube and was in the middle of one the other day when his phone ran out of space.
+He asked me to backup his images and videos for him so that he could make some room.</p>
+<h2>Some Background</h2>
+<p>I've been an avid Linux user for ages so I've gotten used to not having to use iTunes.
+I recently made the move back to Windows 10, but I detest having to use iTunes to do anything on my phone, so I don't even have it installed.</p>
+<p>Back when I was on Linux, I had found <a href="https://apps.apple.com/us/app/ftpmanager-pro/id522627917">FTPManager Pro</a> in the Apple app store, which would allow me to start an FTP server so that I could just use <a href="https://filezilla-project.org/download.php">Filezilla</a> to upload audio files to my phone as well as allow me to copy my images and videos to my network storage device.</p>
+<h2>Attacking the Problem</h2>
+<p>I thought, no problem.
+I already had Filezilla installed, so I fired it up and connected.
+Unfortunately, those images and videos did not show up.
+FTPManager has its own directory that you can access, but Apple apparently won't allow it to access the rest of the filesystem.</p>
+<p>My next thought was to just run an FTP server on my computer, and use FTPManager to transfer the files, because from within the app the media files in question are available; just not to its built-in FTP server.
+So I downloaded <a href="https://filezilla-project.org/download.php?type=server">Filezilla's FTP server</a> utility.
+After a quick run through the settings, creating a user and home directory, I fired it up.</p>
+<p>Back on the phone, I setup the new server and attempted to connect to it.
+No-Go.
+The phone kept reporting that the server was not reachable.
+I double, tripple-checked all of the settings and everything looked good.
+I fired up Filezilla on my computer and connected to localhost on port 21 and I was able to get in!</p>
+<h2>The Problem</h2>
+<p>Back on the phone, I found a way to diagnose connection issues.
+Under <em>Network Diagnostics</em> it listed the following entries:</p>
+<ul>
+<li>Resolve Host</li>
+<li>Ping Host</li>
+<li>Connect Port</li>
+</ul>
+<p>The <em>Resolve Host</em> was the IP address that I had entered for my machine.
+I opened up a command prompt on one of my kids computers and attempted to ping my machine.
+Nothing, 100% packet loss...</p>
+<p>So with no connectivity between my phone and my computer and not being able to ping my computer from another computer, it's easy to conclude that the issue is with my computer blocking the traffic.</p>
+<h2>Firewall: Custom Rule</h2>
+<p>I remembered that at work, while setting up some Samba mounts on a Windows machine, I had run into similar problems because the server could not ping the machines.
+I had to go into the <em>Firewall</em> settings and enable ICMP ping on IPv4, we don't use IPv6 so I didn't see a need to enable it on that protocol.
+I found this really good <a href="https://www.osradar.com/how-to-enable-and-disable-ping-icmp-in-windows-10-firewall/">article</a> on how to do it and was now able to ping my machine in no time.</p>
+<h2>Firewall: Program Rule</h2>
+<p>Although FTPManager could now ping my machine, it still could not connect to the FTP server.
+I went back into the Firewall settings and did the same as above for ICMP, but this time instead of creating a new <strong>Custom</strong> command, I selected <strong>Program</strong>.</p>
+<p><img alt="program" src="../images/fw-program.png"></p>
+<p>On the <strong>Program</strong> screen, I selected <strong>This program path</strong> and clicked on the <em>Browse</em>:</p>
+<p><img alt="path" src="../images/fw-path.png"></p>
+<p>From within the <strong>Open</strong> dialog windows, I navigated to where the <em>Filezilla Server</em> was installed and selected it:</p>
+<p><img alt="filezilla" src="../images/fw-filezilla.png"></p>
+<p>From the <strong>Action</strong> dialog window, I left it at the default <em>Allow the connection</em>:</p>
+<p><img alt="action" src="../images/fw-action.png"></p>
+<p>I left the <strong>Profile</strong> page as default:</p>
+<p><img alt="profile" src="../images/fw-profile.png"></p>
+<p>I then gave it a generic name and clicked on <em>Finish</em>:</p>
+<p><img alt="name" src="../images/fw-name.png"></p>
+<p>Here you can see that the new rul is running and is active:</p>
+<p><img alt="rule" src="../images/fw-rule.png"></p>
+<p>With that final addition, FTPManager was able to connect and I was able to proceeded with the backing up the media files.</p>
+<h2>Conclusion</h2>
+<p>Don't give up when you run into problems, there's always a way!</p></section>
         <hr class="uk-article-divider">
     </article>
 
@@ -119,10 +170,10 @@ Hope that it's of interest to someone...</p></section>
             <div class="uk-panel uk-panel-box">
                 <ul class="uk-nav uk-nav-side">
                     <li class="uk-nav-header">Categories</li>
-                    <li class="uk-active"><a href="https://clamytoe.github.io/category/blog.html">Blog</a></li>
+                    <li ><a href="https://clamytoe.github.io/category/blog.html">Blog</a></li>
                     <li ><a href="https://clamytoe.github.io/category/database.html">Database</a></li>
                     <li ><a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></li>
-                    <li ><a href="https://clamytoe.github.io/category/misc.html">Misc</a></li>
+                    <li class="uk-active"><a href="https://clamytoe.github.io/category/misc.html">Misc</a></li>
                     <li ><a href="https://clamytoe.github.io/category/python.html">Python</a></li>
                     <li class="uk-nav-header">Pages</li>
 
@@ -219,10 +270,10 @@ Hope that it's of interest to someone...</p></section>
 
         <ul class="uk-nav uk-nav-offcanvas" data-uk-nav>
             <li class="uk-nav-header">Categories</li>
-            <li class="uk-active"><a href="https://clamytoe.github.io/category/blog.html">Blog</a></li>
+            <li ><a href="https://clamytoe.github.io/category/blog.html">Blog</a></li>
             <li ><a href="https://clamytoe.github.io/category/database.html">Database</a></li>
             <li ><a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></li>
-            <li ><a href="https://clamytoe.github.io/category/misc.html">Misc</a></li>
+            <li class="uk-active"><a href="https://clamytoe.github.io/category/misc.html">Misc</a></li>
             <li ><a href="https://clamytoe.github.io/category/python.html">Python</a></li>
             <li class="uk-nav-header">Pages</li>
             <li >

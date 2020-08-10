@@ -218,7 +218,7 @@ That's write, hack together a quick little script to do it for you, and that is 
                 <span class="n">cleaned</span> <span class="o">+=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">keep</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-                <span class="n">cleaned</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{keep}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="n">cleaned</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">keep</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
     <span class="k">return</span> <span class="n">cleaned</span>
 
 
