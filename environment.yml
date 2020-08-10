@@ -17,6 +17,7 @@ dependencies:
   - notebook=6.0.3=py38_0
   - pelican=4.2.0=py_0
   - pip=20.0.2=py_2
+  - pyperclip=1.8.0=pyh9f0ad1d_0
   - pytest=5.3.5=py38_1
   - python=3.8.1=h357f687_2
   - python-dateutil=2.8.1=py_0
