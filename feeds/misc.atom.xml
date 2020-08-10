@@ -38,19 +38,19 @@ I found this really good &lt;a href="https://www.osradar.com/how-to-enable-and-d
 &lt;h2&gt;Firewall: Program Rule&lt;/h2&gt;
 &lt;p&gt;Although FTPManager could now ping my machine, it still could not connect to the FTP server.
 I went back into the Firewall settings and did the same as above for ICMP, but this time instead of creating a new &lt;strong&gt;Custom&lt;/strong&gt; command, I selected &lt;strong&gt;Program&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="program" src="../images/fw-program.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="program" src="https://clamytoe.github.io/images/fw-program.png"&gt;&lt;/p&gt;
 &lt;p&gt;On the &lt;strong&gt;Program&lt;/strong&gt; screen, I selected &lt;strong&gt;This program path&lt;/strong&gt; and clicked on the &lt;em&gt;Browse&lt;/em&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="path" src="../images/fw-path.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="path" src="https://clamytoe.github.io/images/fw-path.png"&gt;&lt;/p&gt;
 &lt;p&gt;From within the &lt;strong&gt;Open&lt;/strong&gt; dialog windows, I navigated to where the &lt;em&gt;Filezilla Server&lt;/em&gt; was installed and selected it:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="filezilla" src="../images/fw-filezilla.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="filezilla" src="https://clamytoe.github.io/images/fw-filezilla.png"&gt;&lt;/p&gt;
 &lt;p&gt;From the &lt;strong&gt;Action&lt;/strong&gt; dialog window, I left it at the default &lt;em&gt;Allow the connection&lt;/em&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="action" src="../images/fw-action.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="action" src="https://clamytoe.github.io/images/fw-action.png"&gt;&lt;/p&gt;
 &lt;p&gt;I left the &lt;strong&gt;Profile&lt;/strong&gt; page as default:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="profile" src="../images/fw-profile.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="profile" src="https://clamytoe.github.io/articles/images/fw-profile.png"&gt;&lt;/p&gt;
 &lt;p&gt;I then gave it a generic name and clicked on &lt;em&gt;Finish&lt;/em&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="name" src="../images/fw-name.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="name" src="https://clamytoe.github.io/images/fw-name.png"&gt;&lt;/p&gt;
 &lt;p&gt;Here you can see that the new rul is running and is active:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="rule" src="../images/fw-rule.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="rule" src="https://clamytoe.github.io/articles/images/fw-rule.png"&gt;&lt;/p&gt;
 &lt;p&gt;With that final addition, FTPManager was able to connect and I was able to proceeded with the backing up the media files.&lt;/p&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;Don't give up when you run into problems, there's always a way!&lt;/p&gt;</content><category term="Misc"></category><category term="windows10"></category><category term="icmp"></category><category term="ping"></category><category term="firewall"></category><category term="ftp"></category></entry><entry><title>Bash script into a Makefile</title><link href="https://clamytoe.github.io/articles/2020/Mar/17/bash-into-make" rel="alternate"></link><published>2020-03-17T05:08:00-05:00</published><updated>2020-03-18T09:13:00-05:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-03-17:/articles/2020/Mar/17/bash-into-make</id><summary type="html">&lt;p&gt;How to convert a bash script into a Makefile&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Using make can literally make your life easier&lt;/h1&gt;
