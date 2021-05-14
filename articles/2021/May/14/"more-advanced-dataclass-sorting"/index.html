@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>"More advanced Dataclass sorting"</title>
+<title>More advanced Dataclass sorting</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="A useful tip for making your dataclasses more useful">
 <link rel="shortcut icon" href="https://clamytoe.github.io/favicon.ico" type="image/vnd.microsoft.icon">
@@ -16,10 +16,10 @@
 <meta name="twitter:site" content="@clamytoe" />
 <meta property="og:site_name" content="Ramblings" />
 
-<meta property="og:title" content=""more advanced dataclass sorting"" />
+<meta property="og:title" content="More advanced dataclass sorting" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"" />
-<meta name="twitter:title" content=""more advanced dataclass sorting"" />
+<meta name="twitter:title" content="More advanced dataclass sorting" />
 <meta name="twitter:url" content="https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"" />
 <meta itemprop="url" content="https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"" />
 <meta property="og:description" content="A useful tip for making your dataclasses more useful" />
@@ -75,7 +75,7 @@
             <a href="https://www.facebook.com/sharer/sharer.php?u=https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" taget="_blank" class="uk-button"><i class="uk-icon-facebook-square"></i> Share</a>
             </li>
             <li>
-            <a href="https://twitter.com/intent/tweet?text=%22More%20advanced%20Dataclass%20sorting%22&url=https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"&via=clamytoe" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="uk-button" target="_blank"><i class="uk-icon-twitter"></i> Tweet</a>
+            <a href="https://twitter.com/intent/tweet?text=More%20advanced%20Dataclass%20sorting&url=https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"&via=clamytoe" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="uk-button" target="_blank"><i class="uk-icon-twitter"></i> Tweet</a>
             </li>
             <li>
             <a href="https://plus.google.com/share?url=https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank" class="uk-button"><i class="uk-icon-google-plus-square"></i> Share</a>
@@ -88,11 +88,11 @@
 <div class="uk-width-medium-7-10">
 
     <article class="uk-article">
-        <h1 class="uk-heading-large uk-article-title" itemprop="name">"More advanced Dataclass sorting"</h1>
+        <h1 class="uk-heading-large uk-article-title" itemprop="name">More advanced Dataclass sorting</h1>
         <p class="uk-article-meta"><time datetime="2021-05-14" itemprop="datePublished">Fri 14 May 2021</time> in <a href="https://clamytoe.github.io/category/python.html">Python</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">4 min</span></span></p>
 
         <a href="https://www.facebook.com/sharer/sharer.php?u=https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" taget="_blank" class="uk-button uk-visible-small"><i class="uk-icon-facebook-square"></i> Share</a>
-        <a href="https://twitter.com/intent/tweet?text=%22More%20advanced%20Dataclass%20sorting%22&url=https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"&via=clamytoe" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="uk-button uk-visible-small" target="_blank"><i class="uk-icon-twitter"></i> Tweet</a>
+        <a href="https://twitter.com/intent/tweet?text=More%20advanced%20Dataclass%20sorting&url=https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"&via=clamytoe" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="uk-button uk-visible-small" target="_blank"><i class="uk-icon-twitter"></i> Tweet</a>
         <a href="https://plus.google.com/share?url=https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank" class="uk-button uk-visible-small"><i class="uk-icon-google-plus-square"></i> Share</a>
 
         <p class="uk-article-lead" itemprop="description">A useful tip for making your dataclasses more useful</p>
@@ -202,7 +202,7 @@ That's where <em>frozen</em> comes in:</p>
 
 <p>Ugh, well at least we know it works!</p>
 <h2>Setting class variables with <em><strong>setattr</strong></em></h2>
-<p>It's complaining because we are setting the <em>index_value</em> int <code>__post_init__</code>.
+<p>It's complaining because we are setting the <em>index_value</em> in <code>__post_init__</code>.
 In order to get around it, we'll have to set that value a different way.</p>
 <div class="highlight"><pre><span></span><code><span class="o">...</span>
 
@@ -254,7 +254,7 @@ In order to get around it, we'll have to set that value a different way.</p>
 </code></pre></div>
 
 
-<p>If you would like to learn more about them, check out the <a href="https://docs.python.org/3/library/dataclasses.html">documentation</a>.</p></section>
+<p>If you would like to learn more about Dataclasses, check out the <a href="https://docs.python.org/3/library/dataclasses.html">documentation</a>.</p></section>
         <hr class="uk-article-divider">
     </article>
 
