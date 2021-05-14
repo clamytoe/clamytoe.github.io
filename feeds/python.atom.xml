@@ -1,5 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings - Python</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/python.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2020-05-04T08:56:00-05:00</updated><subtitle>of an autodidact...</subtitle><entry><title>Benchmarking Python Code</title><link href="https://clamytoe.github.io/articles/2020/May/04/benchmarking-python-code" rel="alternate"></link><published>2020-05-04T08:56:00-05:00</published><updated>2020-05-04T08:56:00-05:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-05-04:/articles/2020/May/04/benchmarking-python-code</id><summary type="html">&lt;p&gt;How much faster is one implementation compared to another?&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Need to compare which code is faster, read on to find out how&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ramblings - Python</title><link href="https://clamytoe.github.io/" rel="alternate"></link><link href="https://clamytoe.github.io/feeds/python.atom.xml" rel="self"></link><id>https://clamytoe.github.io/</id><updated>2021-05-14T07:03:00-05:00</updated><subtitle>of an autodidact...</subtitle><entry><title>"More advanced Dataclass sorting"</title><link href="https://clamytoe.github.io/articles/2021/May/14/%22more-advanced-dataclass-sorting%22" rel="alternate"></link><published>2021-05-14T07:03:00-05:00</published><updated>2021-05-14T07:03:00-05:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2021-05-14:/articles/2021/May/14/"more-advanced-dataclass-sorting"</id><summary type="html">&lt;p&gt;A useful tip for making your dataclasses more useful&lt;/p&gt;</summary><content type="html">&lt;h1&gt;"More advanced Dataclass sorting"&lt;/h1&gt;
+&lt;p&gt;While checking my email this morning I came across another useful &lt;a href="https://codechalleng.es/tips/dataclasses-and-order"&gt;Pybites&lt;/a&gt; tip.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="dataclass-order" src="https://clamytoe.github.io/images/python-dataclasses-and-order.png"&gt;&lt;/p&gt;
+&lt;p&gt;It was a great little tip, but I wondered, "what if I wanted to sort by bite level?"&lt;/p&gt;
+&lt;h2&gt;Pretty up the output&lt;/h2&gt;
+&lt;p&gt;I know it's just an example code, but I like to make my output a bit more readable.
+A simple loop of the results is all it takes:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;bite&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;sorted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;bites&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;bite&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;Bite(number=11, title=&amp;#39;Enrich a class&amp;#39;, level=&amp;lt;BiteLevel.ADVANCED: 4&amp;gt;)&lt;/span&gt;
+&lt;span class="err"&gt;Bite(number=21, title=&amp;#39;Query a nested DS&amp;#39;, level=&amp;lt;BiteLevel.BEGINNER: 2&amp;gt;)&lt;/span&gt;
+&lt;span class="err"&gt;Bite(number=25, title=&amp;#39;No promo twice&amp;#39;, level=&amp;lt;BiteLevel.INTERMEDIATE: 3&amp;gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Ah, much better!&lt;/p&gt;
+&lt;h2&gt;Using a &lt;em&gt;sort_index&lt;/em&gt;&lt;/h2&gt;
+&lt;p&gt;As you can see, the bites are being sorted by their number, but I want to see them sorted by difficulty.
+The first thing I did was add a &lt;em&gt;sort_index&lt;/em&gt; to the dataclass and set it to the property that I wanted to sort by, &lt;strong&gt;level&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nd"&gt;@dataclass&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;order&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Bite&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;sort_index&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;
+    &lt;span class="n"&gt;number&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;
+    &lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;
+    &lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;BiteLevel&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;BEGINNER&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__post_init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort_index&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;level&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;Traceback (most recent call last):&lt;/span&gt;
+&lt;span class="err"&gt;  File &amp;quot;enum_play.py&amp;quot;, line 28, in &amp;lt;module&amp;gt;&lt;/span&gt;
+&lt;span class="err"&gt;    Bite(21, &amp;quot;Query a nested DS&amp;quot;),&lt;/span&gt;
+&lt;span class="c"&gt;TypeError: __init__() missing 1 required positional argument: &amp;#39;title&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Uh oh!
+Although it's complaining about a missing title, the problem is actually that it's looking for the &lt;em&gt;sort_index&lt;/em&gt;.&lt;/p&gt;
+&lt;h2&gt;Dataclasses &lt;em&gt;field(init=False)&lt;/em&gt;&lt;/h2&gt;
+&lt;p&gt;I don't want to initialize that variable, so I make the following change to the &lt;strong&gt;Bite&lt;/strong&gt; class:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;dataclasses&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;dataclass&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;field&lt;/span&gt;
+&lt;span class="o"&gt;...&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Bite&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;sort_index&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;field&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;number&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;
+    &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We first import &lt;strong&gt;field&lt;/strong&gt; from dataclasses and then set it to &lt;em&gt;init=False&lt;/em&gt; in order to prevent that variable from being initialized.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;Bite(sort_index=&amp;lt;BiteLevel.BEGINNER: 2&amp;gt;, number=21, title=&amp;#39;Query a nested DS&amp;#39;, level=&amp;lt;BiteLevel.BEGINNER: 2&amp;gt;)&lt;/span&gt;
+&lt;span class="err"&gt;Bite(sort_index=&amp;lt;BiteLevel.INTERMEDIATE: 3&amp;gt;, number=25, title=&amp;#39;No promo twice&amp;#39;, level=&amp;lt;BiteLevel.INTERMEDIATE: 3&amp;gt;)&lt;/span&gt;
+&lt;span class="err"&gt;Bite(sort_index=&amp;lt;BiteLevel.ADVANCED: 4&amp;gt;, number=11, title=&amp;#39;Enrich a class&amp;#39;, level=&amp;lt;BiteLevel.ADVANCED: 4&amp;gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Um, ok better but I don't want to see sort_index being displayed in the output.&lt;/p&gt;
+&lt;h2&gt;Dataclasses &lt;em&gt;field(repr=False)&lt;/em&gt;&lt;/h2&gt;
+&lt;p&gt;In order to prevent &lt;em&gt;sort_index&lt;/em&gt; from being displayed, we will have to set the &lt;em&gt;repr&lt;/em&gt; to &lt;code&gt;False&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Bite&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;sort_index&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;field&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;repr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;Bite(number=21, title=&amp;#39;Query a nested DS&amp;#39;, level=&amp;lt;BiteLevel.BEGINNER: 2&amp;gt;)&lt;/span&gt;
+&lt;span class="err"&gt;Bite(number=25, title=&amp;#39;No promo twice&amp;#39;, level=&amp;lt;BiteLevel.INTERMEDIATE: 3&amp;gt;)&lt;/span&gt;
+&lt;span class="err"&gt;Bite(number=11, title=&amp;#39;Enrich a class&amp;#39;, level=&amp;lt;BiteLevel.ADVANCED: 4&amp;gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Much better!&lt;/p&gt;
+&lt;h2&gt;Dataclasses &lt;em&gt;frozen&lt;/em&gt;&lt;/h2&gt;
+&lt;p&gt;Looking much better!
+But what if I wanted to make the dataclass so that it could not be changed in the code?
+That's where &lt;em&gt;frozen&lt;/em&gt; comes in:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nd"&gt;@dataclass&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;order&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;frozen&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Bite&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;sort_index&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;field&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;repr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;Traceback (most recent call last):&lt;/span&gt;
+&lt;span class="err"&gt;  File &amp;quot;enum_play.py&amp;quot;, line 25, in &amp;lt;module&amp;gt;&lt;/span&gt;
+&lt;span class="err"&gt;    Bite(11, &amp;quot;Enrich a class&amp;quot;, BiteLevel.ADVANCED),&lt;/span&gt;
+&lt;span class="err"&gt;  File &amp;quot;&amp;lt;string&amp;gt;&amp;quot;, line 6, in __init__&lt;/span&gt;
+&lt;span class="err"&gt;  File &amp;quot;enum_play.py&amp;quot;, line 21, in __post_init__&lt;/span&gt;
+&lt;span class="err"&gt;    self.sort_index = self.level&lt;/span&gt;
+&lt;span class="err"&gt;  File &amp;quot;&amp;lt;string&amp;gt;&amp;quot;, line 4, in __setattr__&lt;/span&gt;
+&lt;span class="err"&gt;dataclasses.FrozenInstanceError: cannot assign to field &amp;#39;sort_index&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Ugh, well at least we know it works!&lt;/p&gt;
+&lt;h2&gt;Setting class variables with &lt;em&gt;&lt;strong&gt;setattr&lt;/strong&gt;&lt;/em&gt;&lt;/h2&gt;
+&lt;p&gt;It's complaining because we are setting the &lt;em&gt;index_value&lt;/em&gt; int &lt;code&gt;__post_init__&lt;/code&gt;.
+In order to get around it, we'll have to set that value a different way.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;...&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__post_init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="fm"&gt;__setattr__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;sort_index&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;Bite(number=21, title=&amp;#39;Query a nested DS&amp;#39;, level=&amp;lt;BiteLevel.BEGINNER: 2&amp;gt;)&lt;/span&gt;
+&lt;span class="err"&gt;Bite(number=25, title=&amp;#39;No promo twice&amp;#39;, level=&amp;lt;BiteLevel.INTERMEDIATE: 3&amp;gt;)&lt;/span&gt;
+&lt;span class="err"&gt;Bite(number=11, title=&amp;#39;Enrich a class&amp;#39;, level=&amp;lt;BiteLevel.ADVANCED: 4&amp;gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;There we go!&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;As you can see, working with dataclasses isn't that hard at all and will save you from having to type too much boilerplate code.&lt;/p&gt;
+&lt;p&gt;Final code:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;dataclasses&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;dataclass&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;field&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;enum&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;IntEnum&lt;/span&gt;
+
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;BiteLevel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IntEnum&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;BEGINNER&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+    &lt;span class="n"&gt;INTERMEDIATE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
+    &lt;span class="n"&gt;ADVANCED&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;
+
+
+&lt;span class="nd"&gt;@dataclass&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;order&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;frozen&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Bite&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;sort_index&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;field&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;repr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;number&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;
+    &lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;
+    &lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;BiteLevel&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;BEGINNER&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__post_init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="fm"&gt;__setattr__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;sort_index&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;bites&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="n"&gt;Bite&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Enrich a class&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;BiteLevel&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ADVANCED&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="n"&gt;Bite&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;21&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Query a nested DS&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="n"&gt;Bite&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;25&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;No promo twice&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;BiteLevel&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;INTERMEDIATE&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;bite&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;sorted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;bites&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;bite&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If you would like to learn more about them, check out the &lt;a href="https://docs.python.org/3/library/dataclasses.html"&gt;documentation&lt;/a&gt;.&lt;/p&gt;</content><category term="Python"></category><category term="dataclass"></category><category term="sorting"></category><category term="python3"></category></entry><entry><title>Benchmarking Python Code</title><link href="https://clamytoe.github.io/articles/2020/May/04/benchmarking-python-code" rel="alternate"></link><published>2020-05-04T08:56:00-05:00</published><updated>2020-05-04T08:56:00-05:00</updated><author><name>Martin Uribe</name></author><id>tag:clamytoe.github.io,2020-05-04:/articles/2020/May/04/benchmarking-python-code</id><summary type="html">&lt;p&gt;How much faster is one implementation compared to another?&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Need to compare which code is faster, read on to find out how&lt;/h1&gt;
 &lt;p&gt;A friend of mine, &lt;a href="https://dev.to/mridubhatnagar"&gt;Mridu Bhatnagar&lt;/a&gt;, has been posting some really cool articles explaining how she's gone about solving some &lt;a href="https://leetcode.com/"&gt;LeetCode&lt;/a&gt; challenges.
 They are all interesting, but due to time constraints, I have only attempted to see if I can do a couple of them.&lt;/p&gt;
 &lt;h2&gt;Move Zeroes&lt;/h2&gt;

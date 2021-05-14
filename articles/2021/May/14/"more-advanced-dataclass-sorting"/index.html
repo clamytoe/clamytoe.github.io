@@ -1,33 +1,39 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/Blog"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/Blog"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/Blog"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" class="no-js" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/Blog"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/BlogPosting"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/BlogPosting"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/BlogPosting"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js" prefix="og: http://ogp.me/ns#" itemscope itemtype="http://schema.org/BlogPosting"> <!--<![endif]-->
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Ramblings</title>
+<title>"More advanced Dataclass sorting"</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="A blog about my struggles and learning about programming, software development and life.">
+<meta name="description" content="A useful tip for making your dataclasses more useful">
 <link rel="shortcut icon" href="https://clamytoe.github.io/favicon.ico" type="image/vnd.microsoft.icon">
 <meta name="author" content="Martin Uribe">
 <meta name="copyright" content="Martin Uribe">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@clamytoe" />
 <meta property="og:site_name" content="Ramblings" />
-<meta property="og:title" content="Ramblings" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://clamytoe.github.io" />
-<meta name="twitter:url" content="https://clamytoe.github.io" />
-<meta itemprop="name" content="Ramblings" />
-<meta itemprop="url" content="https://clamytoe.github.io"/>
-<meta property="og:description" content="A blog about my struggles and learning about programming, software development and life." />
-<meta name="twitter:description" content="A blog about my struggles and learning about programming, software development and life." />
-<meta itemprop="description" content="A blog about my struggles and learning about programming, software development and life." />
+
+<meta property="og:title" content=""more advanced dataclass sorting"" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"" />
+<meta name="twitter:title" content=""more advanced dataclass sorting"" />
+<meta name="twitter:url" content="https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"" />
+<meta itemprop="url" content="https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"" />
+<meta property="og:description" content="A useful tip for making your dataclasses more useful" />
+<meta name="twitter:description" content="A useful tip for making your dataclasses more useful" />
+<meta property="og:article:published_time" content="2021-05-14" />
+<meta property="og:article:author" content="Martin Uribe" >
+<meta property="og:article:tag" content="dataclass">
+<meta property="og:article:tag" content="sorting">
+<meta property="og:article:tag" content="python3">
 <meta property="og:image" content="/img/clamytoe.png" />
 <meta property="og:image:type" content="image/png" />
 <meta name="twitter:image" content="/img/clamytoe.png" />
 <meta itemprop="image" content="/img/clamytoe.png" />
+
 <link href="https://clamytoe.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Ramblings ATOM Feed"/>
 <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/uikit/2.23.0/css/uikit.min.css">
@@ -61,15 +67,36 @@
 
     <div class="uk-grid" data-uk-grid-margin>
 
-<div class="uk-width-medium-4-5">
+<div class="mg-container-social uk-width-medium-1-10 uk-hidden-small">
 
+    <div class="uk-panel" id="mg-panel-social">
+        <ul class="uk-nav uk-nav-side">
+            <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" taget="_blank" class="uk-button"><i class="uk-icon-facebook-square"></i> Share</a>
+            </li>
+            <li>
+            <a href="https://twitter.com/intent/tweet?text=%22More%20advanced%20Dataclass%20sorting%22&url=https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"&via=clamytoe" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="uk-button" target="_blank"><i class="uk-icon-twitter"></i> Tweet</a>
+            </li>
+            <li>
+            <a href="https://plus.google.com/share?url=https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank" class="uk-button"><i class="uk-icon-google-plus-square"></i> Share</a>
+            </li>
+        </ul>
+    </div>
 
-    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-        <a href="https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"" class="uk-article-title uk-link-muted" itemprop="name">"More advanced Dataclass sorting"</a>
-        <p class="uk-article-meta"><time datetime="2021-05-14" itemprop="datePublished">Fri 14 May 2021</time> • <a href="https://clamytoe.github.io/category/python.html">Python</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">4 min</span></span></p>
-        </p>
+</div>
+
+<div class="uk-width-medium-7-10">
+
+    <article class="uk-article">
+        <h1 class="uk-heading-large uk-article-title" itemprop="name">"More advanced Dataclass sorting"</h1>
+        <p class="uk-article-meta"><time datetime="2021-05-14" itemprop="datePublished">Fri 14 May 2021</time> in <a href="https://clamytoe.github.io/category/python.html">Python</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">4 min</span></span></p>
+
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" taget="_blank" class="uk-button uk-visible-small"><i class="uk-icon-facebook-square"></i> Share</a>
+        <a href="https://twitter.com/intent/tweet?text=%22More%20advanced%20Dataclass%20sorting%22&url=https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"&via=clamytoe" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="uk-button uk-visible-small" target="_blank"><i class="uk-icon-twitter"></i> Tweet</a>
+        <a href="https://plus.google.com/share?url=https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank" class="uk-button uk-visible-small"><i class="uk-icon-google-plus-square"></i> Share</a>
+
         <p class="uk-article-lead" itemprop="description">A useful tip for making your dataclasses more useful</p>
-            <section itemprop="articleBody"><h1>"More advanced Dataclass sorting"</h1>
+        <section itemprop="articleBody"><h1>"More advanced Dataclass sorting"</h1>
 <p>While checking my email this morning I came across another useful <a href="https://codechalleng.es/tips/dataclasses-and-order">Pybites</a> tip.</p>
 <p><img alt="dataclass-order" src="https://clamytoe.github.io/images/python-dataclasses-and-order.png"></p>
 <p>It was a great little tip, but I wondered, "what if I wanted to sort by bite level?"</p>
@@ -228,112 +255,9 @@ In order to get around it, we'll have to set that value a different way.</p>
 
 
 <p>If you would like to learn more about them, check out the <a href="https://docs.python.org/3/library/dataclasses.html">documentation</a>.</p></section>
-            <a href="https://clamytoe.github.io/articles/2021/May/14/"more-advanced-dataclass-sorting"#disqus_thread"></a>
         <hr class="uk-article-divider">
     </article>
 
-
-    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-        <a href="https://clamytoe.github.io/articles/2020/Aug/10/troubleshooting-connectivity-issues" class="uk-article-title uk-link-muted" itemprop="name">Troubleshooting Connectivity Issues</a>
-        <p class="uk-article-meta"><time datetime="2020-08-10" itemprop="datePublished">Mon 10 August 2020</time> • <a href="https://clamytoe.github.io/category/misc.html">Misc</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">3 min</span></span></p>
-        </p>
-        <p class="uk-article-lead" itemprop="description">Had issues connecting to FTP server running on Windows 10</p>
-            <p>Troubleshooting Connectivity Issues My son likes to live stream on Youtube and was in the middle of one the other day when his phone ran out of space. He asked me to backup his images and videos for him so that he could make some room. Some Background I've been an avid Linux user for ages so I've gotten used to not having to use iTunes. I recently made the move back to Windows 10, but I detest having to...</p>
-            <p><a href="https://clamytoe.github.io/articles/2020/Aug/10/troubleshooting-connectivity-issues">Read More</a></p>
-        <hr class="uk-article-divider">
-    </article>
-
-
-    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-        <a href="https://clamytoe.github.io/articles/2020/May/04/benchmarking-python-code" class="uk-article-title uk-link-muted" itemprop="name">Benchmarking Python Code</a>
-        <p class="uk-article-meta"><time datetime="2020-05-04" itemprop="datePublished">Mon 04 May 2020</time> • <a href="https://clamytoe.github.io/category/python.html">Python</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">7 min</span></span></p>
-        </p>
-        <p class="uk-article-lead" itemprop="description">How much faster is one implementation compared to another?</p>
-            <p>Need to compare which code is faster, read on to find out how A friend of mine, Mridu Bhatnagar, has been posting some really cool articles explaining how she's gone about solving some LeetCode challenges. They are all interesting, but due to time constraints, I have only attempted to see if I can do a couple of them. Move Zeroes One of the first that I attempted to do was Move Zeroes. I thought that I was...</p>
-            <p><a href="https://clamytoe.github.io/articles/2020/May/04/benchmarking-python-code">Read More</a></p>
-        <hr class="uk-article-divider">
-    </article>
-
-
-    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-        <a href="https://clamytoe.github.io/articles/2020/Apr/19/advanced-type-annotations" class="uk-article-title uk-link-muted" itemprop="name">Advanced type annotations</a>
-        <p class="uk-article-meta"><time datetime="2020-04-19" itemprop="datePublished">Sun 19 April 2020</time> • <a href="https://clamytoe.github.io/category/python.html">Python</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">8 min</span></span></p>
-        </p>
-        <p class="uk-article-lead" itemprop="description">Some concrete examples on how to type hint more advanced class objects</p>
-            <p>How to add type annotations to Python dataclasses During the COVID19 outbreak, a lof of companies are either giving away free books, tutorials, or access their training material. One such company is Pluralsight. For the whole month of April 2020, they have given everyone free access to their complete library! The content is just awesome, some of the best I've seen. I have been working through their Python - Beyond the Basics when I came across their section on...</p>
-            <p><a href="https://clamytoe.github.io/articles/2020/Apr/19/advanced-type-annotations">Read More</a></p>
-        <hr class="uk-article-divider">
-    </article>
-
-
-    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-        <a href="https://clamytoe.github.io/articles/2020/Mar/24/cleaning-up-anaconda-environment_yml-files" class="uk-article-title uk-link-muted" itemprop="name">Cleaning up Anaconda environment.yml files</a>
-        <p class="uk-article-meta"><time datetime="2020-03-24" itemprop="datePublished">Tue 24 March 2020</time> • <a href="https://clamytoe.github.io/category/python.html">Python</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">6 min</span></span></p>
-        </p>
-        <p class="uk-article-lead" itemprop="description">Cleaning up Anaconda exported environment files is pretty tedious work</p>
-            <p>Recreating virtual environments with Anaconda I love working with Anaconda. It makes things so much easier. I enjoy using it so much that I even wrote a guest post article on PyBit.es about my workflow. It goes into much more detail on the subject, but I'll cover a few basics here. With that being the case, there is one aspect of it that I really hate and that is creating the environment.yml project file for distribution. Table of Contents What...</p>
-            <p><a href="https://clamytoe.github.io/articles/2020/Mar/24/cleaning-up-anaconda-environment_yml-files">Read More</a></p>
-        <hr class="uk-article-divider">
-    </article>
-
-
-    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-        <a href="https://clamytoe.github.io/articles/2020/Mar/17/bash-into-make" class="uk-article-title uk-link-muted" itemprop="name">Bash script into a Makefile</a>
-        <p class="uk-article-meta"><time datetime="2020-03-17" itemprop="datePublished">Tue 17 March 2020</time> • <a href="https://clamytoe.github.io/category/misc.html">Misc</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">9 min</span></span></p>
-        </p>
-        <p class="uk-article-lead" itemprop="description">How to convert a bash script into a Makefile</p>
-            <p>Using make can literally make your life easier So the other day on the Pybites slack channel, Erik O'Shaughnessy and I were chatting about something and I happened to mention that I had written a bash script to generate documents from Asciidoc files but wanted to create a Makefile to do the same instead. Without hesitation, he asked for my bash script and got to work! I don't think that I could have found a better tutorial...</p>
-            <p><a href="https://clamytoe.github.io/articles/2020/Mar/17/bash-into-make">Read More</a></p>
-        <hr class="uk-article-divider">
-    </article>
-
-
-    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-        <a href="https://clamytoe.github.io/articles/2020/Mar/12/testing-abcs-with-abstract-methods-with-pytest" class="uk-article-title uk-link-muted" itemprop="name">Testing ABC's with abstract methods with Pytest</a>
-        <p class="uk-article-meta"><time datetime="2020-03-12" itemprop="datePublished">Thu 12 March 2020</time> • <a href="https://clamytoe.github.io/category/python.html">Python</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">3 min</span></span></p>
-        </p>
-        <p class="uk-article-lead" itemprop="description">What I had to do to get 100% coverage on my tests</p>
-            <p>So you want to test ABC's with pytest I was working on writing a new code challenge for Codechalleng.es the other day. It's based on inheritance and composition and uses Abstract Base Classes to define the interfaces that should be implemented in classes derived from it. I was just finishing up with the tests and everything was passing. Then when I checked the code coverage on it, I saw that it was complaining about my Site...</p>
-            <p><a href="https://clamytoe.github.io/articles/2020/Mar/12/testing-abcs-with-abstract-methods-with-pytest">Read More</a></p>
-        <hr class="uk-article-divider">
-    </article>
-
-
-    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-        <a href="https://clamytoe.github.io/articles/2020/Mar/09/playing-around-with-jupyter-notebooks" class="uk-article-title uk-link-muted" itemprop="name">Playing around with Jupyter notebooks</a>
-        <p class="uk-article-meta"><time datetime="2020-03-09" itemprop="datePublished">Mon 09 March 2020</time> • <a href="https://clamytoe.github.io/category/blog.html">Blog</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">9 min</span></span></p>
-        </p>
-        <p class="uk-article-lead" itemprop="description">Just giving the notebook plugin a test run to see how things render</p>
-            <p>Seeing how notebooks compare to just plain Markdown¶ What is a Jupyter Notebook¶Well it's a document that lets you render markdown code, display code blocks, and also allows you to execute those code blocks and display their results interactively! Needless to say, they are definitely game changers. It's like the Python interpreter...</p>
-            <p><a href="https://clamytoe.github.io/articles/2020/Mar/09/playing-around-with-jupyter-notebooks">Read More</a></p>
-        <hr class="uk-article-divider">
-    </article>
-
-
-    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-        <a href="https://clamytoe.github.io/articles/2020/Mar/07/mongodb-cli-intro" class="uk-article-title uk-link-muted" itemprop="name">MongoDB CLI Intro</a>
-        <p class="uk-article-meta"><time datetime="2020-03-07" itemprop="datePublished">Sat 07 March 2020</time> • <a href="https://clamytoe.github.io/category/database.html">Database</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">4 min</span></span></p>
-        </p>
-        <p class="uk-article-lead" itemprop="description">Quick introduction on how to connect to a mondoDB database through the built in mongo cli application</p>
-            <p>Why another article on MongoDB After publishing my article on How to install MongoDB on Linux I realized that I should have covered how to access it through the command line! Didn't occur to me that anyone reading it might not want to download and install Robo 3T! Sorry about that! Intro into the mongo cli app It's simple enough. Now I'm no expert but this is what I discovered just playing around with it. (base) ➜...</p>
-            <p><a href="https://clamytoe.github.io/articles/2020/Mar/07/mongodb-cli-intro">Read More</a></p>
-        <hr class="uk-article-divider">
-    </article>
-
-
-    <article class="uk-article" itemtype="http://schema.org/BlogPosting" itemscope="itemscope" itemprop="blogPost">
-        <a href="https://clamytoe.github.io/articles/2020/Mar/06/how-to-install-mongodb-on-linux" class="uk-article-title uk-link-muted" itemprop="name">How to install MongoDB on Linux</a>
-        <p class="uk-article-meta"><time datetime="2020-03-06" itemprop="datePublished">Fri 06 March 2020</time> • <a href="https://clamytoe.github.io/category/database.html">Database</a><span class="readtime-comment">Estimated read time: <span class="readtime-min">4 min</span></span></p>
-        </p>
-        <p class="uk-article-lead" itemprop="description">How to prepare to start working with MongoDB</p>
-            <p>Learning about MongoDB So the other day I started going through Michael Kennedy's free MongoDB Quickstart course. Although he covered the Python code portions, he left getting everything setup, up to you. If you're on a Linux machine that uses APT, then keep on reading. Getting MongoDB I could have gone over to MongoDB's download page, and selected the correct version for my setup, but I wanted to stick with the package manager on my machine. The latest version...</p>
-            <p><a href="https://clamytoe.github.io/articles/2020/Mar/06/how-to-install-mongodb-on-linux">Read More</a></p>
-        <hr class="uk-article-divider">
-    </article>
-
-    <ul class="uk-pagination">
-        <li class="uk-active"><span>1</span></li>
-<li><a href="https://clamytoe.github.io/index2.html"><i class="uk-icon-angle-double-right"></i></a></li><li><a href="https://clamytoe.github.io/index2.html">2</a></li>    </ul>
 
 </div>
 
@@ -352,7 +276,7 @@ In order to get around it, we'll have to set that value a different way.</p>
                     <li ><a href="https://clamytoe.github.io/category/database.html">Database</a></li>
                     <li ><a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></li>
                     <li ><a href="https://clamytoe.github.io/category/misc.html">Misc</a></li>
-                    <li ><a href="https://clamytoe.github.io/category/python.html">Python</a></li>
+                    <li class="uk-active"><a href="https://clamytoe.github.io/category/python.html">Python</a></li>
                     <li class="uk-nav-header">Pages</li>
 
                     <li >
@@ -452,7 +376,7 @@ In order to get around it, we'll have to set that value a different way.</p>
             <li ><a href="https://clamytoe.github.io/category/database.html">Database</a></li>
             <li ><a href="https://clamytoe.github.io/category/datascience.html">DataScience</a></li>
             <li ><a href="https://clamytoe.github.io/category/misc.html">Misc</a></li>
-            <li ><a href="https://clamytoe.github.io/category/python.html">Python</a></li>
+            <li class="uk-active"><a href="https://clamytoe.github.io/category/python.html">Python</a></li>
             <li class="uk-nav-header">Pages</li>
             <li >
                 <a href="https://clamytoe.github.io/pages/about">About</a>
